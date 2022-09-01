@@ -50,6 +50,149 @@
 #include <deal.II/base/logstream.h>
 
 #include <sampleflow/producers/metropolis_hastings.h>
+#include <sampleflow/filters/take_every_nth.h>
+#include <sampleflow/filters/component_splitter.h>
+
+#include <sampleflow/consumers/mean_value.h>
+#include <sampleflow/consumers/count_samples.h>
+#include <sampleflow/consumers/histogram.h>
+#include <sampleflow/consumers/pair_histogram.h>
+#include <sampleflow/consumers/maximum_probability_sample.h>
+#include <sampleflow/consumers/covariance_matrix.h>
+#include <sampleflow/consumers/stream_output.h>
+
+#include <sampleflow/consumers/covariance_matrix.h>
+#include <sampleflow/consumers/acceptance_ratio.h>
+#include <sampleflow/consumers/average_cosinus.h>
+#include <sampleflow/consumers/auto_covariance_matrix.h>
+#include <sampleflow/consumers/auto_covariance_trace.h>
+
+namespace SampleFlow
+{
+  namespace Filters
+  {
+    /**
+     * An implementation of the Filter interface in which a given component
+     * of a vector-valued sample is passed on. This useful if, for example,
+     * one wants to compute the mean value or standard deviation of an
+     * individual component of a sample vector is of interest.
+     *
+     *
+     * ### Threading model ###
+     *
+     * The implementation of this class is thread-safe, i.e., its
+     * filter() member function can be called concurrently and from multiple
+     * threads.
+     *
+     *
+     * @tparam InputType The C++ type used to describe the incoming samples.
+     *   For the current class, the output type of samples is the `value_type`
+     *   of the `InputType`, i.e., `typename InputType::value_type`, as this
+     *   indicates the type of individual components of the `InputType`.
+     */
+    template <typename InputType>
+    class ComponentPairSplitter : public Filter<InputType, std::array<typename InputType::value_type,2>>
+    {
+      public:
+        /**
+         * Constructor.
+         *
+         * @param[in] selected_component The index of the component that is to
+         *   be selected.
+         */
+        ComponentPairSplitter (const unsigned int selected_component_1,
+                               const unsigned int selected_component_2);
+
+        /**
+         * Copy constructor.
+         */
+        ComponentPairSplitter (const ComponentPairSplitter<InputType> &o);
+
+        /**
+         * Destructor. This function also makes sure that all samples this
+         * object may have received have been fully processed. To this end,
+         * it calls the Consumers::disconnect_and_flush() function of the
+         * base class.
+         */
+        virtual ~ComponentPairSplitter ();
+
+        /**
+         * Process one sample by extracting a given component and passing
+         * that on as a sample in its own right to downstream consumers.
+         *
+         * @param[in] sample The sample to process.
+         * @param[in] aux_data Auxiliary data about this sample. The current
+         *   class does not know what to do with any such data and consequently
+         *   simply passes it on.
+         *
+         * @return The selected component of the sample and the auxiliary data
+         *   originally associated with the sample.
+         */
+        virtual
+        boost::optional<std::pair<std::array<typename InputType::value_type,2>, AuxiliaryData> >
+        filter (InputType sample,
+                AuxiliaryData aux_data) override;
+
+      private:
+        /**
+         * The selected component of samples to be extracted.
+         */
+        const std::array<unsigned int,2> selected_components;
+    };
+
+
+
+    template <typename InputType>
+    ComponentPairSplitter<InputType>::
+    ComponentPairSplitter (const unsigned int selected_component_1,
+                           const unsigned int selected_component_2)
+    : selected_components({{selected_component_1, selected_component_2}})
+    {}
+
+
+
+    template <typename InputType>
+    ComponentPairSplitter<InputType>::
+    ComponentPairSplitter (const ComponentPairSplitter<InputType> &o)
+      : selected_components(o.selected_components)
+    {}
+
+
+
+    template <typename InputType>
+    ComponentPairSplitter<InputType>::
+    ~ComponentPairSplitter ()
+    {
+      this->disconnect_and_flush();
+    }
+
+
+
+    template <typename InputType>
+    boost::optional<std::pair<std::array<typename InputType::value_type,2>, AuxiliaryData> >
+    ComponentPairSplitter<InputType>::
+    filter (InputType sample,
+            AuxiliaryData aux_data)
+    {
+      assert (selected_components[0] < sample.size());
+      assert (selected_components[1] < sample.size());
+
+      return std::pair<std::array<typename InputType::value_type,2>, AuxiliaryData>
+      {
+        {
+          {
+            std::move(sample[selected_components[0]]),
+            std::move(sample[selected_components[1]])
+          }
+        },
+        std::move(aux_data)
+      };
+    }
+
+  }
+}
+
+
 
 using namespace dealii;
 
@@ -721,9 +864,74 @@ int main()
   for (auto &el : starting_coefficients)
     el = 1.;
 
-  using SampleType = Vector<double>;
-  
+  // Next declare the sampler and all of the filters and consumers we
+  // need to create to evaluate the solution:
+  using SampleType = Vector<double>;  
   SampleFlow::Producers::MetropolisHastings<Vector<double>> sampler;
+  // Consumer for counting how many samples we have processed
+  SampleFlow::Consumers::CountSamples<SampleType> sample_count;
+  sample_count.connect_to_producer (sampler);
+
+  // Consumer for computing the mean value
+  SampleFlow::Consumers::MeanValue<SampleType> mean_value;
+  mean_value.connect_to_producer (sampler);
+
+  // Consumer for computing the covariance matrix
+  SampleFlow::Consumers::CovarianceMatrix<SampleType> cov_matrix;
+  cov_matrix.connect_to_producer (sampler);
+  
+  // Consumer for computing the MAP point
+  SampleFlow::Consumers::MaximumProbabilitySample<SampleType> MAP_point;
+  MAP_point.connect_to_producer (sampler);
+
+  // Consumers for histograms for each component. For this to work, we
+  // first have to split each sample into its 64 individual
+  // components, and then create histogram objects for each component
+  // individually
+  std::vector<SampleFlow::Filters::ComponentSplitter<SampleType>> component_splitters;
+  std::vector<SampleFlow::Consumers::Histogram<SampleType::value_type>> histograms;
+  component_splitters.reserve(64);
+  histograms.reserve(64);
+  for (unsigned int c=0; c<64; ++c)
+    {
+      component_splitters.emplace_back (c);
+      component_splitters.back().connect_to_producer (sampler);
+
+      histograms.emplace_back(-3, 3, 1000, &exp10);
+      histograms.back().connect_to_producer (component_splitters[c]);
+    }
+
+  // Consumer for computing the autocovariance (correlation). This is
+  // a very expensive operation, and so we only consider every 100th
+  // sample, and compute up to a lag of 200, which equates to a sample
+  // of lag of 20,000
+  SampleFlow::Filters::TakeEveryNth<SampleType> every_100th(100);
+  every_100th.connect_to_producer (sampler);
+    
+  SampleFlow::Consumers::AutoCovarianceMatrix<SampleType> autocovariance(200);
+  autocovariance.connect_to_producer (every_100th);
+
+  SampleFlow::Consumers::AutoCovarianceTrace<SampleType> autocovariance_trace(200);
+  autocovariance_trace.connect_to_producer (every_100th);
+
+  // Set up filters that separate out two pairs of components
+  SampleFlow::Filters::ComponentPairSplitter<SampleType> pair_splitter_45_46(45,46);
+  pair_splitter_45_46.connect_to_producer (sampler);
+
+  SampleFlow::Filters::ComponentPairSplitter<SampleType> pair_splitter_53_54(53,54);
+  pair_splitter_53_54.connect_to_producer (sampler);
+
+  // Then also create the consumers that turn these pairs of
+  // components into pair histograms
+  SampleFlow::Consumers::PairHistogram<std::array<double,2>> pair_histogram_45_46 (0, 100, 300,
+                                                                                   0, 100, 300);
+  pair_histogram_45_46.connect_to_producer (pair_splitter_45_46);
+
+  SampleFlow::Consumers::PairHistogram<std::array<double,2>> pair_histogram_53_54 (0, 100, 300,
+                                                                                   0, 100, 300);
+  pair_histogram_53_54.connect_to_producer (pair_splitter_53_54);
+
+  // Finally, create the samples:
   sampler.sample(starting_coefficients,
                  [&](const SampleType &x) {
                    return (log_likelihood.log_likelihood(laplace_problem.evaluate(x)) +
