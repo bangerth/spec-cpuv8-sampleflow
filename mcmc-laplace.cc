@@ -49,6 +49,8 @@
 
 #include <deal.II/base/logstream.h>
 
+#include <sampleflow/producers/metropolis_hastings.h>
+
 using namespace dealii;
 
 
@@ -845,19 +847,33 @@ int main()
   LogPrior::LogGaussian          log_prior(0, 2);
   ProposalGenerator::LogGaussian proposal_generator(
     random_seed, 0.09); /* so that the acceptance ratio is ~0.24 */
-  Sampler::MetropolisHastings sampler(laplace_problem,
-                                      log_likelihood,
-                                      log_prior,
-                                      proposal_generator,
-                                      random_seed,
-                                      dataset_name);
+
+
+
+  // Sampler::MetropolisHastings sampler(laplace_problem,
+  //                                     log_likelihood,
+  //                                     log_prior,
+  //                                     proposal_generator,
+  //                                     random_seed,
+  //                                     dataset_name);
 
   Vector<double> starting_coefficients(64);
   for (auto &el : starting_coefficients)
     el = 1.;
+
+  using SampleType = Vector<double>;
+  
+  SampleFlow::Producers::MetropolisHastings<Vector<double>> sampler;
   sampler.sample(starting_coefficients,
-                 (testing ? 250 * 40 /* takes 40 seconds */
-                            :
-                            100000000 /* takes 6 days */
-                  ));
+                 [&](const SampleType &x) {
+                   return (log_likelihood.log_likelihood(laplace_problem.evaluate(x)) +
+                           log_prior.log_prior(x));
+                 },
+                 [&](const SampleType &x) {
+                   return proposal_generator.perturb(x);
+                 },
+                 (testing ?
+                  250 /* takes 40 seconds */
+                  :
+                  100000000 /* takes 6 days */));
 }
