@@ -950,4 +950,6 @@ int main()
   for (const auto v : mean_value.get())
     std::cout << v << ' ';
   std::cout << std::endl;
+
+  std::cout << "Number of samples = " << sample_count.get() << std::endl;
 }
