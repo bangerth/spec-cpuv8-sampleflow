@@ -941,7 +941,13 @@ int main()
                    return proposal_generator.perturb(x);
                  },
                  (testing ?
-                  250 /* takes 40 seconds */
+                  250 * 40 /* takes 40 seconds */
                   :
                   100000000 /* takes 6 days */));
+
+  // Then output some statistics
+  std::cout << "Mean value = ";
+  for (const auto v : mean_value.get())
+    std::cout << v << ' ';
+  std::cout << std::endl;
 }
