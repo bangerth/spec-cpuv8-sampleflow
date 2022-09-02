@@ -126,7 +126,7 @@ namespace Filters
      *   originally associated with the sample.
      */
     virtual
-      boost::optional<std::pair<std::array<typename InputType::value_type,2>, SampleFlow::AuxiliaryData> >
+      boost::optional<std::pair<std::array<typename InputType::value_type,2>, SampleFlow::AuxiliaryData>>
       filter (InputType sample,
               SampleFlow::AuxiliaryData aux_data) override;
 
@@ -186,6 +186,76 @@ namespace Filters
       };
   }
 
+
+
+  /**
+   * An implementation of the Filter interface in which a given component
+   * of a vector-valued sample is passed on. This useful if, for example,
+   * one wants to compute the mean value or standard deviation of an
+   * individual component of a sample vector is of interest.
+   *
+   *
+   * ### Threading model ###
+   *
+   * The implementation of this class is thread-safe, i.e., its
+   * filter() member function can be called concurrently and from multiple
+   * threads.
+   *
+   *
+   * @tparam InputType The C++ type used to describe the incoming samples.
+   *   For the current class, the output type of samples is the `value_type`
+   *   of the `InputType`, i.e., `typename InputType::value_type`, as this
+   *   indicates the type of individual components of the `InputType`.
+   */
+  template <typename InputType>
+  class PassThrough : public SampleFlow::Filter<InputType, InputType>
+  {
+    public:
+    /**
+     * Destructor. This function also makes sure that all samples this
+     * object may have received have been fully processed. To this end,
+     * it calls the Consumers::disconnect_and_flush() function of the
+     * base class.
+     */
+    virtual ~PassThrough ();
+
+    /**
+     * Process one sample by simply passing it on
+     *
+     * @param[in] sample The sample to process.
+     * @param[in] aux_data Auxiliary data about this sample. The current
+     *   class does not know what to do with any such data and consequently
+     *   simply passes it on.
+     *
+     * @return The input sample and the auxiliary data
+     *   originally associated with the sample.
+     */
+    virtual
+      boost::optional<std::pair<InputType, SampleFlow::AuxiliaryData>>
+      filter (InputType sample,
+              SampleFlow::AuxiliaryData aux_data) override;
+  };
+
+
+
+  template <typename InputType>
+  PassThrough<InputType>::
+  ~PassThrough ()
+  {
+    this->disconnect_and_flush();
+  }
+
+
+
+  template <typename InputType>
+  boost::optional<std::pair<InputType, SampleFlow::AuxiliaryData>>
+  PassThrough<InputType>::
+  filter (InputType sample,
+          SampleFlow::AuxiliaryData aux_data)
+  {
+    return std::pair<InputType, SampleFlow::AuxiliaryData>
+      { sample, aux_data };
+  }
 }
 
 
@@ -808,24 +878,33 @@ int main()
     el = 1.;
 
   // Next declare the sampler and all of the filters and consumers we
-  // need to create to evaluate the solution:
+  // need to create to evaluate the solution. Because we have more than
+  // one sampler, it is cumbersome to connect all of these objects to
+  // all of the samplers; rather, create a pass through filter that
+  // is itself connected to all samplers, and that serves as inputs for
+  // all of the downstream objects that then only have to be connected
+  // to a single producer (namely, the pass through filter):
   using SampleType = Vector<double>;  
-  SampleFlow::Producers::MetropolisHastings<Vector<double>> sampler;
+  SampleFlow::Producers::MetropolisHastings<SampleType> sampler;
+
+  Filters::PassThrough<SampleType> pass_through;
+  pass_through.connect_to_producer (sampler);
+  
   // Consumer for counting how many samples we have processed
   SampleFlow::Consumers::CountSamples<SampleType> sample_count;
-  sample_count.connect_to_producer (sampler);
+  sample_count.connect_to_producer (pass_through);
 
   // Consumer for computing the mean value
   SampleFlow::Consumers::MeanValue<SampleType> mean_value;
-  mean_value.connect_to_producer (sampler);
+  mean_value.connect_to_producer (pass_through);
 
   // Consumer for computing the covariance matrix
   SampleFlow::Consumers::CovarianceMatrix<SampleType> cov_matrix;
-  cov_matrix.connect_to_producer (sampler);
+  cov_matrix.connect_to_producer (pass_through);
   
   // Consumer for computing the MAP point
   SampleFlow::Consumers::MaximumProbabilitySample<SampleType> MAP_point;
-  MAP_point.connect_to_producer (sampler);
+  MAP_point.connect_to_producer (pass_through);
 
   // Consumers for histograms for each component. For this to work, we
   // first have to split each sample into its 64 individual
@@ -838,7 +917,7 @@ int main()
   for (unsigned int c=0; c<64; ++c)
     {
       component_splitters.emplace_back (c);
-      component_splitters.back().connect_to_producer (sampler);
+      component_splitters.back().connect_to_producer (pass_through);
 
       histograms.emplace_back(-3, 3, 1000, &exp10);
       histograms.back().connect_to_producer (component_splitters[c]);
@@ -849,7 +928,7 @@ int main()
   // sample, and compute up to a lag of 200, which equates to a sample
   // of lag of 20,000
   SampleFlow::Filters::TakeEveryNth<SampleType> every_100th(100);
-  every_100th.connect_to_producer (sampler);
+  every_100th.connect_to_producer (pass_through);
     
   SampleFlow::Consumers::AutoCovarianceMatrix<SampleType> autocovariance(200);
   autocovariance.connect_to_producer (every_100th);
@@ -859,10 +938,10 @@ int main()
 
   // Set up filters that separate out two pairs of components
   Filters::ComponentPairSplitter<SampleType> pair_splitter_45_46(45,46);
-  pair_splitter_45_46.connect_to_producer (sampler);
+  pair_splitter_45_46.connect_to_producer (pass_through);
 
   Filters::ComponentPairSplitter<SampleType> pair_splitter_53_54(53,54);
-  pair_splitter_53_54.connect_to_producer (sampler);
+  pair_splitter_53_54.connect_to_producer (pass_through);
 
   // Then also create the consumers that turn these pairs of
   // components into pair histograms
