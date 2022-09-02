@@ -237,7 +237,6 @@ namespace ForwardSimulator
     void setup_system();
     void assemble_system(const Vector<double> &coefficients);
     void solve();
-    void output_results(const Vector<double> &coefficients) const;
 
     Triangulation<dim>        triangulation;
     FE_Q<dim>                 fe;
@@ -452,35 +451,6 @@ namespace ForwardSimulator
 
 
 
-  // The following function outputs graphical data for the most recently
-  // used coefficient and corresponding solution of the PDE. Collecting
-  // the coefficient values requires translating from the 64-element
-  // coefficient vector and the cells that correspond to each of these
-  // elements. The rest remains pretty obvious, with the exception
-  // of including the number of the current sample into the file name.
-  template <int dim>
-  void
-  PoissonSolver<dim>::output_results(const Vector<double> &coefficients) const
-  {
-    Vector<float> coefficient_values(triangulation.n_active_cells());
-    for (const auto &cell : triangulation.active_cell_iterators())
-      coefficient_values[cell->active_cell_index()] =
-        coefficients(cell->user_index());
-
-    DataOut<dim> data_out;
-
-    data_out.attach_dof_handler(dof_handler);
-    data_out.add_data_vector(solution, "solution");
-    data_out.add_data_vector(coefficient_values, "coefficient");
-
-    data_out.build_patches();
-
-    std::ofstream output("solution-xxx.vtu");
-    data_out.write_vtu(output);
-  }
-
-
-
   // The following is the main function of this class: Given a coefficient
   // vector, it assembles the linear system, solves it, and then evaluates
   // the solution at the measurement points by applying the measurement
@@ -507,8 +477,6 @@ namespace ForwardSimulator
     measurement_matrix.vmult(measurements, solution);
     Assert(measurements.size() == measurement_points.size(),
            ExcInternalError());
-
-    /*  output_results(coefficients);  */
 
     return measurements;
   }
