@@ -66,129 +66,126 @@
 #include <sampleflow/consumers/auto_covariance_matrix.h>
 #include <sampleflow/consumers/auto_covariance_trace.h>
 
-namespace SampleFlow
+namespace Filters
 {
-  namespace Filters
+  /**
+   * An implementation of the Filter interface in which a given component
+   * of a vector-valued sample is passed on. This useful if, for example,
+   * one wants to compute the mean value or standard deviation of an
+   * individual component of a sample vector is of interest.
+   *
+   *
+   * ### Threading model ###
+   *
+   * The implementation of this class is thread-safe, i.e., its
+   * filter() member function can be called concurrently and from multiple
+   * threads.
+   *
+   *
+   * @tparam InputType The C++ type used to describe the incoming samples.
+   *   For the current class, the output type of samples is the `value_type`
+   *   of the `InputType`, i.e., `typename InputType::value_type`, as this
+   *   indicates the type of individual components of the `InputType`.
+   */
+  template <typename InputType>
+  class ComponentPairSplitter : public SampleFlow::Filter<InputType, std::array<typename InputType::value_type,2>>
   {
+    public:
     /**
-     * An implementation of the Filter interface in which a given component
-     * of a vector-valued sample is passed on. This useful if, for example,
-     * one wants to compute the mean value or standard deviation of an
-     * individual component of a sample vector is of interest.
+     * Constructor.
      *
-     *
-     * ### Threading model ###
-     *
-     * The implementation of this class is thread-safe, i.e., its
-     * filter() member function can be called concurrently and from multiple
-     * threads.
-     *
-     *
-     * @tparam InputType The C++ type used to describe the incoming samples.
-     *   For the current class, the output type of samples is the `value_type`
-     *   of the `InputType`, i.e., `typename InputType::value_type`, as this
-     *   indicates the type of individual components of the `InputType`.
+     * @param[in] selected_component The index of the component that is to
+     *   be selected.
      */
-    template <typename InputType>
-    class ComponentPairSplitter : public Filter<InputType, std::array<typename InputType::value_type,2>>
-    {
-      public:
-        /**
-         * Constructor.
-         *
-         * @param[in] selected_component The index of the component that is to
-         *   be selected.
-         */
-        ComponentPairSplitter (const unsigned int selected_component_1,
-                               const unsigned int selected_component_2);
-
-        /**
-         * Copy constructor.
-         */
-        ComponentPairSplitter (const ComponentPairSplitter<InputType> &o);
-
-        /**
-         * Destructor. This function also makes sure that all samples this
-         * object may have received have been fully processed. To this end,
-         * it calls the Consumers::disconnect_and_flush() function of the
-         * base class.
-         */
-        virtual ~ComponentPairSplitter ();
-
-        /**
-         * Process one sample by extracting a given component and passing
-         * that on as a sample in its own right to downstream consumers.
-         *
-         * @param[in] sample The sample to process.
-         * @param[in] aux_data Auxiliary data about this sample. The current
-         *   class does not know what to do with any such data and consequently
-         *   simply passes it on.
-         *
-         * @return The selected component of the sample and the auxiliary data
-         *   originally associated with the sample.
-         */
-        virtual
-        boost::optional<std::pair<std::array<typename InputType::value_type,2>, AuxiliaryData> >
-        filter (InputType sample,
-                AuxiliaryData aux_data) override;
-
-      private:
-        /**
-         * The selected component of samples to be extracted.
-         */
-        const std::array<unsigned int,2> selected_components;
-    };
-
-
-
-    template <typename InputType>
-    ComponentPairSplitter<InputType>::
     ComponentPairSplitter (const unsigned int selected_component_1,
-                           const unsigned int selected_component_2)
-    : selected_components({{selected_component_1, selected_component_2}})
-    {}
+                           const unsigned int selected_component_2);
+
+    /**
+     * Copy constructor.
+     */
+    ComponentPairSplitter (const ComponentPairSplitter<InputType> &o);
+
+    /**
+     * Destructor. This function also makes sure that all samples this
+     * object may have received have been fully processed. To this end,
+     * it calls the Consumers::disconnect_and_flush() function of the
+     * base class.
+     */
+    virtual ~ComponentPairSplitter ();
+
+    /**
+     * Process one sample by extracting a given component and passing
+     * that on as a sample in its own right to downstream consumers.
+     *
+     * @param[in] sample The sample to process.
+     * @param[in] aux_data Auxiliary data about this sample. The current
+     *   class does not know what to do with any such data and consequently
+     *   simply passes it on.
+     *
+     * @return The selected component of the sample and the auxiliary data
+     *   originally associated with the sample.
+     */
+    virtual
+      boost::optional<std::pair<std::array<typename InputType::value_type,2>, SampleFlow::AuxiliaryData> >
+      filter (InputType sample,
+              SampleFlow::AuxiliaryData aux_data) override;
+
+    private:
+    /**
+     * The selected component of samples to be extracted.
+     */
+    const std::array<unsigned int,2> selected_components;
+  };
 
 
 
-    template <typename InputType>
-    ComponentPairSplitter<InputType>::
-    ComponentPairSplitter (const ComponentPairSplitter<InputType> &o)
-      : selected_components(o.selected_components)
-    {}
+  template <typename InputType>
+  ComponentPairSplitter<InputType>::
+  ComponentPairSplitter (const unsigned int selected_component_1,
+                         const unsigned int selected_component_2)
+  : selected_components({{selected_component_1, selected_component_2}})
+  {}
 
 
 
-    template <typename InputType>
-    ComponentPairSplitter<InputType>::
-    ~ComponentPairSplitter ()
-    {
-      this->disconnect_and_flush();
-    }
+  template <typename InputType>
+  ComponentPairSplitter<InputType>::
+  ComponentPairSplitter (const ComponentPairSplitter<InputType> &o)
+  : selected_components(o.selected_components)
+  {}
 
 
 
-    template <typename InputType>
-    boost::optional<std::pair<std::array<typename InputType::value_type,2>, AuxiliaryData> >
-    ComponentPairSplitter<InputType>::
-    filter (InputType sample,
-            AuxiliaryData aux_data)
-    {
-      assert (selected_components[0] < sample.size());
-      assert (selected_components[1] < sample.size());
+  template <typename InputType>
+  ComponentPairSplitter<InputType>::
+  ~ComponentPairSplitter ()
+  {
+    this->disconnect_and_flush();
+  }
 
-      return std::pair<std::array<typename InputType::value_type,2>, AuxiliaryData>
+
+
+  template <typename InputType>
+  boost::optional<std::pair<std::array<typename InputType::value_type,2>, SampleFlow::AuxiliaryData> >
+  ComponentPairSplitter<InputType>::
+  filter (InputType sample,
+          SampleFlow::AuxiliaryData aux_data)
+  {
+    assert (selected_components[0] < sample.size());
+    assert (selected_components[1] < sample.size());
+
+    return std::pair<std::array<typename InputType::value_type,2>, SampleFlow::AuxiliaryData>
       {
         {
           {
             std::move(sample[selected_components[0]]),
-            std::move(sample[selected_components[1]])
-          }
+              std::move(sample[selected_components[1]])
+              }
         },
         std::move(aux_data)
       };
-    }
-
   }
+
 }
 
 
@@ -861,10 +858,10 @@ int main()
   autocovariance_trace.connect_to_producer (every_100th);
 
   // Set up filters that separate out two pairs of components
-  SampleFlow::Filters::ComponentPairSplitter<SampleType> pair_splitter_45_46(45,46);
+  Filters::ComponentPairSplitter<SampleType> pair_splitter_45_46(45,46);
   pair_splitter_45_46.connect_to_producer (sampler);
 
-  SampleFlow::Filters::ComponentPairSplitter<SampleType> pair_splitter_53_54(53,54);
+  Filters::ComponentPairSplitter<SampleType> pair_splitter_53_54(53,54);
   pair_splitter_53_54.connect_to_producer (sampler);
 
   // Then also create the consumers that turn these pairs of
