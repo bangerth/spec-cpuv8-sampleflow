@@ -19,7 +19,6 @@
 
 
 
-#include <deal.II/base/timer.h>
 #include <deal.II/grid/tria.h>
 #include <deal.II/dofs/dof_handler.h>
 #include <deal.II/grid/grid_generator.h>
@@ -259,9 +258,6 @@ namespace ForwardSimulator
     SparsityPattern           measurement_sparsity;
     SparseMatrix<double>      measurement_matrix;
 
-    TimerOutput  timer;
-    unsigned int nth_evaluation;
-
     const std::string &dataset_name;
   };
 
@@ -273,8 +269,6 @@ namespace ForwardSimulator
                                     const std::string &dataset_name)
     : fe(fe_degree)
     , dof_handler(triangulation)
-    , timer(std::cout, TimerOutput::summary, TimerOutput::cpu_times)
-    , nth_evaluation(0)
     , dataset_name(dataset_name)
   {
     make_grid(global_refinements);
@@ -481,8 +475,7 @@ namespace ForwardSimulator
 
     data_out.build_patches();
 
-    std::ofstream output("solution-" +
-                         Utilities::int_to_string(nth_evaluation, 10) + ".vtu");
+    std::ofstream output("solution-xxx.vtu");
     data_out.write_vtu(output);
   }
 
@@ -507,30 +500,15 @@ namespace ForwardSimulator
   Vector<double>
   PoissonSolver<dim>::evaluate(const Vector<double> &coefficients)
   {
-    {
-      TimerOutput::Scope section(timer, "Building linear systems");
-      assemble_system(coefficients);
-    }
-
-    {
-      TimerOutput::Scope section(timer, "Solving linear systems");
-      solve();
-    }
+    assemble_system(coefficients);
+    solve();
 
     Vector<double> measurements(measurement_matrix.m());
-    {
-      TimerOutput::Scope section(timer, "Postprocessing");
+    measurement_matrix.vmult(measurements, solution);
+    Assert(measurements.size() == measurement_points.size(),
+           ExcInternalError());
 
-      measurement_matrix.vmult(measurements, solution);
-      Assert(measurements.size() == measurement_points.size(),
-             ExcInternalError());
-
-      /*  output_results(coefficients);  */
-    }
-
-    ++nth_evaluation;
-    if (nth_evaluation % 10000 == 0)
-      timer.print_summary();
+    /*  output_results(coefficients);  */
 
     return measurements;
   }
