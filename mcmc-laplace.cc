@@ -189,10 +189,7 @@ namespace Filters
 
 
   /**
-   * An implementation of the Filter interface in which a given component
-   * of a vector-valued sample is passed on. This useful if, for example,
-   * one wants to compute the mean value or standard deviation of an
-   * individual component of a sample vector is of interest.
+   * TODO.
    *
    *
    * ### Threading model ###
