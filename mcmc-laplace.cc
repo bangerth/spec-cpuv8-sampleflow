@@ -45,6 +45,8 @@
 #include <fstream>
 #include <iostream>
 #include <random>
+#include <thread>
+#include <memory>
 
 #include <deal.II/base/logstream.h>
 
@@ -686,7 +688,8 @@ namespace ProposalGenerator
   public:
     virtual
     std::pair<Vector<double>,double>
-    perturb(const Vector<double> &current_sample) const = 0;
+    perturb(const Vector<double> &current_sample,
+            std::mt19937 &random_number_generator) const = 0;
 
     virtual ~Interface() = default;
   };
@@ -695,29 +698,27 @@ namespace ProposalGenerator
   class LogGaussian : public Interface
   {
   public:
-    LogGaussian(const unsigned int random_seed, const double log_sigma);
+    LogGaussian(const double log_sigma);
 
     virtual
     std::pair<Vector<double>,double>
-    perturb(const Vector<double> &current_sample) const;
+    perturb(const Vector<double> &current_sample,
+            std::mt19937 &random_number_generator) const;
 
   private:
     const double         log_sigma;
-    mutable std::mt19937 random_number_generator;
   };
 
 
 
-  LogGaussian::LogGaussian(const unsigned int random_seed,
-                           const double       log_sigma)
+  LogGaussian::LogGaussian(const double       log_sigma)
     : log_sigma(log_sigma)
-  {
-    random_number_generator.seed(random_seed);
-  }
+  {}
 
 
   std::pair<Vector<double>,double>
-  LogGaussian::perturb(const Vector<double> &current_sample) const
+  LogGaussian::perturb(const Vector<double> &current_sample,
+                       std::mt19937 &random_number_generator) const
   {
     Vector<double> new_sample = current_sample;
     double         product_of_ratios = 1;
@@ -867,8 +868,7 @@ int main()
     /* fe_degree = */ 1);
   LogLikelihood::Gaussian        log_likelihood(exact_solution, 0.05);
   LogPrior::LogGaussian          log_prior(0, 2);
-  ProposalGenerator::LogGaussian proposal_generator(
-    random_seed, 0.09); /* so that the acceptance ratio is ~0.24 */
+  ProposalGenerator::LogGaussian proposal_generator(0.09); /* so that the acceptance ratio is ~0.24 */
 
   Vector<double> starting_coefficients(64);
   for (auto &el : starting_coefficients)
@@ -881,11 +881,15 @@ int main()
   // is itself connected to all samplers, and that serves as inputs for
   // all of the downstream objects that then only have to be connected
   // to a single producer (namely, the pass through filter):
-  using SampleType = Vector<double>;  
-  SampleFlow::Producers::MetropolisHastings<SampleType> sampler;
-
+  using SampleType = Vector<double>;
+  const unsigned int n_samplers = 50;
+  std::vector<std::unique_ptr<SampleFlow::Producers::MetropolisHastings<SampleType>>> samplers;
+  for (unsigned int i=0; i<n_samplers; ++i)
+    samplers.push_back (std::make_unique<SampleFlow::Producers::MetropolisHastings<SampleType>>());
+  
   Filters::PassThrough<SampleType> pass_through;
-  pass_through.connect_to_producer (sampler);
+  for (const auto &s : samplers)
+    pass_through.connect_to_producer (*s);
   
   // Consumer for counting how many samples we have processed
   SampleFlow::Consumers::CountSamples<SampleType> sample_count;
@@ -951,18 +955,29 @@ int main()
   pair_histogram_53_54.connect_to_producer (pair_splitter_53_54);
 
   // Finally, create the samples:
-  sampler.sample(starting_coefficients,
-                 [&](const SampleType &x) {
-                   return (log_likelihood.log_likelihood(laplace_problem.evaluate(x)) +
-                           log_prior.log_prior(x));
-                 },
-                 [&](const SampleType &x) {
-                   return proposal_generator.perturb(x);
-                 },
-                 (testing ?
-                  10000
-                  :
-                  100000000));
+  std::vector<std::future<void>> tasks;
+  for (const auto &s : samplers)
+    tasks.emplace_back (std::async(std::launch::async,
+                                   [&]()
+                                   {
+                                     std::mt19937 random_number_generator(random_seed);
+                                     s->sample(starting_coefficients,
+                                               [&](const SampleType &x) {
+                                                 return (log_likelihood.log_likelihood(laplace_problem.evaluate(x)) +
+                                                         log_prior.log_prior(x));
+                                               },
+                                               [&](const SampleType &x) {
+                                                 return proposal_generator.perturb(x, random_number_generator);
+                                               },
+                                               (testing ?
+                                                2000000
+                                                :
+                                                100000000),
+                                               random_seed+std::hash<std::unique_ptr<SampleFlow::Producers::MetropolisHastings<SampleType>>>()(s));
+                                   }
+                        ));
+  for (auto &t : tasks)
+    t.wait();
 
   // Then output some statistics
   std::cout << "Mean value = ";
