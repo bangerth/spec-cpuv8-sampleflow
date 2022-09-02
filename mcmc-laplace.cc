@@ -215,7 +215,7 @@ namespace ForwardSimulator
   class Interface
   {
   public:
-    virtual Vector<double> evaluate(const Vector<double> &coefficients) = 0;
+    virtual Vector<double> evaluate(const Vector<double> &coefficients) const = 0;
 
     virtual ~Interface() = default;
   };
@@ -229,13 +229,18 @@ namespace ForwardSimulator
     PoissonSolver(const unsigned int global_refinements,
                   const unsigned int fe_degree);
     virtual Vector<double>
-    evaluate(const Vector<double> &coefficients) override;
+    evaluate(const Vector<double> &coefficients) const override;
 
   private:
     void make_grid(const unsigned int global_refinements);
     void setup_system();
-    void assemble_system(const Vector<double> &coefficients);
-    void solve();
+    void assemble_system(const Vector<double> &coefficients,
+                         SparseMatrix<double> &system_matrix,
+                         Vector<double>       &solution,
+                         Vector<double>       &system_rhs) const;
+    void solve(const SparseMatrix<double> &system_matrix,
+               Vector<double>             &solution,
+               const Vector<double>       &system_rhs) const;
 
     Triangulation<dim>        triangulation;
     FE_Q<dim>                 fe;
@@ -246,10 +251,6 @@ namespace ForwardSimulator
     std::map<types::global_dof_index,double> boundary_values;
 
     SparsityPattern           sparsity_pattern;
-    SparseMatrix<double>      system_matrix;
-
-    Vector<double>            solution;
-    Vector<double>            system_rhs;
 
     std::vector<Point<dim>>   measurement_points;
 
@@ -301,11 +302,6 @@ namespace ForwardSimulator
       DynamicSparsityPattern dsp(dof_handler.n_dofs());
       DoFTools::make_sparsity_pattern(dof_handler, dsp);
       sparsity_pattern.copy_from(dsp);
-
-      system_matrix.reinit(sparsity_pattern);
-
-      solution.reinit(dof_handler.n_dofs());
-      system_rhs.reinit(dof_handler.n_dofs());
     }
 
     // And then define the tools to do point evaluation. We choose
@@ -399,7 +395,10 @@ namespace ForwardSimulator
   // for a (representative) cell, the function that assembles the matrix is
   // pretty short and straightforward:
   template <int dim>
-  void PoissonSolver<dim>::assemble_system(const Vector<double> &coefficients)
+  void PoissonSolver<dim>::assemble_system(const Vector<double> &coefficients,
+                                           SparseMatrix<double> &system_matrix,
+                                           Vector<double>       &solution,
+                                           Vector<double>       &system_rhs) const
   {
     Assert(coefficients.size() == 64, ExcInternalError());
 
@@ -435,7 +434,9 @@ namespace ForwardSimulator
 
   // The same is true for the function that solves the linear system:
   template <int dim>
-  void PoissonSolver<dim>::solve()
+  void PoissonSolver<dim>::solve(const SparseMatrix<double> &system_matrix,
+                                 Vector<double>             &solution,
+                                 const Vector<double>       &system_rhs) const
   {
     SparseILU<double> ilu;
     ilu.initialize(system_matrix);
@@ -463,10 +464,16 @@ namespace ForwardSimulator
   // every 10,000 samples.
   template <int dim>
   Vector<double>
-  PoissonSolver<dim>::evaluate(const Vector<double> &coefficients)
+  PoissonSolver<dim>::evaluate(const Vector<double> &coefficients) const
   {
-    assemble_system(coefficients);
-    solve();
+    SparseMatrix<double>      system_matrix(sparsity_pattern);
+
+    Vector<double>            solution(dof_handler.n_dofs());
+    Vector<double>            system_rhs(dof_handler.n_dofs());
+    
+    assemble_system(coefficients,
+                    system_matrix, solution, system_rhs);
+    solve(system_matrix, solution, system_rhs);
 
     Vector<double> measurements(measurement_matrix.m());
     measurement_matrix.vmult(measurements, solution);
@@ -880,9 +887,9 @@ int main()
                    return proposal_generator.perturb(x);
                  },
                  (testing ?
-                  250 * 40 /* takes 40 seconds */
+                  10000
                   :
-                  100000000 /* takes 6 days */));
+                  100000000));
 
   // Then output some statistics
   std::cout << "Mean value = ";
