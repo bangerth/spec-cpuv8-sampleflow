@@ -227,8 +227,7 @@ namespace ForwardSimulator
   {
   public:
     PoissonSolver(const unsigned int global_refinements,
-                  const unsigned int fe_degree,
-                  const std::string &dataset_name);
+                  const unsigned int fe_degree);
     virtual Vector<double>
     evaluate(const Vector<double> &coefficients) override;
 
@@ -256,19 +255,15 @@ namespace ForwardSimulator
 
     SparsityPattern           measurement_sparsity;
     SparseMatrix<double>      measurement_matrix;
-
-    const std::string &dataset_name;
   };
 
 
 
   template <int dim>
   PoissonSolver<dim>::PoissonSolver(const unsigned int global_refinements,
-                                    const unsigned int fe_degree,
-                                    const std::string &dataset_name)
+                                    const unsigned int fe_degree)
     : fe(fe_degree)
     , dof_handler(triangulation)
-    , dataset_name(dataset_name)
   {
     make_grid(global_refinements);
     setup_system();
@@ -707,7 +702,6 @@ int main()
   MultithreadInfo::set_thread_limit(1);
 
   const unsigned int random_seed  = (testing ? 1U : std::random_device()());
-  const std::string  dataset_name = Utilities::to_string(random_seed, 10);
 
   const Vector<double> exact_solution(
     {   0.06076511762259369, 0.09601910120848481,
@@ -799,8 +793,7 @@ int main()
   // Now run the forward simulator for samples:
   ForwardSimulator::PoissonSolver<2> laplace_problem(
     /* global_refinements = */ 5,
-    /* fe_degree = */ 1,
-    dataset_name);
+    /* fe_degree = */ 1);
   LogLikelihood::Gaussian        log_likelihood(exact_solution, 0.05);
   LogPrior::LogGaussian          log_prior(0, 2);
   ProposalGenerator::LogGaussian proposal_generator(
