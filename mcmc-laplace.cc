@@ -61,6 +61,7 @@
 #include <sampleflow/consumers/maximum_probability_sample.h>
 #include <sampleflow/consumers/covariance_matrix.h>
 #include <sampleflow/consumers/stream_output.h>
+#include <sampleflow/consumers/action.h>
 
 #include <sampleflow/consumers/covariance_matrix.h>
 #include <sampleflow/consumers/acceptance_ratio.h>
@@ -954,6 +955,95 @@ int main()
                                                                                    0, 100, 300);
   pair_histogram_53_54.connect_to_producer (pair_splitter_53_54);
 
+  std::ofstream running_mean_error_output ("running_mean_error.txt");
+  auto compute_running_mean_error
+    = [&](SampleType, SampleFlow::AuxiliaryData)
+    {
+          static const std::valarray<double> known_mean_value =
+          {
+                76.5608 ,
+                1.21607 ,
+                0.977375 ,
+                0.881992 ,
+                0.97185 ,
+                0.947841 ,
+                1.08532 ,
+                11.35 ,
+                1.20704 ,
+                0.09372 ,
+                0.1158 ,
+                0.582919 ,
+                0.941987 ,
+                6.33314 ,
+                9.31675 ,
+                1.08149 ,
+                0.977421 ,
+                0.115797 ,
+                0.464478 ,
+                267.033 ,
+                30.929 ,
+                7.11323 ,
+                12.3736 ,
+                0.949886 ,
+                0.882002 ,
+                0.583633 ,
+                267.568 ,
+                368.927 ,
+                234.852 ,
+                13.3262 ,
+                22.4175 ,
+                0.988837 ,
+                0.97187 ,
+                0.949446 ,
+                30.7951 ,
+                233.977 ,
+                1.15561 ,
+                0.833903 ,
+                88.5316 ,
+                0.987824 ,
+                0.947841 ,
+                6.14538 ,
+                7.17051 ,
+                13.3006 ,
+                0.833687 ,
+                177.126 ,
+                283.245 ,
+                0.914231 ,
+                1.0851 ,
+                9.3217 ,
+                12.3569 ,
+                22.506 ,
+                88.4949 ,
+                283.335 ,
+                218.798 ,
+                0.933451 ,
+                11.5031 ,
+                1.08136 ,
+                0.949848 ,
+                0.988767 ,
+                0.987837 ,
+                0.914259 ,
+                0.933451 ,
+                1.59986
+          };
+
+          const SampleType current_mean = mean_value.get();
+          std::valarray<double> mean(current_mean.begin(),
+                                     current_mean.size());
+          
+          const std::valarray<double> diff = (mean - known_mean_value) / known_mean_value;
+          double norm_sqr = 0;
+          for (const auto p : diff)
+            norm_sqr += p*p;
+          
+          running_mean_error_output << norm_sqr << '\n';
+    };  
+  SampleFlow::Filters::TakeEveryNth<SampleType> every_1000th(1000);
+  every_1000th.connect_to_producer (pass_through);
+  SampleFlow::Consumers::Action<SampleType> running_mean_error (compute_running_mean_error);
+  running_mean_error.connect_to_producer (every_1000th);
+
+  
   // Finally, create the samples:
   std::vector<std::future<void>> tasks;
   for (const auto &s : samplers)
@@ -970,7 +1060,7 @@ int main()
                                                  return proposal_generator.perturb(x, random_number_generator);
                                                },
                                                (testing ?
-                                                2000000
+                                                100000
                                                 :
                                                 100000000),
                                                random_seed+std::hash<std::unique_ptr<SampleFlow::Producers::MetropolisHastings<SampleType>>>()(s));
