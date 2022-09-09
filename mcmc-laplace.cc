@@ -700,6 +700,7 @@ namespace ProposalGenerator
 int main()
 {
   const bool testing = true;
+  const unsigned int n_samplers = 1;
 
   // Run with one thread, so as to not step on other processes
   // doing the same at the same time. It turns out that the problem
@@ -816,7 +817,6 @@ int main()
   // all of the downstream objects that then only have to be connected
   // to a single producer (namely, the pass through filter):
   using SampleType = Vector<double>;
-  const unsigned int n_samplers = 50;
   std::vector<std::unique_ptr<SampleFlow::Producers::MetropolisHastings<SampleType>>> samplers;
   for (unsigned int i=0; i<n_samplers; ++i)
     samplers.push_back (std::make_unique<SampleFlow::Producers::MetropolisHastings<SampleType>>());
@@ -983,7 +983,9 @@ int main()
     tasks.emplace_back (std::async(std::launch::async,
                                    [&]()
                                    {
-                                     std::mt19937 random_number_generator(random_seed);
+                                     const unsigned int my_random_seed
+                                       = random_seed+std::hash<std::unique_ptr<SampleFlow::Producers::MetropolisHastings<SampleType>>>()(s);
+                                     std::mt19937 random_number_generator(my_random_seed);
                                      s->sample(starting_coefficients,
                                                [&](const SampleType &x) {
                                                  const double posterior
@@ -998,7 +1000,7 @@ int main()
                                                 100000
                                                 :
                                                 100000000),
-                                               random_seed+std::hash<std::unique_ptr<SampleFlow::Producers::MetropolisHastings<SampleType>>>()(s));
+                                               my_random_seed);
                                    }
                         ));
   for (auto &t : tasks)
