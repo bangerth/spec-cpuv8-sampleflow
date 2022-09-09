@@ -661,7 +661,7 @@ namespace ProposalGenerator
         const double rnd = std::normal_distribution<>(0, log_sigma)(random_number_generator);
         const double exp_rnd = std::exp(rnd);
         x *= exp_rnd;
-        product_of_ratios *= exp_rnd;
+        product_of_ratios /= exp_rnd;
       }
 
     return {new_sample, product_of_ratios};
