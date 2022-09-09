@@ -978,33 +978,30 @@ int main()
 
   
   // Finally, create the samples:
-  std::vector<std::future<void>> tasks;
+  Threads::TaskGroup<void> tasks;
   for (const auto &s : samplers)
-    tasks.emplace_back (std::async(std::launch::async,
-                                   [&]()
-                                   {
-                                     const unsigned int my_random_seed
-                                       = random_seed+std::hash<std::unique_ptr<SampleFlow::Producers::MetropolisHastings<SampleType>>>()(s);
-                                     std::mt19937 random_number_generator(my_random_seed);
-                                     s->sample(starting_coefficients,
-                                               [&](const SampleType &x) {
-                                                 const double posterior
-                                                   = (log_likelihood.log_likelihood(laplace_problem.evaluate(x)) +
-                                                      log_prior.log_prior(x));
-                                                 return posterior;
-                                               },
-                                               [&](const SampleType &x) {
-                                                 return proposal_generator.perturb(x, random_number_generator);
-                                               },
-                                               (testing ?
-                                                100000
-                                                :
-                                                100000000),
-                                               my_random_seed);
-                                   }
-                        ));
-  for (auto &t : tasks)
-    t.wait();
+    tasks += Threads::new_task ([&]()
+                                  {
+                                    const unsigned int my_random_seed
+                                      = random_seed+std::hash<std::unique_ptr<SampleFlow::Producers::MetropolisHastings<SampleType>>>()(s);
+                                    std::mt19937 random_number_generator(my_random_seed);
+                                    s->sample(starting_coefficients,
+                                              [&](const SampleType &x) {
+                                                const double posterior
+                                                  = (log_likelihood.log_likelihood(laplace_problem.evaluate(x)) +
+                                                     log_prior.log_prior(x));
+                                                return posterior;
+                                              },
+                                              [&](const SampleType &x) {
+                                                return proposal_generator.perturb(x, random_number_generator);
+                                              },
+                                              (testing ?
+                                               100000
+                                               :
+                                               100000000),
+                                              my_random_seed);
+                                  });
+  tasks.join_all();
 
   // Then output some statistics
   std::cout << "Mean value = ";
