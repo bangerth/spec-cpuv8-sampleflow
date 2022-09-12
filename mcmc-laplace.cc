@@ -983,25 +983,26 @@ int main()
   
   // Finally, create the samples:
   std::vector<std::future<void>> tasks;
-  for (const auto &s : samplers)
+  for (unsigned int i=0; i<samplers.size(); ++i)
     tasks.emplace_back (std::async(std::launch::async,
                                    [&]()
                                    {
                                      const unsigned int my_random_seed
-                                       = random_seed+std::hash<std::unique_ptr<SampleFlow::Producers::MetropolisHastings<SampleType>>>()(s);
+                                       = random_seed+std::hash<unsigned int>()(i);
                                      std::mt19937 random_number_generator(my_random_seed);
-                                     s->sample(starting_coefficients,
-                                               [&](const SampleType &x) {
-                                                 const double posterior
-                                                   = (log_likelihood.log_likelihood(laplace_problem.evaluate(x)) +
-                                                      log_prior.log_prior(x));
-                                                 return posterior;
-                                               },
-                                               [&](const SampleType &x) {
-                                                 return proposal_generator.perturb(x, random_number_generator);
-                                               },
-                                               n_samples_per_chain,
-                                               my_random_seed);
+                                     samplers[i]
+                                       ->sample(starting_coefficients,
+                                                [&](const SampleType &x) {
+                                                  const double posterior
+                                                    = (log_likelihood.log_likelihood(laplace_problem.evaluate(x)) +
+                                                       log_prior.log_prior(x));
+                                                  return posterior;
+                                                },
+                                                [&](const SampleType &x) {
+                                                  return proposal_generator.perturb(x, random_number_generator);
+                                                },
+                                                n_samples_per_chain,
+                                                my_random_seed);
                                    }
                         ));
   for (auto &t : tasks)
