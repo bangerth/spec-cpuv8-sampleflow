@@ -701,6 +701,10 @@ int main()
 {
   const bool testing = true;
   const unsigned int n_samplers = 2;
+  const unsigned int n_samples_per_chain = (testing ?
+                                            100000
+                                            :
+                                            100000000);
 
   // Run with one thread, so as to not step on other processes
   // doing the same at the same time. It turns out that the problem
@@ -996,10 +1000,7 @@ int main()
                                                [&](const SampleType &x) {
                                                  return proposal_generator.perturb(x, random_number_generator);
                                                },
-                                               (testing ?
-                                                100000
-                                                :
-                                                100000000),
+                                               n_samples_per_chain,
                                                my_random_seed);
                                    }
                         ));
