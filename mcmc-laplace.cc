@@ -50,7 +50,7 @@
 
 #include <deal.II/base/logstream.h>
 
-#include <sampleflow/producers/metropolis_hastings.h>
+#include <sampleflow/producers/differential_evaluation_mh.h>
 #include <sampleflow/filters/take_every_nth.h>
 #include <sampleflow/filters/component_splitter.h>
 #include <sampleflow/filters/pass_through.h>
@@ -821,13 +821,10 @@ int main()
   // all of the downstream objects that then only have to be connected
   // to a single producer (namely, the pass through filter):
   using SampleType = Vector<double>;
-  std::vector<std::unique_ptr<SampleFlow::Producers::MetropolisHastings<SampleType>>> samplers;
-  for (unsigned int i=0; i<n_samplers; ++i)
-    samplers.push_back (std::make_unique<SampleFlow::Producers::MetropolisHastings<SampleType>>());
+  SampleFlow::Producers::DifferentialEvaluationMetropolisHastings<SampleType> sampler;
   
   SampleFlow::Filters::PassThrough<SampleType> pass_through;
-  for (const auto &s : samplers)
-    pass_through.connect_to_producer (*s);
+  pass_through.connect_to_producer (sampler);
   
   // Consumer for counting how many samples we have processed
   SampleFlow::Consumers::CountSamples<SampleType> sample_count;
@@ -987,31 +984,40 @@ int main()
 
   
   // Finally, create the samples:
-  std::vector<std::future<void>> tasks;
-  for (unsigned int i=0; i<samplers.size(); ++i)
-    tasks.emplace_back (std::async(std::launch::async,
-                                   [&]()
-                                   {
-                                     const unsigned int my_random_seed
-                                       = random_seed+std::hash<unsigned int>()(i);
-                                     std::mt19937 random_number_generator(my_random_seed);
-                                     samplers[i]
-                                       ->sample(starting_coefficients,
-                                                [&](const SampleType &x) {
-                                                  const double posterior
-                                                    = (log_likelihood.log_likelihood(laplace_problem.evaluate(x)) +
-                                                       log_prior.log_prior(x));
-                                                  return posterior;
-                                                },
-                                                [&](const SampleType &x) {
-                                                  return proposal_generator.perturb(x, random_number_generator);
-                                                },
-                                                n_samples_per_chain,
-                                                my_random_seed);
-                                   }
-                        ));
-  for (auto &t : tasks)
-    t.wait();
+  std::mt19937 random_number_generator(random_seed);
+  sampler.sample(std::vector<SampleType>(n_samplers, starting_coefficients),
+                 /* log_likelihood = */
+                 [&](const SampleType &x) {
+                   const double posterior
+                     = (log_likelihood.log_likelihood(laplace_problem.evaluate(x)) +
+                        log_prior.log_prior(x));
+                   return posterior;
+                 },
+                 /* perturb = */
+                 [&](const SampleType &x) {
+                   return proposal_generator.perturb(x, random_number_generator);
+                 },
+                 /* crossover = */
+                 [](const SampleType &current_sample,
+                    const SampleType &sample_a,
+                    const SampleType &sample_b)
+                 {
+                   const double gamma = 2.38 / std::sqrt(2*current_sample.size());
+
+                   // Compute 'current_sample + gamma * (sample_a - sample_b)'
+                   // but in log-space:
+                   SampleType result(current_sample.size());
+                   for (unsigned int i=0; i<result.size(); ++i)
+                     result[i] = std::exp(std::log(current_sample[i])
+                                          + gamma * (std::log(sample_a[i])
+                                                     -
+                                                     std::log(sample_b[i])));
+                   return result;
+                 },
+                 /* crossover_gap = */ 0,
+                 /* n_samples = */ n_samples_per_chain * n_samplers,
+                 /* asynchronous_likelihood_execution = */ true,
+                 random_seed);
 
   // Then output some statistics
   std::cout << "Mean value = ";
