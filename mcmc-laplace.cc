@@ -974,6 +974,11 @@ int main()
             norm_sqr += p*p;
           
           running_mean_error_output << norm_sqr << '\n';
+
+          static unsigned int counter = 0;
+          if (counter % 50 == 0)
+            running_mean_error_output << std::flush;
+          ++counter;
     };  
   SampleFlow::Filters::TakeEveryNth<SampleType> every_1000th(1000);
   every_1000th.connect_to_producer (pass_through);
