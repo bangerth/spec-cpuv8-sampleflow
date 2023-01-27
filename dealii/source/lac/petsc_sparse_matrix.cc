@@ -35,9 +35,7 @@ namespace PETScWrappers
     AssertThrow(ierr == 0, ExcPETScError(ierr));
   }
 
-  SparseMatrix::SparseMatrix(const Mat &A)
-    : MatrixBase(A)
-  {}
+
 
   SparseMatrix::SparseMatrix(const size_type m,
                              const size_type n,
@@ -101,7 +99,7 @@ namespace PETScWrappers
   {
     // get rid of old matrix and generate a
     // new one
-    const PetscErrorCode ierr = MatDestroy(&matrix);
+    const PetscErrorCode ierr = destroy_matrix(matrix);
     AssertThrow(ierr == 0, ExcPETScError(ierr));
 
     do_reinit(m, n, row_lengths, is_symmetric);
@@ -120,6 +118,18 @@ namespace PETScWrappers
     AssertThrow(ierr == 0, ExcPETScError(ierr));
 
     do_reinit(sparsity_pattern, preset_nonzero_locations);
+  }
+
+
+
+  const MPI_Comm &
+  SparseMatrix::get_mpi_communicator() const
+  {
+    static MPI_Comm      comm;
+    const PetscErrorCode ierr =
+      PetscObjectGetComm(reinterpret_cast<PetscObject>(matrix), &comm);
+    AssertThrow(ierr == 0, ExcPETScError(ierr));
+    return comm;
   }
 
 

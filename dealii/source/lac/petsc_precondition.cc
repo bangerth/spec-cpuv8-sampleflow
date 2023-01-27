@@ -33,14 +33,9 @@ DEAL_II_NAMESPACE_OPEN
 
 namespace PETScWrappers
 {
-  PreconditionBase::PreconditionBase(const MPI_Comm &comm)
-    : pc(nullptr)
-  {
-    create_pc_with_comm(comm);
-  }
-
   PreconditionBase::PreconditionBase()
     : pc(nullptr)
+    , matrix(nullptr)
   {}
 
   PreconditionBase::~PreconditionBase()
@@ -56,63 +51,54 @@ namespace PETScWrappers
   void
   PreconditionBase::clear()
   {
-    if (pc)
+    matrix = nullptr;
+
+    if (pc != nullptr)
       {
         PetscErrorCode ierr = PCDestroy(&pc);
+        pc                  = nullptr;
         AssertThrow(ierr == 0, ExcPETScError(ierr));
       }
   }
+
 
   void
   PreconditionBase::vmult(VectorBase &dst, const VectorBase &src) const
   {
     AssertThrow(pc != nullptr, StandardExceptions::ExcInvalidState());
 
-    PetscErrorCode ierr = PCApply(pc, src, dst);
+    const PetscErrorCode ierr = PCApply(pc, src, dst);
     AssertThrow(ierr == 0, ExcPETScError(ierr));
   }
+
 
   void
   PreconditionBase::Tvmult(VectorBase &dst, const VectorBase &src) const
   {
     AssertThrow(pc != nullptr, StandardExceptions::ExcInvalidState());
 
-    PetscErrorCode ierr = PCApplyTranspose(pc, src, dst);
+    const PetscErrorCode ierr = PCApplyTranspose(pc, src, dst);
     AssertThrow(ierr == 0, ExcPETScError(ierr));
   }
 
-  void
-  PreconditionBase::setup()
-  {
-    AssertThrow(pc != nullptr, StandardExceptions::ExcInvalidState());
-
-    PetscErrorCode ierr = PCSetUp(pc);
-    AssertThrow(ierr == 0, ExcPETScError(ierr));
-  }
-
-  const MPI_Comm &
-  PreconditionBase::get_mpi_communicator() const
-  {
-    static MPI_Comm comm  = PETSC_COMM_SELF;
-    MPI_Comm        pcomm = PetscObjectComm(reinterpret_cast<PetscObject>(pc));
-    if (pcomm != MPI_COMM_NULL)
-      comm = pcomm;
-    return comm;
-  }
 
   void
-  PreconditionBase::create_pc_with_mat(const MatrixBase &matrix)
+  PreconditionBase::create_pc()
   {
     // only allow the creation of the
     // preconditioner once
     AssertThrow(pc == nullptr, StandardExceptions::ExcInvalidState());
 
-    MPI_Comm       comm;
-    PetscErrorCode ierr = PetscObjectGetComm(
-      reinterpret_cast<PetscObject>(static_cast<const Mat &>(matrix)), &comm);
+    MPI_Comm comm;
+    // this ugly cast is necessary because the
+    // type Mat and PETScObject are
+    // unrelated.
+    PetscErrorCode ierr =
+      PetscObjectGetComm(reinterpret_cast<PetscObject>(matrix), &comm);
     AssertThrow(ierr == 0, ExcPETScError(ierr));
 
-    create_pc_with_comm(comm);
+    ierr = PCCreate(comm, &pc);
+    AssertThrow(ierr == 0, ExcPETScError(ierr));
 
 #  if DEAL_II_PETSC_VERSION_LT(3, 5, 0)
     ierr = PCSetOperators(pc, matrix, matrix, SAME_PRECONDITIONER);
@@ -122,13 +108,6 @@ namespace PETScWrappers
     AssertThrow(ierr == 0, ExcPETScError(ierr));
   }
 
-  void
-  PreconditionBase::create_pc_with_comm(const MPI_Comm &comm)
-  {
-    clear();
-    PetscErrorCode ierr = PCCreate(comm, &pc);
-    AssertThrow(ierr == 0, ExcPETScError(ierr));
-  }
 
   const PC &
   PreconditionBase::get_pc() const
@@ -137,17 +116,15 @@ namespace PETScWrappers
   }
 
 
+  PreconditionBase::operator Mat() const
+  {
+    return matrix;
+  }
+
+
   /* ----------------- PreconditionJacobi -------------------- */
-
-  PreconditionJacobi::PreconditionJacobi()
-    : PreconditionBase()
-  {}
-
-
-
   PreconditionJacobi::PreconditionJacobi(const MPI_Comm &      comm,
                                          const AdditionalData &additional_data_)
-    : PreconditionBase(comm)
   {
     additional_data = additional_data_;
 
@@ -161,12 +138,9 @@ namespace PETScWrappers
 
   PreconditionJacobi::PreconditionJacobi(const MatrixBase &    matrix,
                                          const AdditionalData &additional_data)
-    : PreconditionBase(matrix.get_mpi_communicator())
   {
     initialize(matrix, additional_data);
   }
-
-
 
   void
   PreconditionJacobi::initialize()
@@ -180,31 +154,27 @@ namespace PETScWrappers
     AssertThrow(ierr == 0, ExcPETScError(ierr));
   }
 
-
-
   void
   PreconditionJacobi::initialize(const MatrixBase &    matrix_,
                                  const AdditionalData &additional_data_)
   {
     clear();
 
+    matrix          = static_cast<Mat>(matrix_);
     additional_data = additional_data_;
 
-    create_pc_with_mat(matrix_);
+    create_pc();
     initialize();
+
+    PetscErrorCode ierr = PCSetUp(pc);
+    AssertThrow(ierr == 0, ExcPETScError(ierr));
   }
 
 
   /* ----------------- PreconditionBlockJacobi -------------------- */
-
-  PreconditionBlockJacobi::PreconditionBlockJacobi()
-    : PreconditionBase()
-  {}
-
   PreconditionBlockJacobi::PreconditionBlockJacobi(
     const MPI_Comm &      comm,
     const AdditionalData &additional_data_)
-    : PreconditionBase(comm)
   {
     additional_data = additional_data_;
 
@@ -219,12 +189,9 @@ namespace PETScWrappers
   PreconditionBlockJacobi::PreconditionBlockJacobi(
     const MatrixBase &    matrix,
     const AdditionalData &additional_data)
-    : PreconditionBase(matrix.get_mpi_communicator())
   {
     initialize(matrix, additional_data);
   }
-
-
 
   void
   PreconditionBlockJacobi::initialize()
@@ -237,27 +204,24 @@ namespace PETScWrappers
   }
 
 
-
   void
   PreconditionBlockJacobi::initialize(const MatrixBase &    matrix_,
                                       const AdditionalData &additional_data_)
   {
     clear();
 
+    matrix          = static_cast<Mat>(matrix_);
     additional_data = additional_data_;
 
-    create_pc_with_mat(matrix_);
+    create_pc();
     initialize();
+
+    PetscErrorCode ierr = PCSetUp(pc);
+    AssertThrow(ierr == 0, ExcPETScError(ierr));
   }
 
 
   /* ----------------- PreconditionSOR -------------------- */
-
-  PreconditionSOR::PreconditionSOR()
-    : PreconditionBase()
-  {}
-
-
 
   PreconditionSOR::AdditionalData::AdditionalData(const double omega)
     : omega(omega)
@@ -267,7 +231,6 @@ namespace PETScWrappers
 
   PreconditionSOR::PreconditionSOR(const MatrixBase &    matrix,
                                    const AdditionalData &additional_data)
-    : PreconditionBase(matrix.get_mpi_communicator())
   {
     initialize(matrix, additional_data);
   }
@@ -279,9 +242,10 @@ namespace PETScWrappers
   {
     clear();
 
+    matrix          = static_cast<Mat>(matrix_);
     additional_data = additional_data_;
 
-    create_pc_with_mat(matrix_);
+    create_pc();
 
     PetscErrorCode ierr = PCSetType(pc, const_cast<char *>(PCSOR));
     AssertThrow(ierr == 0, ExcPETScError(ierr));
@@ -292,16 +256,13 @@ namespace PETScWrappers
 
     ierr = PCSetFromOptions(pc);
     AssertThrow(ierr == 0, ExcPETScError(ierr));
+
+    ierr = PCSetUp(pc);
+    AssertThrow(ierr == 0, ExcPETScError(ierr));
   }
 
 
   /* ----------------- PreconditionSSOR -------------------- */
-
-  PreconditionSSOR::PreconditionSSOR()
-    : PreconditionBase()
-  {}
-
-
 
   PreconditionSSOR::AdditionalData::AdditionalData(const double omega)
     : omega(omega)
@@ -311,7 +272,6 @@ namespace PETScWrappers
 
   PreconditionSSOR::PreconditionSSOR(const MatrixBase &    matrix,
                                      const AdditionalData &additional_data)
-    : PreconditionBase(matrix.get_mpi_communicator())
   {
     initialize(matrix, additional_data);
   }
@@ -323,9 +283,10 @@ namespace PETScWrappers
   {
     clear();
 
+    matrix          = static_cast<Mat>(matrix_);
     additional_data = additional_data_;
 
-    create_pc_with_mat(matrix_);
+    create_pc();
 
     PetscErrorCode ierr = PCSetType(pc, const_cast<char *>(PCSOR));
     AssertThrow(ierr == 0, ExcPETScError(ierr));
@@ -340,15 +301,13 @@ namespace PETScWrappers
 
     ierr = PCSetFromOptions(pc);
     AssertThrow(ierr == 0, ExcPETScError(ierr));
+
+    ierr = PCSetUp(pc);
+    AssertThrow(ierr == 0, ExcPETScError(ierr));
   }
 
 
   /* ----------------- PreconditionICC -------------------- */
-
-  PreconditionICC::PreconditionICC()
-    : PreconditionBase()
-  {}
-
 
 
   PreconditionICC::AdditionalData::AdditionalData(const unsigned int levels)
@@ -359,7 +318,6 @@ namespace PETScWrappers
 
   PreconditionICC::PreconditionICC(const MatrixBase &    matrix,
                                    const AdditionalData &additional_data)
-    : PreconditionBase(matrix.get_mpi_communicator())
   {
     initialize(matrix, additional_data);
   }
@@ -371,9 +329,10 @@ namespace PETScWrappers
   {
     clear();
 
+    matrix          = static_cast<Mat>(matrix_);
     additional_data = additional_data_;
 
-    create_pc_with_mat(matrix_);
+    create_pc();
 
     PetscErrorCode ierr = PCSetType(pc, const_cast<char *>(PCICC));
     AssertThrow(ierr == 0, ExcPETScError(ierr));
@@ -384,16 +343,13 @@ namespace PETScWrappers
 
     ierr = PCSetFromOptions(pc);
     AssertThrow(ierr == 0, ExcPETScError(ierr));
+
+    ierr = PCSetUp(pc);
+    AssertThrow(ierr == 0, ExcPETScError(ierr));
   }
 
 
   /* ----------------- PreconditionILU -------------------- */
-
-  PreconditionILU::PreconditionILU()
-    : PreconditionBase()
-  {}
-
-
 
   PreconditionILU::AdditionalData::AdditionalData(const unsigned int levels)
     : levels(levels)
@@ -403,7 +359,6 @@ namespace PETScWrappers
 
   PreconditionILU::PreconditionILU(const MatrixBase &    matrix,
                                    const AdditionalData &additional_data)
-    : PreconditionBase(matrix.get_mpi_communicator())
   {
     initialize(matrix, additional_data);
   }
@@ -415,9 +370,10 @@ namespace PETScWrappers
   {
     clear();
 
+    matrix          = static_cast<Mat>(matrix_);
     additional_data = additional_data_;
 
-    create_pc_with_mat(matrix_);
+    create_pc();
 
     PetscErrorCode ierr = PCSetType(pc, const_cast<char *>(PCILU));
     AssertThrow(ierr == 0, ExcPETScError(ierr));
@@ -427,6 +383,9 @@ namespace PETScWrappers
     AssertThrow(ierr == 0, ExcPETScError(ierr));
 
     ierr = PCSetFromOptions(pc);
+    AssertThrow(ierr == 0, ExcPETScError(ierr));
+
+    ierr = PCSetUp(pc);
     AssertThrow(ierr == 0, ExcPETScError(ierr));
   }
 
@@ -539,18 +498,9 @@ namespace PETScWrappers
   } // namespace
 #  endif
 
-
-
-  PreconditionBoomerAMG::PreconditionBoomerAMG()
-    : PreconditionBase()
-  {}
-
-
-
   PreconditionBoomerAMG::PreconditionBoomerAMG(
     const MPI_Comm &      comm,
     const AdditionalData &additional_data_)
-    : PreconditionBase(comm)
   {
     additional_data = additional_data_;
 
@@ -568,16 +518,12 @@ namespace PETScWrappers
   }
 
 
-
   PreconditionBoomerAMG::PreconditionBoomerAMG(
     const MatrixBase &    matrix,
     const AdditionalData &additional_data)
-    : PreconditionBase(matrix.get_mpi_communicator())
   {
     initialize(matrix, additional_data);
   }
-
-
 
   void
   PreconditionBoomerAMG::initialize()
@@ -687,8 +633,6 @@ namespace PETScWrappers
 #  endif
   }
 
-
-
   void
   PreconditionBoomerAMG::initialize(const MatrixBase &    matrix_,
                                     const AdditionalData &additional_data_)
@@ -696,10 +640,14 @@ namespace PETScWrappers
 #  ifdef DEAL_II_PETSC_WITH_HYPRE
     clear();
 
+    matrix          = static_cast<Mat>(matrix_);
     additional_data = additional_data_;
 
-    create_pc_with_mat(matrix_);
+    create_pc();
     initialize();
+
+    PetscErrorCode ierr = PCSetUp(pc);
+    AssertThrow(ierr == 0, ExcPETScError(ierr));
 
 #  else // DEAL_II_PETSC_WITH_HYPRE
     (void)matrix_;
@@ -728,16 +676,9 @@ namespace PETScWrappers
 
 
 
-  PreconditionParaSails::PreconditionParaSails()
-    : PreconditionBase()
-  {}
-
-
-
   PreconditionParaSails::PreconditionParaSails(
     const MatrixBase &    matrix,
     const AdditionalData &additional_data)
-    : PreconditionBase(matrix.get_mpi_communicator())
   {
     initialize(matrix, additional_data);
   }
@@ -749,10 +690,11 @@ namespace PETScWrappers
   {
     clear();
 
+    matrix          = static_cast<Mat>(matrix_);
     additional_data = additional_data_;
 
 #  ifdef DEAL_II_PETSC_WITH_HYPRE
-    create_pc_with_mat(matrix_);
+    create_pc();
 
     PetscErrorCode ierr = PCSetType(pc, const_cast<char *>(PCHYPRE));
     AssertThrow(ierr == 0, ExcPETScError(ierr));
@@ -815,8 +757,11 @@ namespace PETScWrappers
     ierr = PCSetFromOptions(pc);
     AssertThrow(ierr == 0, ExcPETScError(ierr));
 
+    ierr = PCSetUp(pc);
+    AssertThrow(ierr == 0, ExcPETScError(ierr));
+
 #  else // DEAL_II_PETSC_WITH_HYPRE
-    (void)matrix_;
+    (void)pc;
     Assert(false,
            ExcMessage("Your PETSc installation does not include a copy of "
                       "the hypre package necessary for this preconditioner."));
@@ -826,15 +771,8 @@ namespace PETScWrappers
 
   /* ----------------- PreconditionNone ------------------------- */
 
-  PreconditionNone::PreconditionNone()
-    : PreconditionBase()
-  {}
-
-
-
   PreconditionNone::PreconditionNone(const MatrixBase &    matrix,
                                      const AdditionalData &additional_data)
-    : PreconditionBase(matrix.get_mpi_communicator())
   {
     initialize(matrix, additional_data);
   }
@@ -846,14 +784,18 @@ namespace PETScWrappers
   {
     clear();
 
+    matrix          = static_cast<Mat>(matrix_);
     additional_data = additional_data_;
 
-    create_pc_with_mat(matrix_);
+    create_pc();
 
     PetscErrorCode ierr = PCSetType(pc, const_cast<char *>(PCNONE));
     AssertThrow(ierr == 0, ExcPETScError(ierr));
 
     ierr = PCSetFromOptions(pc);
+    AssertThrow(ierr == 0, ExcPETScError(ierr));
+
+    ierr = PCSetUp(pc);
     AssertThrow(ierr == 0, ExcPETScError(ierr));
   }
 
@@ -870,15 +812,8 @@ namespace PETScWrappers
 
 
 
-  PreconditionLU::PreconditionLU()
-    : PreconditionBase()
-  {}
-
-
-
   PreconditionLU::PreconditionLU(const MatrixBase &    matrix,
                                  const AdditionalData &additional_data)
-    : PreconditionBase(matrix.get_mpi_communicator())
   {
     initialize(matrix, additional_data);
   }
@@ -890,9 +825,10 @@ namespace PETScWrappers
   {
     clear();
 
+    matrix          = static_cast<Mat>(matrix_);
     additional_data = additional_data_;
 
-    create_pc_with_mat(matrix_);
+    create_pc();
 
     PetscErrorCode ierr = PCSetType(pc, const_cast<char *>(PCLU));
     AssertThrow(ierr == 0, ExcPETScError(ierr));
@@ -909,248 +845,12 @@ namespace PETScWrappers
 
     ierr = PCSetFromOptions(pc);
     AssertThrow(ierr == 0, ExcPETScError(ierr));
-  }
 
-  /* ----------------- PreconditionBDDC -------------------- */
-
-  template <int dim>
-  PreconditionBDDC<dim>::AdditionalData::AdditionalData(
-    const bool                    use_vertices,
-    const bool                    use_edges,
-    const bool                    use_faces,
-    const bool                    symmetric,
-    const std::vector<Point<dim>> coords)
-    : use_vertices(use_vertices)
-    , use_edges(use_edges)
-    , use_faces(use_faces)
-    , symmetric(symmetric)
-    , coords(coords)
-  {}
-
-
-
-  template <int dim>
-  PreconditionBDDC<dim>::PreconditionBDDC()
-    : PreconditionBase()
-  {}
-
-
-
-  template <int dim>
-  PreconditionBDDC<dim>::PreconditionBDDC(
-    const MPI_Comm        comm,
-    const AdditionalData &additional_data_)
-    : PreconditionBase(comm)
-  {
-    additional_data = additional_data_;
-
-    PetscErrorCode ierr = PCCreate(comm, &pc);
-    AssertThrow(ierr == 0, ExcPETScError(ierr));
-
-    initialize();
-  }
-
-
-
-  template <int dim>
-  PreconditionBDDC<dim>::PreconditionBDDC(const MatrixBase &    matrix,
-                                          const AdditionalData &additional_data)
-    : PreconditionBase(matrix.get_mpi_communicator())
-  {
-    initialize(matrix, additional_data);
-  }
-
-
-
-  template <int dim>
-  void
-  PreconditionBDDC<dim>::initialize()
-  {
-#  if DEAL_II_PETSC_VERSION_GTE(3, 10, 0)
-    PetscErrorCode ierr = PCSetType(pc, const_cast<char *>(PCBDDC));
-    AssertThrow(ierr == 0, ExcPETScError(ierr));
-
-    // The matrix must be of IS type. We check for this to avoid the PETSc error
-    // in order to suggest the correct matrix reinit method.
-    {
-      MatType   current_type;
-      Mat       A, P;
-      PetscBool flg;
-
-      ierr = PCGetOperators(pc, &A, &P);
-      AssertThrow(ierr == 0, ExcPETScError(ierr));
-      ierr = PCGetUseAmat(pc, &flg);
-      AssertThrow(ierr == 0, ExcPETScError(ierr));
-
-      ierr = MatGetType(flg ? A : P, &current_type);
-      AssertThrow(ierr == 0, ExcPETScError(ierr));
-      AssertThrow(
-        strcmp(current_type, MATIS) == 0,
-        ExcMessage(
-          "Matrix must be of IS type. For this, the variant of reinit that includes the active dofs must be used."));
-    }
-
-
-    std::stringstream ssStream;
-
-    if (additional_data.use_vertices)
-      set_option_value("-pc_bddc_use_vertices", "true");
-    else
-      set_option_value("-pc_bddc_use_vertices", "false");
-    if (additional_data.use_edges)
-      set_option_value("-pc_bddc_use_edges", "true");
-    else
-      set_option_value("-pc_bddc_use_edges", "false");
-    if (additional_data.use_faces)
-      set_option_value("-pc_bddc_use_faces", "true");
-    else
-      set_option_value("-pc_bddc_use_faces", "false");
-    if (additional_data.symmetric)
-      set_option_value("-pc_bddc_symmetric", "true");
-    else
-      set_option_value("-pc_bddc_symmetric", "false");
-    if (additional_data.coords.size() > 0)
-      {
-        set_option_value("-pc_bddc_corner_selection", "true");
-        // Convert coords vector to PETSc data array
-        std::vector<PetscReal> coords_petsc(additional_data.coords.size() *
-                                            dim);
-        for (unsigned int i = 0, j = 0; i < additional_data.coords.size(); ++i)
-          {
-            for (j = 0; j < dim; ++j)
-              coords_petsc[dim * i + j] = additional_data.coords[i][j];
-          }
-
-        ierr = PCSetCoordinates(pc,
-                                dim,
-                                additional_data.coords.size(),
-                                coords_petsc.data());
-        AssertThrow(ierr == 0, ExcPETScError(ierr));
-      }
-    else
-      {
-        set_option_value("-pc_bddc_corner_selection", "false");
-        ierr = PCSetCoordinates(pc, 0, 0, nullptr);
-        AssertThrow(ierr == 0, ExcPETScError(ierr));
-      }
-
-
-    ierr = PCSetFromOptions(pc);
-    AssertThrow(ierr == 0, ExcPETScError(ierr));
-#  else
-    AssertThrow(
-      false, ExcMessage("BDDC preconditioner requires PETSc 3.10.0 or newer"));
-#  endif
-  }
-
-
-
-  template <int dim>
-  void
-  PreconditionBDDC<dim>::initialize(const MatrixBase &    matrix_,
-                                    const AdditionalData &additional_data_)
-  {
-    clear();
-
-    additional_data = additional_data_;
-
-    create_pc_with_mat(matrix_);
-    initialize();
-  }
-
-  /* ----------------- PreconditionShell -------------------- */
-
-  PreconditionShell::PreconditionShell(const MatrixBase &matrix)
-  {
-    initialize(matrix);
-  }
-
-  PreconditionShell::PreconditionShell(const MPI_Comm &comm)
-  {
-    initialize(comm);
-  }
-
-  void
-  PreconditionShell::initialize(const MPI_Comm &comm)
-  {
-    PetscErrorCode ierr;
-    if (pc)
-      {
-        ierr = PCDestroy(&pc);
-        AssertThrow(ierr == 0, ExcPETScError(ierr));
-      }
-    create_pc_with_comm(comm);
-
-    ierr = PCSetType(pc, PCSHELL);
-    AssertThrow(ierr == 0, ExcPETScError(ierr));
-    ierr = PCShellSetContext(pc, static_cast<void *>(this));
-    AssertThrow(ierr == 0, ExcPETScError(ierr));
-    ierr = PCShellSetApply(pc, PreconditionShell::pcapply);
-    AssertThrow(ierr == 0, ExcPETScError(ierr));
-    ierr = PCShellSetApplyTranspose(pc, PreconditionShell::pcapply_transpose);
-    AssertThrow(ierr == 0, ExcPETScError(ierr));
-    ierr = PCShellSetName(pc, "deal.II user solve");
+    ierr = PCSetUp(pc);
     AssertThrow(ierr == 0, ExcPETScError(ierr));
   }
-
-  void
-  PreconditionShell::initialize(const MatrixBase &matrix)
-  {
-    initialize(matrix.get_mpi_communicator());
-    PetscErrorCode ierr;
-#  if DEAL_II_PETSC_VERSION_LT(3, 5, 0)
-    ierr = PCSetOperators(pc, matrix, matrix, DIFFERENT_NONZERO_PATTERN);
-#  else
-    ierr = PCSetOperators(pc, matrix, matrix);
-#  endif
-    AssertThrow(ierr == 0, ExcPETScError(ierr));
-  }
-
-  int
-  PreconditionShell::pcapply(PC ppc, Vec x, Vec y)
-  {
-    void *ctx;
-
-    PetscFunctionBeginUser;
-    PetscErrorCode ierr = PCShellGetContext(ppc, &ctx);
-    AssertThrow(ierr == 0, ExcPETScError(ierr));
-
-    auto user = static_cast<PreconditionShell *>(ctx);
-    AssertThrow(user->vmult,
-                StandardExceptions::ExcFunctionNotProvided(
-                  "std::function vmult"));
-
-    VectorBase src(x);
-    VectorBase dst(y);
-    user->vmult(dst, src);
-    PetscFunctionReturn(0);
-  }
-
-  int
-  PreconditionShell::pcapply_transpose(PC ppc, Vec x, Vec y)
-  {
-    void *ctx;
-
-    PetscFunctionBeginUser;
-    PetscErrorCode ierr = PCShellGetContext(ppc, &ctx);
-    AssertThrow(ierr == 0, ExcPETScError(ierr));
-
-    auto user = static_cast<PreconditionShell *>(ctx);
-    AssertThrow(user->vmultT,
-                StandardExceptions::ExcFunctionNotProvided(
-                  "std::function vmultT"));
-
-    VectorBase src(x);
-    VectorBase dst(y);
-    user->vmult(dst, src);
-    PetscFunctionReturn(0);
-  }
-
 
 } // namespace PETScWrappers
-
-template class PETScWrappers::PreconditionBDDC<2>;
-template class PETScWrappers::PreconditionBDDC<3>;
 
 DEAL_II_NAMESPACE_CLOSE
 

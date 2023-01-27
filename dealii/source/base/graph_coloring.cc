@@ -15,7 +15,6 @@
 
 #include <deal.II/base/graph_coloring.h>
 
-#include <deal.II/lac/sparsity_tools.h>
 
 DEAL_II_NAMESPACE_OPEN
 

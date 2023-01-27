@@ -32,10 +32,8 @@
 DEAL_II_NAMESPACE_OPEN
 
 
-/**
- * @addtogroup fe
- * @{
- */
+/*!@addtogroup fe */
+/*@{*/
 
 /**
  * Implementation of Arnold-Boffi-Falk (ABF) elements, conforming with the
@@ -258,7 +256,7 @@ private:
 
 
 
-/** @} */
+/*@}*/
 
 
 DEAL_II_NAMESPACE_CLOSE

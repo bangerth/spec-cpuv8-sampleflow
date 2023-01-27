@@ -28,10 +28,8 @@
 
 DEAL_II_NAMESPACE_OPEN
 
-/**
- * @addtogroup fe
- * @{
- */
+/*!@addtogroup fe */
+/*@{*/
 
 /**
  * This class represents an implementation of the
@@ -177,7 +175,7 @@ protected:
     const Quadrature<dim> &                                quadrature,
     const Mapping<dim, dim> &                              mapping,
     const typename Mapping<dim, dim>::InternalDataBase &   mapping_internal,
-    const internal::FEValuesImplementation::MappingRelatedData<dim, dim>
+    const dealii::internal::FEValuesImplementation::MappingRelatedData<dim, dim>
       &                                                       mapping_data,
     const typename FiniteElement<dim, dim>::InternalDataBase &fedata,
     dealii::internal::FEValuesImplementation::FiniteElementRelatedData<dim, dim>
@@ -197,7 +195,7 @@ protected:
     const hp::QCollection<dim - 1> &                       quadrature,
     const Mapping<dim, dim> &                              mapping,
     const typename Mapping<dim, dim>::InternalDataBase &   mapping_internal,
-    const internal::FEValuesImplementation::MappingRelatedData<dim, dim>
+    const dealii::internal::FEValuesImplementation::MappingRelatedData<dim, dim>
       &                                                       mapping_data,
     const typename FiniteElement<dim, dim>::InternalDataBase &fedata,
     dealii::internal::FEValuesImplementation::FiniteElementRelatedData<dim, dim>
@@ -214,7 +212,7 @@ protected:
     const Quadrature<dim - 1> &                            quadrature,
     const Mapping<dim, dim> &                              mapping,
     const typename Mapping<dim, dim>::InternalDataBase &   mapping_internal,
-    const internal::FEValuesImplementation::MappingRelatedData<dim, dim>
+    const dealii::internal::FEValuesImplementation::MappingRelatedData<dim, dim>
       &                                                       mapping_data,
     const typename FiniteElement<dim, dim>::InternalDataBase &fedata,
     dealii::internal::FEValuesImplementation::FiniteElementRelatedData<dim, dim>
@@ -460,7 +458,7 @@ private:
 
 
 
-/** @} */
+/*@}*/
 
 DEAL_II_NAMESPACE_CLOSE
 

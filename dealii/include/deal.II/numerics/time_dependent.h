@@ -14,28 +14,31 @@
 // ---------------------------------------------------------------------
 
 #ifndef dealii_time_dependent_h
-#define dealii_time_dependent_h
+#  define dealii_time_dependent_h
 
 
-#include <deal.II/base/config.h>
+/*----------------------------   time-dependent.h ---------------------------*/
 
-#include <deal.II/base/exceptions.h>
-#include <deal.II/base/smartpointer.h>
-#include <deal.II/base/subscriptor.h>
 
-#include <utility>
-#include <vector>
+#  include <deal.II/base/config.h>
+
+#  include <deal.II/base/exceptions.h>
+#  include <deal.II/base/smartpointer.h>
+#  include <deal.II/base/subscriptor.h>
+
+#  include <utility>
+#  include <vector>
 
 DEAL_II_NAMESPACE_OPEN
 
 // forward declarations
-#ifndef DOXYGEN
+#  ifndef DOXYGEN
 class TimeStepBase;
 template <typename number>
 class Vector;
 template <int dim, int spacedim>
 class Triangulation;
-#endif
+#  endif
 
 /**
  * This class provides an abstract interface to time dependent problems in
@@ -1638,4 +1641,6 @@ TimeDependent::do_loop(InitFunctionObject      init_function,
 
 DEAL_II_NAMESPACE_CLOSE
 
+/*----------------------------   time-dependent.h ---------------------------*/
 #endif
+/*----------------------------   time-dependent.h ---------------------------*/

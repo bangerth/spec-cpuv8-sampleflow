@@ -615,11 +615,13 @@ template <>
 unsigned int
 QGaussOneOverR<2>::quad_size(const Point<2> &singularity, const unsigned int n)
 {
-  const double eps     = 1e-8;
-  bool         on_edge = false;
-  for (unsigned int d = 0; d < 2; ++d)
-    on_edge = on_edge || (std::abs(singularity[d]) < eps ||
-                          std::abs(singularity[d] - 1.0) < eps);
+  const double eps = 1e-8;
+  const bool   on_edge =
+    std::any_of(singularity.begin_raw(),
+                singularity.end_raw(),
+                [eps](double coord) {
+                  return std::abs(coord) < eps || std::abs(coord - 1.) < eps;
+                });
   const bool on_vertex =
     on_edge &&
     std::abs((singularity - Point<2>(.5, .5)).norm_square() - .5) < eps;
@@ -1225,65 +1227,31 @@ QSimplex<dim>::QSimplex(const Quadrature<dim> &quad)
 
 
 template <int dim>
-template <int spacedim>
-Quadrature<spacedim>
+Quadrature<dim>
 QSimplex<dim>::compute_affine_transformation(
-  const std::array<Point<spacedim>, dim + 1> &vertices) const
+  const std::array<Point<dim>, dim + 1> &vertices) const
 {
-  Assert(dim <= spacedim,
-         ExcMessage("Invalid combination of dim and spacedim ."));
-  DerivativeForm<1, spacedim, dim> Bt;
+  Tensor<2, dim> B;
   for (unsigned int d = 0; d < dim; ++d)
-    Bt[d] = vertices[d + 1] - vertices[0];
+    B[d] = vertices[d + 1] - vertices[0];
 
-  const auto   B = Bt.transpose();
-  const double J = std::abs(B.determinant());
+  B              = transpose(B);
+  const double J = std::abs(determinant(B));
 
   // if the determinant is zero, we return an empty quadrature
   if (J < 1e-12)
-    return Quadrature<spacedim>();
+    return Quadrature<dim>();
 
-  std::vector<Point<spacedim>> qp(this->size());
-  std::vector<double>          w(this->size());
+  std::vector<Point<dim>> qp(this->size());
+  std::vector<double>     w(this->size());
 
   for (unsigned int i = 0; i < this->size(); ++i)
     {
-      qp[i] =
-        Point<spacedim>(vertices[0] + apply_transformation(B, this->point(i)));
-      w[i] = J * this->weight(i);
+      qp[i] = Point<dim>(vertices[0] + B * this->point(i));
+      w[i]  = J * this->weight(i);
     }
 
-  return Quadrature<spacedim>(qp, w);
-}
-
-
-
-template <int dim>
-template <int spacedim>
-Quadrature<spacedim>
-QSimplex<dim>::mapped_quadrature(
-  const std::vector<std::array<Point<spacedim>, dim + 1>> &simplices) const
-{
-  Assert(!(dim == 1 && spacedim == 1),
-         ExcMessage("This function is not supposed to work in 1D-1D case."));
-  Assert(dim <= spacedim,
-         ExcMessage("Invalid combination of dim and spacedim ."));
-
-  std::vector<Point<spacedim>> qp;
-  std::vector<double>          ws;
-  for (const auto &simplex : simplices)
-    {
-      const auto rule = this->compute_affine_transformation(simplex);
-      std::transform(rule.get_points().begin(),
-                     rule.get_points().end(),
-                     std::back_inserter(qp),
-                     [&](const Point<spacedim> &p) { return p; });
-      std::transform(rule.get_weights().begin(),
-                     rule.get_weights().end(),
-                     std::back_inserter(ws),
-                     [&](const double w) { return w; });
-    }
-  return Quadrature<spacedim>(qp, ws);
+  return Quadrature<dim>(qp, w);
 }
 
 
@@ -2020,8 +1988,9 @@ QWitherdenVincentSimplex<dim>::QWitherdenVincentSimplex(
           const double volume = (dim == 2 ? 1.0 / 2.0 : 1.0 / 6.0);
           this->weights.emplace_back(volume * b_weights[permutation_n]);
           Point<dim> c_point;
-          for (int d = 0; d < dim; ++d)
-            c_point[d] = b_point[d];
+          std::copy(b_point.begin(),
+                    b_point.begin() + dim,
+                    c_point.begin_raw());
           this->quadrature_points.emplace_back(c_point);
         }
     }
@@ -2239,41 +2208,3 @@ template class QWitherdenVincentSimplex<2>;
 template class QWitherdenVincentSimplex<3>;
 
 DEAL_II_NAMESPACE_CLOSE
-
-namespace dealii
-{
-  template Quadrature<2>
-  QSimplex<1>::compute_affine_transformation(
-    const std::array<Point<2>, 1 + 1> &vertices) const;
-
-  template Quadrature<3>
-  QSimplex<1>::compute_affine_transformation(
-    const std::array<Point<3>, 1 + 1> &vertices) const;
-
-  template Quadrature<3>
-  QSimplex<2>::compute_affine_transformation(
-    const std::array<Point<3>, 2 + 1> &vertices) const;
-} // namespace dealii
-
-namespace dealii
-{
-  template Quadrature<2>
-  QSimplex<1>::mapped_quadrature(
-    const std::vector<std::array<Point<2>, 1 + 1>> &simplices) const;
-
-  template Quadrature<3>
-  QSimplex<1>::mapped_quadrature(
-    const std::vector<std::array<Point<3>, 1 + 1>> &simplices) const;
-
-  template Quadrature<2>
-  QSimplex<2>::mapped_quadrature(
-    const std::vector<std::array<Point<2>, 2 + 1>> &simplices) const;
-
-  template Quadrature<3>
-  QSimplex<2>::mapped_quadrature(
-    const std::vector<std::array<Point<3>, 2 + 1>> &simplices) const;
-
-  template Quadrature<3>
-  QSimplex<3>::mapped_quadrature(
-    const std::vector<std::array<Point<3>, 3 + 1>> &simplices) const;
-} // namespace dealii

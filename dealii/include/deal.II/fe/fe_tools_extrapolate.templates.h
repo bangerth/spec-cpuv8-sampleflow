@@ -1128,7 +1128,6 @@ namespace FETools
       // the same process, so we have to only look at the unique set of
       // destinations:
       std::vector<types::subdomain_id> destinations;
-      destinations.reserve(cells_to_send.size());
       for (const auto &cell : cells_to_send)
         destinations.emplace_back(cell.receiver);
       std::sort(destinations.begin(), destinations.end());
@@ -1368,7 +1367,7 @@ namespace FETools
                           {
                             const types::global_dof_index index =
                               indices[fe.face_to_cell_index(i, face)];
-
+                            ;
                             const bool index_stored =
                               (dofs_on_refined_neighbors.find(index) !=
                                dofs_on_refined_neighbors.end());
@@ -1470,8 +1469,9 @@ namespace FETools
     };
 
     template <class VectorType>
-    struct BlockTypeHelper<VectorType,
-                           std::enable_if_t<IsBlockVector<VectorType>::value>>
+    struct BlockTypeHelper<
+      VectorType,
+      typename std::enable_if<IsBlockVector<VectorType>::value>::type>
     {
       using type = typename VectorType::BlockType;
     };
@@ -1743,10 +1743,10 @@ namespace FETools
     if (dynamic_cast<const parallel::distributed::Triangulation<dim, spacedim>
                        *>(&dof2.get_triangulation()) != nullptr)
       {
-        Assert(dof1.get_fe(0).reference_cell() ==
+        Assert(dof1.get_fe()[0].reference_cell() ==
                  ReferenceCells::get_hypercube<dim>(),
                ExcNotImplemented());
-        Assert(dof2.get_fe(0).reference_cell() ==
+        Assert(dof2.get_fe()[0].reference_cell() ==
                  ReferenceCells::get_hypercube<dim>(),
                ExcNotImplemented());
 
@@ -1773,4 +1773,5 @@ namespace FETools
 
 DEAL_II_NAMESPACE_CLOSE
 
-#endif
+/*--------------------   fe_tools_extrapolate_templates.h -------------------*/
+#endif // dealii_fe_tools_extrapolate_templates_H

@@ -35,10 +35,8 @@ DEAL_II_NAMESPACE_OPEN
  * MGSmootherBase is defined in mg_base.h
  */
 
-/**
- * @addtogroup mg
- * @{
- */
+/*!@addtogroup mg */
+/*@{*/
 
 /**
  * A base class for smoother handling information on smoothing. While not
@@ -581,7 +579,7 @@ private:
   MGLevelObject<LinearOperator<VectorType>> matrices;
 };
 
-/** @} */
+/*@}*/
 
 /* ------------------------------- Inline functions --------------------------
  */

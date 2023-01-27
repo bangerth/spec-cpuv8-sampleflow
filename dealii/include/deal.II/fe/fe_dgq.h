@@ -18,8 +18,8 @@
 
 #include <deal.II/base/config.h>
 
-#include <deal.II/base/mutex.h>
 #include <deal.II/base/tensor_product_polynomials.h>
+#include <deal.II/base/thread_management.h>
 
 #include <deal.II/fe/fe_poly.h>
 
@@ -33,10 +33,8 @@ template <int dim>
 class Quadrature;
 #endif
 
-/**
- * @addtogroup fe
- * @{
- */
+/*!@addtogroup fe */
+/*@{*/
 
 /**
  * Implementation of scalar, discontinuous tensor product elements based on
@@ -522,7 +520,7 @@ public:
 };
 
 
-/** @} */
+/*@}*/
 
 DEAL_II_NAMESPACE_CLOSE
 

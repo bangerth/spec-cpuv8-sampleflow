@@ -403,7 +403,8 @@ protected:
     const Quadrature<1> &                                     quadrature,
     const Mapping<1, spacedim> &                              mapping,
     const typename Mapping<1, spacedim>::InternalDataBase &   mapping_internal,
-    const internal::FEValuesImplementation::MappingRelatedData<1, spacedim>
+    const dealii::internal::FEValuesImplementation::MappingRelatedData<1,
+                                                                       spacedim>
       &                                                          mapping_data,
     const typename FiniteElement<1, spacedim>::InternalDataBase &fe_internal,
     dealii::internal::FEValuesImplementation::FiniteElementRelatedData<1,
@@ -419,7 +420,8 @@ protected:
     const hp::QCollection<0> &                                quadrature,
     const Mapping<1, spacedim> &                              mapping,
     const typename Mapping<1, spacedim>::InternalDataBase &   mapping_internal,
-    const internal::FEValuesImplementation::MappingRelatedData<1, spacedim>
+    const dealii::internal::FEValuesImplementation::MappingRelatedData<1,
+                                                                       spacedim>
       &                                                          mapping_data,
     const typename FiniteElement<1, spacedim>::InternalDataBase &fe_internal,
     dealii::internal::FEValuesImplementation::FiniteElementRelatedData<1,
@@ -434,7 +436,8 @@ protected:
     const Quadrature<0> &                                     quadrature,
     const Mapping<1, spacedim> &                              mapping,
     const typename Mapping<1, spacedim>::InternalDataBase &   mapping_internal,
-    const internal::FEValuesImplementation::MappingRelatedData<1, spacedim>
+    const dealii::internal::FEValuesImplementation::MappingRelatedData<1,
+                                                                       spacedim>
       &                                                          mapping_data,
     const typename FiniteElement<1, spacedim>::InternalDataBase &fe_internal,
     dealii::internal::FEValuesImplementation::FiniteElementRelatedData<1,

@@ -47,7 +47,7 @@ namespace Physics
       /**
        * @name Deformation tensors
        */
-      /** @{ */
+      //@{
 
       /**
        * Return the deformation gradient tensor,
@@ -134,12 +134,12 @@ namespace Physics
       DEAL_II_ALWAYS_INLINE SymmetricTensor<2, dim, Number>
                             b(const Tensor<2, dim, Number> &F);
 
-      /** @} */
+      //@}
 
       /**
        * @name Strain tensors
        */
-      /** @{ */
+      //@{
 
       /**
        * Return the symmetric Green-Lagrange strain tensor,
@@ -193,12 +193,12 @@ namespace Physics
       DEAL_II_ALWAYS_INLINE SymmetricTensor<2, dim, Number>
                             e(const Tensor<2, dim, Number> &F);
 
-      /** @} */
+      //@}
 
       /**
        * @name Strain rate tensors
        */
-      /** @{ */
+      //@{
 
       /**
        * Return the spatial velocity gradient tensor,
@@ -262,7 +262,7 @@ namespace Physics
       Tensor<2, dim, Number>
       w(const Tensor<2, dim, Number> &F, const Tensor<2, dim, Number> &dF_dt);
 
-      /** @} */
+      //@}
     } // namespace Kinematics
   }   // namespace Elasticity
 } // namespace Physics
@@ -288,9 +288,8 @@ template <int dim, typename Number>
 inline Tensor<2, dim, Number>
 Physics::Elasticity::Kinematics::F_iso(const Tensor<2, dim, Number> &F)
 {
-  // Make things work with AD types
-  using std::pow;
-  return internal::NumberType<Number>::value(pow(determinant(F), -1.0 / dim)) *
+  return internal::NumberType<Number>::value(
+           std::pow(determinant(F), -1.0 / dim)) *
          F;
 }
 
@@ -300,9 +299,8 @@ template <int dim, typename Number>
 inline SymmetricTensor<2, dim, Number>
 Physics::Elasticity::Kinematics::F_vol(const Tensor<2, dim, Number> &F)
 {
-  // Make things work with AD types
-  using std::pow;
-  return internal::NumberType<Number>::value(pow(determinant(F), 1.0 / dim)) *
+  return internal::NumberType<Number>::value(
+           std::pow(determinant(F), 1.0 / dim)) *
          static_cast<SymmetricTensor<2, dim, Number>>(
            unit_symmetric_tensor<dim>());
 }

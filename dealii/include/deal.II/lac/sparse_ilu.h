@@ -26,9 +26,8 @@
 
 DEAL_II_NAMESPACE_OPEN
 
-/**
- * @addtogroup Preconditioners
- * @{
+/*! @addtogroup Preconditioners
+ *@{
  */
 
 /**
@@ -153,10 +152,10 @@ public:
                  << ". This must stop the ILU algorithm because it means "
                     "that the matrix for which you try to compute a "
                     "decomposition is singular.");
-  /** @} */
+  //@}
 };
 
-/** @} */
+/*@}*/
 //---------------------------------------------------------------------------
 
 

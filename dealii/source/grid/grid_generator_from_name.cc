@@ -50,7 +50,7 @@ namespace GridGenerator
      * Return true if a grid was actually generated, false otherwise.
      */
     template <int dim, int spacedim>
-    std::enable_if_t<dim != spacedim, bool>
+    typename std::enable_if<dim != spacedim, bool>::type
     generate_codimension_zero_grid(const std::string &,
                                    const std::string &,
                                    Triangulation<dim, spacedim> &)
@@ -243,7 +243,7 @@ namespace GridGenerator
      * Return true if a grid was actually generated, false otherwise.
      */
     template <int dim, int spacedim>
-    std::enable_if_t<dim != spacedim - 1, bool>
+    typename std::enable_if<dim != spacedim - 1, bool>::type
     generate_codimension_one_grid(const std::string &,
                                   const std::string &,
                                   Triangulation<dim, spacedim> &)

@@ -23,10 +23,8 @@
 
 DEAL_II_NAMESPACE_OPEN
 
-/**
- * @addtogroup mapping
- * @{
- */
+/*!@addtogroup mapping */
+/*@{*/
 
 /**
  * Mapping class that uses C1 (continuously differentiable) cubic mappings of
@@ -82,7 +80,7 @@ public:
     std::vector<Point<dim>> &                         a) const override;
 };
 
-/** @} */
+/*@}*/
 
 /* -------------- declaration of explicit specializations ------------- */
 

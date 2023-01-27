@@ -42,10 +42,9 @@ template <int, int>
 class MappingQCache;
 #endif
 
-/**
- * @addtogroup mapping
- * @{
- */
+/*!@addtogroup mapping */
+/*@{*/
+
 
 /**
  * This class implements the functionality for polynomial mappings $Q_p$ of
@@ -123,7 +122,7 @@ public:
    * versions of deal.II, but it does not have any effect on the workings of
    * this class.
    */
-  DEAL_II_DEPRECATED
+  DEAL_II_DEPRECATED_EARLY
   MappingQ(const unsigned int polynomial_degree,
            const bool         use_mapping_q_on_all_cells);
 
@@ -252,7 +251,7 @@ public:
     const typename Triangulation<dim, spacedim>::cell_iterator &cell,
     const ArrayView<const Point<dim>> &                         unit_points,
     const UpdateFlags                                           update_flags,
-    internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
+    dealii::internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
       &output_data) const;
 
   /**
@@ -582,7 +581,7 @@ protected:
     const CellSimilarity::Similarity                            cell_similarity,
     const Quadrature<dim> &                                     quadrature,
     const typename Mapping<dim, spacedim>::InternalDataBase &   internal_data,
-    internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
+    dealii::internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
       &output_data) const override;
 
   using Mapping<dim, spacedim>::fill_fe_face_values;
@@ -594,7 +593,7 @@ protected:
     const unsigned int                                          face_no,
     const hp::QCollection<dim - 1> &                            quadrature,
     const typename Mapping<dim, spacedim>::InternalDataBase &   internal_data,
-    internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
+    dealii::internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
       &output_data) const override;
 
   // documentation can be found in Mapping::fill_fe_subface_values()
@@ -605,7 +604,7 @@ protected:
     const unsigned int                                          subface_no,
     const Quadrature<dim - 1> &                                 quadrature,
     const typename Mapping<dim, spacedim>::InternalDataBase &   internal_data,
-    internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
+    dealii::internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
       &output_data) const override;
 
   // documentation can be found in Mapping::fill_fe_immersed_surface_values()
@@ -614,7 +613,7 @@ protected:
     const typename Triangulation<dim, spacedim>::cell_iterator &cell,
     const NonMatching::ImmersedSurfaceQuadrature<dim> &         quadrature,
     const typename Mapping<dim, spacedim>::InternalDataBase &   internal_data,
-    internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
+    dealii::internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
       &output_data) const override;
 
   /**
@@ -795,7 +794,7 @@ protected:
 template <int dim, int spacedim = dim>
 using MappingQGeneric = MappingQ<dim, spacedim>;
 
-/** @} */
+/*@}*/
 
 
 /*----------------------------------------------------------------------*/

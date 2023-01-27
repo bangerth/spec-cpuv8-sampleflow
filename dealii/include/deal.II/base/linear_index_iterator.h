@@ -250,9 +250,9 @@ public:
    * the same entry in the same container.
    */
   template <typename OtherIterator>
-  friend std::enable_if_t<
+  friend typename std::enable_if<
     std::is_convertible<OtherIterator, DerivedIterator>::value,
-    bool>
+    bool>::type
   operator==(const LinearIndexIterator &left, const OtherIterator &right)
   {
     const auto &right_2 = static_cast<const DerivedIterator &>(right);
@@ -263,9 +263,9 @@ public:
    * Opposite of operator==().
    */
   template <typename OtherIterator>
-  friend std::enable_if_t<
+  friend typename std::enable_if<
     std::is_convertible<OtherIterator, DerivedIterator>::value,
-    bool>
+    bool>::type
   operator!=(const LinearIndexIterator &left, const OtherIterator &right)
   {
     return !(left == right);

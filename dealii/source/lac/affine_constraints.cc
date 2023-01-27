@@ -124,15 +124,10 @@ INSTANTIATE_DLTG_VECTOR(TrilinosWrappers::MPI::Vector);
 
 INSTANTIATE_DLTG_VECTORMATRIX(TrilinosWrappers::SparseMatrix, Vector<double>);
 INSTANTIATE_DLTG_VECTORMATRIX(TrilinosWrappers::SparseMatrix,
-                              LinearAlgebra::distributed::Vector<double>);
-INSTANTIATE_DLTG_VECTORMATRIX(TrilinosWrappers::SparseMatrix,
                               TrilinosWrappers::MPI::Vector);
 
 INSTANTIATE_DLTG_BLOCK_VECTORMATRIX(TrilinosWrappers::BlockSparseMatrix,
                                     Vector<double>);
-INSTANTIATE_DLTG_BLOCK_VECTORMATRIX(
-  TrilinosWrappers::BlockSparseMatrix,
-  LinearAlgebra::distributed::BlockVector<double>);
 INSTANTIATE_DLTG_BLOCK_VECTORMATRIX(TrilinosWrappers::BlockSparseMatrix,
                                     TrilinosWrappers::MPI::BlockVector);
 
@@ -148,34 +143,6 @@ dealii::AffineConstraints<double>::distribute<
   dealii::LinearAlgebra::TpetraWrappers::Vector<float> &) const;
 #    endif
 #  endif
-#endif
-
-#ifndef DOXYGEN
-namespace internal
-{
-  namespace AffineConstraintsImplementation
-  {
-    template void
-    set_zero_all(
-      const std::vector<types::global_dof_index> &                     cm,
-      LinearAlgebra::distributed::Vector<float, MemorySpace::Default> &vec);
-
-    template void
-    set_zero_all(
-      const std::vector<types::global_dof_index> &                      cm,
-      LinearAlgebra::distributed::Vector<double, MemorySpace::Default> &vec);
-  } // namespace AffineConstraintsImplementation
-} // namespace internal
-
-template void
-AffineConstraints<float>::set_zero<
-  LinearAlgebra::distributed::Vector<float, MemorySpace::Default>>(
-  LinearAlgebra::distributed::Vector<float, MemorySpace::Default> &) const;
-
-template void
-AffineConstraints<double>::set_zero<
-  LinearAlgebra::distributed::Vector<double, MemorySpace::Default>>(
-  LinearAlgebra::distributed::Vector<double, MemorySpace::Default> &) const;
 #endif
 
 DEAL_II_NAMESPACE_CLOSE

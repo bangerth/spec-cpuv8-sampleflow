@@ -41,7 +41,6 @@
 #include <deal.II/matrix_free/tensor_product_kernels.h>
 
 #include <array>
-#include <limits>
 
 
 DEAL_II_NAMESPACE_OPEN

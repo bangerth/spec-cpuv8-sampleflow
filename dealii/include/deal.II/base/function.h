@@ -137,12 +137,12 @@ class TensorFunction;
  * @tparam dim The space dimension of the range space within which the domain
  *   $\Omega$ of the function lies. Consequently, the function will be
  *   evaluated at objects of type @p Point<dim>.
- * @tparam RangeNumberType The scalar type of the vector space that is
- *   the range (or image) of this function. As discussed above,
- *   objects of the current type represent functions from ${\mathbb
- *   R}^\text{dim}$ to $S^{n_\text{components}}$ where $S$ is the
- *   underlying scalar type of the vector space. The type of $S$ is
- *   given by the @p RangeNumberType template argument.
+ * @tparam RangeNumberType The scalar type of the vector space that is the range
+ *   (or image) of this function. As discussed above, objects of the current
+ * type represent functions from ${\mathbb R}^\text{dim}$ to
+ *   $S^{n_\text{components}}$ where $S$ is the underlying scalar type of
+ *   the vector space. The type of $S$ is given by the @p RangeNumberType template
+ *   argument.
  *
  * @ingroup functions
  */
@@ -563,6 +563,27 @@ namespace Functions
             const unsigned int component = 0) const override;
   };
 } // namespace Functions
+
+/**
+ * Provide a function which always returns the constant values handed to the
+ * constructor.
+ *
+ * @deprecated use Functions::ConstantFunction instead.
+ */
+template <int dim, typename RangeNumberType = double>
+using ConstantFunction DEAL_II_DEPRECATED =
+  Functions::ConstantFunction<dim, RangeNumberType>;
+
+/**
+ * Provide a function which always returns zero.
+ *
+ * @deprecated use Functions::ZeroFunction instead.
+ */
+template <int dim, typename RangeNumberType = double>
+using ZeroFunction DEAL_II_DEPRECATED =
+  Functions::ZeroFunction<dim, RangeNumberType>;
+
+
 
 /**
  * This is a constant vector-valued function, in which one or more components

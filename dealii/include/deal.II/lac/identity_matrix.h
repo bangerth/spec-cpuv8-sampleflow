@@ -23,9 +23,8 @@
 
 DEAL_II_NAMESPACE_OPEN
 
-/**
- * @addtogroup Matrix1
- * @{
+/*! @addtogroup Matrix1
+ *@{
  */
 
 
@@ -239,7 +238,7 @@ IdentityMatrix::Tvmult_add(OutVectorType &out, const InVectorType &in) const
 
 #endif
 
-/** @} */
+/**@}*/
 
 DEAL_II_NAMESPACE_CLOSE
 

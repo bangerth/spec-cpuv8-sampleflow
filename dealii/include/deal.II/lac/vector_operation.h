@@ -20,9 +20,8 @@
 
 DEAL_II_NAMESPACE_OPEN
 
-/**
- * @addtogroup Vectors
- * @{
+/*! @addtogroup Vectors
+ *@{
  */
 
 /**
@@ -63,7 +62,7 @@ struct VectorOperation
   };
 };
 
-/** @} */
+/*@}*/
 
 DEAL_II_NAMESPACE_CLOSE
 

@@ -155,7 +155,8 @@ public:
    * current lane.
    */
   template <typename U = T>
-  std::enable_if_t<!std::is_same<U, const U>::value, typename T::value_type> &
+  typename std::enable_if<!std::is_same<U, const U>::value,
+                          typename T::value_type>::type &
   operator*()
   {
     AssertIndexRange(lane, T::size());
@@ -537,9 +538,9 @@ public:
    * of bytes in the vectorized array, as opposed to casting a double address
    * to VectorizedArray<double>*.
    */
-  template <typename OtherNumber>
-  DEAL_II_ALWAYS_INLINE void
-  load(const OtherNumber *ptr)
+  DEAL_II_ALWAYS_INLINE
+  void
+  load(const Number *ptr)
   {
     data = *ptr;
   }
@@ -550,9 +551,9 @@ public:
    * aligned by the amount of bytes in the vectorized array, as opposed to
    * casting a double address to VectorizedArray<double>*.
    */
-  template <typename OtherNumber>
-  DEAL_II_ALWAYS_INLINE void
-  store(OtherNumber *ptr) const
+  DEAL_II_ALWAYS_INLINE
+  void
+  store(Number *ptr) const
   {
     *ptr = data;
   }
@@ -729,8 +730,9 @@ private:
 
 /**
  * @name Packing and unpacking of a VectorizedArray
- * @{
  */
+//@{
+
 
 /**
  * Create a vectorized array that sets all entries in the array to the given
@@ -943,7 +945,7 @@ vectorized_transpose_and_store(const bool                            add_into,
 }
 
 
-/** @} */
+//@}
 
 #ifndef DOXYGEN
 
@@ -1096,13 +1098,6 @@ public:
     data = _mm512_loadu_pd(ptr);
   }
 
-  DEAL_II_ALWAYS_INLINE
-  void
-  load(const float *ptr)
-  {
-    data = _mm512_cvtps_pd(_mm256_loadu_ps(ptr));
-  }
-
   /**
    * Write the content of the calling class into memory in form of @p
    * size() to the given address. The memory need not be aligned by
@@ -1114,13 +1109,6 @@ public:
   store(double *ptr) const
   {
     _mm512_storeu_pd(ptr, data);
-  }
-
-  DEAL_II_ALWAYS_INLINE
-  void
-  store(float *ptr) const
-  {
-    _mm256_storeu_ps(ptr, _mm512_cvtpd_ps(data));
   }
 
   /**
@@ -2336,13 +2324,6 @@ public:
     data = _mm256_loadu_pd(ptr);
   }
 
-  DEAL_II_ALWAYS_INLINE
-  void
-  load(const float *ptr)
-  {
-    data = _mm256_cvtps_pd(_mm_loadu_ps(ptr));
-  }
-
   /**
    * Write the content of the calling class into memory in form of @p
    * size() to the given address. The memory need not be aligned by
@@ -2354,13 +2335,6 @@ public:
   store(double *ptr) const
   {
     _mm256_storeu_pd(ptr, data);
-  }
-
-  DEAL_II_ALWAYS_INLINE
-  void
-  store(float *ptr) const
-  {
-    _mm_storeu_ps(ptr, _mm256_cvtpd_ps(data));
   }
 
   /**
@@ -3428,15 +3402,6 @@ public:
     data = _mm_loadu_pd(ptr);
   }
 
-  DEAL_II_ALWAYS_INLINE
-  void
-  load(const float *ptr)
-  {
-    DEAL_II_OPENMP_SIMD_PRAGMA
-    for (unsigned int i = 0; i < 2; ++i)
-      data[i] = ptr[i];
-  }
-
   /**
    * Write the content of the calling class into memory in form of @p
    * size() to the given address. The memory need not be aligned by
@@ -3448,15 +3413,6 @@ public:
   store(double *ptr) const
   {
     _mm_storeu_pd(ptr, data);
-  }
-
-  DEAL_II_ALWAYS_INLINE
-  void
-  store(float *ptr) const
-  {
-    DEAL_II_OPENMP_SIMD_PRAGMA
-    for (unsigned int i = 0; i < 2; ++i)
-      ptr[i] = data[i];
   }
 
   /**
@@ -4741,8 +4697,8 @@ private:
 
 /**
  * @name Arithmetic operations with VectorizedArray
- * @{
  */
+//@{
 
 /**
  * Relational operator == for VectorizedArray
@@ -5097,12 +5053,13 @@ operator<<(std::ostream &out, const VectorizedArray<Number, width> &p)
   return out;
 }
 
-/** @} */
+//@}
 
 /**
  * @name Ternary operations on VectorizedArray
- * @{
  */
+//@{
+
 
 /**
  * enum class encoding binary operations for a component-wise comparison of
@@ -5247,7 +5204,7 @@ compare_and_apply_mask(const VectorizedArray<Number, 1> &left,
   return result;
 }
 
-/** @} */
+//@}
 
 #ifndef DOXYGEN
 #  if DEAL_II_VECTORIZATION_WIDTH_IN_BITS >= 512 && defined(__AVX512F__)
@@ -5405,49 +5362,13 @@ namespace internal
   template <typename T>
   struct VectorizedArrayTrait
   {
-    using value_type                   = T;
-    static constexpr std::size_t width = 1;
-
-    static T &
-    get(T &value, unsigned int c)
-    {
-      AssertDimension(c, 0);
-      (void)c;
-
-      return value;
-    }
-
-    static const T &
-    get(const T &value, unsigned int c)
-    {
-      AssertDimension(c, 0);
-      (void)c;
-
-      return value;
-    }
+    using value_type = T;
   };
 
-  template <typename T, std::size_t width_>
-  struct VectorizedArrayTrait<VectorizedArray<T, width_>>
+  template <typename T, std::size_t width>
+  struct VectorizedArrayTrait<VectorizedArray<T, width>>
   {
-    using value_type                   = T;
-    static constexpr std::size_t width = width_;
-
-    static T &
-    get(VectorizedArray<T, width_> &values, unsigned int c)
-    {
-      AssertIndexRange(c, width_);
-
-      return values[c];
-    }
-
-    static const T &
-    get(const VectorizedArray<T, width_> &values, unsigned int c)
-    {
-      AssertIndexRange(c, width_);
-
-      return values[c];
-    }
+    using value_type = T;
   };
 } // namespace internal
 

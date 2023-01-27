@@ -22,7 +22,6 @@
 #include <deal.II/base/tensor_product_polynomials.h>
 #include <deal.II/base/tensor_product_polynomials_bubbles.h>
 #include <deal.II/base/tensor_product_polynomials_const.h>
-#include <deal.II/base/thread_management.h>
 
 #include <deal.II/fe/fe_dgp.h>
 #include <deal.II/fe/fe_dgq.h>
@@ -1027,11 +1026,9 @@ FE_Q_Base<dim, spacedim>::initialize_quad_dof_index_permutation()
   AssertDimension(this->n_unique_faces(), 1);
   const unsigned int face_no = 0;
 
-  Assert(
-    this->adjust_quad_dof_index_for_face_orientation_table[0].n_elements() ==
-      this->reference_cell().n_face_orientations(face_no) *
-        this->n_dofs_per_quad(face_no),
-    ExcInternalError());
+  Assert(this->adjust_quad_dof_index_for_face_orientation_table[0]
+             .n_elements() == 8 * this->n_dofs_per_quad(face_no),
+         ExcInternalError());
 
   const unsigned int n = q_degree - 1;
   Assert(n * n == this->n_dofs_per_quad(face_no), ExcInternalError());

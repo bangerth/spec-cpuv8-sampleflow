@@ -31,10 +31,8 @@
 
 DEAL_II_NAMESPACE_OPEN
 
-/**
- * @addtogroup threads
- * @{
- */
+/*!@addtogroup threads */
+/*@{*/
 
 #  ifndef DOXYGEN
 class LogStream;
@@ -376,7 +374,7 @@ namespace Threads
      * "if constexpr".
      */
     template <typename T>
-    std::enable_if_t<
+    typename std::enable_if_t<
       std::is_copy_constructible<typename unpack_container<T>::type>::value,
       T &>
     construct_element(std::map<std::thread::id, T> &  data,
@@ -392,7 +390,7 @@ namespace Threads
     }
 
     template <typename T>
-    std::enable_if_t<
+    typename std::enable_if_t<
       !std::is_copy_constructible<typename unpack_container<T>::type>::value,
       T &>
     construct_element(std::map<std::thread::id, T> &data,
@@ -437,7 +435,7 @@ namespace Threads
 
     {
       // Take a unique ("writer") lock for manipulating the std::map. This
-      // lock ensures that no other thread does a lookup at the same time.
+      // lock ensures that no other threat does a lookup at the same time.
       std::unique_lock<decltype(insertion_mutex)> lock(insertion_mutex);
 
       return internal::construct_element(data, my_id, exemplar);

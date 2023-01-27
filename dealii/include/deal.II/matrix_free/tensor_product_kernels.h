@@ -1567,218 +1567,6 @@ namespace internal
 
 
 
-  template <int dim,
-            int n_rows_static,
-            int n_columns_static,
-            typename Number,
-            typename Number2,
-            int  direction,
-            bool contract_over_rows,
-            bool add,
-            int  type,
-            bool one_line>
-  inline void
-  even_odd_apply(const int                       n_rows_in,
-                 const int                       n_columns_in,
-                 const Number2 *DEAL_II_RESTRICT shapes,
-                 const Number *                  in,
-                 Number *                        out)
-  {
-    static_assert(type < 3, "Only three variants type=0,1,2 implemented");
-    static_assert(one_line == false || direction == dim - 1,
-                  "Single-line evaluation only works for direction=dim-1.");
-
-    const int n_rows = n_rows_static == -1 ? n_rows_in : n_rows_static;
-    const int n_columns =
-      n_columns_static == -1 ? n_columns_in : n_columns_static;
-
-    Assert(dim == direction + 1 || one_line == true || n_rows == n_columns ||
-             in != out,
-           ExcMessage("In-place operation only supported for "
-                      "n_rows==n_columns or single-line interpolation"));
-
-    // We cannot statically assert that direction is less than dim, so must do
-    // an additional dynamic check
-    AssertIndexRange(direction, dim);
-
-    const int     nn = contract_over_rows ? n_columns : n_rows;
-    const int     mm = contract_over_rows ? n_rows : n_columns;
-    constexpr int mm_static =
-      contract_over_rows ? n_rows_static : n_columns_static;
-    const int     n_cols     = nn / 2;
-    const int     mid        = mm / 2;
-    constexpr int mid_static = mm_static / 2;
-    constexpr int max_mid    = 15; // for non-templated execution
-
-    Assert((n_rows_static != -1 && n_columns_static != -1) || mid <= max_mid,
-           ExcNotImplemented());
-
-    const int stride    = Utilities::pow(n_columns, direction);
-    const int n_blocks1 = one_line ? 1 : stride;
-    const int n_blocks2 =
-      Utilities::pow(n_rows, (direction >= dim) ? 0 : (dim - direction - 1));
-
-    const int offset = (n_columns + 1) / 2;
-
-    // this code may look very inefficient at first sight due to the many
-    // different cases with if's at the innermost loop part, but all of the
-    // conditionals can be evaluated at compile time because they are
-    // templates, so the compiler should optimize everything away
-    for (int i2 = 0; i2 < n_blocks2; ++i2)
-      {
-        for (int i1 = 0; i1 < n_blocks1; ++i1)
-          {
-            constexpr unsigned int mid_size =
-              (n_rows_static == -1 || n_columns_static == -1) ?
-                max_mid :
-                (mid_static > 0 ? mid_static : 1);
-            Number xp[mid_size], xm[mid_size];
-            for (int i = 0; i < mid; ++i)
-              {
-                if (contract_over_rows == true && type == 1)
-                  {
-                    xp[i] = in[stride * i] - in[stride * (mm - 1 - i)];
-                    xm[i] = in[stride * i] + in[stride * (mm - 1 - i)];
-                  }
-                else
-                  {
-                    xp[i] = in[stride * i] + in[stride * (mm - 1 - i)];
-                    xm[i] = in[stride * i] - in[stride * (mm - 1 - i)];
-                  }
-              }
-            Number xmid = in[stride * mid];
-            for (int col = 0; col < n_cols; ++col)
-              {
-                Number r0, r1;
-                if (mid > 0)
-                  {
-                    if (contract_over_rows == true)
-                      {
-                        r0 = shapes[col] * xp[0];
-                        r1 = shapes[(n_rows - 1) * offset + col] * xm[0];
-                      }
-                    else
-                      {
-                        r0 = shapes[col * offset] * xp[0];
-                        r1 = shapes[(n_rows - 1 - col) * offset] * xm[0];
-                      }
-                    for (int ind = 1; ind < mid; ++ind)
-                      {
-                        if (contract_over_rows == true)
-                          {
-                            r0 += shapes[ind * offset + col] * xp[ind];
-                            r1 += shapes[(n_rows - 1 - ind) * offset + col] *
-                                  xm[ind];
-                          }
-                        else
-                          {
-                            r0 += shapes[col * offset + ind] * xp[ind];
-                            r1 += shapes[(n_rows - 1 - col) * offset + ind] *
-                                  xm[ind];
-                          }
-                      }
-                  }
-                else
-                  r0 = r1 = Number();
-                if (mm % 2 == 1 && contract_over_rows == true)
-                  {
-                    if (type == 1)
-                      r1 += shapes[mid * offset + col] * xmid;
-                    else
-                      r0 += shapes[mid * offset + col] * xmid;
-                  }
-                else if (mm % 2 == 1 && (nn % 2 == 0 || type > 0 || mm == 3))
-                  r0 += shapes[col * offset + mid] * xmid;
-
-                if (add)
-                  {
-                    out[stride * col] += r0 + r1;
-                    if (type == 1 && contract_over_rows == false)
-                      out[stride * (nn - 1 - col)] += r1 - r0;
-                    else
-                      out[stride * (nn - 1 - col)] += r0 - r1;
-                  }
-                else
-                  {
-                    out[stride * col] = r0 + r1;
-                    if (type == 1 && contract_over_rows == false)
-                      out[stride * (nn - 1 - col)] = r1 - r0;
-                    else
-                      out[stride * (nn - 1 - col)] = r0 - r1;
-                  }
-              }
-            if (type == 0 && contract_over_rows == true && nn % 2 == 1 &&
-                mm % 2 == 1 && mm > 3)
-              {
-                if (add)
-                  out[stride * n_cols] += shapes[mid * offset + n_cols] * xmid;
-                else
-                  out[stride * n_cols] = shapes[mid * offset + n_cols] * xmid;
-              }
-            else if (contract_over_rows == true && nn % 2 == 1)
-              {
-                Number r0;
-                if (mid > 0)
-                  {
-                    r0 = shapes[n_cols] * xp[0];
-                    for (int ind = 1; ind < mid; ++ind)
-                      r0 += shapes[ind * offset + n_cols] * xp[ind];
-                  }
-                else
-                  r0 = Number();
-                if (type != 1 && mm % 2 == 1)
-                  r0 += shapes[mid * offset + n_cols] * xmid;
-
-                if (add)
-                  out[stride * n_cols] += r0;
-                else
-                  out[stride * n_cols] = r0;
-              }
-            else if (contract_over_rows == false && nn % 2 == 1)
-              {
-                Number r0;
-                if (mid > 0)
-                  {
-                    if (type == 1)
-                      {
-                        r0 = shapes[n_cols * offset] * xm[0];
-                        for (int ind = 1; ind < mid; ++ind)
-                          r0 += shapes[n_cols * offset + ind] * xm[ind];
-                      }
-                    else
-                      {
-                        r0 = shapes[n_cols * offset] * xp[0];
-                        for (int ind = 1; ind < mid; ++ind)
-                          r0 += shapes[n_cols * offset + ind] * xp[ind];
-                      }
-                  }
-                else
-                  r0 = Number();
-
-                if ((type == 0 || type == 2) && mm % 2 == 1)
-                  r0 += shapes[n_cols * offset + mid] * xmid;
-
-                if (add)
-                  out[stride * n_cols] += r0;
-                else
-                  out[stride * n_cols] = r0;
-              }
-            if (one_line == false)
-              {
-                in += 1;
-                out += 1;
-              }
-          }
-        if (one_line == false)
-          {
-            in += stride * (mm - 1);
-            out += stride * (nn - 1);
-          }
-      }
-  }
-
-
-
   /**
    * Internal evaluator for 1d-3d shape function using the tensor product form
    * of the basis functions.
@@ -1963,19 +1751,7 @@ namespace internal
     static void
     apply(const Number2 *DEAL_II_RESTRICT shape_data,
           const Number *                  in,
-          Number *                        out)
-    {
-      even_odd_apply<dim,
-                     n_rows,
-                     n_columns,
-                     Number,
-                     Number2,
-                     direction,
-                     contract_over_rows,
-                     add,
-                     type,
-                     one_line>(n_rows, n_columns, shape_data, in, out);
-    }
+          Number *                        out);
 
   private:
     const Number2 *shape_values;
@@ -1984,135 +1760,203 @@ namespace internal
   };
 
 
-  /**
-   * Internal evaluator for shape function using the tensor product form
-   * of the basis functions. The same as the other templated class but
-   * without making use of template arguments and variable loop bounds
-   * instead.
-   */
-  template <int dim, typename Number, typename Number2>
-  struct EvaluatorTensorProduct<evaluate_evenodd, dim, 0, 0, Number, Number2>
+
+  template <int dim,
+            int n_rows,
+            int n_columns,
+            typename Number,
+            typename Number2>
+  template <int  direction,
+            bool contract_over_rows,
+            bool add,
+            int  type,
+            bool one_line>
+  inline void
+  EvaluatorTensorProduct<evaluate_evenodd,
+                         dim,
+                         n_rows,
+                         n_columns,
+                         Number,
+                         Number2>::apply(const Number2 *DEAL_II_RESTRICT shapes,
+                                         const Number *                  in,
+                                         Number *                        out)
   {
-    EvaluatorTensorProduct()
-      : shape_values(nullptr)
-      , shape_gradients(nullptr)
-      , shape_hessians(nullptr)
-      , n_rows(numbers::invalid_unsigned_int)
-      , n_columns(numbers::invalid_unsigned_int)
-    {}
+    static_assert(type < 3, "Only three variants type=0,1,2 implemented");
+    static_assert(one_line == false || direction == dim - 1,
+                  "Single-line evaluation only works for direction=dim-1.");
+    Assert(dim == direction + 1 || one_line == true || n_rows == n_columns ||
+             in != out,
+           ExcMessage("In-place operation only supported for "
+                      "n_rows==n_columns or single-line interpolation"));
 
-    EvaluatorTensorProduct(const AlignedVector<Number2> &shape_values,
-                           const unsigned int            n_rows    = 0,
-                           const unsigned int            n_columns = 0)
-      : shape_values(shape_values.begin())
-      , shape_gradients(nullptr)
-      , shape_hessians(nullptr)
-      , n_rows(n_rows)
-      , n_columns(n_columns)
-    {
-      AssertDimension(shape_values.size(), n_rows * ((n_columns + 1) / 2));
-    }
+    // We cannot statically assert that direction is less than dim, so must do
+    // an additional dynamic check
+    AssertIndexRange(direction, dim);
 
-    EvaluatorTensorProduct(const AlignedVector<Number2> &shape_values,
-                           const AlignedVector<Number2> &shape_gradients,
-                           const AlignedVector<Number2> &shape_hessians,
-                           const unsigned int            n_rows    = 0,
-                           const unsigned int            n_columns = 0)
-      : shape_values(shape_values.begin())
-      , shape_gradients(shape_gradients.begin())
-      , shape_hessians(shape_hessians.begin())
-      , n_rows(n_rows)
-      , n_columns(n_columns)
-    {
-      if (!shape_values.empty())
-        AssertDimension(shape_values.size(), n_rows * ((n_columns + 1) / 2));
-      if (!shape_gradients.empty())
-        AssertDimension(shape_gradients.size(), n_rows * ((n_columns + 1) / 2));
-      if (!shape_hessians.empty())
-        AssertDimension(shape_hessians.size(), n_rows * ((n_columns + 1) / 2));
-    }
+    constexpr int nn     = contract_over_rows ? n_columns : n_rows;
+    constexpr int mm     = contract_over_rows ? n_rows : n_columns;
+    constexpr int n_cols = nn / 2;
+    constexpr int mid    = mm / 2;
 
-    template <int direction, bool contract_over_rows, bool add>
-    void
-    values(const Number in[], Number out[]) const
-    {
-      Assert(shape_values != nullptr, ExcNotInitialized());
-      apply<direction, contract_over_rows, add, 0>(shape_values, in, out);
-    }
+    constexpr int stride    = Utilities::pow(n_columns, direction);
+    constexpr int n_blocks1 = one_line ? 1 : stride;
+    constexpr int n_blocks2 =
+      Utilities::pow(n_rows, (direction >= dim) ? 0 : (dim - direction - 1));
 
-    template <int direction, bool contract_over_rows, bool add>
-    void
-    gradients(const Number in[], Number out[]) const
-    {
-      Assert(shape_gradients != nullptr, ExcNotInitialized());
-      apply<direction, contract_over_rows, add, 1>(shape_gradients, in, out);
-    }
+    constexpr int offset = (n_columns + 1) / 2;
 
-    template <int direction, bool contract_over_rows, bool add>
-    void
-    hessians(const Number in[], Number out[]) const
-    {
-      Assert(shape_hessians != nullptr, ExcNotInitialized());
-      apply<direction, contract_over_rows, add, 2>(shape_hessians, in, out);
-    }
+    // this code may look very inefficient at first sight due to the many
+    // different cases with if's at the innermost loop part, but all of the
+    // conditionals can be evaluated at compile time because they are
+    // templates, so the compiler should optimize everything away
+    for (int i2 = 0; i2 < n_blocks2; ++i2)
+      {
+        for (int i1 = 0; i1 < n_blocks1; ++i1)
+          {
+            Number xp[mid > 0 ? mid : 1], xm[mid > 0 ? mid : 1];
+            for (int i = 0; i < mid; ++i)
+              {
+                if (contract_over_rows == true && type == 1)
+                  {
+                    xp[i] = in[stride * i] - in[stride * (mm - 1 - i)];
+                    xm[i] = in[stride * i] + in[stride * (mm - 1 - i)];
+                  }
+                else
+                  {
+                    xp[i] = in[stride * i] + in[stride * (mm - 1 - i)];
+                    xm[i] = in[stride * i] - in[stride * (mm - 1 - i)];
+                  }
+              }
+            Number xmid = in[stride * mid];
+            for (int col = 0; col < n_cols; ++col)
+              {
+                Number r0, r1;
+                if (mid > 0)
+                  {
+                    if (contract_over_rows == true)
+                      {
+                        r0 = shapes[col] * xp[0];
+                        r1 = shapes[(n_rows - 1) * offset + col] * xm[0];
+                      }
+                    else
+                      {
+                        r0 = shapes[col * offset] * xp[0];
+                        r1 = shapes[(n_rows - 1 - col) * offset] * xm[0];
+                      }
+                    for (int ind = 1; ind < mid; ++ind)
+                      {
+                        if (contract_over_rows == true)
+                          {
+                            r0 += shapes[ind * offset + col] * xp[ind];
+                            r1 += shapes[(n_rows - 1 - ind) * offset + col] *
+                                  xm[ind];
+                          }
+                        else
+                          {
+                            r0 += shapes[col * offset + ind] * xp[ind];
+                            r1 += shapes[(n_rows - 1 - col) * offset + ind] *
+                                  xm[ind];
+                          }
+                      }
+                  }
+                else
+                  r0 = r1 = Number();
+                if (mm % 2 == 1 && contract_over_rows == true)
+                  {
+                    if (type == 1)
+                      r1 += shapes[mid * offset + col] * xmid;
+                    else
+                      r0 += shapes[mid * offset + col] * xmid;
+                  }
+                else if (mm % 2 == 1 && (nn % 2 == 0 || type > 0 || mm == 3))
+                  r0 += shapes[col * offset + mid] * xmid;
 
-    template <int direction, bool contract_over_rows, bool add>
-    void
-    values_one_line(const Number in[], Number out[]) const
-    {
-      Assert(shape_values != nullptr, ExcNotInitialized());
-      apply<direction, contract_over_rows, add, 0, true>(shape_values, in, out);
-    }
+                if (add)
+                  {
+                    out[stride * col] += r0 + r1;
+                    if (type == 1 && contract_over_rows == false)
+                      out[stride * (nn - 1 - col)] += r1 - r0;
+                    else
+                      out[stride * (nn - 1 - col)] += r0 - r1;
+                  }
+                else
+                  {
+                    out[stride * col] = r0 + r1;
+                    if (type == 1 && contract_over_rows == false)
+                      out[stride * (nn - 1 - col)] = r1 - r0;
+                    else
+                      out[stride * (nn - 1 - col)] = r0 - r1;
+                  }
+              }
+            if (type == 0 && contract_over_rows == true && nn % 2 == 1 &&
+                mm % 2 == 1 && mm > 3)
+              {
+                if (add)
+                  out[stride * n_cols] += shapes[mid * offset + n_cols] * xmid;
+                else
+                  out[stride * n_cols] = shapes[mid * offset + n_cols] * xmid;
+              }
+            else if (contract_over_rows == true && nn % 2 == 1)
+              {
+                Number r0;
+                if (mid > 0)
+                  {
+                    r0 = shapes[n_cols] * xp[0];
+                    for (int ind = 1; ind < mid; ++ind)
+                      r0 += shapes[ind * offset + n_cols] * xp[ind];
+                  }
+                else
+                  r0 = Number();
+                if (type != 1 && mm % 2 == 1)
+                  r0 += shapes[mid * offset + n_cols] * xmid;
 
-    template <int direction, bool contract_over_rows, bool add>
-    void
-    gradients_one_line(const Number in[], Number out[]) const
-    {
-      Assert(shape_gradients != nullptr, ExcNotInitialized());
-      apply<direction, contract_over_rows, add, 1, true>(shape_gradients,
-                                                         in,
-                                                         out);
-    }
+                if (add)
+                  out[stride * n_cols] += r0;
+                else
+                  out[stride * n_cols] = r0;
+              }
+            else if (contract_over_rows == false && nn % 2 == 1)
+              {
+                Number r0;
+                if (mid > 0)
+                  {
+                    if (type == 1)
+                      {
+                        r0 = shapes[n_cols * offset] * xm[0];
+                        for (int ind = 1; ind < mid; ++ind)
+                          r0 += shapes[n_cols * offset + ind] * xm[ind];
+                      }
+                    else
+                      {
+                        r0 = shapes[n_cols * offset] * xp[0];
+                        for (int ind = 1; ind < mid; ++ind)
+                          r0 += shapes[n_cols * offset + ind] * xp[ind];
+                      }
+                  }
+                else
+                  r0 = Number();
 
-    template <int direction, bool contract_over_rows, bool add>
-    void
-    hessians_one_line(const Number in[], Number out[]) const
-    {
-      Assert(shape_hessians != nullptr, ExcNotInitialized());
-      apply<direction, contract_over_rows, add, 2, true>(shape_hessians,
-                                                         in,
-                                                         out);
-    }
+                if ((type == 0 || type == 2) && mm % 2 == 1)
+                  r0 += shapes[n_cols * offset + mid] * xmid;
 
-    template <int  direction,
-              bool contract_over_rows,
-              bool add,
-              int  type,
-              bool one_line = false>
-    void
-    apply(const Number2 *DEAL_II_RESTRICT shape_data,
-          const Number *                  in,
-          Number *                        out) const
-    {
-      even_odd_apply<dim,
-                     -1,
-                     -1,
-                     Number,
-                     Number2,
-                     direction,
-                     contract_over_rows,
-                     add,
-                     type,
-                     one_line>(n_rows, n_columns, shape_data, in, out);
-    }
-
-  private:
-    const Number2 *    shape_values;
-    const Number2 *    shape_gradients;
-    const Number2 *    shape_hessians;
-    const unsigned int n_rows;
-    const unsigned int n_columns;
-  };
+                if (add)
+                  out[stride * n_cols] += r0;
+                else
+                  out[stride * n_cols] = r0;
+              }
+            if (one_line == false)
+              {
+                in += 1;
+                out += 1;
+              }
+          }
+        if (one_line == false)
+          {
+            in += stride * (mm - 1);
+            out += stride * (nn - 1);
+          }
+      }
+  }
 
 
 
@@ -3324,218 +3168,37 @@ namespace internal
   }
 
 
-  template <int dim, int n_points_1d_template, typename Number>
+  template <int dim, int loop_length_template, typename Number>
   inline void
-  weight_fe_q_dofs_by_entity(const Number *     weights,
-                             const unsigned int n_components,
-                             const int          n_points_1d_non_template,
-                             Number *           data)
+  weight_fe_q_dofs_by_entity(const VectorizedArray<Number> *weights,
+                             const unsigned int             n_components,
+                             const int                loop_length_non_template,
+                             VectorizedArray<Number> *data)
   {
-    const int n_points_1d = n_points_1d_template != -1 ?
-                              n_points_1d_template :
-                              n_points_1d_non_template;
+    const int loop_length = loop_length_template != -1 ?
+                              loop_length_template :
+                              loop_length_non_template;
 
-    Assert(n_points_1d > 0, ExcNotImplemented());
-    Assert(n_points_1d < 100, ExcNotImplemented());
-
-    unsigned int compressed_index[100];
-    compressed_index[0] = 0;
-    for (int i = 1; i < n_points_1d - 1; ++i)
-      compressed_index[i] = 1;
-    compressed_index[n_points_1d - 1] = 2;
-
+    Assert(loop_length > 0, ExcNotImplemented());
+    Assert(loop_length < 100, ExcNotImplemented());
+    unsigned int degree_to_3[100];
+    degree_to_3[0] = 0;
+    for (int i = 1; i < loop_length - 1; ++i)
+      degree_to_3[i] = 1;
+    degree_to_3[loop_length - 1] = 2;
     for (unsigned int c = 0; c < n_components; ++c)
-      for (int k = 0; k < (dim > 2 ? n_points_1d : 1); ++k)
-        for (int j = 0; j < (dim > 1 ? n_points_1d : 1); ++j)
+      for (int k = 0; k < (dim > 2 ? loop_length : 1); ++k)
+        for (int j = 0; j < (dim > 1 ? loop_length : 1); ++j)
           {
-            const unsigned int shift =
-              9 * compressed_index[k] + 3 * compressed_index[j];
+            const unsigned int shift = 9 * degree_to_3[k] + 3 * degree_to_3[j];
             data[0] *= weights[shift];
-            // loop bound as int avoids compiler warnings in case n_points_1d
+            // loop bound as int avoids compiler warnings in case loop_length
             // == 1 (polynomial degree 0)
-            for (int i = 1; i < n_points_1d - 1; ++i)
+            for (int i = 1; i < loop_length - 1; ++i)
               data[i] *= weights[shift + 1];
-            data[n_points_1d - 1] *= weights[shift + 2];
-            data += n_points_1d;
+            data[loop_length - 1] *= weights[shift + 2];
+            data += loop_length;
           }
-  }
-
-
-  template <int dim, int n_points_1d_template, typename Number>
-  inline void
-  weight_fe_q_dofs_by_entity_shifted(const Number *     weights,
-                                     const unsigned int n_components,
-                                     const int n_points_1d_non_template,
-                                     Number *  data)
-  {
-    const int n_points_1d = n_points_1d_template != -1 ?
-                              n_points_1d_template :
-                              n_points_1d_non_template;
-
-    Assert((n_points_1d % 2) == 1,
-           ExcMessage("The function can only with add number of points"));
-    Assert(n_points_1d > 0, ExcNotImplemented());
-    Assert(n_points_1d < 100, ExcNotImplemented());
-
-    const unsigned int n_inside_1d = n_points_1d / 2;
-
-    unsigned int compressed_index[100];
-
-    unsigned int c = 0;
-    for (int i = 0; i < n_inside_1d; ++i)
-      compressed_index[c++] = 0;
-    compressed_index[c++] = 1;
-    for (int i = 0; i < n_inside_1d; ++i)
-      compressed_index[c++] = 2;
-
-    for (unsigned int c = 0; c < n_components; ++c)
-      for (int k = 0; k < (dim > 2 ? n_points_1d : 1); ++k)
-        for (int j = 0; j < (dim > 1 ? n_points_1d : 1); ++j)
-          {
-            const unsigned int shift =
-              9 * compressed_index[k] + 3 * compressed_index[j];
-
-            unsigned int c = 0;
-            for (int i = 0; i < n_inside_1d; ++i)
-              data[c++] *= weights[shift];
-            data[c++] *= weights[shift + 1];
-            for (int i = 0; i < n_inside_1d; ++i)
-              data[c++] *= weights[shift + 2];
-            data += n_points_1d;
-          }
-  }
-
-
-  template <int dim, int n_points_1d_template, typename Number>
-  inline bool
-  compute_weights_fe_q_dofs_by_entity(const Number *     data,
-                                      const unsigned int n_components,
-                                      const int n_points_1d_non_template,
-                                      Number *  weights)
-  {
-    const int n_points_1d = n_points_1d_template != -1 ?
-                              n_points_1d_template :
-                              n_points_1d_non_template;
-
-    Assert(n_points_1d > 0, ExcNotImplemented());
-    Assert(n_points_1d < 100, ExcNotImplemented());
-
-    unsigned int compressed_index[100];
-    compressed_index[0] = 0;
-    for (int i = 1; i < n_points_1d - 1; ++i)
-      compressed_index[i] = 1;
-    compressed_index[n_points_1d - 1] = 2;
-
-    // Insert the number data into a storage position for weight,
-    // ensuring that the array has either not been touched before
-    // or the previous content is the same. In case the previous
-    // content has a different value, we exit this function and
-    // signal to outer functions that the compression was not possible.
-    const auto check_and_set = [](Number &weight, const Number &data) {
-      if (weight == Number(-1.0) || weight == data)
-        {
-          weight = data;
-          return true; // success for the entry
-        }
-
-      return false; // failure for the entry
-    };
-
-    for (unsigned int c = 0; c < Utilities::pow<unsigned int>(3, dim); ++c)
-      weights[c] = Number(-1.0);
-
-    for (unsigned int c = 0; c < n_components; ++c)
-      for (int k = 0; k < (dim > 2 ? n_points_1d : 1); ++k)
-        for (int j = 0; j < (dim > 1 ? n_points_1d : 1);
-             ++j, data += n_points_1d)
-          {
-            const unsigned int shift =
-              9 * compressed_index[k] + 3 * compressed_index[j];
-
-            if (!check_and_set(weights[shift], data[0]))
-              return false; // failure
-
-            for (int i = 1; i < n_points_1d - 1; ++i)
-              if (!check_and_set(weights[shift + 1], data[i]))
-                return false; // failure
-
-            if (!check_and_set(weights[shift + 2], data[n_points_1d - 1]))
-              return false; // failure
-          }
-
-    return true; // success
-  }
-
-
-  template <int dim, int n_points_1d_template, typename Number>
-  inline bool
-  compute_weights_fe_q_dofs_by_entity_shifted(
-    const Number *     data,
-    const unsigned int n_components,
-    const int          n_points_1d_non_template,
-    Number *           weights)
-  {
-    const int n_points_1d = n_points_1d_template != -1 ?
-                              n_points_1d_template :
-                              n_points_1d_non_template;
-
-    Assert((n_points_1d % 2) == 1,
-           ExcMessage("The function can only with add number of points"));
-    Assert(n_points_1d > 0, ExcNotImplemented());
-    Assert(n_points_1d < 100, ExcNotImplemented());
-
-    const unsigned int n_inside_1d = n_points_1d / 2;
-
-    unsigned int compressed_index[100];
-
-    unsigned int c = 0;
-    for (int i = 0; i < n_inside_1d; ++i)
-      compressed_index[c++] = 0;
-    compressed_index[c++] = 1;
-    for (int i = 0; i < n_inside_1d; ++i)
-      compressed_index[c++] = 2;
-
-    // Insert the number data into a storage position for weight,
-    // ensuring that the array has either not been touched before
-    // or the previous content is the same. In case the previous
-    // content has a different value, we exit this function and
-    // signal to outer functions that the compression was not possible.
-    const auto check_and_set = [](Number &weight, const Number &data) {
-      if (weight == Number(-1.0) || weight == data)
-        {
-          weight = data;
-          return true; // success for the entry
-        }
-
-      return false; // failure for the entry
-    };
-
-    for (unsigned int c = 0; c < Utilities::pow<unsigned int>(3, dim); ++c)
-      weights[c] = Number(-1.0);
-
-    for (unsigned int comp = 0; comp < n_components; ++comp)
-      for (int k = 0; k < (dim > 2 ? n_points_1d : 1); ++k)
-        for (int j = 0; j < (dim > 1 ? n_points_1d : 1);
-             ++j, data += n_points_1d)
-          {
-            const unsigned int shift =
-              9 * compressed_index[k] + 3 * compressed_index[j];
-
-            unsigned int c = 0;
-
-            for (int i = 0; i < n_inside_1d; ++i)
-              if (!check_and_set(weights[shift], data[c++]))
-                return false; // failure
-
-            if (!check_and_set(weights[shift + 1], data[c++]))
-              return false; // failure
-
-            for (int i = 0; i < n_inside_1d; ++i)
-              if (!check_and_set(weights[shift + 2], data[c++]))
-                return false; // failure
-          }
-
-    return true; // success
   }
 
 

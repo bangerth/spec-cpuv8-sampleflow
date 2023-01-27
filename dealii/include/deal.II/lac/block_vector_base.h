@@ -38,9 +38,8 @@
 DEAL_II_NAMESPACE_OPEN
 
 
-/**
- * @addtogroup Vectors
- * @{
+/*! @addtogroup Vectors
+ *@{
  */
 
 namespace internal
@@ -343,7 +342,7 @@ namespace internal
                        "different block vectors. There is no reasonable way "
                        "to do this.");
 
-      /** @} */
+      //@}
     private:
       /**
        * Pointer to the block vector object to which this iterator points.
@@ -965,7 +964,7 @@ protected:
 };
 
 
-/** @} */
+/*@}*/
 
 /*----------------------- Inline functions ----------------------------------*/
 

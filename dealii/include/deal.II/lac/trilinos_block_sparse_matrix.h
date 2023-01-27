@@ -42,9 +42,8 @@ class BlockSparseMatrix;
 
 namespace TrilinosWrappers
 {
-  /**
-   * @addtogroup TrilinosWrappers
-   * @{
+  /*! @addtogroup TrilinosWrappers
+   *@{
    */
 
   /**
@@ -348,7 +347,7 @@ namespace TrilinosWrappers
                    int,
                    << "The blocks [" << arg1 << ',' << arg2 << "] and [" << arg3
                    << ',' << arg4 << "] have differing column numbers.");
-    //** @} */
+    ///@}
 
   private:
     /**
@@ -402,7 +401,7 @@ namespace TrilinosWrappers
 
 
 
-  /** @} */
+  /*@}*/
 
   // ------------- inline and template functions -----------------
 

@@ -18,7 +18,7 @@
 
 #include <deal.II/base/config.h>
 
-#ifdef DEAL_II_WITH_CUDA
+#ifdef DEAL_II_COMPILER_CUDA_AWARE
 
 #  include <deal.II/base/tensor.h>
 #  include <deal.II/base/utilities.h>

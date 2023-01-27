@@ -696,7 +696,9 @@ FE_FaceQ<1, spacedim>::fill_fe_values(
   const Quadrature<1> &,
   const Mapping<1, spacedim> &,
   const typename Mapping<1, spacedim>::InternalDataBase &,
-  const internal::FEValuesImplementation::MappingRelatedData<1, spacedim> &,
+  const dealii::internal::FEValuesImplementation::MappingRelatedData<1,
+                                                                     spacedim>
+    &,
   const typename FiniteElement<1, spacedim>::InternalDataBase &,
   dealii::internal::FEValuesImplementation::FiniteElementRelatedData<1,
                                                                      spacedim>
@@ -715,7 +717,9 @@ FE_FaceQ<1, spacedim>::fill_fe_face_values(
   const hp::QCollection<0> &,
   const Mapping<1, spacedim> &,
   const typename Mapping<1, spacedim>::InternalDataBase &,
-  const internal::FEValuesImplementation::MappingRelatedData<1, spacedim> &,
+  const dealii::internal::FEValuesImplementation::MappingRelatedData<1,
+                                                                     spacedim>
+    &,
   const typename FiniteElement<1, spacedim>::InternalDataBase &fe_internal,
   dealii::internal::FEValuesImplementation::FiniteElementRelatedData<1,
                                                                      spacedim>
@@ -740,7 +744,9 @@ FE_FaceQ<1, spacedim>::fill_fe_subface_values(
   const Quadrature<0> &,
   const Mapping<1, spacedim> &,
   const typename Mapping<1, spacedim>::InternalDataBase &,
-  const internal::FEValuesImplementation::MappingRelatedData<1, spacedim> &,
+  const dealii::internal::FEValuesImplementation::MappingRelatedData<1,
+                                                                     spacedim>
+    &,
   const typename FiniteElement<1, spacedim>::InternalDataBase &,
   dealii::internal::FEValuesImplementation::FiniteElementRelatedData<1,
                                                                      spacedim>

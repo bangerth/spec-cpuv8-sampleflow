@@ -24,7 +24,6 @@
 #include <deal.II/base/utilities.h>
 
 #include <deal.II/lac/exceptions.h>
-#include <deal.II/lac/sparsity_pattern_base.h>
 
 #include <algorithm>
 #include <iostream>
@@ -37,9 +36,8 @@ DEAL_II_NAMESPACE_OPEN
 class DynamicSparsityPattern;
 #endif
 
-/**
- * @addtogroup Sparsity
- * @{
+/*! @addtogroup Sparsity
+ *@{
  */
 
 
@@ -319,7 +317,7 @@ namespace DynamicSparsityPatternIterators
  * sp.copy_from (dynamic_pattern);
  * @endcode
  */
-class DynamicSparsityPattern : public SparsityPatternBase
+class DynamicSparsityPattern : public Subscriptor
 {
 public:
   /**
@@ -440,13 +438,6 @@ public:
               ForwardIterator end,
               const bool      indices_are_unique_and_sorted = false);
 
-  virtual void
-  add_row_entries(const size_type &                 row,
-                  const ArrayView<const size_type> &columns,
-                  const bool indices_are_sorted = false) override;
-
-  using SparsityPatternBase::add_entries;
-
   /**
    * Check if a value at a certain position may be non-zero.
    */
@@ -515,6 +506,19 @@ public:
   print_gnuplot(std::ostream &out) const;
 
   /**
+   * Return the number of rows, which equals the dimension of the image space.
+   */
+  size_type
+  n_rows() const;
+
+  /**
+   * Return the number of columns, which equals the dimension of the range
+   * space.
+   */
+  size_type
+  n_cols() const;
+
+  /**
    * Number of entries in a specific row. This function can only be called if
    * the given row is a member of the index set of rows that we want to store.
    */
@@ -544,8 +548,8 @@ public:
 
   /**
    * @name Iterators
-   * @{
    */
+  // @{
 
   /**
    * Iterator starting at the first entry of the matrix. The resulting
@@ -599,9 +603,7 @@ public:
   iterator
   end(const size_type r) const;
 
-  /**
-   * @}
-   */
+  // @}
 
   /**
    * Compute the bandwidth of the matrix represented by this structure. The
@@ -671,6 +673,16 @@ private:
   bool have_entries;
 
   /**
+   * Number of rows that this sparsity structure shall represent.
+   */
+  size_type rows;
+
+  /**
+   * Number of columns that this sparsity structure shall represent.
+   */
+  size_type cols;
+
+  /**
    * A set that contains the valid rows.
    */
 
@@ -724,7 +736,7 @@ private:
   friend class DynamicSparsityPatternIterators::Accessor;
 };
 
-/** @} */
+/*@}*/
 /*---------------------- Inline functions -----------------------------------*/
 
 
@@ -999,11 +1011,27 @@ DynamicSparsityPattern::Line::add(const size_type j)
 
 
 
+inline DynamicSparsityPattern::size_type
+DynamicSparsityPattern::n_rows() const
+{
+  return rows;
+}
+
+
+
+inline types::global_dof_index
+DynamicSparsityPattern::n_cols() const
+{
+  return cols;
+}
+
+
+
 inline void
 DynamicSparsityPattern::add(const size_type i, const size_type j)
 {
-  AssertIndexRange(i, n_rows());
-  AssertIndexRange(j, n_cols());
+  AssertIndexRange(i, rows);
+  AssertIndexRange(j, cols);
 
   if (rowset.size() > 0 && !rowset.is_element(i))
     return;

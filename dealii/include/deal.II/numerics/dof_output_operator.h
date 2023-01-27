@@ -23,6 +23,7 @@
 #include <deal.II/algorithms/operator.h>
 
 #include <deal.II/base/event.h>
+#include <deal.II/base/parameter_handler.h>
 
 #include <deal.II/dofs/dof_handler.h>
 
@@ -31,10 +32,6 @@
 #include <fstream>
 
 DEAL_II_NAMESPACE_OPEN
-
-#ifndef DOXYGEN
-class ParameterHandler;
-#endif
 
 namespace Algorithms
 {

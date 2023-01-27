@@ -18,7 +18,6 @@
 
 #include <deal.II/base/config.h>
 
-#include <deal.II/base/floating_point_comparator.h>
 #include <deal.II/base/memory_consumption.h>
 #include <deal.II/base/multithread_info.h>
 #include <deal.II/base/thread_management.h>
@@ -34,8 +33,6 @@
 #include <deal.II/matrix_free/mapping_info.h>
 #include <deal.II/matrix_free/mapping_info_storage.templates.h>
 #include <deal.II/matrix_free/util.h>
-
-#include <limits>
 
 DEAL_II_NAMESPACE_OPEN
 
@@ -71,8 +68,7 @@ namespace internal
       const UpdateFlags update_flags_cells,
       const UpdateFlags update_flags_boundary_faces,
       const UpdateFlags update_flags_inner_faces,
-      const UpdateFlags update_flags_faces_by_cells,
-      const bool        piola_transform)
+      const UpdateFlags update_flags_faces_by_cells)
     {
       clear();
       this->mapping_collection = mapping;
@@ -89,18 +85,15 @@ namespace internal
       // the mapping that are independent of the FE
       this->update_flags_cells =
         MappingInfoStorage<dim, dim, VectorizedArrayType>::compute_update_flags(
-          update_flags_cells, quad, piola_transform);
+          update_flags_cells, quad);
 
       this->update_flags_boundary_faces =
         ((update_flags_inner_faces | update_flags_boundary_faces) &
              update_quadrature_points ?
            update_quadrature_points :
            update_default) |
-        ((((update_flags_inner_faces | update_flags_boundary_faces) &
-           (update_jacobian_grads | update_hessians)) != 0u ||
-          (piola_transform &&
-           ((update_flags_inner_faces | update_flags_boundary_faces) &
-            (update_gradients | update_contravariant_transformation)) != 0u)) ?
+        (((update_flags_inner_faces | update_flags_boundary_faces) &
+          (update_jacobian_grads | update_hessians)) != 0u ?
            update_jacobian_grads :
            update_default) |
         update_normal_vectors | update_JxW_values | update_jacobians;
@@ -178,7 +171,7 @@ namespace internal
                   face_data_by_cells[my_q].descriptor[hpq * scale].initialize(
                     quad_face);
                   reference_cell_types[my_q][hpq] =
-                    ReferenceCells::get_hypercube<dim>();
+                    dealii::ReferenceCells::get_hypercube<dim>();
                 }
             }
         }
@@ -348,13 +341,12 @@ namespace internal
       struct CompressedCellData
       {
         CompressedCellData(const double expected_size)
-          : data(FloatingPointComparator<VectorizedArrayType>(
-              expected_size * std::numeric_limits<double>::epsilon() * 1024.))
+          : data(FPArrayComparator<Number, VectorizedArrayType>(expected_size))
         {}
 
         std::map<Tensor<2, dim, Tensor<1, VectorizedArrayType::size(), Number>>,
                  unsigned int,
-                 FloatingPointComparator<VectorizedArrayType>>
+                 FPArrayComparator<Number, VectorizedArrayType>>
           data;
       };
 
@@ -800,31 +792,10 @@ namespace internal
                       data.first[my_q].jacobians[0].push_back(inv_jac);
 
                       if (update_flags & update_jacobian_grads)
-                        {
-                          data.first[my_q].jacobian_gradients[0].push_back(
-                            process_jacobian_gradient(inv_jac,
-                                                      inv_jac,
-                                                      jacobian_grad));
-                          Tensor<1,
-                                 dim *(dim + 1) / 2,
-                                 Tensor<1, dim, VectorizedArrayType>>
-                            jac_grad_sym;
-                          // the diagonal part of Jacobian gradient comes
-                          // first
-                          for (unsigned int d = 0; d < dim; ++d)
-                            for (unsigned int f = 0; f < dim; ++f)
-                              jac_grad_sym[d][f] = jacobian_grad[f][d][d];
-
-                          // then the upper-diagonal part
-                          for (unsigned int d = 0, count = dim; d < dim; ++d)
-                            for (unsigned int e = d + 1; e < dim; ++e, ++count)
-                              for (unsigned int f = 0; f < dim; ++f)
-                                jac_grad_sym[count][f] = jacobian_grad[f][d][e];
-
-                          data.first[my_q]
-                            .jacobian_gradients_non_inverse[0]
-                            .push_back(jac_grad_sym);
-                        }
+                        data.first[my_q].jacobian_gradients[0].push_back(
+                          process_jacobian_gradient(inv_jac,
+                                                    inv_jac,
+                                                    jacobian_grad));
                     }
                 }
 
@@ -968,12 +939,6 @@ namespace internal
                       data_cells_local.jacobian_gradients[i].end(),
                       data_cells.jacobian_gradients[i].begin() + data_shift[0]);
             data_cells_local.jacobian_gradients[i].clear();
-            std::copy(
-              data_cells_local.jacobian_gradients_non_inverse[i].begin(),
-              data_cells_local.jacobian_gradients_non_inverse[i].end(),
-              data_cells.jacobian_gradients_non_inverse[i].begin() +
-                data_shift[0]);
-            data_cells_local.jacobian_gradients_non_inverse[i].clear();
             std::copy(data_cells_local.normals_times_jacobians[i].begin(),
                       data_cells_local.normals_times_jacobians[i].end(),
                       data_cells.normals_times_jacobians[i].begin() +
@@ -1079,12 +1044,11 @@ namespace internal
         // first quadrature point on the cell - we use a relatively coarse
         // tolerance to account for some inaccuracies in the manifold
         // evaluation
+        const FPArrayComparator<double> comparator(1e4 * jacobian_size);
         std::map<std::array<Tensor<2, dim>, dim + 1>,
                  unsigned int,
-                 FloatingPointComparator<double>>
-          compressed_jacobians(FloatingPointComparator<double>(
-            1e4 * jacobian_size * std::numeric_limits<double>::epsilon() *
-            1024.));
+                 FPArrayComparator<double>>
+          compressed_jacobians(comparator);
 
         unsigned int n_data_buckets = 0;
         for (unsigned int cell = 0; cell < jacobians_on_stencil.size(); ++cell)
@@ -1295,28 +1259,6 @@ namespace internal
                                   inv_jac_grad[d][e],
                                   vv,
                                   my_data.jacobian_gradients[0][idx][d][e]);
-
-                            // Also store the non-inverse jacobian gradient.
-                            // the diagonal part of Jacobian gradient comes
-                            // first
-                            for (unsigned int d = 0; d < dim; ++d)
-                              for (unsigned int f = 0; f < dim; ++f)
-                                store_vectorized_array(
-                                  jac_grad[f][d][d],
-                                  vv,
-                                  my_data.jacobian_gradients_non_inverse[0][idx]
-                                                                        [d][f]);
-
-                            // then the upper-diagonal part
-                            for (unsigned int d = 0, count = dim; d < dim; ++d)
-                              for (unsigned int e = d + 1; e < dim;
-                                   ++e, ++count)
-                                for (unsigned int f = 0; f < dim; ++f)
-                                  store_vectorized_array(
-                                    jac_grad[f][d][e],
-                                    vv,
-                                    my_data.jacobian_gradients_non_inverse
-                                      [0][idx][count][f]);
                           }
                       }
                   }
@@ -1422,12 +1364,8 @@ namespace internal
           cell_data[my_q].jacobians[0].resize_fast(
             cell_data[my_q].JxW_values.size());
           if (update_flags_cells & update_jacobian_grads)
-            {
-              cell_data[my_q].jacobian_gradients[0].resize_fast(
-                cell_data[my_q].JxW_values.size());
-              cell_data[my_q].jacobian_gradients_non_inverse[0].resize_fast(
-                cell_data[my_q].JxW_values.size());
-            }
+            cell_data[my_q].jacobian_gradients[0].resize_fast(
+              cell_data[my_q].JxW_values.size());
           if (update_flags_cells & update_quadrature_points)
             {
               cell_data[my_q].quadrature_point_offsets.resize(cell_type.size());
@@ -1501,14 +1439,13 @@ namespace internal
       template <int dim, typename Number, typename VectorizedArrayType>
       struct CompressedFaceData
       {
-        // Constructor. As a scaling factor for the FloatingPointComparator, we
+        // Constructor. As a scaling factor for the FPArrayComparator, we
         // select the inverse of the Jacobian (not the Jacobian as in the
         // CompressedCellData) and add another factor of 512 to account for
         // some roundoff effects.
         CompressedFaceData(const Number jacobian_size)
-          : data(FloatingPointComparator<VectorizedArrayType>(
-              512. / jacobian_size * std::numeric_limits<double>::epsilon() *
-              1024.))
+          : data(FPArrayComparator<Number, VectorizedArrayType>(512. /
+                                                                jacobian_size))
           , jacobian_size(jacobian_size)
         {}
 
@@ -1522,7 +1459,7 @@ namespace internal
                         2 * dim * dim + dim + 1,
                         Tensor<1, VectorizedArrayType::size(), Number>>,
                  unsigned int,
-                 FloatingPointComparator<VectorizedArrayType>>
+                 FPArrayComparator<Number, VectorizedArrayType>>
           data;
 
         // Store the scaling factor
@@ -1537,14 +1474,16 @@ namespace internal
       template <int dim>
       unsigned int
       reorder_face_derivative_indices(
-        const unsigned int  face_no,
-        const unsigned int  index,
-        const ReferenceCell reference_cell = ReferenceCells::Invalid)
+        const unsigned int          face_no,
+        const unsigned int          index,
+        const dealii::ReferenceCell reference_cell =
+          dealii::ReferenceCells::Invalid)
       {
         Assert(index < dim, ExcInternalError());
 
-        if ((reference_cell == ReferenceCells::Invalid ||
-             reference_cell == ReferenceCells::get_hypercube<dim>()) == false)
+        if ((reference_cell == dealii::ReferenceCells::Invalid ||
+             reference_cell == dealii::ReferenceCells::get_hypercube<dim>()) ==
+            false)
           {
             return index;
           }
@@ -2105,10 +2044,11 @@ namespace internal
         FEEvaluationData<dim, VectorizedDouble, true> eval_ext(shape_info,
                                                                false);
 
-        AlignedVector<VectorizedDouble> evaluation_data_int,
-          evaluation_data_ext;
-        eval_int.set_data_pointers(&evaluation_data_int, dim);
-        eval_ext.set_data_pointers(&evaluation_data_ext, dim);
+        // Let both evaluators use the same array as their use will not
+        // overlap
+        AlignedVector<VectorizedDouble> evaluation_data;
+        eval_int.set_data_pointers(&evaluation_data, dim);
+        eval_ext.set_data_pointers(&evaluation_data, dim);
 
         for (unsigned int face = begin_face; face < end_face; ++face)
           for (unsigned vv = 0; vv < n_lanes; vv += n_lanes_d)
@@ -2208,29 +2148,6 @@ namespace internal
                               my_data.jacobian_gradients[is_exterior]
                                                         [offset + q][d][e]);
                         }
-
-                      // Also store the non-inverse jacobian gradient.
-                      // the diagonal part of Jacobian gradient comes first.
-                      // jac_grad already has its derivatives reordered,
-                      // so no need to compensate for this here
-                      for (unsigned int d = 0; d < dim; ++d)
-                        for (unsigned int f = 0; f < dim; ++f)
-                          store_vectorized_array(
-                            jac_grad[f][d][d],
-                            vv,
-                            my_data.jacobian_gradients_non_inverse[is_exterior]
-                                                                  [offset + q]
-                                                                  [d][f]);
-
-                      // then the upper-diagonal part
-                      for (unsigned int d = 0, count = dim; d < dim; ++d)
-                        for (unsigned int e = d + 1; e < dim; ++e, ++count)
-                          for (unsigned int f = 0; f < dim; ++f)
-                            store_vectorized_array(
-                              jac_grad[f][d][e],
-                              vv,
-                              my_data.jacobian_gradients_non_inverse
-                                [is_exterior][offset + q][count][f]);
                     }
                 };
 
@@ -2519,10 +2436,6 @@ namespace internal
                 face_data[my_q].JxW_values.size());
               face_data[my_q].jacobian_gradients[1].resize_fast(
                 face_data[my_q].JxW_values.size());
-              face_data[my_q].jacobian_gradients_non_inverse[0].resize_fast(
-                face_data[my_q].JxW_values.size());
-              face_data[my_q].jacobian_gradients_non_inverse[1].resize_fast(
-                face_data[my_q].JxW_values.size());
             }
           face_data[my_q].normals_times_jacobians[0].resize_fast(
             face_data[my_q].JxW_values.size());
@@ -2761,10 +2674,7 @@ namespace internal
           my_data.JxW_values.resize_fast(max_size);
           my_data.jacobians[0].resize_fast(max_size);
           if (update_flags_cells & update_jacobian_grads)
-            {
-              my_data.jacobian_gradients[0].resize_fast(max_size);
-              my_data.jacobian_gradients_non_inverse[0].resize_fast(max_size);
-            }
+            my_data.jacobian_gradients[0].resize_fast(max_size);
 
           if (update_flags_cells & update_quadrature_points)
             {
@@ -2896,8 +2806,6 @@ namespace internal
             {
               my_data.jacobian_gradients[0].resize_fast(max_size);
               my_data.jacobian_gradients[1].resize_fast(max_size);
-              my_data.jacobian_gradients_non_inverse[0].resize_fast(max_size);
-              my_data.jacobian_gradients_non_inverse[1].resize_fast(max_size);
             }
           my_data.normals_times_jacobians[0].resize_fast(max_size);
           my_data.normals_times_jacobians[1].resize_fast(max_size);
@@ -3096,14 +3004,8 @@ namespace internal
             face_data_by_cells[my_q].normals_times_jacobians[1].resize_fast(
               storage_length * GeometryInfo<dim>::faces_per_cell);
           if (update_flags & update_jacobian_grads)
-            {
-              face_data_by_cells[my_q].jacobian_gradients[0].resize_fast(
-                storage_length * GeometryInfo<dim>::faces_per_cell);
-              face_data_by_cells[my_q]
-                .jacobian_gradients_non_inverse[0]
-                .resize_fast(storage_length *
-                             GeometryInfo<dim>::faces_per_cell);
-            }
+            face_data_by_cells[my_q].jacobian_gradients[0].resize_fast(
+              storage_length * GeometryInfo<dim>::faces_per_cell);
 
           if (update_flags & update_quadrature_points)
             face_data_by_cells[my_q].quadrature_points.resize_fast(
@@ -3347,6 +3249,112 @@ namespace internal
           cell_data[j].print_memory_consumption(out, task_info);
           face_data[j].print_memory_consumption(out, task_info);
         }
+    }
+
+
+
+    /* ------------------------------------------------------------------ */
+
+    template <typename Number, typename VectorizedArrayType>
+    FPArrayComparator<Number, VectorizedArrayType>::FPArrayComparator(
+      const Number scaling)
+      : tolerance(scaling * std::numeric_limits<double>::epsilon() * 1024.)
+    {}
+
+
+
+    template <typename Number, typename VectorizedArrayType>
+    bool
+    FPArrayComparator<Number, VectorizedArrayType>::operator()(
+      const std::vector<Number> &v1,
+      const std::vector<Number> &v2) const
+    {
+      const unsigned int s1 = v1.size(), s2 = v2.size();
+      if (s1 < s2)
+        return true;
+      else if (s1 > s2)
+        return false;
+      else
+        for (unsigned int i = 0; i < s1; ++i)
+          if (v1[i] < v2[i] - tolerance)
+            return true;
+          else if (v1[i] > v2[i] + tolerance)
+            return false;
+      return false;
+    }
+
+
+
+    template <typename Number, typename VectorizedArrayType>
+    bool
+    FPArrayComparator<Number, VectorizedArrayType>::operator()(
+      const Tensor<1, VectorizedArrayType::size(), Number> &t1,
+      const Tensor<1, VectorizedArrayType::size(), Number> &t2) const
+    {
+      for (unsigned int k = 0; k < VectorizedArrayType::size(); ++k)
+        if (t1[k] < t2[k] - tolerance)
+          return true;
+        else if (t1[k] > t2[k] + tolerance)
+          return false;
+      return false;
+    }
+
+
+
+    template <typename Number, typename VectorizedArrayType>
+    template <int dim>
+    bool
+    FPArrayComparator<Number, VectorizedArrayType>::operator()(
+      const Tensor<1, dim, Tensor<1, VectorizedArrayType::size(), Number>> &t1,
+      const Tensor<1, dim, Tensor<1, VectorizedArrayType::size(), Number>> &t2)
+      const
+    {
+      for (unsigned int d = 0; d < dim; ++d)
+        for (unsigned int k = 0; k < VectorizedArrayType::size(); ++k)
+          if (t1[d][k] < t2[d][k] - tolerance)
+            return true;
+          else if (t1[d][k] > t2[d][k] + tolerance)
+            return false;
+      return false;
+    }
+
+
+
+    template <typename Number, typename VectorizedArrayType>
+    template <int dim>
+    bool
+    FPArrayComparator<Number, VectorizedArrayType>::operator()(
+      const Tensor<2, dim, Tensor<1, VectorizedArrayType::size(), Number>> &t1,
+      const Tensor<2, dim, Tensor<1, VectorizedArrayType::size(), Number>> &t2)
+      const
+    {
+      for (unsigned int d = 0; d < dim; ++d)
+        for (unsigned int e = 0; e < dim; ++e)
+          for (unsigned int k = 0; k < VectorizedArrayType::size(); ++k)
+            if (t1[d][e][k] < t2[d][e][k] - tolerance)
+              return true;
+            else if (t1[d][e][k] > t2[d][e][k] + tolerance)
+              return false;
+      return false;
+    }
+
+
+
+    template <typename Number, typename VectorizedArrayType>
+    template <int dim>
+    bool
+    FPArrayComparator<Number, VectorizedArrayType>::operator()(
+      const std::array<Tensor<2, dim, Number>, dim + 1> &t1,
+      const std::array<Tensor<2, dim, Number>, dim + 1> &t2) const
+    {
+      for (unsigned int i = 0; i < t1.size(); ++i)
+        for (unsigned int d = 0; d < dim; ++d)
+          for (unsigned int e = 0; e < dim; ++e)
+            if (t1[i][d][e] < t2[i][d][e] - tolerance)
+              return true;
+            else if (t1[i][d][e] > t2[i][d][e] + tolerance)
+              return false;
+      return false;
     }
 
   } // namespace MatrixFreeFunctions

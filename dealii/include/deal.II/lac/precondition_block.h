@@ -29,9 +29,8 @@
 
 DEAL_II_NAMESPACE_OPEN
 
-/**
- * @addtogroup Preconditioners
- * @{
+/*! @addtogroup Preconditioners
+ *@{
  */
 
 
@@ -329,7 +328,7 @@ public:
    */
   DeclException0(ExcInverseMatricesAlreadyExist);
 
-  /** @} */
+  //@}
 
 protected:
   /**
@@ -891,7 +890,7 @@ public:
   Tstep(Vector<number2> &dst, const Vector<number2> &rhs) const;
 };
 
-/** @} */
+/*@}*/
 //---------------------------------------------------------------------------
 
 #ifndef DOXYGEN

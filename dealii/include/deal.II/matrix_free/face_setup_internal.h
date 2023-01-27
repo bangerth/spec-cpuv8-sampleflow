@@ -20,6 +20,7 @@
 #include <deal.II/base/config.h>
 
 #include <deal.II/base/memory_consumption.h>
+#include <deal.II/base/utilities.h>
 
 #include <deal.II/distributed/tria_base.h>
 
@@ -797,7 +798,7 @@ namespace internal
                         info.face_type =
                           is_mixed_mesh ?
                             (dcell->face(f)->reference_cell() !=
-                             ReferenceCells::get_hypercube<dim - 1>()) :
+                             dealii::ReferenceCells::get_hypercube<dim - 1>()) :
                             0;
                         info.subface_index =
                           GeometryInfo<dim>::max_children_per_cell;
@@ -986,7 +987,7 @@ namespace internal
 
       info.face_type = is_mixed_mesh ?
                          (cell->face(face_no)->reference_cell() !=
-                          ReferenceCells::get_hypercube<dim - 1>()) :
+                          dealii::ReferenceCells::get_hypercube<dim - 1>()) :
                          0;
 
       info.subface_index = GeometryInfo<dim>::max_children_per_cell;

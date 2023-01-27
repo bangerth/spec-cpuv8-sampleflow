@@ -36,10 +36,8 @@ DEAL_II_NAMESPACE_OPEN
  * MGSmootherBase is defined in mg_base.h
  */
 
-/**
- * @addtogroup mg
- * @{
- */
+/*!@addtogroup mg */
+/*@{*/
 
 /**
  * General smoother class for block vectors. This class gives complete freedom
@@ -129,7 +127,7 @@ private:
     mem;
 };
 
-/** @} */
+/**@}*/
 
 //---------------------------------------------------------------------------
 

@@ -42,7 +42,6 @@
 #include <cstring>
 #include <iomanip>
 #include <iostream>
-#include <limits>
 #include <memory>
 
 DEAL_II_NAMESPACE_OPEN
@@ -108,8 +107,8 @@ namespace internal
       scatter_context, v, sequential_vector, INSERT_VALUES, SCATTER_FORWARD);
     AssertThrow(ierr == 0, ExcPETScError(ierr));
 
-    const PetscScalar *start_ptr;
-    ierr = VecGetArrayRead(sequential_vector, &start_ptr);
+    PetscScalar *start_ptr;
+    ierr = VecGetArray(sequential_vector, &start_ptr);
     AssertThrow(ierr == 0, ExcPETScError(ierr));
 
     const PETScWrappers::VectorBase::size_type v_size = v.size();
@@ -119,7 +118,7 @@ namespace internal
     internal::VectorOperations::copy(start_ptr,
                                      start_ptr + out.size(),
                                      out.begin());
-    ierr = VecRestoreArrayRead(sequential_vector, &start_ptr);
+    ierr = VecRestoreArray(sequential_vector, &start_ptr);
     AssertThrow(ierr == 0, ExcPETScError(ierr));
 
     ierr = VecScatterDestroy(&scatter_context);
@@ -239,6 +238,18 @@ Vector<Number>::grow_or_shrink(const size_type n)
   values.resize(n);
 
   maybe_reset_thread_partitioner();
+}
+
+
+
+template <typename Number>
+template <typename Number2>
+void
+Vector<Number>::reinit(const Vector<Number2> &v,
+                       const bool             omit_zeroing_entries)
+{
+  do_reinit(v.size(), omit_zeroing_entries, false);
+  thread_loop_partitioner = v.thread_loop_partitioner;
 }
 
 

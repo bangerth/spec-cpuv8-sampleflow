@@ -19,7 +19,6 @@
 
 #include <deal.II/base/config.h>
 
-#include <deal.II/base/mpi_stub.h>
 #include <deal.II/base/smartpointer.h>
 #include <deal.II/base/subscriptor.h>
 #include <deal.II/base/template_constraints.h>
@@ -37,6 +36,10 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
+
+#ifdef DEAL_II_WITH_MPI
+#  include <mpi.h>
+#endif
 
 #ifdef DEAL_II_WITH_P4EST
 #  include <p4est.h>
@@ -636,7 +639,7 @@ namespace parallel
        *
        * @deprecated The autopartition parameter has been removed.
        */
-      DEAL_II_DEPRECATED
+      DEAL_II_DEPRECATED_EARLY
       virtual void
       load(const std::string &filename, const bool autopartition) override;
 
@@ -903,7 +906,7 @@ namespace parallel
        * This function is not implemented, but needs to be present for the
        * compiler.
        */
-      DEAL_II_DEPRECATED
+      DEAL_II_DEPRECATED_EARLY
       virtual void
       load(const std::string &filename, const bool autopartition) override;
 
@@ -1059,7 +1062,7 @@ namespace parallel
        * Dummy replacement to allow for better error messages when compiling
        * this class.
        */
-      DEAL_II_DEPRECATED
+      DEAL_II_DEPRECATED_EARLY
       virtual void
       load(const std::string & /*filename*/,
            const bool /*autopartition*/) override

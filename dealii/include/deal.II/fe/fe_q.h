@@ -25,10 +25,8 @@
 DEAL_II_NAMESPACE_OPEN
 
 
-/**
- * @addtogroup fe
- * @{
- */
+/*!@addtogroup fe */
+/*@{*/
 
 /**
  * Implementation of a scalar Lagrange finite element @p Qp that yields the
@@ -635,7 +633,7 @@ public:
 
 
 
-/** @} */
+/*@}*/
 
 DEAL_II_NAMESPACE_CLOSE
 

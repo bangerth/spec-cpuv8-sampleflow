@@ -27,10 +27,8 @@
 
 DEAL_II_NAMESPACE_OPEN
 
-/**
- * @addtogroup mg
- * @{
- */
+/*!@addtogroup mg */
+/*@{*/
 
 /**
  * Coarse grid solver using smoother only. This is a little wrapper,
@@ -239,7 +237,7 @@ private:
   LAPACKFullMatrix<number> matrix;
 };
 
-/** @} */
+/*@}*/
 
 #ifndef DOXYGEN
 /* ------------------ Functions for MGCoarseGridApplySmoother -----------*/
@@ -367,9 +365,9 @@ namespace internal
       class SolverType,
       class MatrixType,
       class PreconditionerType,
-      std::enable_if_t<
+      typename std::enable_if<
         std::is_same<VectorType, typename SolverType::vector_type>::value,
-        VectorType> * = nullptr>
+        VectorType>::type * = nullptr>
     void
     solve(SolverType &              solver,
           const MatrixType &        matrix,
@@ -385,9 +383,9 @@ namespace internal
       class SolverType,
       class MatrixType,
       class PreconditionerType,
-      std::enable_if_t<
+      typename std::enable_if<
         !std::is_same<VectorType, typename SolverType::vector_type>::value,
-        VectorType> * = nullptr>
+        VectorType>::type * = nullptr>
     void
     solve(SolverType &              solver,
           const MatrixType &        matrix,

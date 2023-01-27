@@ -109,8 +109,8 @@ namespace LinearAlgebra
 
         static_assert(
           std::is_same<MemorySpace, ::dealii::MemorySpace::Host>::value ||
-            std::is_same<MemorySpace, ::dealii::MemorySpace::Default>::value,
-          "MemorySpace should be Host or Default");
+            std::is_same<MemorySpace, ::dealii::MemorySpace::CUDA>::value,
+          "MemorySpace should be Host or CUDA");
       }
     };
 
@@ -160,8 +160,9 @@ namespace LinearAlgebra
 
 
 
+#ifdef DEAL_II_COMPILER_CUDA_AWARE
     template <typename Number>
-    struct read_write_vector_functions<Number, ::dealii::MemorySpace::Default>
+    struct read_write_vector_functions<Number, ::dealii::MemorySpace::CUDA>
     {
       using size_type = types::global_dof_index;
 
@@ -177,12 +178,11 @@ namespace LinearAlgebra
 
         const unsigned int n_elements =
           communication_pattern->locally_owned_size();
-        Kokkos::deep_copy(
-          Kokkos::View<Number *, Kokkos::HostSpace>(tmp_vector.begin(),
-                                                    n_elements),
-          Kokkos::View<const Number *,
-                       ::dealii::MemorySpace::Default::kokkos_space>(
-            values, n_elements));
+        cudaError_t cuda_error_code = cudaMemcpy(tmp_vector.begin(),
+                                                 values,
+                                                 n_elements * sizeof(Number),
+                                                 cudaMemcpyDeviceToHost);
+        AssertCuda(cuda_error_code);
         tmp_vector.update_ghost_values();
 
         const IndexSet &stored = rw_vector.get_stored_elements();
@@ -205,6 +205,7 @@ namespace LinearAlgebra
             rw_vector.local_element(i) = tmp_vector(stored.nth_index_in_set(i));
       }
     };
+#endif
   } // namespace internal
 
 
@@ -251,7 +252,7 @@ namespace LinearAlgebra
     if (omit_zeroing_entries == false)
       this->operator=(Number());
 
-    // reset the communication pattern
+    // reset the communication patter
     source_stored_elements.clear();
     comm_pattern.reset();
   }
@@ -264,14 +265,14 @@ namespace LinearAlgebra
   ReadWriteVector<Number>::reinit(const ReadWriteVector<Number2> &v,
                                   const bool omit_zeroing_entries)
   {
-    resize_val(v.locally_owned_size());
+    resize_val(v.n_elements());
 
     stored_elements = v.get_stored_elements();
 
     if (omit_zeroing_entries == false)
       this->operator=(Number());
 
-    // reset the communication pattern
+    // reset the communication patter
     source_stored_elements.clear();
     comm_pattern.reset();
   }
@@ -338,7 +339,7 @@ namespace LinearAlgebra
     FunctorTemplate<Functor> functor(*this, func);
     dealii::internal::VectorOperations::parallel_for(functor,
                                                      0,
-                                                     locally_owned_size(),
+                                                     n_elements(),
                                                      thread_loop_partitioner);
   }
 
@@ -352,15 +353,15 @@ namespace LinearAlgebra
       return *this;
 
     thread_loop_partitioner = in_vector.thread_loop_partitioner;
-    if (locally_owned_size() != in_vector.locally_owned_size())
+    if (n_elements() != in_vector.n_elements())
       reinit(in_vector, true);
 
-    if (locally_owned_size() > 0)
+    if (n_elements() > 0)
       {
         dealii::internal::VectorOperations::Vector_copy<Number, Number> copier(
           in_vector.values.get(), values.get());
         dealii::internal::VectorOperations::parallel_for(
-          copier, 0, locally_owned_size(), thread_loop_partitioner);
+          copier, 0, n_elements(), thread_loop_partitioner);
       }
 
     return *this;
@@ -374,15 +375,15 @@ namespace LinearAlgebra
   ReadWriteVector<Number>::operator=(const ReadWriteVector<Number2> &in_vector)
   {
     thread_loop_partitioner = in_vector.thread_loop_partitioner;
-    if (locally_owned_size() != in_vector.locally_owned_size())
+    if (n_elements() != in_vector.n_elements())
       reinit(in_vector, true);
 
-    if (locally_owned_size() > 0)
+    if (n_elements() > 0)
       {
         dealii::internal::VectorOperations::Vector_copy<Number, Number2> copier(
           in_vector.values.get(), values.get());
         dealii::internal::VectorOperations::parallel_for(
-          copier, 0, locally_owned_size(), thread_loop_partitioner);
+          copier, 0, n_elements(), thread_loop_partitioner);
       }
 
     return *this;
@@ -398,7 +399,7 @@ namespace LinearAlgebra
            ExcMessage("Only 0 can be assigned to a vector."));
     (void)s;
 
-    const size_type this_size = locally_owned_size();
+    const size_type this_size = n_elements();
     if (this_size > 0)
       {
         dealii::internal::VectorOperations::Vector_set<Number> setter(
@@ -556,16 +557,16 @@ namespace LinearAlgebra
            StandardExceptions::ExcInvalidState());
 
     // get a representation of the vector and copy it
-    const PetscScalar *start_ptr;
-    PetscErrorCode     ierr =
-      VecGetArrayRead(static_cast<const Vec &>(petsc_vec), &start_ptr);
+    PetscScalar *  start_ptr;
+    PetscErrorCode ierr =
+      VecGetArray(static_cast<const Vec &>(petsc_vec), &start_ptr);
     AssertThrow(ierr == 0, ExcPETScError(ierr));
 
     const size_type vec_size = petsc_vec.locally_owned_size();
     internal::copy_petsc_vector(start_ptr, start_ptr + vec_size, begin());
 
     // restore the representation of the vector
-    ierr = VecRestoreArrayRead(static_cast<const Vec &>(petsc_vec), &start_ptr);
+    ierr = VecRestoreArray(static_cast<const Vec &>(petsc_vec), &start_ptr);
     AssertThrow(ierr == 0, ExcPETScError(ierr));
   }
 #endif
@@ -893,7 +894,7 @@ namespace LinearAlgebra
 
 
 
-#ifdef DEAL_II_WITH_CUDA
+#ifdef DEAL_II_COMPILER_CUDA_AWARE
   template <typename Number>
   void
   ReadWriteVector<Number>::import(
@@ -998,8 +999,7 @@ namespace LinearAlgebra
   ReadWriteVector<Number>::memory_consumption() const
   {
     std::size_t memory = sizeof(*this);
-    memory +=
-      sizeof(Number) * static_cast<std::size_t>(this->locally_owned_size());
+    memory += sizeof(Number) * static_cast<std::size_t>(this->n_elements());
 
     memory += stored_elements.memory_consumption();
 

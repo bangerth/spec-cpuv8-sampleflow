@@ -14,35 +14,34 @@
 // ---------------------------------------------------------------------
 
 #ifndef dealii_chunk_sparse_matrix_h
-#define dealii_chunk_sparse_matrix_h
+#  define dealii_chunk_sparse_matrix_h
 
 
-#include <deal.II/base/config.h>
+#  include <deal.II/base/config.h>
 
-#include <deal.II/base/smartpointer.h>
-#include <deal.II/base/subscriptor.h>
+#  include <deal.II/base/smartpointer.h>
+#  include <deal.II/base/subscriptor.h>
 
-#include <deal.II/lac/chunk_sparsity_pattern.h>
-#include <deal.II/lac/exceptions.h>
-#include <deal.II/lac/identity_matrix.h>
+#  include <deal.II/lac/chunk_sparsity_pattern.h>
+#  include <deal.II/lac/exceptions.h>
+#  include <deal.II/lac/identity_matrix.h>
 
-#include <iterator>
-#include <memory>
+#  include <iterator>
+#  include <memory>
 
 
 DEAL_II_NAMESPACE_OPEN
 
 // Forward declarations
-#ifndef DOXYGEN
+#  ifndef DOXYGEN
 template <typename number>
 class Vector;
 template <typename number>
 class FullMatrix;
-#endif
+#  endif
 
-/**
- * @addtogroup Matrix1
- * @{
+/*! @addtogroup Matrix1
+ *@{
  */
 
 /**
@@ -503,7 +502,7 @@ public:
   /**
    * @name Constructors and initialization.
    */
-  /** @{ */
+  //@{
   /**
    * Constructor; initializes the matrix to be empty, without any structure,
    * i.e.  the matrix is not usable at all. This constructor is therefore only
@@ -612,11 +611,11 @@ public:
    */
   virtual void
   clear();
-  /** @} */
+  //@}
   /**
    * @name Information on the matrix
    */
-  /** @{ */
+  //@{
   /**
    * Return whether the object is empty. It is empty if either both dimensions
    * are zero or no ChunkSparsityPattern is associated.
@@ -674,11 +673,11 @@ public:
   std::size_t
   memory_consumption() const;
 
-  /** @} */
+  //@}
   /**
    * @name Modifying entries
    */
-  /** @{ */
+  //@{
   /**
    * Set the element (<i>i,j</i>) to <tt>value</tt>. Throws an error if the
    * entry does not exist or if <tt>value</tt> is not a finite number. Still,
@@ -805,11 +804,11 @@ public:
   void
   add(const number factor, const ChunkSparseMatrix<somenumber> &matrix);
 
-  /** @} */
+  //@}
   /**
    * @name Entry Access
    */
-  /** @{ */
+  //@{
 
   /**
    * Return the value of the entry (<i>i,j</i>).  This may be an expensive
@@ -870,11 +869,11 @@ public:
                    size_type *     column_indices,
                    number *        values) const;
 
-  /** @} */
+  //@}
   /**
    * @name Matrix vector multiplications
    */
-  /** @{ */
+  //@{
   /**
    * Matrix-vector multiplication: let <i>dst = M*src</i> with <i>M</i> being
    * this matrix.
@@ -988,11 +987,11 @@ public:
            const Vector<somenumber> &x,
            const Vector<somenumber> &b) const;
 
-  /** @} */
+  //@}
   /**
    * @name Matrix norms
    */
-  /** @{ */
+  //@{
 
   /**
    * Return the l1-norm of the matrix, that is $|M|_1=max_{all columns
@@ -1020,11 +1019,11 @@ public:
    */
   real_type
   frobenius_norm() const;
-  /** @} */
+  //@}
   /**
    * @name Preconditioning methods
    */
-  /** @{ */
+  //@{
 
   /**
    * Apply the Jacobi preconditioner, which multiplies every element of the
@@ -1152,11 +1151,11 @@ public:
   SSOR_step(Vector<somenumber> &      v,
             const Vector<somenumber> &b,
             const number              om = 1.) const;
-  /** @} */
+  //@}
   /**
    * @name Iterators
    */
-  /** @{ */
+  //@{
 
   /**
    * Iterator starting at first entry of the matrix. This is the version for
@@ -1271,11 +1270,11 @@ public:
    */
   iterator
   end(const unsigned int r);
-  /** @} */
+  //@}
   /**
    * @name Input/Output
    */
-  /** @{ */
+  //@{
 
   /**
    * Print the matrix to the given stream, using the format <tt>(line,col)
@@ -1351,7 +1350,7 @@ public:
    */
   void
   block_read(std::istream &in);
-  /** @} */
+  //@}
   /**
    * @addtogroup Exceptions
    * @{
@@ -1395,10 +1394,10 @@ public:
    * Exception
    */
   DeclExceptionMsg(ExcSourceEqualsDestination,
-                   "You are attempting an operation on two vectors that "
+                   "You are attempting an operation on two matrices that "
                    "are the same object, but the operation requires that the "
                    "two objects are in fact different.");
-  /** @} */
+  //@}
 private:
   /**
    * Pointer to the sparsity pattern used for this matrix. In order to
@@ -1441,9 +1440,9 @@ private:
   friend class ChunkSparseMatrixIterators::Accessor;
 };
 
-/** @} */
+/*@}*/
 
-#ifndef DOXYGEN
+#  ifndef DOXYGEN
 /*---------------------- Inline functions -----------------------------------*/
 
 
@@ -2071,8 +2070,9 @@ ChunkSparseMatrix<number>::end(const unsigned int r)
 
 
 
-#endif // DOXYGEN
+#  endif // DOXYGEN
 
 DEAL_II_NAMESPACE_CLOSE
 
 #endif
+/*--------------------------- chunk_sparse_matrix.h -------------------------*/

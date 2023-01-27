@@ -56,10 +56,8 @@ class AffineConstraints;
 #endif
 
 
-/**
- * @addtogroup feall
- * @{
- */
+/*!@addtogroup feall */
+/*@{*/
 
 
 /**
@@ -612,11 +610,11 @@ namespace FETools
 
 
 
-  /** @} */
+  //@}
   /**
    * @name Functions which should be in DoFTools
    */
-  /** @{ */
+  //@{
   /**
    * Compute the interpolation of a the @p dof1-function @p u1 to a @p
    * dof2-function @p u2. @p dof1 and @p dof2 need to be DoFHandlers based on
@@ -863,7 +861,7 @@ namespace FETools
     const AffineConstraints<typename OutVector::value_type> &constraints,
     OutVector &                                              z2);
 
-  /** @} */
+  //@}
   /**
    * The numbering of the degrees of freedom in continuous finite elements is
    * hierarchic, i.e. in such a way that we first number the vertex dofs, in
@@ -1485,7 +1483,7 @@ namespace FETools
 
 #endif
 
-/** @} */
+/*@}*/
 
 DEAL_II_NAMESPACE_CLOSE
 

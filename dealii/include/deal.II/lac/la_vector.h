@@ -62,9 +62,8 @@ DEAL_II_NAMESPACE_OPEN
  */
 namespace LinearAlgebra
 {
-  /**
-   * @addtogroup Vectors
-   * @{
+  /*! @addtogroup Vectors
+   *@{
    */
 
   /**
@@ -422,7 +421,7 @@ namespace LinearAlgebra
     friend class Vector;
   };
 
-  /** @} */
+  /*@}*/
   /*--------------------------- Inline functions ----------------------------*/
 
   template <typename Number>

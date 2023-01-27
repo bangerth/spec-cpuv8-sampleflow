@@ -30,8 +30,6 @@ DEAL_II_DISABLE_EXTRA_DIAGNOSTICS
 #endif
 DEAL_II_ENABLE_EXTRA_DIAGNOSTICS
 
-#include <limits>
-
 DEAL_II_NAMESPACE_OPEN
 
 
@@ -96,7 +94,8 @@ Mapping<dim, spacedim>::fill_fe_immersed_surface_values(
   const typename Triangulation<dim, spacedim>::cell_iterator &,
   const NonMatching::ImmersedSurfaceQuadrature<dim> &,
   const typename Mapping<dim, spacedim>::InternalDataBase &,
-  internal::FEValuesImplementation::MappingRelatedData<dim, spacedim> &) const
+  dealii::internal::FEValuesImplementation::MappingRelatedData<dim, spacedim> &)
+  const
 {
   AssertThrow(false, ExcNotImplemented());
 }
@@ -176,7 +175,7 @@ Mapping<dim, spacedim>::fill_fe_face_values(
   const unsigned int                                          face_no,
   const hp::QCollection<dim - 1> &                            quadrature,
   const typename Mapping<dim, spacedim>::InternalDataBase &   internal_data,
-  internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
+  dealii::internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
     &output_data) const
 {
   // base class version, implement overridden function in derived classes
@@ -193,7 +192,7 @@ Mapping<dim, spacedim>::fill_fe_face_values(
   const unsigned int                                          face_no,
   const Quadrature<dim - 1> &                                 quadrature,
   const typename Mapping<dim, spacedim>::InternalDataBase &   internal_data,
-  internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
+  dealii::internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
     &output_data) const
 {
   Assert(false,

@@ -189,7 +189,7 @@ namespace Functions
 
   template <int dim>
   PoisseuilleFlow<dim>::PoisseuilleFlow(const double r, const double Re)
-    : inv_sqr_radius(1 / r / r)
+    : radius(r)
     , Reynolds(Re)
   {
     Assert(Reynolds != 0., ExcMessage("Reynolds number cannot be zero"));
@@ -203,7 +203,8 @@ namespace Functions
     const std::vector<Point<dim>> &   points,
     std::vector<std::vector<double>> &values) const
   {
-    const unsigned int n = points.size();
+    unsigned int n       = points.size();
+    double       stretch = 1. / radius;
 
     Assert(values.size() == dim + 1,
            ExcDimensionMismatch(values.size(), dim + 1));
@@ -213,12 +214,13 @@ namespace Functions
     for (unsigned int k = 0; k < n; ++k)
       {
         const Point<dim> &p = points[k];
-        // First, compute the square of the distance to the x-axis divided by
-        // the radius.
+        // First, compute the
+        // square of the distance to
+        // the x-axis divided by the
+        // radius.
         double r2 = 0;
         for (unsigned int d = 1; d < dim; ++d)
-          r2 += p(d) * p(d);
-        r2 *= inv_sqr_radius;
+          r2 += p(d) * p(d) * stretch * stretch;
 
         // x-velocity
         values[0][k] = 1. - r2;
@@ -226,7 +228,7 @@ namespace Functions
         for (unsigned int d = 1; d < dim; ++d)
           values[d][k] = 0.;
         // pressure
-        values[dim][k] = -2 * (dim - 1) * inv_sqr_radius * p(0) / Reynolds +
+        values[dim][k] = -2 * (dim - 1) * stretch * stretch * p(0) / Reynolds +
                          this->mean_pressure;
       }
   }
@@ -239,7 +241,8 @@ namespace Functions
     const std::vector<Point<dim>> &           points,
     std::vector<std::vector<Tensor<1, dim>>> &values) const
   {
-    const unsigned int n = points.size();
+    unsigned int n       = points.size();
+    double       stretch = 1. / radius;
 
     Assert(values.size() == dim + 1,
            ExcDimensionMismatch(values.size(), dim + 1));
@@ -252,12 +255,12 @@ namespace Functions
         // x-velocity
         values[0][k][0] = 0.;
         for (unsigned int d = 1; d < dim; ++d)
-          values[0][k][d] = -2. * p(d) * inv_sqr_radius;
+          values[0][k][d] = -2. * p(d) * stretch * stretch;
         // other velocities
         for (unsigned int d = 1; d < dim; ++d)
           values[d][k] = 0.;
         // pressure
-        values[dim][k][0] = -2 * (dim - 1) * inv_sqr_radius / Reynolds;
+        values[dim][k][0] = -2 * (dim - 1) * stretch * stretch / Reynolds;
         for (unsigned int d = 1; d < dim; ++d)
           values[dim][k][d] = 0.;
       }
@@ -271,7 +274,7 @@ namespace Functions
     const std::vector<Point<dim>> &   points,
     std::vector<std::vector<double>> &values) const
   {
-    const unsigned int n = points.size();
+    unsigned int n = points.size();
     (void)n;
     Assert(values.size() == dim + 1,
            ExcDimensionMismatch(values.size(), dim + 1));

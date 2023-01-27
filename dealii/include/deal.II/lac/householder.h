@@ -34,9 +34,8 @@ template <typename number>
 class Vector;
 #endif
 
-/**
- * @addtogroup Matrix2
- * @{
+/*! @addtogroup Matrix2
+ *@{
  */
 
 
@@ -157,7 +156,7 @@ private:
   FullMatrix<double> storage;
 };
 
-/** @} */
+/*@}*/
 
 #ifndef DOXYGEN
 /*-------------------------Inline functions -------------------------------*/

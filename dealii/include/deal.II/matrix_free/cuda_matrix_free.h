@@ -19,11 +19,10 @@
 
 #include <deal.II/base/config.h>
 
-#ifdef DEAL_II_WITH_CUDA
+#ifdef DEAL_II_COMPILER_CUDA_AWARE
 
 #  include <deal.II/base/cuda_size.h>
-#  include <deal.II/base/mpi_stub.h>
-#  include <deal.II/base/partitioner.h>
+#  include <deal.II/base/mpi.h>
 #  include <deal.II/base/quadrature.h>
 #  include <deal.II/base/tensor.h>
 
@@ -31,6 +30,7 @@
 
 #  include <deal.II/fe/fe_update_flags.h>
 #  include <deal.II/fe/mapping.h>
+#  include <deal.II/fe/mapping_q1.h>
 
 #  include <deal.II/grid/filtered_iterator.h>
 
@@ -128,7 +128,7 @@ namespace CUDAWrappers
         , use_coloring(use_coloring)
         , overlap_communication_computation(overlap_communication_computation)
       {
-#  ifndef DEAL_II_MPI_WITH_DEVICE_SUPPORT
+#  ifndef DEAL_II_MPI_WITH_CUDA_SUPPORT
         AssertThrow(
           overlap_communication_computation == false,
           ExcMessage(

@@ -43,7 +43,8 @@ DEAL_II_NAMESPACE_OPEN
  * @endcode
  *
  * deal.II has its own implementation for tensorial objects such as
- * dealii::Tensor and dealii::SymmetricTensor
+ * dealii::Tensor<rank, dim, Number> and dealii::SymmetricTensor<rank, dim,
+ * Number>
  *
  * The methods and algorithms implemented in this namespace, however, are
  * fully generic. More precisely, it can operate on nested c-style arrays, or

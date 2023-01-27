@@ -18,7 +18,6 @@
 #include <deal.II/base/mpi.templates.h>
 #include <deal.II/base/mpi_compute_index_owner_internal.h>
 #include <deal.II/base/mpi_consensus_algorithms.h>
-#include <deal.II/base/partitioner.h>
 #include <deal.II/base/timer.h>
 
 #include <deal.II/matrix_free/vector_data_exchange.h>
@@ -443,8 +442,8 @@ namespace internal
           std::vector<
             std::pair<types::global_dof_index, types::global_dof_index>>,
           std::vector<unsigned int>>
-          consensus_algorithm;
-        consensus_algorithm.run(process, comm);
+          consensus_algorithm(process, comm);
+        consensus_algorithm.run();
 
         // decompress ghost_indices_within_larger_ghost_set for simpler
         // data access during setup

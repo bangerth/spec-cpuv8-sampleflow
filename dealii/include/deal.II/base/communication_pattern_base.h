@@ -18,7 +18,7 @@
 
 #include <deal.II/base/config.h>
 
-#include <deal.II/base/mpi_stub.h>
+#include <deal.II/base/mpi.h>
 
 DEAL_II_NAMESPACE_OPEN
 

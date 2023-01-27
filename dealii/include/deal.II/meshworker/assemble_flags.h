@@ -24,10 +24,8 @@
 
 DEAL_II_NAMESPACE_OPEN
 
-/**
- * @addtogroup MeshWorker
- * @{
- */
+/*!@addtogroup MeshWorker */
+/*@{*/
 
 namespace MeshWorker
 {
@@ -197,7 +195,7 @@ namespace MeshWorker
   }
 } // namespace MeshWorker
 
-/** @} */
+/*@}*/
 
 DEAL_II_NAMESPACE_CLOSE
 

@@ -17,7 +17,6 @@
 #include <deal.II/fe/fe_enriched.h>
 #include <deal.II/fe/fe_tools.h>
 
-#include <deal.II/lac/dynamic_sparsity_pattern.h>
 #include <deal.II/lac/sparsity_tools.h>
 
 #include <memory>
@@ -529,7 +528,8 @@ FE_Enriched<dim, spacedim>::fill_fe_values(
   const Quadrature<dim> &                                     quadrature,
   const Mapping<dim, spacedim> &                              mapping,
   const typename Mapping<dim, spacedim>::InternalDataBase &   mapping_internal,
-  const internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
+  const dealii::internal::FEValuesImplementation::MappingRelatedData<dim,
+                                                                     spacedim>
     &                                                            mapping_data,
   const typename FiniteElement<dim, spacedim>::InternalDataBase &fe_internal,
   internal::FEValuesImplementation::FiniteElementRelatedData<dim, spacedim>
@@ -563,7 +563,8 @@ FE_Enriched<dim, spacedim>::fill_fe_face_values(
   const hp::QCollection<dim - 1> &                            quadrature,
   const Mapping<dim, spacedim> &                              mapping,
   const typename Mapping<dim, spacedim>::InternalDataBase &   mapping_internal,
-  const internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
+  const dealii::internal::FEValuesImplementation::MappingRelatedData<dim,
+                                                                     spacedim>
     &                                                            mapping_data,
   const typename FiniteElement<dim, spacedim>::InternalDataBase &fe_internal,
   internal::FEValuesImplementation::FiniteElementRelatedData<dim, spacedim>
@@ -600,7 +601,8 @@ FE_Enriched<dim, spacedim>::fill_fe_subface_values(
   const Quadrature<dim - 1> &                                 quadrature,
   const Mapping<dim, spacedim> &                              mapping,
   const typename Mapping<dim, spacedim>::InternalDataBase &   mapping_internal,
-  const internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
+  const dealii::internal::FEValuesImplementation::MappingRelatedData<dim,
+                                                                     spacedim>
     &                                                            mapping_data,
   const typename FiniteElement<dim, spacedim>::InternalDataBase &fe_internal,
   internal::FEValuesImplementation::FiniteElementRelatedData<dim, spacedim>

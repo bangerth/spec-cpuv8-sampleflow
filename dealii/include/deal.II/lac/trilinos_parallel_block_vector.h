@@ -46,9 +46,8 @@ namespace TrilinosWrappers
 } // namespace TrilinosWrappers
 #  endif
 
-/**
- * @addtogroup TrilinosWrappers
- * @{
+/*! @addtogroup TrilinosWrappers
+ *@{
  */
 
 namespace TrilinosWrappers
@@ -348,13 +347,11 @@ namespace TrilinosWrappers
     inline BlockVector::BlockVector(const BlockVector &v)
       : dealii::BlockVectorBase<MPI::Vector>()
     {
+      this->components.resize(v.n_blocks());
       this->block_indices = v.block_indices;
 
-      this->components.resize(this->n_blocks());
-      for (unsigned int i = 0; i < this->n_blocks(); ++i)
+      for (size_type i = 0; i < this->n_blocks(); ++i)
         this->components[i] = v.components[i];
-
-      this->collect_sizes();
     }
 
 
@@ -372,19 +369,18 @@ namespace TrilinosWrappers
     BlockVector &
     BlockVector::operator=(const ::dealii::BlockVector<Number> &v)
     {
-      // we only allow assignment to vectors with the same number of blocks
-      // or to an empty BlockVector
-      Assert(this->n_blocks() == 0 || this->n_blocks() == v.n_blocks(),
-             ExcDimensionMismatch(this->n_blocks(), v.n_blocks()));
+      if (n_blocks() != v.n_blocks())
+        {
+          std::vector<size_type> block_sizes(v.n_blocks(), 0);
+          block_indices.reinit(block_sizes);
+          if (components.size() != n_blocks())
+            components.resize(n_blocks());
+        }
 
-      if (this->n_blocks() != v.n_blocks())
-        this->block_indices = v.get_block_indices();
-
-      this->components.resize(this->n_blocks());
-      for (unsigned int i = 0; i < this->n_blocks(); ++i)
+      for (size_type i = 0; i < this->n_blocks(); ++i)
         this->components[i] = v.block(i);
 
-      this->collect_sizes();
+      collect_sizes();
 
       return *this;
     }
@@ -431,7 +427,7 @@ namespace TrilinosWrappers
 
 } /* namespace TrilinosWrappers */
 
-/** @} */
+/*@}*/
 
 
 namespace internal

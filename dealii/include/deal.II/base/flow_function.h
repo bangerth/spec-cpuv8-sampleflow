@@ -20,8 +20,8 @@
 #include <deal.II/base/config.h>
 
 #include <deal.II/base/function.h>
-#include <deal.II/base/mutex.h>
 #include <deal.II/base/point.h>
+#include <deal.II/base/thread_management.h>
 
 DEAL_II_NAMESPACE_OPEN
 
@@ -174,7 +174,7 @@ namespace Functions
                       std::vector<std::vector<double>> &values) const override;
 
   private:
-    const double inv_sqr_radius;
+    const double radius;
     const double Reynolds;
   };
 

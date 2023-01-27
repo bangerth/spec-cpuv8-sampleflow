@@ -28,10 +28,8 @@
 
 DEAL_II_NAMESPACE_OPEN
 
-/**
- * @addtogroup Solvers
- * @{
- */
+/*!@addtogroup Solvers */
+/*@{*/
 
 /**
  * <h3>Quasi-minimal method for symmetric matrices (SQMR)</h3>
@@ -234,7 +232,7 @@ private:
   unsigned int step;
 };
 
-/** @} */
+/*@}*/
 /*------------------------- Implementation ----------------------------*/
 
 #ifndef DOXYGEN

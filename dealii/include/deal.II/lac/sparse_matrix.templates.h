@@ -168,14 +168,14 @@ namespace internal
     using size_type = types::global_dof_index;
 
     template <typename T>
-    std::enable_if_t<std::is_trivial<T>::value>
+    typename std::enable_if<std::is_trivial<T>::value>::type
     zero_subrange(const size_type begin, const size_type end, T *dst)
     {
       std::memset(dst + begin, 0, (end - begin) * sizeof(T));
     }
 
     template <typename T>
-    std::enable_if_t<!std::is_trivial<T>::value>
+    typename std::enable_if<!std::is_trivial<T>::value>::type
     zero_subrange(const size_type begin, const size_type end, T *dst)
     {
       std::fill(dst + begin, dst + end, 0);
@@ -219,7 +219,11 @@ SparseMatrix<number>::operator=(const double d)
       grain_size);
   else if (matrix_size > 0)
     {
-      if DEAL_II_CONSTEXPR_IN_CONDITIONAL (std::is_trivial<number>::value)
+#ifdef DEAL_II_HAVE_CXX17
+      if constexpr (std::is_trivial<number>::value)
+#else
+      if (std::is_trivial<number>::value)
+#endif
         std::memset(val.get(), 0, matrix_size * sizeof(number));
       else
         std::fill(val.get(), val.get() + matrix_size, 0);

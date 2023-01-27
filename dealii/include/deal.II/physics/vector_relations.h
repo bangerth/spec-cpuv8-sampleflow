@@ -21,7 +21,6 @@
 #include <deal.II/base/tensor.h>
 
 #include <cmath>
-#include <limits>
 
 DEAL_II_NAMESPACE_OPEN
 

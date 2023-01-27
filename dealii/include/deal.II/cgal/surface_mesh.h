@@ -19,6 +19,7 @@
 #include <deal.II/base/config.h>
 
 #include <deal.II/fe/mapping.h>
+#include <deal.II/fe/mapping_q.h>
 
 #include <deal.II/grid/tria.h>
 

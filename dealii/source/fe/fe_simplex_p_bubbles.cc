@@ -67,8 +67,8 @@ namespace FE_P_BubblesImplementation
     FE_SimplexP<dim>        fe_p(degree);
     std::vector<Point<dim>> points = fe_p.get_unit_support_points();
 
-    const auto       reference_cell = fe_p.reference_cell();
-    const Point<dim> centroid       = reference_cell.template barycenter<dim>();
+    Point<dim> centroid;
+    std::fill(centroid.begin_raw(), centroid.end_raw(), 1.0 / double(dim + 1));
 
     switch (dim)
       {
@@ -85,27 +85,11 @@ namespace FE_P_BubblesImplementation
           {
             if (degree == 2)
               {
-                for (const auto &face_no : reference_cell.face_indices())
-                  {
-                    Point<dim> midpoint;
-                    for (const auto face_vertex_no :
-                         reference_cell.face_reference_cell(0).vertex_indices())
-                      {
-                        const auto vertex_no =
-                          reference_cell.face_to_cell_vertices(
-                            face_no,
-                            face_vertex_no,
-                            ReferenceCell::default_combined_face_orientation());
-
-                        midpoint +=
-                          reference_cell.template vertex<dim>(vertex_no);
-                      }
-
-                    midpoint /=
-                      reference_cell.face_reference_cell(0).n_vertices();
-                    points.push_back(midpoint);
-                  }
-
+                const double q13 = 1.0 / 3.0;
+                points.emplace_back(q13, q13, 0.0);
+                points.emplace_back(q13, 0.0, q13);
+                points.emplace_back(0.0, q13, q13);
+                points.emplace_back(q13, q13, q13);
                 points.push_back(centroid);
               }
             return points;
@@ -133,8 +117,8 @@ namespace FE_P_BubblesImplementation
   BarycentricPolynomials<dim>
   get_basis(const unsigned int degree)
   {
-    const auto       reference_cell = ReferenceCells::get_simplex<dim>();
-    const Point<dim> centroid       = reference_cell.template barycenter<dim>();
+    Point<dim> centroid;
+    std::fill(centroid.begin_raw(), centroid.end_raw(), 1.0 / double(dim + 1));
 
     auto M = [](const unsigned int d) {
       return BarycentricPolynomial<dim, double>::monomial(d);
@@ -156,8 +140,8 @@ namespace FE_P_BubblesImplementation
 
             // in 2D and 3D we add a centroid bubble function
             auto c_bubble = BarycentricPolynomial<dim>() + 1;
-            for (const auto &vertex : reference_cell.vertex_indices())
-              c_bubble = c_bubble * M(vertex);
+            for (unsigned int d = 0; d < dim + 1; ++d)
+              c_bubble = c_bubble * M(d);
             c_bubble = c_bubble / c_bubble.value(centroid);
 
             std::vector<BarycentricPolynomial<dim>> bubble_functions;
@@ -170,22 +154,14 @@ namespace FE_P_BubblesImplementation
                 // need 'face bubble' functions in addition to the centroid.
                 // Furthermore we need to subtract them off from the other
                 // functions so that we end up with an interpolatory basis
-                for (const auto &face_no : reference_cell.face_indices())
-                  {
-                    std::vector<unsigned int> vertices;
-                    for (const auto face_vertex_no :
-                         reference_cell.face_reference_cell(0).vertex_indices())
-                      vertices.push_back(reference_cell.face_to_cell_vertices(
-                        face_no,
-                        face_vertex_no,
-                        ReferenceCell::default_combined_face_orientation()));
-
-                    Assert(vertices.size() == 3, ExcInternalError());
-                    auto b =
-                      27.0 * M(vertices[0]) * M(vertices[1]) * M(vertices[2]);
-                    bubble_functions.push_back(b -
-                                               b.value(centroid) * c_bubble);
-                  }
+                auto b0 = 27 * M(0) * M(1) * M(2);
+                bubble_functions.push_back(b0 - b0.value(centroid) * c_bubble);
+                auto b1 = 27 * M(0) * M(1) * M(3);
+                bubble_functions.push_back(b1 - b1.value(centroid) * c_bubble);
+                auto b2 = 27 * M(0) * M(2) * M(3);
+                bubble_functions.push_back(b2 - b2.value(centroid) * c_bubble);
+                auto b3 = 27 * M(1) * M(2) * M(3);
+                bubble_functions.push_back(b3 - b3.value(centroid) * c_bubble);
 
                 bubble_functions.push_back(c_bubble);
               }

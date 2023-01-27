@@ -19,7 +19,7 @@
 
 #include <deal.II/base/config.h>
 
-#include <deal.II/base/mpi_stub.h>
+#include <deal.II/base/mpi.h>
 #include <deal.II/base/partitioner.h>
 #include <deal.II/base/smartpointer.h>
 #include <deal.II/base/subscriptor.h>
@@ -202,12 +202,19 @@ namespace parallel
     const std::set<types::subdomain_id> &
     level_ghost_owners() const;
 
+    /**
+     * Return partitioner for the global indices of the cells on the active
+     * level of the triangulation.
+     */
     const std::weak_ptr<const Utilities::MPI::Partitioner>
-    global_active_cell_index_partitioner() const override;
+    global_active_cell_index_partitioner() const;
 
+    /**
+     * Return partitioner for the global indices of the cells on the given @p
+     * level of the triangulation.
+     */
     const std::weak_ptr<const Utilities::MPI::Partitioner>
-    global_level_cell_index_partitioner(
-      const unsigned int level) const override;
+    global_level_cell_index_partitioner(const unsigned int level) const;
 
     /**
      * @copydoc dealii::Triangulation::get_boundary_ids()
@@ -499,7 +506,7 @@ namespace parallel
      *
      * @deprecated The autopartition parameter has been removed.
      */
-    DEAL_II_DEPRECATED
+    DEAL_II_DEPRECATED_EARLY
     virtual void
     load(const std::string &filename, const bool autopartition) = 0;
 

@@ -41,7 +41,6 @@ DEAL_II_ENABLE_EXTRA_DIAGNOSTICS
 #include <algorithm>
 #include <array>
 #include <cmath>
-#include <limits>
 #include <memory>
 #include <numeric>
 
@@ -123,7 +122,7 @@ MappingQ<dim, spacedim>::InternalData::initialize(
       // in all directions
       if (tensor_product_quadrature)
         {
-          const std::array<Quadrature<1>, dim> &quad_array =
+          const std::array<Quadrature<1>, dim> quad_array =
             q.get_tensor_basis();
           for (unsigned int i = 1; i < dim && tensor_product_quadrature; ++i)
             {
@@ -1266,7 +1265,7 @@ MappingQ<dim, spacedim>::fill_fe_immersed_surface_values(
   const typename Triangulation<dim, spacedim>::cell_iterator &cell,
   const NonMatching::ImmersedSurfaceQuadrature<dim> &         quadrature,
   const typename Mapping<dim, spacedim>::InternalDataBase &   internal_data,
-  internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
+  dealii::internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
     &output_data) const
 {
   Assert(dim == spacedim, ExcNotImplemented());
@@ -1399,7 +1398,7 @@ MappingQ<dim, spacedim>::fill_mapping_data_for_generic_points(
   const typename Triangulation<dim, spacedim>::cell_iterator &cell,
   const ArrayView<const Point<dim>> &                         unit_points,
   const UpdateFlags                                           update_flags,
-  internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
+  dealii::internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
     &output_data) const
 {
   if (update_flags == update_default)
@@ -1680,10 +1679,10 @@ MappingQ<dim, spacedim>::add_line_support_points(
                cell->get_manifold() :
                line->get_manifold());
 
-          const auto reference_cell = ReferenceCells::get_hypercube<dim>();
           const std::array<Point<spacedim>, 2> vertices{
-            {cell->vertex(reference_cell.line_to_cell_vertices(line_no, 0)),
-             cell->vertex(reference_cell.line_to_cell_vertices(line_no, 1))}};
+            {cell->vertex(GeometryInfo<dim>::line_to_cell_vertices(line_no, 0)),
+             cell->vertex(
+               GeometryInfo<dim>::line_to_cell_vertices(line_no, 1))}};
 
           const std::size_t n_rows =
             support_point_weights_perimeter_to_interior[0].size(0);

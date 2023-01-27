@@ -21,7 +21,7 @@
 
 #include <deal.II/matrix_free/cuda_matrix_free.h>
 
-#ifdef DEAL_II_WITH_CUDA
+#ifdef DEAL_II_COMPILER_CUDA_AWARE
 
 #  include <deal.II/base/cuda.h>
 #  include <deal.II/base/cuda_size.h>
@@ -31,7 +31,6 @@
 
 #  include <deal.II/fe/fe_dgq.h>
 #  include <deal.II/fe/fe_values.h>
-#  include <deal.II/fe/mapping_q1.h>
 
 #  include <deal.II/matrix_free/cuda_hanging_nodes_internal.h>
 #  include <deal.II/matrix_free/shape_info.h>
@@ -1025,7 +1024,7 @@ namespace CUDAWrappers
                 std::vector<bool> ghost_vertices(
                   dof_handler->get_triangulation().n_vertices(), false);
 
-                for (const auto &cell :
+                for (const auto cell :
                      dof_handler->get_triangulation().active_cell_iterators())
                   if (cell->is_ghost())
                     for (unsigned int i = 0;

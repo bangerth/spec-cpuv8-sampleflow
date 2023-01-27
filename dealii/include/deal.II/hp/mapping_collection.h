@@ -21,7 +21,6 @@
 #include <deal.II/base/subscriptor.h>
 
 #include <deal.II/fe/fe.h>
-#include <deal.II/fe/mapping.h>
 #include <deal.II/fe/mapping_q1.h>
 
 #include <deal.II/hp/collection.h>
@@ -163,7 +162,7 @@ namespace hp
     static_assert(
       is_base_of_all<Mapping<dim, spacedim>, MappingTypes...>::value,
       "Not all of the input arguments of this function "
-      "are derived from Mapping<dim, spacedim>!");
+      "are derived from FiniteElement<dim,spacedim>!");
 
     // loop over all of the given arguments and add the mappings to
     // this collection. Inlining the definition of mapping_pointers causes

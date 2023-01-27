@@ -19,7 +19,6 @@
 #include <deal.II/hp/fe_collection.h>
 #include <deal.II/hp/mapping_collection.h>
 
-#include <limits>
 #include <set>
 
 
@@ -72,11 +71,6 @@ namespace hp
              new_fe.n_components() == this->operator[](0).n_components(),
            ExcMessage("All elements inside a collection need to have the "
                       "same number of vector components!"));
-
-    Assert(this->size() <= std::numeric_limits<types::fe_index>::max() &&
-             this->size() != numbers::invalid_fe_index,
-           ExcMessage(
-             "You reached the maximum possible number of finite elements."));
 
     Collection<FiniteElement<dim, spacedim>>::push_back(new_fe.clone());
   }
@@ -239,7 +233,7 @@ namespace hp
       }
 
     // If we couldn't find the dominating object, return an invalid one.
-    return numbers::invalid_fe_index;
+    return numbers::invalid_unsigned_int;
   }
 
 
@@ -286,7 +280,7 @@ namespace hp
       }
 
     // If we couldn't find the dominated object, return an invalid one.
-    return numbers::invalid_fe_index;
+    return numbers::invalid_unsigned_int;
   }
 
 
@@ -299,7 +293,7 @@ namespace hp
   {
     unsigned int fe_index = find_dominating_fe(fes, codim);
 
-    if (fe_index == numbers::invalid_fe_index)
+    if (fe_index == numbers::invalid_unsigned_int)
       {
         const std::set<unsigned int> dominating_fes =
           find_common_fes(fes, codim);
@@ -319,7 +313,7 @@ namespace hp
   {
     unsigned int fe_index = find_dominated_fe(fes, codim);
 
-    if (fe_index == numbers::invalid_fe_index)
+    if (fe_index == numbers::invalid_unsigned_int)
       {
         const std::set<unsigned int> dominated_fes =
           find_enclosing_fes(fes, codim);

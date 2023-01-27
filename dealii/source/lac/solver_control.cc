@@ -57,9 +57,6 @@ SolverControl::check(const unsigned int step, const double check_value)
   if (step == 0)
     {
       initial_val = check_value;
-
-      if (history_data_enabled)
-        history_data.clear();
     }
 
   if (m_log_history && ((step % m_log_frequency) == 0))
@@ -267,9 +264,6 @@ ReductionControl::check(const unsigned int step, const double check_value)
     {
       initial_val = check_value;
       reduced_tol = check_value * reduce;
-
-      if (history_data_enabled)
-        history_data.clear();
     }
 
   // check whether desired reduction

@@ -14,7 +14,6 @@
 // ---------------------------------------------------------------------
 
 #include <deal.II/base/ndarray.h>
-#include <deal.II/base/parameter_handler.h>
 
 #include <deal.II/distributed/fully_distributed_tria.h>
 #include <deal.II/distributed/shared_tria.h>
@@ -1414,21 +1413,25 @@ namespace GridGenerator
         }
       else if (tria.n_cells() == 96)
         {
-          // the 96-cell hypershell is based on a once refined 12-cell
-          // mesh. consequently, since the outer faces all are face_no==5
-          // above, so they are here (unless they are in the interior). Use
-          // this to assign boundary indicators, but also make sure that we
-          // encounter exactly 48 such faces
-#  ifdef DEBUG
+          // the 96-cell hypershell is
+          // based on a once refined
+          // 12-cell mesh. consequently,
+          // since the outer faces all
+          // are face_no==5 above, so
+          // they are here (unless they
+          // are in the interior). Use
+          // this to assign boundary
+          // indicators, but also make
+          // sure that we encounter
+          // exactly 48 such faces
           unsigned int count = 0;
-#  endif
-          for (const auto &cell : tria.cell_iterators())
+          for (Triangulation<3>::cell_iterator cell = tria.begin();
+               cell != tria.end();
+               ++cell)
             if (cell->face(5)->at_boundary())
               {
                 cell->face(5)->set_all_boundary_ids(1);
-#  ifdef DEBUG
                 ++count;
-#  endif
               }
           Assert(count == 48, ExcInternalError());
         }
@@ -1805,23 +1808,21 @@ namespace GridGenerator
 
     unsigned int offset = 0;
 
-    // This Triangulation is constructed using a numbering scheme in which
-    // the front face is first and the back face is second,
-    // which is more convenient for creating a Moebius loop
-    static constexpr std::array<unsigned int, 8> local_vertex_numbering{
-      {0, 1, 5, 4, 2, 3, 7, 6}};
+    // This Triangulation is constructed using the UCD numbering scheme since,
+    // in that numbering, the front face is first and the back face is second,
+    // which is more convenient for creating a moebius
     std::vector<CellData<dim>> cells(n_cells);
     for (unsigned int i = 0; i < n_cells; ++i)
       {
         for (unsigned int j = 0; j < 2; ++j)
           {
-            cells[i].vertices[local_vertex_numbering[0 + 4 * j]] =
+            cells[i].vertices[GeometryInfo<3>::ucd_to_deal[0 + 4 * j]] =
               offset + 0 + 4 * j;
-            cells[i].vertices[local_vertex_numbering[1 + 4 * j]] =
+            cells[i].vertices[GeometryInfo<3>::ucd_to_deal[1 + 4 * j]] =
               offset + 3 + 4 * j;
-            cells[i].vertices[local_vertex_numbering[2 + 4 * j]] =
+            cells[i].vertices[GeometryInfo<3>::ucd_to_deal[2 + 4 * j]] =
               offset + 2 + 4 * j;
-            cells[i].vertices[local_vertex_numbering[3 + 4 * j]] =
+            cells[i].vertices[GeometryInfo<3>::ucd_to_deal[3 + 4 * j]] =
               offset + 1 + 4 * j;
           }
         offset += 4;
@@ -1829,13 +1830,13 @@ namespace GridGenerator
       }
 
     // now correct the last four vertices
-    cells[n_cells - 1].vertices[local_vertex_numbering[4]] =
+    cells[n_cells - 1].vertices[GeometryInfo<3>::ucd_to_deal[4]] =
       (0 + n_rotations) % 4;
-    cells[n_cells - 1].vertices[local_vertex_numbering[5]] =
+    cells[n_cells - 1].vertices[GeometryInfo<3>::ucd_to_deal[5]] =
       (3 + n_rotations) % 4;
-    cells[n_cells - 1].vertices[local_vertex_numbering[6]] =
+    cells[n_cells - 1].vertices[GeometryInfo<3>::ucd_to_deal[6]] =
       (2 + n_rotations) % 4;
-    cells[n_cells - 1].vertices[local_vertex_numbering[7]] =
+    cells[n_cells - 1].vertices[GeometryInfo<3>::ucd_to_deal[7]] =
       (1 + n_rotations) % 4;
 
     GridTools::invert_all_negative_measure_cells(vertices, cells);
@@ -5507,14 +5508,14 @@ namespace GridGenerator
       {
         const double height = initial_height + height_increment * rep;
 
-        vertices.emplace_back(-d, height, -d);
-        vertices.emplace_back(d, height, -d);
-        vertices.emplace_back(-a, height, -a);
-        vertices.emplace_back(a, height, -a);
-        vertices.emplace_back(-a, height, a);
-        vertices.emplace_back(a, height, a);
-        vertices.emplace_back(-d, height, d);
-        vertices.emplace_back(d, height, d);
+        vertices.emplace_back(Point<3>(-d, height, -d));
+        vertices.emplace_back(Point<3>(d, height, -d));
+        vertices.emplace_back(Point<3>(-a, height, -a));
+        vertices.emplace_back(Point<3>(a, height, -a));
+        vertices.emplace_back(Point<3>(-a, height, a));
+        vertices.emplace_back(Point<3>(a, height, a));
+        vertices.emplace_back(Point<3>(-d, height, d));
+        vertices.emplace_back(Point<3>(d, height, d));
       }
 
     // Turn cylinder such that y->x
@@ -6468,8 +6469,7 @@ namespace GridGenerator
     const std::vector<const Triangulation<dim, spacedim> *> &triangulations,
     Triangulation<dim, spacedim> &                           result,
     const double duplicated_vertex_tolerance,
-    const bool   copy_manifold_ids,
-    const bool   copy_boundary_ids)
+    const bool   copy_manifold_ids)
   {
     std::vector<Point<spacedim>> vertices;
     std::vector<CellData<dim>>   cells;
@@ -6544,26 +6544,6 @@ namespace GridGenerator
       GridTools::consistently_order_cells(cells);
     result.clear();
     result.create_triangulation(vertices, cells, subcell_data);
-
-    if (copy_boundary_ids)
-      {
-        auto result_cell = result.begin();
-        for (const auto &tria : triangulations)
-          {
-            for (const auto &cell : tria->cell_iterators())
-              {
-                for (auto const &f : cell->face_indices())
-                  if (result_cell->face(f)->at_boundary())
-                    result_cell->face(f)->set_boundary_id(
-                      cell->face(f)->boundary_id());
-                ++result_cell;
-              }
-          }
-      }
-
-    Assert(duplicated_vertex_tolerance > 0.0 ||
-             n_accumulated_vertices == result.n_vertices(),
-           ExcInternalError());
   }
 
 
@@ -6574,8 +6554,7 @@ namespace GridGenerator
                        const Triangulation<dim, spacedim> &triangulation_2,
                        Triangulation<dim, spacedim> &      result,
                        const double duplicated_vertex_tolerance,
-                       const bool   copy_manifold_ids,
-                       const bool   copy_boundary_ids)
+                       const bool   copy_manifold_ids)
   {
     // if either Triangulation is empty then merging is just a copy.
     if (triangulation_1.n_cells() == 0)
@@ -6591,8 +6570,7 @@ namespace GridGenerator
     merge_triangulations({&triangulation_1, &triangulation_2},
                          result,
                          duplicated_vertex_tolerance,
-                         copy_manifold_ids,
-                         copy_boundary_ids);
+                         copy_manifold_ids);
   }
 
 

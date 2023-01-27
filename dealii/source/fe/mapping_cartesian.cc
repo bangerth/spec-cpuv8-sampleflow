@@ -55,31 +55,19 @@ is_cartesian(const CellType &cell)
   if (!cell->reference_cell().is_hyper_cube())
     return false;
 
-  // The tolerances here are somewhat larger than the square of the machine
-  // epsilon, because we are going to compare the square of distances (to
-  // avoid computing square roots).
-  const double abs_tol           = 1e-30;
-  const double rel_tol           = 1e-28;
+  const double tolerance         = 1e-14;
   const auto   bounding_box      = cell->bounding_box();
   const auto & bounding_vertices = bounding_box.get_boundary_points();
-  const auto   bb_diagonal_length_squared =
+  const auto   cell_measure =
     bounding_vertices.first.distance_square(bounding_vertices.second);
 
   for (const unsigned int v : cell->vertex_indices())
     {
-      // Choose a tolerance that takes into account both that vertices far
-      // away from the origin have only a finite number of digits
-      // that are considered correct (an "absolute tolerance"), as well as that
-      // vertices are supposed to be close to the corresponding vertices of the
-      // bounding box (a tolerance that is "relative" to the size of the cell).
-      //
-      // We need to do it this way because when a vertex is far away from
-      // the origin, computing the difference between two vertices is subject
-      // to cancellation.
-      const double tolerance = std::max(abs_tol * cell->vertex(v).norm_square(),
-                                        rel_tol * bb_diagonal_length_squared);
+      const double vertex_tolerance =
+        tolerance * std::max(cell->vertex(v).norm_square(), cell_measure);
 
-      if (cell->vertex(v).distance_square(bounding_box.vertex(v)) > tolerance)
+      if (cell->vertex(v).distance_square(bounding_box.vertex(v)) >
+          vertex_tolerance)
         return false;
     }
 
@@ -549,7 +537,7 @@ MappingCartesian<dim, spacedim>::fill_mapping_data_for_generic_points(
   const typename Triangulation<dim, spacedim>::cell_iterator &cell,
   const ArrayView<const Point<dim>> &                         unit_points,
   const UpdateFlags                                           update_flags,
-  internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
+  dealii::internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
     &output_data) const
 {
   if (update_flags == update_default)
@@ -699,7 +687,7 @@ MappingCartesian<dim, spacedim>::fill_fe_immersed_surface_values(
   const typename Triangulation<dim, spacedim>::cell_iterator &cell,
   const NonMatching::ImmersedSurfaceQuadrature<dim> &         quadrature,
   const typename Mapping<dim, spacedim>::InternalDataBase &   internal_data,
-  internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
+  dealii::internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
     &output_data) const
 {
   AssertDimension(dim, spacedim);

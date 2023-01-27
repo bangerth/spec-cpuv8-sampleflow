@@ -24,8 +24,6 @@
 
 #include <deal.II/multigrid/mg_transfer_internal.h>
 
-#include <memory>
-
 DEAL_II_NAMESPACE_OPEN
 
 namespace internal
@@ -90,7 +88,8 @@ namespace internal
       copy_indices.resize(n_levels);
       copy_indices_global_mine.resize(n_levels);
       copy_indices_level_mine.resize(n_levels);
-      const IndexSet &owned_dofs = dof_handler.locally_owned_dofs();
+      IndexSet globally_relevant;
+      DoFTools::extract_locally_relevant_dofs(dof_handler, globally_relevant);
 
       const unsigned int dofs_per_cell = dof_handler.get_fe().n_dofs_per_cell();
       std::vector<types::global_dof_index> global_dof_indices(dofs_per_cell);
@@ -98,9 +97,7 @@ namespace internal
 
       for (unsigned int level = 0; level < n_levels; ++level)
         {
-          std::vector<bool> dof_touched(owned_dofs.n_elements(), false);
-          const IndexSet &  owned_level_dofs =
-            dof_handler.locally_owned_mg_dofs(level);
+          std::vector<bool> dof_touched(globally_relevant.n_elements(), false);
 
           // for the most common case where copy_indices are locally owned
           // both globally and on the level, we want to skip collecting pairs
@@ -122,8 +119,9 @@ namespace internal
                      numbers::artificial_subdomain_id))
                 continue;
 
-              unrolled_copy_indices.resize(owned_dofs.n_elements(),
-                                           numbers::invalid_dof_index);
+              unrolled_copy_indices.resize(
+                dof_handler.locally_owned_dofs().n_elements(),
+                numbers::invalid_dof_index);
 
               // get the dof numbers of this cell for the global and the
               // level-wise numbering
@@ -143,36 +141,53 @@ namespace internal
                   // and the level one. This check involves locally owned
                   // indices which often consist only of a single range, so
                   // they are cheap to look up.
-                  const types::global_dof_index global_index_in_set =
-                    owned_dofs.index_within_set(global_dof_indices[i]);
                   bool global_mine =
-                    global_index_in_set != numbers::invalid_dof_index;
+                    dof_handler.locally_owned_dofs().is_element(
+                      global_dof_indices[i]);
                   bool level_mine =
-                    owned_level_dofs.is_element(level_dof_indices[i]);
+                    dof_handler.locally_owned_mg_dofs(level).is_element(
+                      level_dof_indices[i]);
 
                   if (global_mine && level_mine)
                     {
                       // we own both the active dof index and the level one ->
                       // set them into the vector, indexed by the local index
                       // range of the active dof
-                      unrolled_copy_indices[global_index_in_set] =
+                      unrolled_copy_indices[dof_handler.locally_owned_dofs()
+                                              .index_within_set(
+                                                global_dof_indices[i])] =
                         level_dof_indices[i];
-                    }
-                  else if (global_mine &&
-                           dof_touched[global_index_in_set] == false)
-                    {
-                      copy_indices_global_mine[level].emplace_back(
-                        global_dof_indices[i], level_dof_indices[i]);
-
-                      // send this to the owner of the level_dof:
-                      send_data_temp.emplace_back(level,
-                                                  global_dof_indices[i],
-                                                  level_dof_indices[i]);
-                      dof_touched[global_index_in_set] = true;
                     }
                   else
                     {
-                      // somebody will send those to me
+                      // Get the relevant dofs index - this might be more
+                      // expensive to look up than the active indices, so we
+                      // only do it for the local-remote case within this loop.
+                      const types::global_dof_index relevant_idx =
+                        globally_relevant.index_within_set(
+                          global_dof_indices[i]);
+
+                      // Work on this dof if we haven't already (on this or a
+                      // coarser level)
+                      if (dof_touched[relevant_idx] == false)
+                        {
+                          if (global_mine)
+                            {
+                              copy_indices_global_mine[level].emplace_back(
+                                global_dof_indices[i], level_dof_indices[i]);
+
+                              // send this to the owner of the level_dof:
+                              send_data_temp.emplace_back(level,
+                                                          global_dof_indices[i],
+                                                          level_dof_indices[i]);
+                            }
+                          else
+                            {
+                              // somebody will send those to me
+                            }
+
+                          dof_touched[relevant_idx] = true;
+                        }
                     }
                 }
             }
@@ -188,13 +203,14 @@ namespace internal
               if (copy_indices_global_mine[level].empty())
                 copy_indices[level].reserve(unrolled_copy_indices.size());
 
-              // owned_dofs.nth_index_in_set(i) in this query is
+              // locally_owned_dofs().nth_index_in_set(i) in this query is
               // usually cheap to look up as there are few ranges in
-              // the locally owned part
+              // dof_handler.locally_owned_dofs()
               for (unsigned int i = 0; i < unrolled_copy_indices.size(); ++i)
                 if (unrolled_copy_indices[i] != numbers::invalid_dof_index)
                   copy_indices[level].emplace_back(
-                    owned_dofs.nth_index_in_set(i), unrolled_copy_indices[i]);
+                    dof_handler.locally_owned_dofs().nth_index_in_set(i),
+                    unrolled_copy_indices[i]);
             }
         }
 
@@ -244,7 +260,7 @@ namespace internal
 
           for (unsigned int level = 0; level < n_levels; ++level)
             {
-              const IndexSet &owned_level_dofs =
+              const IndexSet &is_local =
                 dof_handler.locally_owned_mg_dofs(level);
 
               std::vector<types::global_dof_index> level_dof_indices;
@@ -256,7 +272,7 @@ namespace internal
                     global_dof_indices.push_back(dofpair.global_dof_index);
                   }
 
-              IndexSet is_ghost(owned_level_dofs.size());
+              IndexSet is_ghost(is_local.size());
               is_ghost.add_indices(level_dof_indices.begin(),
                                    level_dof_indices.end());
 
@@ -264,7 +280,7 @@ namespace internal
                           ExcMessage("Size does not match!"));
 
               const auto index_owner =
-                Utilities::MPI::compute_index_owner(owned_level_dofs,
+                Utilities::MPI::compute_index_owner(is_local,
                                                     is_ghost,
                                                     tria->get_communicator());
 
@@ -293,16 +309,31 @@ namespace internal
               {
                 requests.push_back(MPI_Request());
                 std::vector<DoFPair> &data = send_data[dest];
-
-                const int ierr =
-                  MPI_Isend(data.data(),
-                            data.size() * sizeof(decltype(*data.data())),
-                            MPI_BYTE,
-                            dest,
-                            mpi_tag,
-                            tria->get_communicator(),
-                            &*requests.rbegin());
-                AssertThrowMPI(ierr);
+                // If there is nothing to send, we still need to send a message,
+                // because the receiving end will be waitng. In that case we
+                // just send an empty message.
+                if (data.size())
+                  {
+                    const int ierr = MPI_Isend(data.data(),
+                                               data.size() * sizeof(data[0]),
+                                               MPI_BYTE,
+                                               dest,
+                                               mpi_tag,
+                                               tria->get_communicator(),
+                                               &*requests.rbegin());
+                    AssertThrowMPI(ierr);
+                  }
+                else
+                  {
+                    const int ierr = MPI_Isend(nullptr,
+                                               0,
+                                               MPI_BYTE,
+                                               dest,
+                                               mpi_tag,
+                                               tria->get_communicator(),
+                                               &*requests.rbegin());
+                    AssertThrowMPI(ierr);
+                  }
               }
           }
 
@@ -451,10 +482,8 @@ namespace internal
                 ghosted_dofs.index_within_set(
                   target_partitioner->local_to_global(
                     copy_indices_global_mine(1, i)));
-          target_partitioner =
-            std::make_shared<Utilities::MPI::Partitioner>(locally_owned,
-                                                          ghosted_dofs,
-                                                          communicator);
+          target_partitioner.reset(new Utilities::MPI::Partitioner(
+            locally_owned, ghosted_dofs, communicator));
         }
     }
 
@@ -662,7 +691,8 @@ namespace internal
       setup_element_info(elem_info, *fe, dof_handler);
 
 
-      // ---------- 2. Extract and match dof indices between child and parent
+      // -------------- 2. Extract and match dof indices between child and
+      // parent
       const unsigned int n_levels = tria.n_global_levels();
       level_dof_indices.resize(n_levels);
       parent_child_connect.resize(n_levels - 1);

@@ -32,6 +32,7 @@
 #include <boost/any.hpp>
 
 #include <algorithm>
+#include <map>
 #include <vector>
 
 DEAL_II_NAMESPACE_OPEN
@@ -419,8 +420,8 @@ namespace MeshWorker
 
     /**
      * @name Methods to work on current cell
-     * @{
      */
+    /**@{*/ // CurrentCellMethods
 
     /**
      * Initialize the internal FEValues with the given @p cell, and return
@@ -458,27 +459,6 @@ namespace MeshWorker
     reinit(const typename DoFHandler<dim, spacedim>::active_cell_iterator &cell,
            const unsigned int face_no,
            const unsigned int subface_no);
-
-    /**
-     * Initialize the internal FEInterfaceValues with the given arguments, and
-     * return a reference to it.
-     *
-     * After calling this function, get_local_dof_indices(),
-     * get_quadrature_points(), get_normal_vectors(), and get_JxW_values() will
-     * be forwarded to the local FEInterfaceValues object. The methods
-     * get_current_fe_values() will return the FEValuesBase associated to the
-     * current cell, while get_neighbor_fe_values() will be associated with the
-     * neighbor cell. The method get_local_dof_indices() will return the
-     * same result of FEInterfaceValues::get_interface_dof_indices(),
-     * while the get_neighbor_dof_indices() will return the local dof indices
-     * of the neighbor cell.
-     */
-    const FEInterfaceValues<dim, spacedim> &
-    reinit(const typename DoFHandler<dim, spacedim>::active_cell_iterator &cell,
-           const unsigned int face_no,
-           const typename DoFHandler<dim, spacedim>::active_cell_iterator
-             &                cell_neighbor,
-           const unsigned int face_no_neighbor);
 
     /**
      * Initialize the internal FEInterfaceValues with the given arguments, and
@@ -558,8 +538,8 @@ namespace MeshWorker
 
     /**
      * @name Methods to work on neighbor cell
-     * @{
      */
+    /** @{ */ // NeighborCellMethods
 
     /**
      * Initialize the internal neighbor FEValues to use the given @p cell, and
@@ -1426,8 +1406,6 @@ namespace MeshWorker
     /**
      * Interface values on facets.
      */
-    // The FEInterfaceValues class supports initialization with hp objects
-    // as well.
     std::unique_ptr<FEInterfaceValues<dim, spacedim>> interface_fe_values;
 
     /** @} */ // non-hp data

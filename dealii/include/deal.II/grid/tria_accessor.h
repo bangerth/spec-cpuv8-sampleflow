@@ -56,12 +56,6 @@ namespace parallel
 }
 
 template <int dim, int spacedim>
-class DoFHandler;
-template <int dim, int spacedim, bool lda>
-class DoFCellAccessor;
-
-
-template <int dim, int spacedim>
 class Manifold;
 
 template <int dim, int spacedim>
@@ -1769,15 +1763,35 @@ private:
   set_line_orientation(const unsigned int line, const bool orientation) const;
 
   /**
-   * Set the combined face orientation (i.e., the integer that uniquely encodes
-   * the orientation, flip, and rotation).
+   * Set whether the quad with index @p face has its normal pointing in the
+   * standard direction (@p true) or whether it is the opposite (@p false).
+   * Which is the standard direction is documented with the GeometryInfo
+   * class.
+   *
+   * This function is only for internal use in the library. Setting this flag
+   * to any other value than the one that the triangulation has already set is
+   * bound to bring you disaster.
+   */
+  void
+  set_face_orientation(const unsigned int face, const bool orientation) const;
+
+  /**
+   * Set the flag indicating, what <code>face_flip()</code> will return.
    *
    * It is only possible to set the face_orientation of cells in 3d (i.e.
    * <code>structdim==3 && dim==3</code>).
    */
   void
-  set_combined_face_orientation(const unsigned int  face,
-                                const unsigned char combined_orientation) const;
+  set_face_flip(const unsigned int face, const bool flip) const;
+
+  /**
+   * Set the flag indicating, what <code>face_rotation()</code> will return.
+   *
+   * It is only possible to set the face_orientation of cells in 3d (i.e.
+   * <code>structdim==3 && dim==3</code>).
+   */
+  void
+  set_face_rotation(const unsigned int face, const bool rotation) const;
 
   /**
    * Set the @p used flag. Only for internal use in the library.
@@ -3126,31 +3140,6 @@ public:
    */
 
   /**
-   * @name Converting iterators
-   */
-  /**
-   * @{
-   */
-
-  /**
-   * A function that converts a Triangulation active cell iterator to a
-   * DoFHandler active cell iterator, or a DoFHandler active cell iterator
-   * to an active cell iterator of another DoFHandler. The @p iterator must be
-   * associated with the triangulation of the @p dof_handler.
-   *
-   * @param dof_handler The DoFHandler for the output active cell iterator.
-   * @return An active cell iterator for the @p dof_handler, matching the cell
-   *         referenced by the input @p iterator. The type of the
-   *         returned object is a DoFHandler::active_cell_iterator.
-   */
-  TriaActiveIterator<DoFCellAccessor<dim, spacedim, false>>
-  as_dof_handler_iterator(const DoFHandler<dim, spacedim> &dof_handler) const;
-
-  /**
-   * @}
-   */
-
-  /**
    * @name Accessing sub-objects and neighbors
    */
   /**
@@ -3792,9 +3781,7 @@ public:
   /**
    * Return a globally unique index for a non-artificial level cell.
    *
-   * @note Similar to global_active_cell_index(), with the difference
-   * that the cell-data vector has been set up with
-   * parallel::TriangulationBase::global_level_cell_index_partitioner().
+   * @note Similar to global_active_cell_index().
    */
   types::global_cell_index
   global_level_cell_index() const;

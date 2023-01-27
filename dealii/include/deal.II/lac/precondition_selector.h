@@ -35,9 +35,8 @@ class SparseMatrix;
 #endif
 
 
-/**
- * @addtogroup Preconditioners
- * @{
+/*! @addtogroup Preconditioners
+ *@{
  */
 
 /**
@@ -177,7 +176,7 @@ public:
    */
   DeclException0(ExcNoMatrixGivenToUse);
 
-  /** @} */
+  //@}
 protected:
   /**
    * Stores the name of the preconditioning.
@@ -198,7 +197,7 @@ private:
   const typename VectorType::value_type omega;
 };
 
-/** @} */
+/*@}*/
 /* --------------------- Inline and template functions ------------------- */
 
 

@@ -979,6 +979,8 @@ namespace WorkStream
               using WorkerAndCopier = internal::tbb_colored::
                 WorkerAndCopier<Iterator, ScratchData, CopyData>;
 
+              using RangeType = typename std::vector<Iterator>::const_iterator;
+
               WorkerAndCopier worker_and_copier(worker,
                                                 copier,
                                                 sample_scratch_data,
@@ -1210,7 +1212,8 @@ namespace WorkStream
             typename IteratorRangeType,
             typename ScratchData,
             typename CopyData,
-            typename = std::enable_if_t<has_begin_and_end<IteratorRangeType>>>
+            typename = typename std::enable_if<
+              has_begin_and_end<IteratorRangeType>>::type>
   void
   run(IteratorRangeType  iterator_range,
       Worker             worker,
@@ -1433,7 +1436,8 @@ namespace WorkStream
             typename IteratorRangeType,
             typename ScratchData,
             typename CopyData,
-            typename = std::enable_if_t<has_begin_and_end<IteratorRangeType>>>
+            typename = typename std::enable_if<
+              has_begin_and_end<IteratorRangeType>>::type>
   void
   run(IteratorRangeType iterator_range,
       MainClass &       main_object,

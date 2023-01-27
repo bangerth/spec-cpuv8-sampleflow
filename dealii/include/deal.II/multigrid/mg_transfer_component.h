@@ -27,6 +27,7 @@
 #include <deal.II/lac/affine_constraints.h>
 #include <deal.II/lac/block_sparsity_pattern.h>
 #include <deal.II/lac/block_vector.h>
+#include <deal.II/lac/sparsity_pattern.h>
 #include <deal.II/lac/vector_memory.h>
 
 #include <deal.II/multigrid/mg_base.h>
@@ -47,10 +48,8 @@ class DoFHandler;
  * MGTransferBase is defined in mg_base.h
  */
 
-/**
- * @addtogroup mg
- * @{
- */
+/*!@addtogroup mg */
+/*@{*/
 
 /**
  * Implementation of matrix generation for component wise multigrid transfer.
@@ -372,7 +371,7 @@ public:
   SmartPointer<const AffineConstraints<double>> constraints;
 };
 
-/** @} */
+/*@}*/
 
 //---------------------------------------------------------------------------
 template <typename number>

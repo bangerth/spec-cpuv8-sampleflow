@@ -20,7 +20,6 @@
 
 #include <deal.II/particles/particle_handler.h>
 
-#include <limits>
 #include <memory>
 #include <utility>
 
@@ -1372,7 +1371,7 @@ namespace Particles
                     });
 
           // Search all of the cells adjacent to the closest vertex of the
-          // previous cell. Most likely we will find the particle in them.
+          // previous cell Most likely we will find the particle in them.
           for (unsigned int i = 0; i < n_neighbor_cells; ++i)
             {
               typename std::set<typename Triangulation<dim, spacedim>::
@@ -1395,14 +1394,6 @@ namespace Particles
 
           if (!found_cell)
             {
-              // For some clang-based compilers and boost versions the call to
-              // RTree::query doesn't compile. We use a slower implementation as
-              // workaround.
-              // This is fixed in boost in
-              // https://github.com/boostorg/numeric_conversion/commit/50a1eae942effb0a9b90724323ef8f2a67e7984a
-#if defined(DEAL_II_WITH_BOOST_BUNDLED) ||                \
-  !(defined(__clang_major__) && __clang_major__ >= 16) || \
-  BOOST_VERSION >= 108100
               // The particle is not in a neighbor of the old cell.
               // Look for the new cell in the whole local domain.
               // This case is rare.
@@ -1417,12 +1408,6 @@ namespace Particles
               AssertDimension(closest_vertex_in_domain.size(), 1);
               const unsigned int closest_vertex_index_in_domain =
                 closest_vertex_in_domain[0].second;
-#else
-              const unsigned int closest_vertex_index_in_domain =
-                GridTools::find_closest_vertex(*mapping,
-                                               *triangulation,
-                                               out_particle->get_location());
-#endif
 
               // Search all of the cells adjacent to the closest vertex of the
               // domain. Most likely we will find the particle in them.
@@ -1556,15 +1541,6 @@ namespace Particles
     ghost_particles_cache.ghost_particles_by_domain.clear();
     ghost_particles_cache.valid = false;
 
-    // In the case of a parallel simulation with periodic boundary conditions
-    // the vertices associated with periodic boundaries are not directly
-    // connected to the ghost cells but they are connected to the ghost cells
-    // through their coinciding vertices. We gather this information using the
-    // vertices_with_ghost_neighbors map
-    const std::map<unsigned int, std::set<types::subdomain_id>>
-      &vertices_with_ghost_neighbors =
-        triangulation_cache->get_vertices_with_ghost_neighbors();
-
     const std::set<types::subdomain_id> ghost_owners =
       parallel_triangulation->ghost_owners();
     for (const auto ghost_owner : ghost_owners)
@@ -1581,15 +1557,9 @@ namespace Particles
             std::set<unsigned int> cell_to_neighbor_subdomain;
             for (const unsigned int v : cell->vertex_indices())
               {
-                const auto vertex_ghost_neighbors =
-                  vertices_with_ghost_neighbors.find(cell->vertex_index(v));
-                if (vertex_ghost_neighbors !=
-                    vertices_with_ghost_neighbors.end())
-                  {
-                    cell_to_neighbor_subdomain.insert(
-                      vertex_ghost_neighbors->second.begin(),
-                      vertex_ghost_neighbors->second.end());
-                  }
+                cell_to_neighbor_subdomain.insert(
+                  vertex_to_neighbor_subdomain[cell->vertex_index(v)].begin(),
+                  vertex_to_neighbor_subdomain[cell->vertex_index(v)].end());
               }
 
             if (cell_to_neighbor_subdomain.size() > 0)

@@ -37,6 +37,7 @@
 
 #  include <cstdio>
 #  include <iostream>
+#  include <set>
 #  if DEAL_II_OPENCASCADE_VERSION_GTE(7, 0, 0)
 #    include <Standard_Transient.hxx>
 #  else
@@ -866,7 +867,7 @@ namespace OpenCASCADE
     Standard_Real Max_Curvature = props.MaxCurvature();
     Tensor<1, 3>  normal        = Point<3>(Normal.X(), Normal.Y(), Normal.Z());
 
-    // In the case your manifold changes from convex to concave or vice-versa
+    // In the case your manifold changes from convex to concave or viceversa
     // the normal could jump from "inner" to "outer" normal.
     // However, you should be able to change the normal sense preserving
     // the manifold orientation:

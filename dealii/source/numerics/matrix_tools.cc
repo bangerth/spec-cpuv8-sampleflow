@@ -24,8 +24,12 @@
 
 #include <deal.II/fe/fe.h>
 #include <deal.II/fe/fe_values.h>
+#include <deal.II/fe/mapping_q1.h>
 
 #include <deal.II/grid/tria_iterator.h>
+
+#include <deal.II/hp/fe_values.h>
+#include <deal.II/hp/mapping_collection.h>
 
 #include <deal.II/lac/block_sparse_matrix.h>
 #include <deal.II/lac/block_vector.h>
@@ -50,6 +54,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <set>
 
 
 DEAL_II_NAMESPACE_OPEN

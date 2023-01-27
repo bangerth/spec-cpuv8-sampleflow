@@ -13,9 +13,10 @@
 //
 // ---------------------------------------------------------------------
 
-#include <deal.II/base/parameter_handler.h>
 #include <deal.II/base/parsed_function.h>
 #include <deal.II/base/utilities.h>
+
+#include <cstdio>
 
 DEAL_II_NAMESPACE_OPEN
 

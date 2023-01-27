@@ -38,8 +38,6 @@ namespace internal
         return MemoryConsumption::memory_consumption(lines);
       if (dim == 3)
         return (MemoryConsumption::memory_consumption(quads) +
-                MemoryConsumption::memory_consumption(quads_line_orientations) +
-                MemoryConsumption::memory_consumption(quad_is_quadrilateral) +
                 MemoryConsumption::memory_consumption(lines));
 
       return 0;

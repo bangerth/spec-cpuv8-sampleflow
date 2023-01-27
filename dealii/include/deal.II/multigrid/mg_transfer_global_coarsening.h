@@ -155,8 +155,6 @@ namespace MGTransferGlobalCoarseningTools
 
 /**
  * Class for transfer between two multigrid levels for p- or global coarsening.
- *
- * The implementation of this class is explained in detail in @cite munch2022gc.
  */
 template <int dim, typename VectorType>
 class MGTwoLevelTransfer
@@ -205,8 +203,6 @@ public:
 /**
  * Class for transfer between two multigrid levels for p- or global coarsening.
  * Specialization for LinearAlgebra::distributed::Vector.
- *
- * The implementation of this class is explained in detail in @cite munch2022gc.
  */
 template <int dim, typename Number>
 class MGTwoLevelTransfer<dim, LinearAlgebra::distributed::Vector<Number>>
@@ -325,17 +321,6 @@ public:
   memory_consumption() const;
 
 private:
-  void
-  update_ghost_values(const LinearAlgebra::distributed::Vector<Number> &) const;
-
-  void
-  compress(LinearAlgebra::distributed::Vector<Number> &,
-           const VectorOperation::values) const;
-
-  void
-  zero_out_ghost_values(
-    const LinearAlgebra::distributed::Vector<Number> &) const;
-
   /**
    * A multigrid transfer scheme. A multrigrid transfer class can have different
    * transfer schemes to enable p-adaptivity (one transfer scheme per
@@ -424,34 +409,9 @@ private:
   std::shared_ptr<const Utilities::MPI::Partitioner> partitioner_fine;
 
   /**
-   * Embedded partitioner for efficient communication if locally relevant DoFs
-   * are a subset of an external Partitioner object.
-   */
-  std::shared_ptr<const Utilities::MPI::Partitioner> partitioner_fine_embedded;
-
-  /**
-   * Buffer for efficient communication if locally relevant DoFs
-   * are a subset of an external Partitioner object.
-   */
-  mutable AlignedVector<Number> buffer_fine_embedded;
-
-  /**
    * Partitioner needed by the intermediate vector.
    */
   std::shared_ptr<const Utilities::MPI::Partitioner> partitioner_coarse;
-
-  /**
-   * Embedded partitioner for efficient communication if locally relevant DoFs
-   * are a subset of an external Partitioner object.
-   */
-  std::shared_ptr<const Utilities::MPI::Partitioner>
-    partitioner_coarse_embedded;
-
-  /**
-   * Buffer for efficient communication if locally relevant DoFs
-   * are a subset of an external Partitioner object.
-   */
-  mutable AlignedVector<Number> buffer_coarse_embedded;
 
   /**
    * Internal vector needed for collecting all degrees of freedom of the fine
@@ -510,8 +470,6 @@ private:
  * FE_Q and FE_DGQ and simplex elements FE_SimplexP and FE_SimplexDGP as well as
  * for systems involving multiple components of one of these elements. Other
  * elements are currently not implemented.
- *
- * The implementation of this class is explained in detail in @cite munch2022gc.
  */
 template <int dim, typename VectorType>
 class MGTransferGlobalCoarsening : public dealii::MGTransferBase<VectorType>
@@ -638,18 +596,6 @@ public:
    */
   std::size_t
   memory_consumption() const;
-
-  /**
-   * Minimum level.
-   */
-  unsigned int
-  min_level() const;
-
-  /**
-   * Maximum level.
-   */
-  unsigned int
-  max_level() const;
 
 private:
   /**
@@ -924,24 +870,6 @@ MGTransferGlobalCoarsening<dim, VectorType>::memory_consumption() const
     size += this->transfer[l].memory_consumption();
 
   return size;
-}
-
-
-
-template <int dim, typename VectorType>
-inline unsigned int
-MGTransferGlobalCoarsening<dim, VectorType>::min_level() const
-{
-  return transfer.min_level();
-}
-
-
-
-template <int dim, typename VectorType>
-inline unsigned int
-MGTransferGlobalCoarsening<dim, VectorType>::max_level() const
-{
-  return transfer.max_level();
 }
 
 #endif

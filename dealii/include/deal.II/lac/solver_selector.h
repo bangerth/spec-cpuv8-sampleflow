@@ -34,10 +34,8 @@
 DEAL_II_NAMESPACE_OPEN
 
 
-/**
- * @addtogroup Solvers
- * @{
- */
+/*!@addtogroup Solvers */
+/*@{*/
 
 /**
  * Selects a solver by changing a parameter.
@@ -242,7 +240,7 @@ private:
   typename SolverFGMRES<VectorType>::AdditionalData fgmres_data;
 };
 
-/** @} */
+/*@}*/
 /* --------------------- Inline and template functions ------------------- */
 
 

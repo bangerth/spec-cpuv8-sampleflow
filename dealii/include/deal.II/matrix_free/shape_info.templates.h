@@ -22,7 +22,6 @@
 #include <deal.II/base/memory_consumption.h>
 #include <deal.II/base/polynomial.h>
 #include <deal.II/base/polynomials_piecewise.h>
-#include <deal.II/base/polynomials_raviart_thomas.h>
 #include <deal.II/base/qprojector.h>
 #include <deal.II/base/tensor_product_polynomials.h>
 #include <deal.II/base/utilities.h>
@@ -34,7 +33,6 @@
 #include <deal.II/fe/fe_pyramid_p.h>
 #include <deal.II/fe/fe_q.h>
 #include <deal.II/fe/fe_q_dg0.h>
-#include <deal.II/fe/fe_q_iso_q1.h>
 #include <deal.II/fe/fe_raviart_thomas.h>
 #include <deal.II/fe/fe_simplex_p.h>
 #include <deal.II/fe/fe_simplex_p_bubbles.h>
@@ -270,8 +268,7 @@ namespace internal
           const unsigned int dofs_per_face_normal = fe_in.n_dofs_per_face();
 
           lexicographic_numbering =
-            PolynomialsRaviartThomas<dim>::get_lexicographic_numbering(
-              fe_in.degree, fe_in.degree - 1);
+            get_lexicographic_numbering_rt_nodal<dim>(fe_in.degree);
 
           // To get the right shape_values of the RT element
           std::vector<unsigned int> lex_normal, lex_tangent;
@@ -748,18 +745,12 @@ namespace internal
 
           for (unsigned int i = 0; i < quad.size(); ++i)
             {
-              std::array<double, 3> values;
-              poly_coll[i].value(0.0, 2, values.data());
-              for (unsigned int d = 0; d < 3; ++d)
-                quadrature_data_on_face[0][i + d * quad.size()] = values[d];
-              poly_coll[i].value(1.0, 2, values.data());
-              for (unsigned int d = 0; d < 3; ++d)
-                quadrature_data_on_face[1][i + d * quad.size()] = values[d];
+              quadrature_data_on_face[0][i] = poly_coll[i].value(0.0);
+              quadrature_data_on_face[1][i] = poly_coll[i].value(1.0);
             }
         }
 
-      if (dim > 1 && (dynamic_cast<const FE_Q<dim> *>(&fe) ||
-                      dynamic_cast<const FE_Q_iso_Q1<dim> *>(&fe)))
+      if (dim > 1 && dynamic_cast<const FE_Q<dim> *>(&fe))
         {
           auto &subface_interpolation_matrix_0 =
             univariate_shape_data.subface_interpolation_matrices[0];
@@ -776,33 +767,19 @@ namespace internal
           subface_interpolation_matrix_scalar_0.resize(nn * nn);
           subface_interpolation_matrix_scalar_1.resize(nn * nn);
 
-          const bool is_feq = dynamic_cast<const FE_Q<dim> *>(&fe) != nullptr;
-
-          std::vector<Point<1>> fe_q_points =
-            is_feq ? QGaussLobatto<1>(nn).get_points() :
-                     QIterated<1>(QTrapezoid<1>(), nn - 1).get_points();
-
-          const std::vector<Polynomials::Polynomial<double>> poly_feq =
+          std::vector<Point<1>> fe_q_points = QGaussLobatto<1>(nn).get_points();
+          const std::vector<Polynomials::Polynomial<double>> poly =
             Polynomials::generate_complete_Lagrange_basis(fe_q_points);
-
-          const std::vector<Polynomials::PiecewisePolynomial<double>>
-            poly_feq_iso_q1 =
-              Polynomials::generate_complete_Lagrange_basis_on_subdivisions(nn -
-                                                                              1,
-                                                                            1);
 
           for (unsigned int i = 0, c = 0; i < nn; ++i)
             for (unsigned int j = 0; j < nn; ++j, ++c)
               {
                 subface_interpolation_matrix_scalar_0[c] =
-                  is_feq ? poly_feq[j].value(0.5 * fe_q_points[i][0]) :
-                           poly_feq_iso_q1[j].value(0.5 * fe_q_points[i][0]);
+                  poly[j].value(0.5 * fe_q_points[i][0]);
                 subface_interpolation_matrix_0[c] =
                   subface_interpolation_matrix_scalar_0[c];
                 subface_interpolation_matrix_scalar_1[c] =
-                  is_feq ?
-                    poly_feq[j].value(0.5 + 0.5 * fe_q_points[i][0]) :
-                    poly_feq_iso_q1[j].value(0.5 + 0.5 * fe_q_points[i][0]);
+                  poly[j].value(0.5 + 0.5 * fe_q_points[i][0]);
                 subface_interpolation_matrix_1[c] =
                   subface_interpolation_matrix_scalar_1[c];
               }
@@ -934,14 +911,10 @@ namespace internal
       if (element_type == tensor_general &&
           check_1d_shapes_symmetric(univariate_shape_data))
         {
-          if (dynamic_cast<const FE_Q_iso_Q1<dim> *>(&fe) &&
-              fe.tensor_degree() > 1)
-            element_type = tensor_symmetric_no_collocation;
-          else if (check_1d_shapes_collocation(univariate_shape_data))
+          if (check_1d_shapes_collocation(univariate_shape_data))
             element_type = tensor_symmetric_collocation;
           else
             element_type = tensor_symmetric;
-
           if (n_dofs_1d > 2 && element_type == tensor_symmetric)
             {
               // check if we are a Hermite type

@@ -21,6 +21,7 @@
 
 #include <deal.II/fe/fe.h>
 #include <deal.II/fe/fe_tools.h>
+#include <deal.II/fe/mapping_q1_eulerian.h>
 #include <deal.II/fe/mapping_q_eulerian.h>
 
 #include <deal.II/grid/tria_iterator.h>

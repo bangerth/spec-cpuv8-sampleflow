@@ -22,7 +22,6 @@
 #ifdef DEAL_II_WITH_TRILINOS
 
 #  include <deal.II/base/index_set.h>
-#  include <deal.II/base/mpi_stub.h>
 #  include <deal.II/base/subscriptor.h>
 
 #  include <deal.II/lac/trilinos_epetra_communication_pattern.h>
@@ -31,6 +30,7 @@
 #  include <deal.II/lac/vector_type_traits.h>
 
 #  include <Epetra_FEVector.h>
+#  include <mpi.h>
 
 #  include <memory>
 

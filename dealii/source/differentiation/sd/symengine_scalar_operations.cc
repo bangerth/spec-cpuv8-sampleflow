@@ -44,7 +44,6 @@ namespace Differentiation
     }
 
 
-#  ifndef DOXYGEN
     Expression
     make_symbolic_function(const std::string &             symbol,
                            const SD::types::symbol_vector &arguments)
@@ -60,7 +59,6 @@ namespace Differentiation
       return make_symbolic_function(symbol,
                                     SD::Utilities::extract_symbols(arguments));
     }
-#  endif
 
 
     /* --------------------------- Differentiation ------------------------- */

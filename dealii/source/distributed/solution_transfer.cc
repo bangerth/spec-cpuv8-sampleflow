@@ -27,6 +27,8 @@
 #  include <deal.II/grid/tria_accessor.h>
 #  include <deal.II/grid/tria_iterator.h>
 
+#  include <deal.II/hp/dof_handler.h>
+
 #  include <deal.II/lac/block_vector.h>
 #  include <deal.II/lac/la_parallel_block_vector.h>
 #  include <deal.II/lac/la_parallel_vector.h>
@@ -156,10 +158,6 @@ namespace parallel
           const_cast<dealii::Triangulation<dim, spacedim> *>(
             &dof_handler->get_triangulation())));
       Assert(tria != nullptr, ExcInternalError());
-
-      Assert(handle == numbers::invalid_unsigned_int,
-             ExcMessage("You can only add one solution per "
-                        "SolutionTransfer object."));
 
       handle = tria->register_data_attach(
         [this](
@@ -291,7 +289,6 @@ namespace parallel
         }
 
       input_vectors.clear();
-      handle = numbers::invalid_unsigned_int;
     }
 
 

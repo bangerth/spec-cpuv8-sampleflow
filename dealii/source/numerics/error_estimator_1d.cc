@@ -26,7 +26,7 @@
 #include <deal.II/fe/fe.h>
 #include <deal.II/fe/fe_update_flags.h>
 #include <deal.II/fe/fe_values.h>
-#include <deal.II/fe/mapping.h>
+#include <deal.II/fe/mapping_q1.h>
 
 #include <deal.II/grid/tria_iterator.h>
 
@@ -111,8 +111,7 @@ KellyErrorEstimator<1, spacedim>::estimate(
   const types::material_id  material_id,
   const Strategy            strategy)
 {
-  const auto reference_cell = ReferenceCells::Line;
-  estimate(reference_cell.template get_default_linear_mapping<1, spacedim>(),
+  estimate(StaticMappingQ1<1, spacedim>::mapping,
            dof_handler,
            quadrature,
            neumann_bc,
@@ -146,8 +145,7 @@ KellyErrorEstimator<1, spacedim>::estimate(
   const types::material_id                material_id,
   const Strategy                          strategy)
 {
-  const auto reference_cell = ReferenceCells::Line;
-  estimate(reference_cell.template get_default_linear_mapping<1, spacedim>(),
+  estimate(StaticMappingQ1<1, spacedim>::mapping,
            dof_handler,
            quadrature,
            neumann_bc,
@@ -219,8 +217,7 @@ KellyErrorEstimator<1, spacedim>::estimate(
   const types::material_id  material_id,
   const Strategy            strategy)
 {
-  const auto reference_cell = ReferenceCells::Line;
-  estimate(reference_cell.template get_default_linear_mapping<1, spacedim>(),
+  estimate(StaticMappingQ1<1, spacedim>::mapping,
            dof_handler,
            quadrature,
            neumann_bc,
@@ -254,8 +251,7 @@ KellyErrorEstimator<1, spacedim>::estimate(
   const types::material_id                material_id,
   const Strategy                          strategy)
 {
-  const auto reference_cell = ReferenceCells::Line;
-  estimate(reference_cell.template get_default_linear_mapping<1, spacedim>(),
+  estimate(StaticMappingQ1<1, spacedim>::mapping,
            dof_handler,
            quadrature,
            neumann_bc,

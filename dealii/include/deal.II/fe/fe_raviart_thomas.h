@@ -18,7 +18,6 @@
 
 #include <deal.II/base/config.h>
 
-#include <deal.II/base/mutex.h>
 #include <deal.II/base/table.h>
 
 #include <deal.II/fe/fe.h>
@@ -28,10 +27,8 @@
 
 DEAL_II_NAMESPACE_OPEN
 
-/**
- * @addtogroup fe
- * @{
- */
+/*!@addtogroup fe */
+/*@{*/
 
 /**
  * Implementation of Raviart-Thomas (RT) elements. The Raviart-Thomas space
@@ -423,7 +420,19 @@ private:
   mutable Threads::Mutex mutex;
 };
 
-/** @} */
+
+namespace internal
+{
+  /**
+   * Compute the lexicographic to hierarchic numbering underlying the
+   * FE_RaviartThomasNodal class.
+   */
+  template <int dim>
+  std::vector<unsigned int>
+  get_lexicographic_numbering_rt_nodal(const unsigned int degree);
+} // namespace internal
+
+/*@}*/
 
 /* -------------- declaration of explicit specializations ------------- */
 

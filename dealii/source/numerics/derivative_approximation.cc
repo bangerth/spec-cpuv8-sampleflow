@@ -21,7 +21,7 @@
 
 #include <deal.II/fe/fe.h>
 #include <deal.II/fe/fe_values.h>
-#include <deal.II/fe/mapping.h>
+#include <deal.II/fe/mapping_q1.h>
 
 #include <deal.II/grid/filtered_iterator.h>
 #include <deal.II/grid/grid_tools.h>
@@ -1030,12 +1030,8 @@ namespace DerivativeApproximation
                        Vector<float> &                  derivative_norm,
                        const unsigned int               component)
   {
-    Assert(!dof_handler.get_triangulation().is_mixed_mesh(),
-           ExcNotImplemented());
-    const auto reference_cell =
-      dof_handler.get_triangulation().get_reference_cells()[0];
     internal::approximate_derivative<internal::Gradient<dim>, dim>(
-      reference_cell.template get_default_linear_mapping<dim, spacedim>(),
+      StaticMappingQ1<dim>::mapping,
       dof_handler,
       solution,
       component,
@@ -1063,12 +1059,8 @@ namespace DerivativeApproximation
                                 Vector<float> &    derivative_norm,
                                 const unsigned int component)
   {
-    Assert(!dof_handler.get_triangulation().is_mixed_mesh(),
-           ExcNotImplemented());
-    const auto reference_cell =
-      dof_handler.get_triangulation().get_reference_cells()[0];
     internal::approximate_derivative<internal::SecondDerivative<dim>, dim>(
-      reference_cell.template get_default_linear_mapping<dim, spacedim>(),
+      StaticMappingQ1<dim>::mapping,
       dof_handler,
       solution,
       component,

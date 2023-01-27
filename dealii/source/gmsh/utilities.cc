@@ -13,8 +13,6 @@
 //
 // ---------------------------------------------------------------------
 
-#include <deal.II/base/parameter_handler.h>
-
 #include <deal.II/gmsh/utilities.h>
 
 #include <deal.II/grid/grid_in.h>

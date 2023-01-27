@@ -19,6 +19,7 @@
 #include <deal.II/algorithms/theta_timestepping.templates.h>
 
 #include <deal.II/base/logstream.h>
+#include <deal.II/base/parameter_handler.h>
 
 #include <deal.II/lac/block_vector.h>
 #include <deal.II/lac/la_parallel_block_vector.h>

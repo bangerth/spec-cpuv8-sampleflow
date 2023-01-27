@@ -18,7 +18,6 @@
 
 #include <deal.II/dofs/dof_accessor.h>
 
-#include <limits>
 
 DEAL_II_NAMESPACE_OPEN
 

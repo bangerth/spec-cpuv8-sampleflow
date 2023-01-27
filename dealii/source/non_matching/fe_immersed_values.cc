@@ -13,8 +13,6 @@
 //
 // ---------------------------------------------------------------------
 
-#include <deal.II/base/thread_management.h>
-
 #include <deal.II/grid/tria_iterator.h>
 
 #include <deal.II/non_matching/fe_immersed_values.h>

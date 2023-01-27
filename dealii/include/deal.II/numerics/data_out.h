@@ -451,6 +451,17 @@ private:
     const CurvedCellRegion curved_cell_region);
 };
 
+namespace Legacy
+{
+  /**
+   * @deprecated Use dealii::DataOut without the DoFHandlerType template
+   * instead.
+   */
+  template <int dim, typename DoFHandlerType = DoFHandler<dim>>
+  using DataOut DEAL_II_DEPRECATED =
+    dealii::DataOut<dim, DoFHandlerType::space_dimension>;
+} // namespace Legacy
+
 
 DEAL_II_NAMESPACE_CLOSE
 

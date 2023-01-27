@@ -20,8 +20,6 @@
 #include <deal.II/base/config.h>
 
 #include <deal.II/base/exceptions.h>
-#include <deal.II/base/index_set.h>
-#include <deal.II/base/mpi_stub.h>
 
 #include <deal.II/lac/block_sparsity_pattern.h>
 #include <deal.II/lac/dynamic_sparsity_pattern.h>
@@ -30,12 +28,17 @@
 #include <memory>
 #include <vector>
 
+#ifdef DEAL_II_WITH_MPI
+#  include <deal.II/base/index_set.h>
+
+#  include <mpi.h>
+#endif
+
 DEAL_II_NAMESPACE_OPEN
 
 
-/**
- * @addtogroup Sparsity
- * @{
+/*! @addtogroup Sparsity
+ *@{
  */
 
 /**

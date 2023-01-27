@@ -23,7 +23,6 @@
 #include <deal.II/base/derivative_form.h>
 
 #include <deal.II/fe/fe_update_flags.h>
-#include <deal.II/fe/mapping_related_data.h>
 
 #include <deal.II/grid/tria.h>
 
@@ -135,7 +134,7 @@ enum MappingKind
   /**
    * The mappings for 2-forms and third order tensors.
    *
-   * These are mappings typically applied to hessians transformed to the
+   * These are mappings typpically applied to hessians transformed to the
    * reference cell.
    *
    * Mapping of the hessian of a covariant vector field (see
@@ -905,7 +904,7 @@ protected:
     const CellSimilarity::Similarity                            cell_similarity,
     const Quadrature<dim> &                                     quadrature,
     const typename Mapping<dim, spacedim>::InternalDataBase &   internal_data,
-    internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
+    dealii::internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
       &output_data) const = 0;
 
   /**
@@ -938,7 +937,7 @@ protected:
     const unsigned int                                          face_no,
     const hp::QCollection<dim - 1> &                            quadrature,
     const typename Mapping<dim, spacedim>::InternalDataBase &   internal_data,
-    internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
+    dealii::internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
       &output_data) const;
 
   /**
@@ -986,7 +985,7 @@ protected:
     const unsigned int                                          subface_no,
     const Quadrature<dim - 1> &                                 quadrature,
     const typename Mapping<dim, spacedim>::InternalDataBase &   internal_data,
-    internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
+    dealii::internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
       &output_data) const = 0;
 
   /**
@@ -1000,7 +999,7 @@ protected:
     const typename Triangulation<dim, spacedim>::cell_iterator &cell,
     const NonMatching::ImmersedSurfaceQuadrature<dim> &         quadrature,
     const typename Mapping<dim, spacedim>::InternalDataBase &   internal_data,
-    internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
+    dealii::internal::FEValuesImplementation::MappingRelatedData<dim, spacedim>
       &output_data) const;
 
   /**

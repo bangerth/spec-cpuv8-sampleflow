@@ -27,11 +27,11 @@
 
 #include <deal.II/fe/fe.h>
 #include <deal.II/fe/fe_q_base.h>
-#include <deal.II/fe/mapping_q1.h>
 
 #include <deal.II/grid/tria.h>
 #include <deal.II/grid/tria_iterator.h>
 
+#include <deal.II/hp/dof_handler.h>
 #include <deal.II/hp/fe_collection.h>
 #include <deal.II/hp/fe_values.h>
 
@@ -759,8 +759,8 @@ namespace DoFRenumbering
                          const std::vector<unsigned int> &component_order_arg,
                          const bool                       is_level_operation)
   {
-    const hp::FECollection<dim, spacedim> &fe_collection =
-      start->get_dof_handler().get_fe_collection();
+    const hp::FECollection<dim, spacedim> fe_collection(
+      start->get_dof_handler().get_fe_collection());
 
     // do nothing if the FE has only
     // one component
@@ -873,8 +873,8 @@ namespace DoFRenumbering
         // on each cell: get dof indices
         // and insert them into the global
         // list using their component
-        const types::fe_index fe_index = cell->active_fe_index();
-        const unsigned int    dofs_per_cell =
+        const unsigned int fe_index = cell->active_fe_index();
+        const unsigned int dofs_per_cell =
           fe_collection[fe_index].n_dofs_per_cell();
         local_dof_indices.resize(dofs_per_cell);
         cell->get_active_or_mg_dof_indices(local_dof_indices);
@@ -1072,8 +1072,8 @@ namespace DoFRenumbering
                      const ENDITERATOR &                   end,
                      const bool                            is_level_operation)
   {
-    const hp::FECollection<dim, spacedim> &fe_collection =
-      start->get_dof_handler().get_fe_collection();
+    const hp::FECollection<dim, spacedim> fe_collection(
+      start->get_dof_handler().get_fe_collection());
 
     // do nothing if the FE has only
     // one component
@@ -1146,8 +1146,8 @@ namespace DoFRenumbering
         // on each cell: get dof indices
         // and insert them into the global
         // list using their component
-        const types::fe_index fe_index = cell->active_fe_index();
-        const unsigned int    dofs_per_cell =
+        const unsigned int fe_index = cell->active_fe_index();
+        const unsigned int dofs_per_cell =
           fe_collection[fe_index].n_dofs_per_cell();
         local_dof_indices.resize(dofs_per_cell);
         cell->get_active_or_mg_dof_indices(local_dof_indices);
@@ -2680,10 +2680,10 @@ namespace DoFRenumbering
                                     const IndexSet &              owned_dofs,
                                     std::vector<unsigned int> &   result,
                                     unsigned int &counter_dof_numbers) {
-        const types::global_dof_index local_dof_index =
-          owned_dofs.index_within_set(dof_index);
-        if (local_dof_index != numbers::invalid_dof_index)
+        if (owned_dofs.is_element(dof_index))
           {
+            const unsigned int local_dof_index =
+              owned_dofs.index_within_set(dof_index);
             AssertIndexRange(local_dof_index, result.size());
             if (result[local_dof_index] == numbers::invalid_unsigned_int)
               result[local_dof_index] = counter_dof_numbers++;
@@ -2691,7 +2691,7 @@ namespace DoFRenumbering
       };
 
       unsigned int                         counter_dof_numbers = 0;
-      std::vector<unsigned int>            dofs_extracted;
+      std::vector<unsigned int>            local_dofs, dofs_extracted;
       std::vector<types::global_dof_index> dof_indices(
         matrix_free.get_dof_handler(component).get_fe().dofs_per_cell);
 
@@ -2706,21 +2706,19 @@ namespace DoFRenumbering
       // that we pick the unconstrained indices in the hierarchical order for
       // part (a) as this makes it easy to identify the DoFs on the individual
       // entities, whereas we pick the numbers with constraints eliminated for
-      // part (b). For the latter, we keep track of each DoF's interaction
-      // with different ranges of cell batches, i.e., call-backs into the
-      // operation_on_cell_range() function.
-      const unsigned int        n_owned_dofs = owned_dofs.n_elements();
+      // part (b). For the latter, we finally need to sort the indices and
+      // remove duplicates to really only count the DoFs in each range of cell
+      // batches once.
       std::vector<unsigned int> dof_numbers_mf_order(
-        n_owned_dofs, dealii::numbers::invalid_unsigned_int);
-      std::vector<unsigned int> last_touch_by_cell_batch_range(
-        n_owned_dofs, dealii::numbers::invalid_unsigned_int);
-      std::vector<unsigned char> touch_count(n_owned_dofs);
+        owned_dofs.n_elements(), dealii::numbers::invalid_unsigned_int);
+      std::vector<unsigned char> touch_count(owned_dofs.n_elements());
 
       const auto operation_on_cell_range =
         [&](const MatrixFree<dim, Number, VectorizedArrayType> &data,
             unsigned int &,
             const unsigned int &,
             const std::pair<unsigned int, unsigned int> &cell_range) {
+          local_dofs.clear();
           for (unsigned int cell = cell_range.first; cell < cell_range.second;
                ++cell)
             {
@@ -2762,22 +2760,22 @@ namespace DoFRenumbering
                     }
                 }
 
-              // part (b): increment the touch count of a dof appearing in the
-              // current cell batch if it was last touched by another than the
-              // present cell batch range (we track them via storing the last
-              // cell batch range that touched a particular dof)
+              // part (b): compute the touch count in the current cell batch
+              // range
               data.get_dof_info(component).get_dof_indices_on_cell_batch(
                 dofs_extracted, cell);
-              for (unsigned int dof_index : dofs_extracted)
-                if (dof_index < n_owned_dofs &&
-                    last_touch_by_cell_batch_range[dof_index] !=
-                      cell_range.first)
-                  {
-                    ++touch_count[dof_index];
-                    last_touch_by_cell_batch_range[dof_index] =
-                      cell_range.first;
-                  }
+              local_dofs.insert(local_dofs.end(),
+                                dofs_extracted.begin(),
+                                dofs_extracted.end());
             }
+
+          std::sort(local_dofs.begin(), local_dofs.end());
+          local_dofs.erase(std::unique(local_dofs.begin(), local_dofs.end()),
+                           local_dofs.end());
+
+          for (unsigned int i : local_dofs)
+            if (i < touch_count.size())
+              touch_count[i]++;
         };
 
       // Finally run the matrix-free loop.
@@ -2789,7 +2787,7 @@ namespace DoFRenumbering
       matrix_free.template cell_loop<unsigned int, unsigned int>(
         operation_on_cell_range, counter_dof_numbers, counter_dof_numbers);
 
-      AssertDimension(counter_dof_numbers, n_owned_dofs);
+      AssertDimension(counter_dof_numbers, owned_dofs.n_elements());
 
       return std::make_pair(dof_numbers_mf_order, touch_count);
     }

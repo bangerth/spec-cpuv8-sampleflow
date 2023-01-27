@@ -14,15 +14,15 @@
 // ---------------------------------------------------------------------
 
 #ifndef dealii_petsc_matrix_free_h
-#define dealii_petsc_matrix_free_h
+#  define dealii_petsc_matrix_free_h
 
 
-#include <deal.II/base/config.h>
+#  include <deal.II/base/config.h>
 
-#ifdef DEAL_II_WITH_PETSC
-#  include <deal.II/lac/exceptions.h>
-#  include <deal.II/lac/petsc_matrix_base.h>
-#  include <deal.II/lac/petsc_vector.h>
+#  ifdef DEAL_II_WITH_PETSC
+#    include <deal.II/lac/exceptions.h>
+#    include <deal.II/lac/petsc_matrix_base.h>
+#    include <deal.II/lac/petsc_vector.h>
 DEAL_II_NAMESPACE_OPEN
 
 
@@ -177,6 +177,13 @@ namespace PETScWrappers
     clear();
 
     /**
+     * Return a reference to the MPI communicator object in use with this
+     * matrix.
+     */
+    const MPI_Comm &
+    get_mpi_communicator() const override;
+
+    /**
      * Matrix-vector multiplication: let <i>dst = M*src</i> with <i>M</i>
      * being this matrix.
      *
@@ -247,6 +254,12 @@ namespace PETScWrappers
 
   private:
     /**
+     * Copy of the communicator object to be used for this parallel matrix-
+     * free object.
+     */
+    MPI_Comm communicator;
+
+    /**
      * Callback-function registered as the matrix-vector multiplication of
      * this matrix-free object called by PETSc routines. This function must be
      * static and takes a PETSc matrix @p A, and vectors @p src and @p dst,
@@ -266,8 +279,7 @@ namespace PETScWrappers
      * previous matrix is left to the caller.
      */
     void
-    do_reinit(const MPI_Comm &   comm,
-              const unsigned int m,
+    do_reinit(const unsigned int m,
               const unsigned int n,
               const unsigned int local_rows,
               const unsigned int local_columns);
@@ -275,10 +287,18 @@ namespace PETScWrappers
 
 
 
+  // -------- template and inline functions ----------
+
+  inline const MPI_Comm &
+  MatrixFree::get_mpi_communicator() const
+  {
+    return communicator;
+  }
 } // namespace PETScWrappers
 
 DEAL_II_NAMESPACE_CLOSE
 
-#endif // DEAL_II_WITH_PETSC
+#  endif // DEAL_II_WITH_PETSC
 
 #endif
+/*---------------------------- petsc_matrix_free.h --------------------------*/

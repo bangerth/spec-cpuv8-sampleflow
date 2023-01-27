@@ -24,8 +24,12 @@
 
 #include <deal.II/fe/fe.h>
 #include <deal.II/fe/fe_values.h>
+#include <deal.II/fe/mapping_q1.h>
 
 #include <deal.II/grid/tria_iterator.h>
+
+#include <deal.II/hp/fe_values.h>
+#include <deal.II/hp/mapping_collection.h>
 
 #include <deal.II/lac/block_sparse_matrix.h>
 #include <deal.II/lac/block_vector.h>
@@ -66,6 +70,9 @@ namespace MatrixTools
     PETScWrappers::VectorBase &                           right_hand_side,
     const bool                                            eliminate_columns)
   {
+    (void)eliminate_columns;
+    Assert(eliminate_columns == false, ExcNotImplemented());
+
     Assert(matrix.n() == right_hand_side.size(),
            ExcDimensionMismatch(matrix.n(), right_hand_side.size()));
     Assert(matrix.n() == solution.size(),
@@ -115,11 +122,7 @@ namespace MatrixTools
         // preserving it. this is different from
         // the case of deal.II sparse matrices
         // treated in the other functions.
-        if (eliminate_columns)
-          matrix.clear_rows_columns(constrained_rows,
-                                    average_nonzero_diagonal_entry);
-        else
-          matrix.clear_rows(constrained_rows, average_nonzero_diagonal_entry);
+        matrix.clear_rows(constrained_rows, average_nonzero_diagonal_entry);
 
         std::vector<types::global_dof_index> indices;
         std::vector<PetscScalar>             solution_values;
@@ -143,10 +146,7 @@ namespace MatrixTools
         // clear_rows() is a collective operation so we still have to call
         // it:
         std::vector<types::global_dof_index> constrained_rows;
-        if (eliminate_columns)
-          matrix.clear_rows_columns(constrained_rows, 1.);
-        else
-          matrix.clear_rows(constrained_rows, 1.);
+        matrix.clear_rows(constrained_rows, 1.);
       }
 
     // clean up
@@ -163,7 +163,6 @@ namespace MatrixTools
     PETScWrappers::MPI::BlockVector &                     right_hand_side,
     const bool                                            eliminate_columns)
   {
-    Assert(eliminate_columns == false, ExcNotImplemented());
     Assert(matrix.n() == right_hand_side.size(),
            ExcDimensionMismatch(matrix.n(), right_hand_side.size()));
     Assert(matrix.n() == solution.size(),

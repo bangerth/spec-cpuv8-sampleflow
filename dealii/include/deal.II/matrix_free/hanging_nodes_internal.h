@@ -24,7 +24,6 @@
 #include <deal.II/dofs/dof_accessor.h>
 
 #include <deal.II/fe/fe_q.h>
-#include <deal.II/fe/fe_q_iso_q1.h>
 #include <deal.II/fe/fe_tools.h>
 
 #include <deal.II/hp/fe_collection.h>
@@ -199,7 +198,7 @@ namespace internal
      * would be an integer which would in turn trigger a compiler warning when
      * we tried to assign it to an object of type UpdateFlags.
      */
-    DEAL_II_HOST_DEVICE inline ConstraintKinds
+    DEAL_II_CUDA_HOST_DEV inline ConstraintKinds
     operator|(const ConstraintKinds f1, const ConstraintKinds f2)
     {
       return static_cast<ConstraintKinds>(static_cast<std::uint16_t>(f1) |
@@ -212,7 +211,7 @@ namespace internal
      * Global operator which sets the bits from the second argument also in the
      * first one.
      */
-    DEAL_II_HOST_DEVICE inline ConstraintKinds &
+    DEAL_II_CUDA_HOST_DEV inline ConstraintKinds &
     operator|=(ConstraintKinds &f1, const ConstraintKinds f2)
     {
       f1 = f1 | f2;
@@ -224,7 +223,7 @@ namespace internal
     /**
      * Global operator which checks inequality.
      */
-    DEAL_II_HOST_DEVICE inline bool
+    DEAL_II_CUDA_HOST_DEV inline bool
     operator!=(const ConstraintKinds f1, const ConstraintKinds f2)
     {
       return static_cast<std::uint16_t>(f1) != static_cast<std::uint16_t>(f2);
@@ -236,7 +235,7 @@ namespace internal
      * Global operator which checks if the first argument is less than the
      * second.
      */
-    DEAL_II_HOST_DEVICE inline bool
+    DEAL_II_CUDA_HOST_DEV inline bool
     operator<(const ConstraintKinds f1, const ConstraintKinds f2)
     {
       return static_cast<std::uint16_t>(f1) < static_cast<std::uint16_t>(f2);
@@ -247,7 +246,7 @@ namespace internal
     /**
      * Global operator which performs a binary and for the provided arguments.
      */
-    DEAL_II_HOST_DEVICE inline ConstraintKinds
+    DEAL_II_CUDA_HOST_DEV inline ConstraintKinds
     operator&(const ConstraintKinds f1, const ConstraintKinds f2)
     {
       return static_cast<ConstraintKinds>(static_cast<std::uint16_t>(f1) &
@@ -259,8 +258,9 @@ namespace internal
     /**
      * This class creates the mask used in the treatment of hanging nodes in
      * CUDAWrappers::MatrixFree.
-     * The implementation of this class is explained in detail in
-     * @cite munch2022hn.
+     * The implementation of this class is explained in Section 3 of
+     * @cite ljungkvist2017matrix and in Section 3.4 of
+     * @cite kronbichler2019multigrid.
      */
     template <int dim>
     class HangingNodes
@@ -270,12 +270,6 @@ namespace internal
        * Constructor.
        */
       HangingNodes(const Triangulation<dim> &triangualtion);
-
-      /**
-       * Return the memory consumption of the allocated memory in this class.
-       */
-      std::size_t
-      memory_consumption() const;
 
       /**
        * Compute the value of the constraint mask for a given cell.
@@ -364,15 +358,6 @@ namespace internal
       // for pure hex meshes)
       if (triangulation.all_reference_cells_are_hyper_cube())
         setup_line_to_cell(triangulation);
-    }
-
-
-
-    template <int dim>
-    inline std::size_t
-    HangingNodes<dim>::memory_consumption() const
-    {
-      return MemoryConsumption::memory_consumption(line_to_cells);
     }
 
 
@@ -492,13 +477,9 @@ namespace internal
             for (unsigned int c = 0;
                  c < fe_collection[i].element_multiplicity(base_element_index);
                  ++c, ++comp)
-              if (dim == 1 ||
-                  (dynamic_cast<const FE_Q<dim> *>(
-                     &fe_collection[i].base_element(base_element_index)) ==
-                     nullptr &&
-                   dynamic_cast<const FE_Q_iso_Q1<dim> *>(
-                     &fe_collection[i].base_element(base_element_index)) ==
-                     nullptr))
+              if (dim == 1 || dynamic_cast<const FE_Q<dim> *>(
+                                &fe_collection[i].base_element(
+                                  base_element_index)) == nullptr)
                 supported_components[i][comp] = false;
               else
                 supported_components[i][comp] = true;
@@ -549,10 +530,6 @@ namespace internal
               neighbor->level() == cell->level())
             continue;
 
-          // Ignore if the neighbors are FE_Nothing
-          if (neighbor->get_fe().n_dofs_per_cell() == 0)
-            continue;
-
           face |= 1 << direction;
         }
 
@@ -573,16 +550,10 @@ namespace internal
                 std::find_if(line_to_cells[line_index].begin(),
                              line_to_cells[line_index].end(),
                              [&cell](const auto &edge_neighbor) {
-                               DoFCellAccessor<dim, dim, false> dof_cell(
-                                 &edge_neighbor.first->get_triangulation(),
-                                 edge_neighbor.first->level(),
-                                 edge_neighbor.first->index(),
-                                 &cell->get_dof_handler());
                                return edge_neighbor.first->is_artificial() ==
                                         false &&
                                       edge_neighbor.first->level() <
-                                        cell->level() &&
-                                      dof_cell.get_fe().n_dofs_per_cell() > 0;
+                                        cell->level();
                              });
 
               if (edge_neighbor == line_to_cells[line_index].end())

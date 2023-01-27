@@ -18,7 +18,6 @@
 
 #include <deal.II/base/config.h>
 
-#include <deal.II/base/mutex.h>
 #include <deal.II/base/polynomials_barycentric.h>
 
 #include <deal.II/fe/fe_poly.h>

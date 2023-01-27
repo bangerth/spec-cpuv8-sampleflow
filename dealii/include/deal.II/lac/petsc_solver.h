@@ -14,45 +14,45 @@
 // ---------------------------------------------------------------------
 
 #ifndef dealii_petsc_solver_h
-#define dealii_petsc_solver_h
+#  define dealii_petsc_solver_h
 
 
-#include <deal.II/base/config.h>
+#  include <deal.II/base/config.h>
 
-#ifdef DEAL_II_WITH_PETSC
+#  ifdef DEAL_II_WITH_PETSC
 
-#  include <deal.II/lac/exceptions.h>
-#  include <deal.II/lac/solver_control.h>
+#    include <deal.II/lac/exceptions.h>
+#    include <deal.II/lac/solver_control.h>
 
-#  include <petscksp.h>
+#    include <petscksp.h>
 
-#  include <memory>
+#    include <memory>
 
-#  ifdef DEAL_II_WITH_SLEPC
-#    include <deal.II/lac/slepc_spectral_transformation.h>
-#  endif
+#    ifdef DEAL_II_WITH_SLEPC
+#      include <deal.II/lac/slepc_spectral_transformation.h>
+#    endif
 
 DEAL_II_NAMESPACE_OPEN
 
 // Forward declarations
-#  ifndef DOXYGEN
-#    ifdef DEAL_II_WITH_SLEPC
+#    ifndef DOXYGEN
+#      ifdef DEAL_II_WITH_SLEPC
 namespace SLEPcWrappers
 {
   // forward declarations
   class TransformationBase;
 } // namespace SLEPcWrappers
+#      endif
 #    endif
-#  endif
 
 namespace PETScWrappers
 {
   // forward declarations
-#  ifndef DOXYGEN
+#    ifndef DOXYGEN
   class MatrixBase;
   class VectorBase;
   class PreconditionBase;
-#  endif
+#    endif
 
 
   /**
@@ -83,15 +83,45 @@ namespace PETScWrappers
    * object. This is done for performance reasons. The solver and
    * preconditioner can be reset by calling reset().
    *
+   * One of the gotchas of PETSc is that -- in particular in MPI mode -- it
+   * often does not produce very helpful error messages. In order to save
+   * other users some time in searching a hard to track down error, here is
+   * one situation and the error message one gets there: when you don't
+   * specify an MPI communicator to your solver's constructor. In this case,
+   * you will get an error of the following form from each of your parallel
+   * processes:
+   * @verbatim
+   *   [1]PETSC ERROR: PCSetVector() line 1173 in src/ksp/pc/interface/precon.c
+   *   [1]PETSC ERROR:   Arguments must have same communicators!
+   *   [1]PETSC ERROR:   Different communicators in the two objects: Argument #
+   * 1 and 2! [1]PETSC ERROR: KSPSetUp() line 195 in
+   * src/ksp/ksp/interface/itfunc.c
+   * @endverbatim
+   *
+   * This error, on which one can spend a very long time figuring out what
+   * exactly goes wrong, results from not specifying an MPI communicator. Note
+   * that the communicator @em must match that of the matrix and all vectors
+   * in the linear system which we want to solve. Aggravating the situation is
+   * the fact that the default argument to the solver classes, @p
+   * PETSC_COMM_SELF, is the appropriate argument for the sequential case
+   * (which is why it is the default argument), so this error only shows up in
+   * parallel mode.
+   *
    * @ingroup PETScWrappers
    */
   class SolverBase
   {
   public:
     /**
-     * Constructor.
+     * Constructor. Takes the solver control object and the MPI communicator
+     * over which parallel computations are to happen.
+     *
+     * Note that the communicator used here must match the communicator used
+     * in the system matrix, solution, and right hand side object of the solve
+     * to be done with this solver. Otherwise, PETSc will generate hard to
+     * track down errors, see the documentation of the SolverBase class.
      */
-    SolverBase(SolverControl &cn);
+    SolverBase(SolverControl &cn, const MPI_Comm &mpi_communicator);
 
     /**
      * Destructor.
@@ -149,6 +179,11 @@ namespace PETScWrappers
      * and copy the data back into it afterwards.
      */
     SolverControl &solver_control;
+
+    /**
+     * Copy of the MPI communicator object to be used for the solver.
+     */
+    const MPI_Comm mpi_communicator;
 
     /**
      * %Function that takes a Krylov Subspace Solver context object, and sets
@@ -215,11 +250,11 @@ namespace PETScWrappers
      */
     std::unique_ptr<SolverData> solver_data;
 
-#  ifdef DEAL_II_WITH_SLEPC
+#    ifdef DEAL_II_WITH_SLEPC
     // Make the transformation class a friend, since it needs to set the KSP
     // solver.
     friend class SLEPcWrappers::TransformationBase;
-#  endif
+#    endif
   };
 
 
@@ -251,24 +286,23 @@ namespace PETScWrappers
 
     /**
      * Constructor. In contrast to deal.II's own solvers, there is no need to
-     * give a vector memory object.
+     * give a vector memory object. However, PETSc solvers want to have an MPI
+     * communicator context over which computations are parallelized. By
+     * default, @p PETSC_COMM_SELF is used here, but you can change this. Note
+     * that for single processor (non-MPI) versions, this parameter does not
+     * have any effect.
      *
      * The last argument takes a structure with additional, solver dependent
      * flags for tuning.
-     */
-    SolverRichardson(SolverControl &       cn,
-                     const AdditionalData &data = AdditionalData());
-
-    /**
-     * Constructor. This constructor is deprecated and ignores the MPI
-     * communicator argument. Use the other constructor instead.
      *
-     * @deprecated
+     * Note that the communicator used here must match the communicator used
+     * in the system matrix, solution, and right hand side object of the solve
+     * to be done with this solver. Otherwise, PETSc will generate hard to
+     * track down errors, see the documentation of the SolverBase class.
      */
-    DEAL_II_DEPRECATED_EARLY
     SolverRichardson(SolverControl &       cn,
-                     const MPI_Comm &      mpi_communicator,
-                     const AdditionalData &data = AdditionalData());
+                     const MPI_Comm &      mpi_communicator = PETSC_COMM_SELF,
+                     const AdditionalData &data             = AdditionalData());
 
   protected:
     /**
@@ -303,24 +337,23 @@ namespace PETScWrappers
 
     /**
      * Constructor. In contrast to deal.II's own solvers, there is no need to
-     * give a vector memory object.
+     * give a vector memory object. However, PETSc solvers want to have an MPI
+     * communicator context over which computations are parallelized. By
+     * default, @p PETSC_COMM_SELF is used here, but you can change this. Note
+     * that for single processor (non-MPI) versions, this parameter does not
+     * have any effect.
      *
      * The last argument takes a structure with additional, solver dependent
      * flags for tuning.
-     */
-    SolverChebychev(SolverControl &       cn,
-                    const AdditionalData &data = AdditionalData());
-
-    /**
-     * Constructor. This constructor is deprecated and ignores the MPI
-     * communicator argument. Use the other constructor instead.
      *
-     * @deprecated
+     * Note that the communicator used here must match the communicator used
+     * in the system matrix, solution, and right hand side object of the solve
+     * to be done with this solver. Otherwise, PETSc will generate hard to
+     * track down errors, see the documentation of the SolverBase class.
      */
-    DEAL_II_DEPRECATED_EARLY
     SolverChebychev(SolverControl &       cn,
-                    const MPI_Comm &      mpi_communicator,
-                    const AdditionalData &data = AdditionalData());
+                    const MPI_Comm &      mpi_communicator = PETSC_COMM_SELF,
+                    const AdditionalData &data             = AdditionalData());
 
   protected:
     /**
@@ -354,23 +387,23 @@ namespace PETScWrappers
 
     /**
      * Constructor. In contrast to deal.II's own solvers, there is no need to
-     * give a vector memory object.
+     * give a vector memory object. However, PETSc solvers want to have an MPI
+     * communicator context over which computations are parallelized. By
+     * default, @p PETSC_COMM_SELF is used here, but you can change this. Note
+     * that for single processor (non-MPI) versions, this parameter does not
+     * have any effect.
      *
      * The last argument takes a structure with additional, solver dependent
      * flags for tuning.
-     */
-    SolverCG(SolverControl &cn, const AdditionalData &data = AdditionalData());
-
-    /**
-     * Constructor. This constructor is deprecated and ignores the MPI
-     * communicator argument. Use the other constructor instead.
      *
-     * @deprecated
+     * Note that the communicator used here must match the communicator used
+     * in the system matrix, solution, and right hand side object of the solve
+     * to be done with this solver. Otherwise, PETSc will generate hard to
+     * track down errors, see the documentation of the SolverBase class.
      */
-    DEAL_II_DEPRECATED_EARLY
     SolverCG(SolverControl &       cn,
-             const MPI_Comm &      mpi_communicator,
-             const AdditionalData &data = AdditionalData());
+             const MPI_Comm &      mpi_communicator = PETSC_COMM_SELF,
+             const AdditionalData &data             = AdditionalData());
 
   protected:
     /**
@@ -404,24 +437,23 @@ namespace PETScWrappers
 
     /**
      * Constructor. In contrast to deal.II's own solvers, there is no need to
-     * give a vector memory object.
+     * give a vector memory object. However, PETSc solvers want to have an MPI
+     * communicator context over which computations are parallelized. By
+     * default, @p PETSC_COMM_SELF is used here, but you can change this. Note
+     * that for single processor (non-MPI) versions, this parameter does not
+     * have any effect.
      *
      * The last argument takes a structure with additional, solver dependent
      * flags for tuning.
-     */
-    SolverBiCG(SolverControl &       cn,
-               const AdditionalData &data = AdditionalData());
-
-    /**
-     * Constructor. This constructor is deprecated and ignores the MPI
-     * communicator argument. Use the other constructor instead.
      *
-     * @deprecated
+     * Note that the communicator used here must match the communicator used
+     * in the system matrix, solution, and right hand side object of the solve
+     * to be done with this solver. Otherwise, PETSc will generate hard to
+     * track down errors, see the documentation of the SolverBase class.
      */
-    DEAL_II_DEPRECATED_EARLY
     SolverBiCG(SolverControl &       cn,
-               const MPI_Comm &      mpi_communicator,
-               const AdditionalData &data = AdditionalData());
+               const MPI_Comm &      mpi_communicator = PETSC_COMM_SELF,
+               const AdditionalData &data             = AdditionalData());
 
   protected:
     /**
@@ -472,24 +504,23 @@ namespace PETScWrappers
 
     /**
      * Constructor. In contrast to deal.II's own solvers, there is no need to
-     * give a vector memory object.
+     * give a vector memory object. However, PETSc solvers want to have an MPI
+     * communicator context over which computations are parallelized. By
+     * default, @p PETSC_COMM_SELF is used here, but you can change this. Note
+     * that for single processor (non-MPI) versions, this parameter does not
+     * have any effect.
      *
      * The last argument takes a structure with additional, solver dependent
      * flags for tuning.
-     */
-    SolverGMRES(SolverControl &       cn,
-                const AdditionalData &data = AdditionalData());
-
-    /**
-     * Constructor. This constructor is deprecated and ignores the MPI
-     * communicator argument. Use the other constructor instead.
      *
-     * @deprecated
+     * Note that the communicator used here must match the communicator used
+     * in the system matrix, solution, and right hand side object of the solve
+     * to be done with this solver. Otherwise, PETSc will generate hard to
+     * track down errors, see the documentation of the SolverBase class.
      */
-    DEAL_II_DEPRECATED_EARLY
     SolverGMRES(SolverControl &       cn,
-                const MPI_Comm &      mpi_communicator,
-                const AdditionalData &data = AdditionalData());
+                const MPI_Comm &      mpi_communicator = PETSC_COMM_SELF,
+                const AdditionalData &data             = AdditionalData());
 
   protected:
     /**
@@ -524,24 +555,23 @@ namespace PETScWrappers
 
     /**
      * Constructor. In contrast to deal.II's own solvers, there is no need to
-     * give a vector memory object.
+     * give a vector memory object. However, PETSc solvers want to have an MPI
+     * communicator context over which computations are parallelized. By
+     * default, @p PETSC_COMM_SELF is used here, but you can change this. Note
+     * that for single processor (non-MPI) versions, this parameter does not
+     * have any effect.
      *
      * The last argument takes a structure with additional, solver dependent
      * flags for tuning.
-     */
-    SolverBicgstab(SolverControl &       cn,
-                   const AdditionalData &data = AdditionalData());
-
-    /**
-     * Constructor. This constructor is deprecated and ignores the MPI
-     * communicator argument. Use the other constructor instead.
      *
-     * @deprecated
+     * Note that the communicator used here must match the communicator used
+     * in the system matrix, solution, and right hand side object of the solve
+     * to be done with this solver. Otherwise, PETSc will generate hard to
+     * track down errors, see the documentation of the SolverBase class.
      */
-    DEAL_II_DEPRECATED_EARLY
     SolverBicgstab(SolverControl &       cn,
-                   const MPI_Comm &      mpi_communicator,
-                   const AdditionalData &data = AdditionalData());
+                   const MPI_Comm &      mpi_communicator = PETSC_COMM_SELF,
+                   const AdditionalData &data             = AdditionalData());
 
   protected:
     /**
@@ -556,8 +586,6 @@ namespace PETScWrappers
     virtual void
     set_solver_type(KSP &ksp) const override;
   };
-
-
 
   /**
    * An implementation of the solver interface using the PETSc CG Squared
@@ -576,23 +604,23 @@ namespace PETScWrappers
 
     /**
      * Constructor. In contrast to deal.II's own solvers, there is no need to
-     * give a vector memory object.
+     * give a vector memory object. However, PETSc solvers want to have an MPI
+     * communicator context over which computations are parallelized. By
+     * default, @p PETSC_COMM_SELF is used here, but you can change this. Note
+     * that for single processor (non-MPI) versions, this parameter does not
+     * have any effect.
      *
      * The last argument takes a structure with additional, solver dependent
      * flags for tuning.
-     */
-    SolverCGS(SolverControl &cn, const AdditionalData &data = AdditionalData());
-
-    /**
-     * Constructor. This constructor is deprecated and ignores the MPI
-     * communicator argument. Use the other constructor instead.
      *
-     * @deprecated
+     * Note that the communicator used here must match the communicator used
+     * in the system matrix, solution, and right hand side object of the solve
+     * to be done with this solver. Otherwise, PETSc will generate hard to
+     * track down errors, see the documentation of the SolverBase class.
      */
-    DEAL_II_DEPRECATED_EARLY
     SolverCGS(SolverControl &       cn,
-              const MPI_Comm &      mpi_communicator,
-              const AdditionalData &data = AdditionalData());
+              const MPI_Comm &      mpi_communicator = PETSC_COMM_SELF,
+              const AdditionalData &data             = AdditionalData());
 
   protected:
     /**
@@ -626,24 +654,23 @@ namespace PETScWrappers
 
     /**
      * Constructor. In contrast to deal.II's own solvers, there is no need to
-     * give a vector memory object.
+     * give a vector memory object. However, PETSc solvers want to have an MPI
+     * communicator context over which computations are parallelized. By
+     * default, @p PETSC_COMM_SELF is used here, but you can change this. Note
+     * that for single processor (non-MPI) versions, this parameter does not
+     * have any effect.
      *
      * The last argument takes a structure with additional, solver dependent
      * flags for tuning.
-     */
-    SolverTFQMR(SolverControl &       cn,
-                const AdditionalData &data = AdditionalData());
-
-    /**
-     * Constructor. This constructor is deprecated and ignores the MPI
-     * communicator argument. Use the other constructor instead.
      *
-     * @deprecated
+     * Note that the communicator used here must match the communicator used
+     * in the system matrix, solution, and right hand side object of the solve
+     * to be done with this solver. Otherwise, PETSc will generate hard to
+     * track down errors, see the documentation of the SolverBase class.
      */
-    DEAL_II_DEPRECATED_EARLY
     SolverTFQMR(SolverControl &       cn,
-                const MPI_Comm &      mpi_communicator,
-                const AdditionalData &data = AdditionalData());
+                const MPI_Comm &      mpi_communicator = PETSC_COMM_SELF,
+                const AdditionalData &data             = AdditionalData());
 
   protected:
     /**
@@ -682,24 +709,23 @@ namespace PETScWrappers
 
     /**
      * Constructor. In contrast to deal.II's own solvers, there is no need to
-     * give a vector memory object.
+     * give a vector memory object. However, PETSc solvers want to have an MPI
+     * communicator context over which computations are parallelized. By
+     * default, @p PETSC_COMM_SELF is used here, but you can change this. Note
+     * that for single processor (non-MPI) versions, this parameter does not
+     * have any effect.
      *
      * The last argument takes a structure with additional, solver dependent
      * flags for tuning.
-     */
-    SolverTCQMR(SolverControl &       cn,
-                const AdditionalData &data = AdditionalData());
-
-    /**
-     * Constructor. This constructor is deprecated and ignores the MPI
-     * communicator argument. Use the other constructor instead.
      *
-     * @deprecated
+     * Note that the communicator used here must match the communicator used
+     * in the system matrix, solution, and right hand side object of the solve
+     * to be done with this solver. Otherwise, PETSc will generate hard to
+     * track down errors, see the documentation of the SolverBase class.
      */
-    DEAL_II_DEPRECATED_EARLY
     SolverTCQMR(SolverControl &       cn,
-                const MPI_Comm &      mpi_communicator,
-                const AdditionalData &data = AdditionalData());
+                const MPI_Comm &      mpi_communicator = PETSC_COMM_SELF,
+                const AdditionalData &data             = AdditionalData());
 
   protected:
     /**
@@ -733,23 +759,23 @@ namespace PETScWrappers
 
     /**
      * Constructor. In contrast to deal.II's own solvers, there is no need to
-     * give a vector memory object.
+     * give a vector memory object. However, PETSc solvers want to have an MPI
+     * communicator context over which computations are parallelized. By
+     * default, @p PETSC_COMM_SELF is used here, but you can change this. Note
+     * that for single processor (non-MPI) versions, this parameter does not
+     * have any effect.
      *
      * The last argument takes a structure with additional, solver dependent
      * flags for tuning.
-     */
-    SolverCR(SolverControl &cn, const AdditionalData &data = AdditionalData());
-
-    /**
-     * Constructor. This constructor is deprecated and ignores the MPI
-     * communicator argument. Use the other constructor instead.
      *
-     * @deprecated
+     * Note that the communicator used here must match the communicator used
+     * in the system matrix, solution, and right hand side object of the solve
+     * to be done with this solver. Otherwise, PETSc will generate hard to
+     * track down errors, see the documentation of the SolverBase class.
      */
-    DEAL_II_DEPRECATED_EARLY
     SolverCR(SolverControl &       cn,
-             const MPI_Comm &      mpi_communicator,
-             const AdditionalData &data = AdditionalData());
+             const MPI_Comm &      mpi_communicator = PETSC_COMM_SELF,
+             const AdditionalData &data             = AdditionalData());
 
   protected:
     /**
@@ -784,24 +810,23 @@ namespace PETScWrappers
 
     /**
      * Constructor. In contrast to deal.II's own solvers, there is no need to
-     * give a vector memory object.
+     * give a vector memory object. However, PETSc solvers want to have an MPI
+     * communicator context over which computations are parallelized. By
+     * default, @p PETSC_COMM_SELF is used here, but you can change this. Note
+     * that for single processor (non-MPI) versions, this parameter does not
+     * have any effect.
      *
      * The last argument takes a structure with additional, solver dependent
      * flags for tuning.
-     */
-    SolverLSQR(SolverControl &       cn,
-               const AdditionalData &data = AdditionalData());
-
-    /**
-     * Constructor. This constructor is deprecated and ignores the MPI
-     * communicator argument. Use the other constructor instead.
      *
-     * @deprecated
+     * Note that the communicator used here must match the communicator used
+     * in the system matrix, solution, and right hand side object of the solve
+     * to be done with this solver. Otherwise, PETSc will generate hard to
+     * track down errors, see the documentation of the SolverBase class.
      */
-    DEAL_II_DEPRECATED_EARLY
     SolverLSQR(SolverControl &       cn,
-               const MPI_Comm &      mpi_communicator,
-               const AdditionalData &data = AdditionalData());
+               const MPI_Comm &      mpi_communicator = PETSC_COMM_SELF,
+               const AdditionalData &data             = AdditionalData());
 
   protected:
     /**
@@ -840,24 +865,23 @@ namespace PETScWrappers
 
     /**
      * Constructor. In contrast to deal.II's own solvers, there is no need to
-     * give a vector memory object.
+     * give a vector memory object. However, PETSc solvers want to have an MPI
+     * communicator context over which computations are parallelized. By
+     * default, @p PETSC_COMM_SELF is used here, but you can change this. Note
+     * that for single processor (non-MPI) versions, this parameter does not
+     * have any effect.
      *
      * The last argument takes a structure with additional, solver dependent
      * flags for tuning.
-     */
-    SolverPreOnly(SolverControl &       cn,
-                  const AdditionalData &data = AdditionalData());
-
-    /**
-     * Constructor. This constructor is deprecated and ignores the MPI
-     * communicator argument. Use the other constructor instead.
      *
-     * @deprecated
+     * Note that the communicator used here must match the communicator used
+     * in the system matrix, solution, and right hand side object of the solve
+     * to be done with this solver. Otherwise, PETSc will generate hard to
+     * track down errors, see the documentation of the SolverBase class.
      */
-    DEAL_II_DEPRECATED_EARLY
     SolverPreOnly(SolverControl &       cn,
-                  const MPI_Comm &      mpi_communicator,
-                  const AdditionalData &data = AdditionalData());
+                  const MPI_Comm &      mpi_communicator = PETSC_COMM_SELF,
+                  const AdditionalData &data             = AdditionalData());
 
   protected:
     /**
@@ -904,22 +928,11 @@ namespace PETScWrappers
      */
     struct AdditionalData
     {};
-
     /**
-     * Constructor.
+     * Constructor
      */
     SparseDirectMUMPS(SolverControl &       cn,
-                      const AdditionalData &data = AdditionalData());
-
-    /**
-     * Constructor. This constructor is deprecated and ignores the MPI
-     * communicator argument. Use the other constructor instead.
-     *
-     * @deprecated
-     */
-    DEAL_II_DEPRECATED_EARLY
-    SparseDirectMUMPS(SolverControl &       cn,
-                      const MPI_Comm &      mpi_communicator,
+                      const MPI_Comm &      mpi_communicator = PETSC_COMM_SELF,
                       const AdditionalData &data = AdditionalData());
 
     /**
@@ -987,6 +1000,9 @@ namespace PETScWrappers
 
 DEAL_II_NAMESPACE_CLOSE
 
-#endif // DEAL_II_WITH_PETSC
+#  endif // DEAL_II_WITH_PETSC
+
+/*----------------------------   petsc_solver.h ---------------------------*/
 
 #endif
+/*----------------------------   petsc_solver.h ---------------------------*/

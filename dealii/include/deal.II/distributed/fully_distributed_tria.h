@@ -19,12 +19,14 @@
 
 #include <deal.II/base/config.h>
 
-#include <deal.II/base/mpi_stub.h>
-
 #include <deal.II/distributed/repartitioning_policy_tools.h>
 #include <deal.II/distributed/tria_base.h>
 
 #include <vector>
+
+#ifdef DEAL_II_WITH_MPI
+#  include <mpi.h>
+#endif
 
 DEAL_II_NAMESPACE_OPEN
 
@@ -264,7 +266,7 @@ namespace parallel
        *
        * @deprecated The autopartition parameter has been removed.
        */
-      DEAL_II_DEPRECATED
+      DEAL_II_DEPRECATED_EARLY
       virtual void
       load(const std::string &filename, const bool autopartition) override;
 

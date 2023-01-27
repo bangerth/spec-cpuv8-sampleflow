@@ -20,7 +20,7 @@
 #include <deal.II/base/config.h>
 
 #include <deal.II/base/geometry_info.h>
-#include <deal.II/base/mpi_stub.h>
+#include <deal.II/base/mpi.h>
 #include <deal.II/base/point.h>
 #include <deal.II/base/table.h>
 
@@ -202,44 +202,24 @@ class XDMFEntry;
  * writing the section headers and the new output stream class for writing a
  * single mesh object.
  *
+ * <h3>Credits</h3>
+ * <ul>
+ *
+ * <li>EPS output based on an earlier implementation by Stefan Nauber for the
+ * old DataOut class
+ *
+ * <li>Povray output by Thomas Richter
+ *
+ * <li>Tecplot output by Benjamin Shelton Kirk
+ *
+ * <li>Lagrange VTK output by Alexander Grayver
+ *
+ * </ul>
+ *
  * @ingroup output
  */
 namespace DataOutBase
 {
-  /**
-   * An enum for different levels of compression used in several places
-   * to determine zlib compression levels for binary output. At some
-   * places, it is possible to output the data also as plain text as
-   * an alternative, which is convenient for debugging. We use
-   * this flag to indicate such an output as well.
-   */
-  enum class CompressionLevel
-  {
-    /**
-     * Do not use any compression.
-     */
-    no_compression,
-    /**
-     * Use the fastest available compression algorithm.
-     */
-    best_speed,
-    /**
-     * Use the algorithm which results in the smallest compressed
-     * files. This is the default flag.
-     */
-    best_compression,
-    /**
-     * Use the default compression algorithm. This is a compromise between
-     * speed and file size.
-     */
-    default_compression,
-    /**
-     * Output as plain text (ASCII) if available.
-     */
-    plain_text
-  };
-
-
   /**
    * Data structure describing a patch of data in <tt>dim</tt> space
    * dimensions.
@@ -281,23 +261,13 @@ namespace DataOutBase
      *
      * The order of points is the same as for cells in the
      * triangulation.
-     *
-     * @note This array is sized to accommodate the maximal number of vertices
-     *   one might encounter in a cell, namely those for a hypercube cell.
-     *   For other kinds of cells (triangles, tetrahedra, etc.), only the
-     *   first few elements of this array will be used.
      */
-    std::array<Point<spacedim>, GeometryInfo<dim>::vertices_per_cell> vertices;
+    Point<spacedim> vertices[GeometryInfo<dim>::vertices_per_cell];
 
     /**
      * Patch indices of neighbors of the current patch. This is made available
      * for the OpenDX format that requires neighbor
      * information for advanced output.
-     *
-     * @note This array is sized to accommodate the maximal number of faces
-     *   one might encounter in a cell, namely those for a hypercube cell.
-     *   For other kinds of cells (triangles, tetrahedra, etc.), only the
-     *   first few elements of this array will be used.
      */
     std::array<unsigned int, GeometryInfo<dim>::faces_per_cell> neighbors;
 
@@ -404,7 +374,7 @@ namespace DataOutBase
       << "It is not possible to have a structural dimension of " << arg1
       << " to be larger than the space dimension of the surrounding"
       << " space " << arg2);
-    /** @} */
+    //@}
   };
 
 
@@ -556,7 +526,7 @@ namespace DataOutBase
       << "It is not possible to have a structural dimension of " << arg1
       << " to be larger than the space dimension of the surrounding"
       << " space " << arg2);
-    /** @} */
+    //@}
   };
 
 
@@ -1154,26 +1124,34 @@ namespace DataOutBase
     /**
      * A data type providing the different possible zlib compression
      * levels. These map directly to constants defined by zlib.
-     *
-     * @deprecated Use DataOutBase::CompressionLevel instead.
      */
-    using ZlibCompressionLevel DEAL_II_DEPRECATED =
-      DataOutBase::CompressionLevel;
-
-    DEAL_II_DEPRECATED static const DataOutBase::CompressionLevel
-      no_compression = DataOutBase::CompressionLevel::no_compression;
-    DEAL_II_DEPRECATED static const DataOutBase::CompressionLevel
-      best_compression = DataOutBase::CompressionLevel::best_compression;
-    DEAL_II_DEPRECATED static const DataOutBase::CompressionLevel best_speed =
-      DataOutBase::CompressionLevel::best_speed;
-    DEAL_II_DEPRECATED static const DataOutBase::CompressionLevel
-      default_compression = DataOutBase::CompressionLevel::default_compression;
+    enum ZlibCompressionLevel
+    {
+      /**
+       * Do not use any compression.
+       */
+      no_compression,
+      /**
+       * Use the fastest available compression algorithm.
+       */
+      best_speed,
+      /**
+       * Use the algorithm which results in the smallest compressed
+       * files. This is the default flag.
+       */
+      best_compression,
+      /**
+       * Use the default compression algorithm. This is a compromise between
+       * speed and file size.
+       */
+      default_compression
+    };
 
     /**
      * Flag determining the compression level at which zlib, if available, is
      * run. The default is <tt>best_compression</tt>.
      */
-    DataOutBase::CompressionLevel compression_level;
+    ZlibCompressionLevel compression_level;
 
     /**
      * Flag determining whether to write patches as linear cells
@@ -1221,13 +1199,12 @@ namespace DataOutBase
      * Constructor. Initializes the member variables with names corresponding
      * to the argument names of this function.
      */
-    explicit VtkFlags(
-      const double           time  = std::numeric_limits<double>::min(),
-      const unsigned int     cycle = std::numeric_limits<unsigned int>::min(),
-      const bool             print_date_and_time = true,
-      const CompressionLevel compression_level =
-        CompressionLevel::best_compression,
-      const bool write_higher_order_cells                      = false,
+    VtkFlags(
+      const double       time  = std::numeric_limits<double>::min(),
+      const unsigned int cycle = std::numeric_limits<unsigned int>::min(),
+      const bool         print_date_and_time              = true,
+      const ZlibCompressionLevel compression_level        = best_compression,
+      const bool                 write_higher_order_cells = false,
       const std::map<std::string, std::string> &physical_units = {});
   };
 
@@ -1418,9 +1395,11 @@ namespace DataOutBase
      */
     template <int dim>
     void
-    write_cell(const unsigned int                   index,
-               const unsigned int                   start,
-               const std::array<unsigned int, dim> &offsets);
+    write_cell(const unsigned int index,
+               const unsigned int start,
+               const unsigned int d1,
+               const unsigned int d2,
+               const unsigned int d3);
 
     /**
      * Record a single deal.II cell without subdivisions (e.g. simplex) in the
@@ -2365,30 +2344,6 @@ namespace DataOutBase
     std::ostream &                   out);
 
   /**
-   * Like write_deal_II_intermediate() but write all patches from all ranks
-   * using MPI I/O
-   * into a single file with name @p name. Compression using zlib is optional and controlled
-   * by the @p compression argument.
-   *
-   * The files typically have the extension <tt>.pd2</tt>.
-   */
-  template <int dim, int spacedim>
-  void
-  write_deal_II_intermediate_in_parallel(
-    const std::vector<Patch<dim, spacedim>> &patches,
-    const std::vector<std::string> &         data_names,
-    const std::vector<
-      std::tuple<unsigned int,
-                 unsigned int,
-                 std::string,
-                 DataComponentInterpretation::DataComponentInterpretation>>
-      &                              nonscalar_data_ranges,
-    const Deal_II_IntermediateFlags &flags,
-    const std::string &              filename,
-    const MPI_Comm &                 comm,
-    const CompressionLevel           compression);
-
-  /**
    * Write the data in @p data_filter to a single HDF5 file containing both the
    * mesh and solution values.
    */
@@ -2529,7 +2484,7 @@ namespace DataOutBase
                  << "There was an error opening Tecplot file " << arg1
                  << " for output.");
 
-  /** @} */
+  //@}
 } // namespace DataOutBase
 
 
@@ -2870,18 +2825,6 @@ public:
    */
   void
   write_deal_II_intermediate(std::ostream &out) const;
-
-  /**
-   * Obtain data through get_patches() and write it using MPI I/O in parallel
-   * to the file @p filename in the parallel
-   * deal.II intermediate format. See
-   * DataOutBase::write_deal_II_intermediate_in_parallel().
-   */
-  void
-  write_deal_II_intermediate_in_parallel(
-    const std::string &                 filename,
-    const MPI_Comm &                    comm,
-    const DataOutBase::CompressionLevel compression) const;
 
   /**
    * Create an XDMFEntry based on the data in the data_filter. This assumes
@@ -3243,14 +3186,6 @@ public:
   read(std::istream &in);
 
   /**
-   * Read all data previously written using
-   * DataOutBase::write_deal_II_intermediate_in_parallel() from all
-   * MPI ranks into this data structure.
-   */
-  void
-  read_whole_parallel_file(std::istream &in);
-
-  /**
    * This function can be used to merge the patches read by the other object
    * into the patches that this present object stores. This is sometimes handy
    * if one has, for example, a domain decomposition algorithm where each
@@ -3387,31 +3322,7 @@ public:
    * cases where <code>solution_filename == mesh_filename</code>, and
    * <code>dim==spacedim</code>.
    */
-  XDMFEntry(const std::string &  filename,
-            const double         time,
-            const std::uint64_t  nodes,
-            const std::uint64_t  cells,
-            const unsigned int   dim,
-            const ReferenceCell &cell_type);
-
-  /**
-   * Deprecated constructor.
-   *
-   * @deprecated Use the constructor that additionally takes a ReferenceCell.
-   */
   XDMFEntry(const std::string & filename,
-            const double        time,
-            const std::uint64_t nodes,
-            const std::uint64_t cells,
-            const unsigned int  dim);
-
-  /**
-   * Deprecated constructor.
-   *
-   * @deprecated Use the constructor that additionally takes a ReferenceCell.
-   */
-  XDMFEntry(const std::string & mesh_filename,
-            const std::string & solution_filename,
             const double        time,
             const std::uint64_t nodes,
             const std::uint64_t cells,
@@ -3421,20 +3332,16 @@ public:
    * Simplified constructor that calls the complete constructor for
    * cases where <code>dim==spacedim</code>.
    */
-  XDMFEntry(const std::string &  mesh_filename,
-            const std::string &  solution_filename,
-            const double         time,
-            const std::uint64_t  nodes,
-            const std::uint64_t  cells,
-            const unsigned int   dim,
-            const ReferenceCell &cell_type);
+  XDMFEntry(const std::string & mesh_filename,
+            const std::string & solution_filename,
+            const double        time,
+            const std::uint64_t nodes,
+            const std::uint64_t cells,
+            const unsigned int  dim);
 
   /**
-   * Deprecated constructor.
-   *
-   * @deprecated Use the constructor that additionally takes a ReferenceCell.
+   * Constructor that sets all members to provided parameters.
    */
-  DEAL_II_DEPRECATED
   XDMFEntry(const std::string & mesh_filename,
             const std::string & solution_filename,
             const double        time,
@@ -3442,18 +3349,6 @@ public:
             const std::uint64_t cells,
             const unsigned int  dim,
             const unsigned int  spacedim);
-
-  /**
-   * Constructor that sets all members to provided parameters.
-   */
-  XDMFEntry(const std::string &  mesh_filename,
-            const std::string &  solution_filename,
-            const double         time,
-            const std::uint64_t  nodes,
-            const std::uint64_t  cells,
-            const unsigned int   dim,
-            const unsigned int   spacedim,
-            const ReferenceCell &cell_type);
 
   /**
    * Record an attribute and associated dimensionality.
@@ -3471,23 +3366,24 @@ public:
   serialize(Archive &ar, const unsigned int /*version*/)
   {
     ar &valid &h5_sol_filename &h5_mesh_filename &entry_time &num_nodes
-      &num_cells &dimension &space_dimension &cell_type &attribute_dims;
+      &num_cells &dimension &space_dimension &attribute_dims;
   }
 
   /**
    * Get the XDMF content associated with this entry.
    * If the entry is not valid, this returns an empty string.
+   *
+   * @deprecated Use the overload taking an `unsigned int` and a
+   * `const ReferenceCell &` instead.
    */
+  DEAL_II_DEPRECATED
   std::string
   get_xdmf_content(const unsigned int indent_level) const;
 
   /**
    * Get the XDMF content associated with this entry.
    * If the entry is not valid, this returns an empty string.
-   *
-   * @deprecated Use the other function instead.
    */
-  DEAL_II_DEPRECATED
   std::string
   get_xdmf_content(const unsigned int   indent_level,
                    const ReferenceCell &reference_cell) const;
@@ -3533,12 +3429,6 @@ private:
    * Note that dimension <= space_dimension.
    */
   unsigned int space_dimension;
-
-  /**
-   * The type of cell in deal.II language. We currently only support
-   * xdmf entries where all cells have the same type.
-   */
-  ReferenceCell cell_type;
 
   /**
    * The attributes associated with this entry and their dimension.
