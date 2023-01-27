@@ -45,13 +45,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  Vector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  1 > &,
   Vector<double>  &,
  const ComponentMask &);
@@ -96,13 +89,6 @@
  const FullMatrix<double> &,
  const  Vector<double>  &,
   Vector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  Vector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -153,13 +139,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  Vector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  3 > &,
   Vector<double>  &,
  const ComponentMask &);
@@ -204,13 +183,6 @@
  const FullMatrix<double> &,
  const  Vector<double>  &,
   Vector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  Vector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -261,13 +233,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  Vector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  2 > &,
   Vector<double>  &,
  const ComponentMask &);
@@ -312,13 +277,6 @@
  const FullMatrix<double> &,
  const  Vector<double>  &,
   Vector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  Vector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -369,13 +327,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  Vector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  1 > &,
   Vector<double>  &,
  const ComponentMask &);
@@ -420,13 +371,6 @@
  const FullMatrix<double> &,
  const  Vector<double>  &,
   Vector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  Vector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -477,13 +421,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  Vector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  3 > &,
   Vector<double>  &,
  const ComponentMask &);
@@ -528,13 +465,6 @@
  const FullMatrix<double> &,
  const  Vector<float>  &,
   Vector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  Vector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -585,13 +515,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  Vector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  2 > &,
   Vector<float>  &,
  const ComponentMask &);
@@ -636,13 +559,6 @@
  const FullMatrix<double> &,
  const  Vector<float>  &,
   Vector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  Vector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -693,13 +609,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  Vector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  1 > &,
   Vector<float>  &,
  const ComponentMask &);
@@ -744,13 +653,6 @@
  const FullMatrix<double> &,
  const  Vector<float>  &,
   Vector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  Vector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -801,13 +703,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  Vector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  3 > &,
   Vector<float>  &,
  const ComponentMask &);
@@ -852,13 +747,6 @@
  const FullMatrix<double> &,
  const  Vector<float>  &,
   Vector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  Vector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -909,13 +797,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  Vector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  2 > &,
   Vector<float>  &,
  const ComponentMask &);
@@ -960,13 +841,6 @@
  const FullMatrix<double> &,
  const  Vector<float>  &,
   Vector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  Vector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -1017,13 +891,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  BlockVector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  1 > &,
   BlockVector<double>  &,
  const ComponentMask &);
@@ -1068,13 +935,6 @@
  const FullMatrix<double> &,
  const  BlockVector<double>  &,
   BlockVector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  BlockVector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -1125,13 +985,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  BlockVector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  3 > &,
   BlockVector<double>  &,
  const ComponentMask &);
@@ -1176,13 +1029,6 @@
  const FullMatrix<double> &,
  const  BlockVector<double>  &,
   BlockVector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  BlockVector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -1233,13 +1079,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  BlockVector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  2 > &,
   BlockVector<double>  &,
  const ComponentMask &);
@@ -1284,13 +1123,6 @@
  const FullMatrix<double> &,
  const  BlockVector<double>  &,
   BlockVector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  BlockVector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -1341,13 +1173,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  BlockVector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  1 > &,
   BlockVector<double>  &,
  const ComponentMask &);
@@ -1392,13 +1217,6 @@
  const FullMatrix<double> &,
  const  BlockVector<double>  &,
   BlockVector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  BlockVector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -1449,13 +1267,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  BlockVector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  3 > &,
   BlockVector<double>  &,
  const ComponentMask &);
@@ -1500,13 +1311,6 @@
  const FullMatrix<double> &,
  const  BlockVector<float>  &,
   BlockVector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  BlockVector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -1557,13 +1361,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  BlockVector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  2 > &,
   BlockVector<float>  &,
  const ComponentMask &);
@@ -1608,13 +1405,6 @@
  const FullMatrix<double> &,
  const  BlockVector<float>  &,
   BlockVector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  BlockVector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -1665,13 +1455,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  BlockVector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  1 > &,
   BlockVector<float>  &,
  const ComponentMask &);
@@ -1716,13 +1499,6 @@
  const FullMatrix<double> &,
  const  BlockVector<float>  &,
   BlockVector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  BlockVector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -1773,13 +1549,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  BlockVector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  3 > &,
   BlockVector<float>  &,
  const ComponentMask &);
@@ -1824,13 +1593,6 @@
  const FullMatrix<double> &,
  const  BlockVector<float>  &,
   BlockVector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  BlockVector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -1881,13 +1643,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  BlockVector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  2 > &,
   BlockVector<float>  &,
  const ComponentMask &);
@@ -1932,13 +1687,6 @@
  const FullMatrix<double> &,
  const  BlockVector<float>  &,
   BlockVector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  BlockVector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -1989,13 +1737,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  LinearAlgebra::Vector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  1 > &,
   LinearAlgebra::Vector<double>  &,
  const ComponentMask &);
@@ -2040,13 +1781,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::Vector<double>  &,
   LinearAlgebra::Vector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  LinearAlgebra::Vector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -2097,13 +1831,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  LinearAlgebra::Vector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  3 > &,
   LinearAlgebra::Vector<double>  &,
  const ComponentMask &);
@@ -2148,13 +1875,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::Vector<double>  &,
   LinearAlgebra::Vector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  LinearAlgebra::Vector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -2205,13 +1925,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  LinearAlgebra::Vector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  2 > &,
   LinearAlgebra::Vector<double>  &,
  const ComponentMask &);
@@ -2256,13 +1969,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::Vector<double>  &,
   LinearAlgebra::Vector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  LinearAlgebra::Vector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -2313,13 +2019,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  LinearAlgebra::Vector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  1 > &,
   LinearAlgebra::Vector<double>  &,
  const ComponentMask &);
@@ -2364,13 +2063,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::Vector<double>  &,
   LinearAlgebra::Vector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  LinearAlgebra::Vector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -2421,13 +2113,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  LinearAlgebra::Vector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  3 > &,
   LinearAlgebra::Vector<double>  &,
  const ComponentMask &);
@@ -2472,13 +2157,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::Vector<float>  &,
   LinearAlgebra::Vector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  LinearAlgebra::Vector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -2529,13 +2207,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  LinearAlgebra::Vector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  2 > &,
   LinearAlgebra::Vector<float>  &,
  const ComponentMask &);
@@ -2580,13 +2251,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::Vector<float>  &,
   LinearAlgebra::Vector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  LinearAlgebra::Vector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -2637,13 +2301,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  LinearAlgebra::Vector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  1 > &,
   LinearAlgebra::Vector<float>  &,
  const ComponentMask &);
@@ -2688,13 +2345,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::Vector<float>  &,
   LinearAlgebra::Vector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  LinearAlgebra::Vector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -2745,13 +2395,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  LinearAlgebra::Vector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  3 > &,
   LinearAlgebra::Vector<float>  &,
  const ComponentMask &);
@@ -2796,13 +2439,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::Vector<float>  &,
   LinearAlgebra::Vector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  LinearAlgebra::Vector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -2853,13 +2489,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  LinearAlgebra::Vector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  2 > &,
   LinearAlgebra::Vector<float>  &,
  const ComponentMask &);
@@ -2904,13 +2533,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::Vector<float>  &,
   LinearAlgebra::Vector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  LinearAlgebra::Vector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -2961,13 +2583,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  LinearAlgebra::distributed::Vector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  1 > &,
   LinearAlgebra::distributed::Vector<double>  &,
  const ComponentMask &);
@@ -3012,13 +2627,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::Vector<double>  &,
   LinearAlgebra::distributed::Vector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  LinearAlgebra::distributed::Vector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -3069,13 +2677,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  LinearAlgebra::distributed::Vector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  3 > &,
   LinearAlgebra::distributed::Vector<double>  &,
  const ComponentMask &);
@@ -3120,13 +2721,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::Vector<double>  &,
   LinearAlgebra::distributed::Vector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  LinearAlgebra::distributed::Vector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -3177,13 +2771,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  LinearAlgebra::distributed::Vector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  2 > &,
   LinearAlgebra::distributed::Vector<double>  &,
  const ComponentMask &);
@@ -3228,13 +2815,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::Vector<double>  &,
   LinearAlgebra::distributed::Vector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  LinearAlgebra::distributed::Vector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -3285,13 +2865,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  LinearAlgebra::distributed::Vector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  1 > &,
   LinearAlgebra::distributed::Vector<double>  &,
  const ComponentMask &);
@@ -3336,13 +2909,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::Vector<double>  &,
   LinearAlgebra::distributed::Vector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  LinearAlgebra::distributed::Vector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -3393,13 +2959,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  LinearAlgebra::distributed::Vector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  3 > &,
   LinearAlgebra::distributed::Vector<double>  &,
  const ComponentMask &);
@@ -3444,13 +3003,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::Vector<float>  &,
   LinearAlgebra::distributed::Vector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  LinearAlgebra::distributed::Vector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -3501,13 +3053,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  LinearAlgebra::distributed::Vector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  2 > &,
   LinearAlgebra::distributed::Vector<float>  &,
  const ComponentMask &);
@@ -3552,13 +3097,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::Vector<float>  &,
   LinearAlgebra::distributed::Vector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  LinearAlgebra::distributed::Vector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -3609,13 +3147,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  LinearAlgebra::distributed::Vector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  1 > &,
   LinearAlgebra::distributed::Vector<float>  &,
  const ComponentMask &);
@@ -3660,13 +3191,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::Vector<float>  &,
   LinearAlgebra::distributed::Vector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  LinearAlgebra::distributed::Vector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -3717,13 +3241,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  LinearAlgebra::distributed::Vector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  3 > &,
   LinearAlgebra::distributed::Vector<float>  &,
  const ComponentMask &);
@@ -3768,13 +3285,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::Vector<float>  &,
   LinearAlgebra::distributed::Vector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  LinearAlgebra::distributed::Vector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -3825,13 +3335,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  LinearAlgebra::distributed::Vector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  2 > &,
   LinearAlgebra::distributed::Vector<float>  &,
  const ComponentMask &);
@@ -3876,13 +3379,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::Vector<float>  &,
   LinearAlgebra::distributed::Vector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  LinearAlgebra::distributed::Vector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -3933,13 +3429,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  LinearAlgebra::distributed::BlockVector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  1 > &,
   LinearAlgebra::distributed::BlockVector<double>  &,
  const ComponentMask &);
@@ -3984,13 +3473,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::BlockVector<double>  &,
   LinearAlgebra::distributed::BlockVector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  LinearAlgebra::distributed::BlockVector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -4041,13 +3523,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  LinearAlgebra::distributed::BlockVector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  3 > &,
   LinearAlgebra::distributed::BlockVector<double>  &,
  const ComponentMask &);
@@ -4092,13 +3567,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::BlockVector<double>  &,
   LinearAlgebra::distributed::BlockVector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  LinearAlgebra::distributed::BlockVector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -4149,13 +3617,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  LinearAlgebra::distributed::BlockVector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  2 > &,
   LinearAlgebra::distributed::BlockVector<double>  &,
  const ComponentMask &);
@@ -4200,13 +3661,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::BlockVector<double>  &,
   LinearAlgebra::distributed::BlockVector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  LinearAlgebra::distributed::BlockVector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -4257,13 +3711,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  LinearAlgebra::distributed::BlockVector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  1 > &,
   LinearAlgebra::distributed::BlockVector<double>  &,
  const ComponentMask &);
@@ -4308,13 +3755,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::BlockVector<double>  &,
   LinearAlgebra::distributed::BlockVector<double>  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  LinearAlgebra::distributed::BlockVector<double>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -4365,13 +3805,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  LinearAlgebra::distributed::BlockVector<double>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  3 > &,
   LinearAlgebra::distributed::BlockVector<double>  &,
  const ComponentMask &);
@@ -4416,13 +3849,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::BlockVector<float>  &,
   LinearAlgebra::distributed::BlockVector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  LinearAlgebra::distributed::BlockVector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -4473,13 +3899,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  LinearAlgebra::distributed::BlockVector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  2 > &,
   LinearAlgebra::distributed::BlockVector<float>  &,
  const ComponentMask &);
@@ -4524,13 +3943,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::BlockVector<float>  &,
   LinearAlgebra::distributed::BlockVector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  LinearAlgebra::distributed::BlockVector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -4581,13 +3993,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  LinearAlgebra::distributed::BlockVector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  1 > &,
   LinearAlgebra::distributed::BlockVector<float>  &,
  const ComponentMask &);
@@ -4632,13 +4037,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::BlockVector<float>  &,
   LinearAlgebra::distributed::BlockVector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  LinearAlgebra::distributed::BlockVector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -4689,13 +4087,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  LinearAlgebra::distributed::BlockVector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  3 > &,
   LinearAlgebra::distributed::BlockVector<float>  &,
  const ComponentMask &);
@@ -4740,13 +4131,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::BlockVector<float>  &,
   LinearAlgebra::distributed::BlockVector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  LinearAlgebra::distributed::BlockVector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -4797,13 +4181,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  LinearAlgebra::distributed::BlockVector<float>  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  2 > &,
   LinearAlgebra::distributed::BlockVector<float>  &,
  const ComponentMask &);
@@ -4848,13 +4225,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::BlockVector<float>  &,
   LinearAlgebra::distributed::BlockVector<float>  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  LinearAlgebra::distributed::BlockVector<float>  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -4905,13 +4275,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  Vector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  1 > &,
   Vector<std::complex<double> >  &,
  const ComponentMask &);
@@ -4956,13 +4319,6 @@
  const FullMatrix<double> &,
  const  Vector<std::complex<double> >  &,
   Vector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  Vector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -5013,13 +4369,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  Vector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  3 > &,
   Vector<std::complex<double> >  &,
  const ComponentMask &);
@@ -5064,13 +4413,6 @@
  const FullMatrix<double> &,
  const  Vector<std::complex<double> >  &,
   Vector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  Vector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -5121,13 +4463,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  Vector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  2 > &,
   Vector<std::complex<double> >  &,
  const ComponentMask &);
@@ -5172,13 +4507,6 @@
  const FullMatrix<double> &,
  const  Vector<std::complex<double> >  &,
   Vector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  Vector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -5229,13 +4557,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  Vector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  1 > &,
   Vector<std::complex<double> >  &,
  const ComponentMask &);
@@ -5280,13 +4601,6 @@
  const FullMatrix<double> &,
  const  Vector<std::complex<double> >  &,
   Vector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  Vector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -5337,13 +4651,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  Vector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  3 > &,
   Vector<std::complex<double> >  &,
  const ComponentMask &);
@@ -5388,13 +4695,6 @@
  const FullMatrix<double> &,
  const  Vector<std::complex<float> >  &,
   Vector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  Vector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -5445,13 +4745,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  Vector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  2 > &,
   Vector<std::complex<float> >  &,
  const ComponentMask &);
@@ -5496,13 +4789,6 @@
  const FullMatrix<double> &,
  const  Vector<std::complex<float> >  &,
   Vector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  Vector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -5553,13 +4839,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  Vector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  1 > &,
   Vector<std::complex<float> >  &,
  const ComponentMask &);
@@ -5604,13 +4883,6 @@
  const FullMatrix<double> &,
  const  Vector<std::complex<float> >  &,
   Vector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  Vector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -5661,13 +4933,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  Vector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  3 > &,
   Vector<std::complex<float> >  &,
  const ComponentMask &);
@@ -5712,13 +4977,6 @@
  const FullMatrix<double> &,
  const  Vector<std::complex<float> >  &,
   Vector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  Vector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -5769,13 +5027,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  Vector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  2 > &,
   Vector<std::complex<float> >  &,
  const ComponentMask &);
@@ -5820,13 +5071,6 @@
  const FullMatrix<double> &,
  const  Vector<std::complex<float> >  &,
   Vector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  Vector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -5877,13 +5121,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  BlockVector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  1 > &,
   BlockVector<std::complex<double> >  &,
  const ComponentMask &);
@@ -5928,13 +5165,6 @@
  const FullMatrix<double> &,
  const  BlockVector<std::complex<double> >  &,
   BlockVector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  BlockVector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -5985,13 +5215,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  BlockVector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  3 > &,
   BlockVector<std::complex<double> >  &,
  const ComponentMask &);
@@ -6036,13 +5259,6 @@
  const FullMatrix<double> &,
  const  BlockVector<std::complex<double> >  &,
   BlockVector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  BlockVector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -6093,13 +5309,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  BlockVector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  2 > &,
   BlockVector<std::complex<double> >  &,
  const ComponentMask &);
@@ -6144,13 +5353,6 @@
  const FullMatrix<double> &,
  const  BlockVector<std::complex<double> >  &,
   BlockVector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  BlockVector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -6201,13 +5403,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  BlockVector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  1 > &,
   BlockVector<std::complex<double> >  &,
  const ComponentMask &);
@@ -6252,13 +5447,6 @@
  const FullMatrix<double> &,
  const  BlockVector<std::complex<double> >  &,
   BlockVector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  BlockVector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -6309,13 +5497,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  BlockVector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  3 > &,
   BlockVector<std::complex<double> >  &,
  const ComponentMask &);
@@ -6360,13 +5541,6 @@
  const FullMatrix<double> &,
  const  BlockVector<std::complex<float> >  &,
   BlockVector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  BlockVector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -6417,13 +5591,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  BlockVector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  2 > &,
   BlockVector<std::complex<float> >  &,
  const ComponentMask &);
@@ -6468,13 +5635,6 @@
  const FullMatrix<double> &,
  const  BlockVector<std::complex<float> >  &,
   BlockVector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  BlockVector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -6525,13 +5685,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  BlockVector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  1 > &,
   BlockVector<std::complex<float> >  &,
  const ComponentMask &);
@@ -6576,13 +5729,6 @@
  const FullMatrix<double> &,
  const  BlockVector<std::complex<float> >  &,
   BlockVector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  BlockVector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -6633,13 +5779,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  BlockVector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  3 > &,
   BlockVector<std::complex<float> >  &,
  const ComponentMask &);
@@ -6684,13 +5823,6 @@
  const FullMatrix<double> &,
  const  BlockVector<std::complex<float> >  &,
   BlockVector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  BlockVector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -6741,13 +5873,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  BlockVector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  2 > &,
   BlockVector<std::complex<float> >  &,
  const ComponentMask &);
@@ -6792,13 +5917,6 @@
  const FullMatrix<double> &,
  const  BlockVector<std::complex<float> >  &,
   BlockVector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  BlockVector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -6849,13 +5967,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  LinearAlgebra::Vector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  1 > &,
   LinearAlgebra::Vector<std::complex<double> >  &,
  const ComponentMask &);
@@ -6900,13 +6011,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::Vector<std::complex<double> >  &,
   LinearAlgebra::Vector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  LinearAlgebra::Vector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -6957,13 +6061,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  LinearAlgebra::Vector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  3 > &,
   LinearAlgebra::Vector<std::complex<double> >  &,
  const ComponentMask &);
@@ -7008,13 +6105,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::Vector<std::complex<double> >  &,
   LinearAlgebra::Vector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  LinearAlgebra::Vector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -7065,13 +6155,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  LinearAlgebra::Vector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  2 > &,
   LinearAlgebra::Vector<std::complex<double> >  &,
  const ComponentMask &);
@@ -7116,13 +6199,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::Vector<std::complex<double> >  &,
   LinearAlgebra::Vector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  LinearAlgebra::Vector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -7173,13 +6249,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  LinearAlgebra::Vector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  1 > &,
   LinearAlgebra::Vector<std::complex<double> >  &,
  const ComponentMask &);
@@ -7224,13 +6293,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::Vector<std::complex<double> >  &,
   LinearAlgebra::Vector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  LinearAlgebra::Vector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -7281,13 +6343,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  LinearAlgebra::Vector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  3 > &,
   LinearAlgebra::Vector<std::complex<double> >  &,
  const ComponentMask &);
@@ -7332,13 +6387,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::Vector<std::complex<float> >  &,
   LinearAlgebra::Vector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  LinearAlgebra::Vector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -7389,13 +6437,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  LinearAlgebra::Vector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  2 > &,
   LinearAlgebra::Vector<std::complex<float> >  &,
  const ComponentMask &);
@@ -7440,13 +6481,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::Vector<std::complex<float> >  &,
   LinearAlgebra::Vector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  LinearAlgebra::Vector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -7497,13 +6531,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  LinearAlgebra::Vector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  1 > &,
   LinearAlgebra::Vector<std::complex<float> >  &,
  const ComponentMask &);
@@ -7548,13 +6575,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::Vector<std::complex<float> >  &,
   LinearAlgebra::Vector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  LinearAlgebra::Vector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -7605,13 +6625,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  LinearAlgebra::Vector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  3 > &,
   LinearAlgebra::Vector<std::complex<float> >  &,
  const ComponentMask &);
@@ -7656,13 +6669,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::Vector<std::complex<float> >  &,
   LinearAlgebra::Vector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  LinearAlgebra::Vector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -7713,13 +6719,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  LinearAlgebra::Vector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  2 > &,
   LinearAlgebra::Vector<std::complex<float> >  &,
  const ComponentMask &);
@@ -7764,13 +6763,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::Vector<std::complex<float> >  &,
   LinearAlgebra::Vector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  LinearAlgebra::Vector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -7821,13 +6813,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  LinearAlgebra::distributed::Vector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  1 > &,
   LinearAlgebra::distributed::Vector<std::complex<double> >  &,
  const ComponentMask &);
@@ -7872,13 +6857,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::Vector<std::complex<double> >  &,
   LinearAlgebra::distributed::Vector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  LinearAlgebra::distributed::Vector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -7929,13 +6907,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  LinearAlgebra::distributed::Vector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  3 > &,
   LinearAlgebra::distributed::Vector<std::complex<double> >  &,
  const ComponentMask &);
@@ -7980,13 +6951,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::Vector<std::complex<double> >  &,
   LinearAlgebra::distributed::Vector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  LinearAlgebra::distributed::Vector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -8037,13 +7001,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  LinearAlgebra::distributed::Vector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  2 > &,
   LinearAlgebra::distributed::Vector<std::complex<double> >  &,
  const ComponentMask &);
@@ -8088,13 +7045,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::Vector<std::complex<double> >  &,
   LinearAlgebra::distributed::Vector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  LinearAlgebra::distributed::Vector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -8145,13 +7095,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  LinearAlgebra::distributed::Vector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  1 > &,
   LinearAlgebra::distributed::Vector<std::complex<double> >  &,
  const ComponentMask &);
@@ -8196,13 +7139,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::Vector<std::complex<double> >  &,
   LinearAlgebra::distributed::Vector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  LinearAlgebra::distributed::Vector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -8253,13 +7189,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  LinearAlgebra::distributed::Vector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  3 > &,
   LinearAlgebra::distributed::Vector<std::complex<double> >  &,
  const ComponentMask &);
@@ -8304,13 +7233,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::Vector<std::complex<float> >  &,
   LinearAlgebra::distributed::Vector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  LinearAlgebra::distributed::Vector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -8361,13 +7283,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  LinearAlgebra::distributed::Vector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  2 > &,
   LinearAlgebra::distributed::Vector<std::complex<float> >  &,
  const ComponentMask &);
@@ -8412,13 +7327,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::Vector<std::complex<float> >  &,
   LinearAlgebra::distributed::Vector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  LinearAlgebra::distributed::Vector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -8469,13 +7377,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  LinearAlgebra::distributed::Vector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  1 > &,
   LinearAlgebra::distributed::Vector<std::complex<float> >  &,
  const ComponentMask &);
@@ -8520,13 +7421,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::Vector<std::complex<float> >  &,
   LinearAlgebra::distributed::Vector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  LinearAlgebra::distributed::Vector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -8577,13 +7471,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  LinearAlgebra::distributed::Vector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  3 > &,
   LinearAlgebra::distributed::Vector<std::complex<float> >  &,
  const ComponentMask &);
@@ -8628,13 +7515,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::Vector<std::complex<float> >  &,
   LinearAlgebra::distributed::Vector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  LinearAlgebra::distributed::Vector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -8685,13 +7565,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  LinearAlgebra::distributed::Vector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  2 > &,
   LinearAlgebra::distributed::Vector<std::complex<float> >  &,
  const ComponentMask &);
@@ -8736,13 +7609,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::Vector<std::complex<float> >  &,
   LinearAlgebra::distributed::Vector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  LinearAlgebra::distributed::Vector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -8793,13 +7659,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  LinearAlgebra::distributed::BlockVector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  1 > &,
   LinearAlgebra::distributed::BlockVector<std::complex<double> >  &,
  const ComponentMask &);
@@ -8844,13 +7703,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::BlockVector<std::complex<double> >  &,
   LinearAlgebra::distributed::BlockVector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  LinearAlgebra::distributed::BlockVector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -8901,13 +7753,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  LinearAlgebra::distributed::BlockVector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  3 > &,
   LinearAlgebra::distributed::BlockVector<std::complex<double> >  &,
  const ComponentMask &);
@@ -8952,13 +7797,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::BlockVector<std::complex<double> >  &,
   LinearAlgebra::distributed::BlockVector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  LinearAlgebra::distributed::BlockVector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -9009,13 +7847,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  LinearAlgebra::distributed::BlockVector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  2 > &,
   LinearAlgebra::distributed::BlockVector<std::complex<double> >  &,
  const ComponentMask &);
@@ -9060,13 +7891,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::BlockVector<std::complex<double> >  &,
   LinearAlgebra::distributed::BlockVector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  LinearAlgebra::distributed::BlockVector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -9117,13 +7941,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  LinearAlgebra::distributed::BlockVector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  1 > &,
   LinearAlgebra::distributed::BlockVector<std::complex<double> >  &,
  const ComponentMask &);
@@ -9168,13 +7985,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::BlockVector<std::complex<double> >  &,
   LinearAlgebra::distributed::BlockVector<std::complex<double> >  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  LinearAlgebra::distributed::BlockVector<std::complex<double> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -9225,13 +8035,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  LinearAlgebra::distributed::BlockVector<std::complex<double> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  3 > &,
   LinearAlgebra::distributed::BlockVector<std::complex<double> >  &,
  const ComponentMask &);
@@ -9276,13 +8079,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::BlockVector<std::complex<float> >  &,
   LinearAlgebra::distributed::BlockVector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  1 > &,
- const DoFHandler< 1 ,  1 > &,
-  LinearAlgebra::distributed::BlockVector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -9333,13 +8129,6 @@
 
  template void
  get_position_vector(
- const Mapping< 1 ,  2 > &,
- const DoFHandler< 1 ,  2 > &,
-  LinearAlgebra::distributed::BlockVector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 1 ,  2 > &,
   LinearAlgebra::distributed::BlockVector<std::complex<float> >  &,
  const ComponentMask &);
@@ -9384,13 +8173,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::BlockVector<std::complex<float> >  &,
   LinearAlgebra::distributed::BlockVector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 1 ,  3 > &,
- const DoFHandler< 1 ,  3 > &,
-  LinearAlgebra::distributed::BlockVector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -9441,13 +8223,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  1 > &,
- const DoFHandler< 2 ,  1 > &,
-  LinearAlgebra::distributed::BlockVector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  1 > &,
   LinearAlgebra::distributed::BlockVector<std::complex<float> >  &,
  const ComponentMask &);
@@ -9492,13 +8267,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::BlockVector<std::complex<float> >  &,
   LinearAlgebra::distributed::BlockVector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 2 ,  2 > &,
- const DoFHandler< 2 ,  2 > &,
-  LinearAlgebra::distributed::BlockVector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -9549,13 +8317,6 @@
 
  template void
  get_position_vector(
- const Mapping< 2 ,  3 > &,
- const DoFHandler< 2 ,  3 > &,
-  LinearAlgebra::distributed::BlockVector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 2 ,  3 > &,
   LinearAlgebra::distributed::BlockVector<std::complex<float> >  &,
  const ComponentMask &);
@@ -9600,13 +8361,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::BlockVector<std::complex<float> >  &,
   LinearAlgebra::distributed::BlockVector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  1 > &,
- const DoFHandler< 3 ,  1 > &,
-  LinearAlgebra::distributed::BlockVector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(
@@ -9657,13 +8411,6 @@
 
  template void
  get_position_vector(
- const Mapping< 3 ,  2 > &,
- const DoFHandler< 3 ,  2 > &,
-  LinearAlgebra::distributed::BlockVector<std::complex<float> >  &,
- const ComponentMask &);
-
- template void
- get_position_vector(
  const DoFHandler< 3 ,  2 > &,
   LinearAlgebra::distributed::BlockVector<std::complex<float> >  &,
  const ComponentMask &);
@@ -9708,13 +8455,6 @@
  const FullMatrix<double> &,
  const  LinearAlgebra::distributed::BlockVector<std::complex<float> >  &,
   LinearAlgebra::distributed::BlockVector<std::complex<float> >  &);
-
- template void
- get_position_vector(
- const Mapping< 3 ,  3 > &,
- const DoFHandler< 3 ,  3 > &,
-  LinearAlgebra::distributed::BlockVector<std::complex<float> >  &,
- const ComponentMask &);
 
  template void
  get_position_vector(

@@ -942,6 +942,19 @@ template std::vector<unsigned int> DoFTools::make_vertex_patches(
 
  
 
+ template void DoFTools::distribute_cell_to_dof_vector< 1 ,
+  1 >(
+ const DoFHandler< 1 > &dof_handler,
+ const Vector<float> & cell_data,
+ Vector<double> & dof_data,
+ const unsigned int component);
+ template void DoFTools::distribute_cell_to_dof_vector< 1 ,
+  1 >(
+ const DoFHandler< 1 > &dof_handler,
+ const Vector<double> & cell_data,
+ Vector<double> & dof_data,
+ const unsigned int component);
+
  template void
  DoFTools::extract_boundary_dofs< 1 ,  1 >(
  const DoFHandler< 1 > &,
@@ -1180,6 +1193,19 @@ template std::vector<unsigned int> DoFTools::make_vertex_patches(
 
  
 
+ template void DoFTools::distribute_cell_to_dof_vector< 2 ,
+  2 >(
+ const DoFHandler< 2 > &dof_handler,
+ const Vector<float> & cell_data,
+ Vector<double> & dof_data,
+ const unsigned int component);
+ template void DoFTools::distribute_cell_to_dof_vector< 2 ,
+  2 >(
+ const DoFHandler< 2 > &dof_handler,
+ const Vector<double> & cell_data,
+ Vector<double> & dof_data,
+ const unsigned int component);
+
  template void
  DoFTools::extract_boundary_dofs< 2 ,  2 >(
  const DoFHandler< 2 > &,
@@ -1417,6 +1443,19 @@ template std::vector<unsigned int> DoFTools::make_vertex_patches(
  bool);
 
  
+
+ template void DoFTools::distribute_cell_to_dof_vector< 3 ,
+  3 >(
+ const DoFHandler< 3 > &dof_handler,
+ const Vector<float> & cell_data,
+ Vector<double> & dof_data,
+ const unsigned int component);
+ template void DoFTools::distribute_cell_to_dof_vector< 3 ,
+  3 >(
+ const DoFHandler< 3 > &dof_handler,
+ const Vector<double> & cell_data,
+ Vector<double> & dof_data,
+ const unsigned int component);
 
  template void
  DoFTools::extract_boundary_dofs< 3 ,  3 >(
@@ -2148,30 +2187,6 @@ template IndexSet
  const DoFHandler< 1 ,  1 > &,
  const BlockMask &,
  std::vector<bool> &);
-
- template void
- make_cell_patches< 1 ,  1 >(
- SparsityPattern &,
- const DoFHandler< 1 ,  1 > &,
- const unsigned int,
- const std::vector<bool> &,
- const types::global_dof_index);
-
- template void
- distribute_cell_to_dof_vector< 1 ,  1 >(
- const DoFHandler< 1 ,  1 >
- & dof_handler,
- const Vector<float> &cell_data,
- Vector<double> & dof_data,
- const unsigned int component);
-
- template void
- distribute_cell_to_dof_vector< 1 ,  1 >(
- const DoFHandler< 1 ,  1 >
- & dof_handler,
- const Vector<double> &cell_data,
- Vector<double> & dof_data,
- const unsigned int component);
  }
 #endif
  
@@ -2194,30 +2209,6 @@ template IndexSet
  const DoFHandler< 1 ,  2 > &,
  const BlockMask &,
  std::vector<bool> &);
-
- template void
- make_cell_patches< 1 ,  2 >(
- SparsityPattern &,
- const DoFHandler< 1 ,  2 > &,
- const unsigned int,
- const std::vector<bool> &,
- const types::global_dof_index);
-
- template void
- distribute_cell_to_dof_vector< 1 ,  2 >(
- const DoFHandler< 1 ,  2 >
- & dof_handler,
- const Vector<float> &cell_data,
- Vector<double> & dof_data,
- const unsigned int component);
-
- template void
- distribute_cell_to_dof_vector< 1 ,  2 >(
- const DoFHandler< 1 ,  2 >
- & dof_handler,
- const Vector<double> &cell_data,
- Vector<double> & dof_data,
- const unsigned int component);
  }
 #endif
  
@@ -2240,30 +2231,6 @@ template IndexSet
  const DoFHandler< 1 ,  3 > &,
  const BlockMask &,
  std::vector<bool> &);
-
- template void
- make_cell_patches< 1 ,  3 >(
- SparsityPattern &,
- const DoFHandler< 1 ,  3 > &,
- const unsigned int,
- const std::vector<bool> &,
- const types::global_dof_index);
-
- template void
- distribute_cell_to_dof_vector< 1 ,  3 >(
- const DoFHandler< 1 ,  3 >
- & dof_handler,
- const Vector<float> &cell_data,
- Vector<double> & dof_data,
- const unsigned int component);
-
- template void
- distribute_cell_to_dof_vector< 1 ,  3 >(
- const DoFHandler< 1 ,  3 >
- & dof_handler,
- const Vector<double> &cell_data,
- Vector<double> & dof_data,
- const unsigned int component);
  }
 #endif
  
@@ -2286,30 +2253,6 @@ template IndexSet
  const DoFHandler< 2 ,  1 > &,
  const BlockMask &,
  std::vector<bool> &);
-
- template void
- make_cell_patches< 2 ,  1 >(
- SparsityPattern &,
- const DoFHandler< 2 ,  1 > &,
- const unsigned int,
- const std::vector<bool> &,
- const types::global_dof_index);
-
- template void
- distribute_cell_to_dof_vector< 2 ,  1 >(
- const DoFHandler< 2 ,  1 >
- & dof_handler,
- const Vector<float> &cell_data,
- Vector<double> & dof_data,
- const unsigned int component);
-
- template void
- distribute_cell_to_dof_vector< 2 ,  1 >(
- const DoFHandler< 2 ,  1 >
- & dof_handler,
- const Vector<double> &cell_data,
- Vector<double> & dof_data,
- const unsigned int component);
  }
 #endif
  
@@ -2332,30 +2275,6 @@ template IndexSet
  const DoFHandler< 2 ,  2 > &,
  const BlockMask &,
  std::vector<bool> &);
-
- template void
- make_cell_patches< 2 ,  2 >(
- SparsityPattern &,
- const DoFHandler< 2 ,  2 > &,
- const unsigned int,
- const std::vector<bool> &,
- const types::global_dof_index);
-
- template void
- distribute_cell_to_dof_vector< 2 ,  2 >(
- const DoFHandler< 2 ,  2 >
- & dof_handler,
- const Vector<float> &cell_data,
- Vector<double> & dof_data,
- const unsigned int component);
-
- template void
- distribute_cell_to_dof_vector< 2 ,  2 >(
- const DoFHandler< 2 ,  2 >
- & dof_handler,
- const Vector<double> &cell_data,
- Vector<double> & dof_data,
- const unsigned int component);
  }
 #endif
  
@@ -2378,30 +2297,6 @@ template IndexSet
  const DoFHandler< 2 ,  3 > &,
  const BlockMask &,
  std::vector<bool> &);
-
- template void
- make_cell_patches< 2 ,  3 >(
- SparsityPattern &,
- const DoFHandler< 2 ,  3 > &,
- const unsigned int,
- const std::vector<bool> &,
- const types::global_dof_index);
-
- template void
- distribute_cell_to_dof_vector< 2 ,  3 >(
- const DoFHandler< 2 ,  3 >
- & dof_handler,
- const Vector<float> &cell_data,
- Vector<double> & dof_data,
- const unsigned int component);
-
- template void
- distribute_cell_to_dof_vector< 2 ,  3 >(
- const DoFHandler< 2 ,  3 >
- & dof_handler,
- const Vector<double> &cell_data,
- Vector<double> & dof_data,
- const unsigned int component);
  }
 #endif
  
@@ -2424,30 +2319,6 @@ template IndexSet
  const DoFHandler< 3 ,  1 > &,
  const BlockMask &,
  std::vector<bool> &);
-
- template void
- make_cell_patches< 3 ,  1 >(
- SparsityPattern &,
- const DoFHandler< 3 ,  1 > &,
- const unsigned int,
- const std::vector<bool> &,
- const types::global_dof_index);
-
- template void
- distribute_cell_to_dof_vector< 3 ,  1 >(
- const DoFHandler< 3 ,  1 >
- & dof_handler,
- const Vector<float> &cell_data,
- Vector<double> & dof_data,
- const unsigned int component);
-
- template void
- distribute_cell_to_dof_vector< 3 ,  1 >(
- const DoFHandler< 3 ,  1 >
- & dof_handler,
- const Vector<double> &cell_data,
- Vector<double> & dof_data,
- const unsigned int component);
  }
 #endif
  
@@ -2470,30 +2341,6 @@ template IndexSet
  const DoFHandler< 3 ,  2 > &,
  const BlockMask &,
  std::vector<bool> &);
-
- template void
- make_cell_patches< 3 ,  2 >(
- SparsityPattern &,
- const DoFHandler< 3 ,  2 > &,
- const unsigned int,
- const std::vector<bool> &,
- const types::global_dof_index);
-
- template void
- distribute_cell_to_dof_vector< 3 ,  2 >(
- const DoFHandler< 3 ,  2 >
- & dof_handler,
- const Vector<float> &cell_data,
- Vector<double> & dof_data,
- const unsigned int component);
-
- template void
- distribute_cell_to_dof_vector< 3 ,  2 >(
- const DoFHandler< 3 ,  2 >
- & dof_handler,
- const Vector<double> &cell_data,
- Vector<double> & dof_data,
- const unsigned int component);
  }
 #endif
  
@@ -2516,7 +2363,142 @@ template IndexSet
  const DoFHandler< 3 ,  3 > &,
  const BlockMask &,
  std::vector<bool> &);
+ }
+#endif
+ 
+#endif
+#if (SPLIT_INSTANTIATIONS_CHECK(45))
+#if  1  <=  1 
+ namespace DoFTools
+ {
+ template void
+ make_cell_patches< 1 ,  1 >(
+ SparsityPattern &,
+ const DoFHandler< 1 ,  1 > &,
+ const unsigned int,
+ const std::vector<bool> &,
+ const types::global_dof_index);
 
+ }
+#endif
+ 
+#endif
+#if (SPLIT_INSTANTIATIONS_CHECK(46))
+#if  1  <=  2 
+ namespace DoFTools
+ {
+ template void
+ make_cell_patches< 1 ,  2 >(
+ SparsityPattern &,
+ const DoFHandler< 1 ,  2 > &,
+ const unsigned int,
+ const std::vector<bool> &,
+ const types::global_dof_index);
+
+ }
+#endif
+ 
+#endif
+#if (SPLIT_INSTANTIATIONS_CHECK(47))
+#if  1  <=  3 
+ namespace DoFTools
+ {
+ template void
+ make_cell_patches< 1 ,  3 >(
+ SparsityPattern &,
+ const DoFHandler< 1 ,  3 > &,
+ const unsigned int,
+ const std::vector<bool> &,
+ const types::global_dof_index);
+
+ }
+#endif
+ 
+#endif
+#if (SPLIT_INSTANTIATIONS_CHECK(48))
+#if  2  <=  1 
+ namespace DoFTools
+ {
+ template void
+ make_cell_patches< 2 ,  1 >(
+ SparsityPattern &,
+ const DoFHandler< 2 ,  1 > &,
+ const unsigned int,
+ const std::vector<bool> &,
+ const types::global_dof_index);
+
+ }
+#endif
+ 
+#endif
+#if (SPLIT_INSTANTIATIONS_CHECK(49))
+#if  2  <=  2 
+ namespace DoFTools
+ {
+ template void
+ make_cell_patches< 2 ,  2 >(
+ SparsityPattern &,
+ const DoFHandler< 2 ,  2 > &,
+ const unsigned int,
+ const std::vector<bool> &,
+ const types::global_dof_index);
+
+ }
+#endif
+ 
+#endif
+#if (SPLIT_INSTANTIATIONS_CHECK(50))
+#if  2  <=  3 
+ namespace DoFTools
+ {
+ template void
+ make_cell_patches< 2 ,  3 >(
+ SparsityPattern &,
+ const DoFHandler< 2 ,  3 > &,
+ const unsigned int,
+ const std::vector<bool> &,
+ const types::global_dof_index);
+
+ }
+#endif
+ 
+#endif
+#if (SPLIT_INSTANTIATIONS_CHECK(51))
+#if  3  <=  1 
+ namespace DoFTools
+ {
+ template void
+ make_cell_patches< 3 ,  1 >(
+ SparsityPattern &,
+ const DoFHandler< 3 ,  1 > &,
+ const unsigned int,
+ const std::vector<bool> &,
+ const types::global_dof_index);
+
+ }
+#endif
+ 
+#endif
+#if (SPLIT_INSTANTIATIONS_CHECK(52))
+#if  3  <=  2 
+ namespace DoFTools
+ {
+ template void
+ make_cell_patches< 3 ,  2 >(
+ SparsityPattern &,
+ const DoFHandler< 3 ,  2 > &,
+ const unsigned int,
+ const std::vector<bool> &,
+ const types::global_dof_index);
+
+ }
+#endif
+ 
+#endif
+#if (SPLIT_INSTANTIATIONS_CHECK(53))
+#if  3  <=  3 
+ namespace DoFTools
+ {
  template void
  make_cell_patches< 3 ,  3 >(
  SparsityPattern &,
@@ -2525,21 +2507,6 @@ template IndexSet
  const std::vector<bool> &,
  const types::global_dof_index);
 
- template void
- distribute_cell_to_dof_vector< 3 ,  3 >(
- const DoFHandler< 3 ,  3 >
- & dof_handler,
- const Vector<float> &cell_data,
- Vector<double> & dof_data,
- const unsigned int component);
-
- template void
- distribute_cell_to_dof_vector< 3 ,  3 >(
- const DoFHandler< 3 ,  3 >
- & dof_handler,
- const Vector<double> &cell_data,
- Vector<double> & dof_data,
- const unsigned int component);
  }
 #endif
  

@@ -87,7 +87,7 @@ namespace parallel
  refine_and_coarsen_fixed_number< 1 ,
   double ,
   1 >(
- dealii::Triangulation< 1 > &,
+ parallel::distributed::Triangulation< 1 > &,
  const dealii::Vector< double > &,
  const double,
  const double,
@@ -97,7 +97,7 @@ namespace parallel
  refine_and_coarsen_fixed_fraction< 1 ,
   double ,
   1 >(
- dealii::Triangulation< 1 > &,
+ parallel::distributed::Triangulation< 1 > &,
  const dealii::Vector< double > &,
  const double,
  const double,
@@ -119,7 +119,8 @@ namespace parallel
  refine_and_coarsen_fixed_number< 1  - 1,
   double ,
   1 >(
- dealii::Triangulation< 1  - 1,  1 > &,
+ parallel::distributed::Triangulation< 1  - 1,
+  1 > &,
  const dealii::Vector< double > &,
  const double,
  const double,
@@ -129,7 +130,8 @@ namespace parallel
  refine_and_coarsen_fixed_fraction< 1  - 1,
   double ,
   1 >(
- dealii::Triangulation< 1  - 1,  1 > &,
+ parallel::distributed::Triangulation< 1  - 1,
+  1 > &,
  const dealii::Vector< double > &,
  const double,
  const double,
@@ -152,7 +154,7 @@ namespace parallel
  refine_and_coarsen_fixed_number< 2 ,
   double ,
   2 >(
- dealii::Triangulation< 2 > &,
+ parallel::distributed::Triangulation< 2 > &,
  const dealii::Vector< double > &,
  const double,
  const double,
@@ -162,7 +164,7 @@ namespace parallel
  refine_and_coarsen_fixed_fraction< 2 ,
   double ,
   2 >(
- dealii::Triangulation< 2 > &,
+ parallel::distributed::Triangulation< 2 > &,
  const dealii::Vector< double > &,
  const double,
  const double,
@@ -184,7 +186,8 @@ namespace parallel
  refine_and_coarsen_fixed_number< 2  - 1,
   double ,
   2 >(
- dealii::Triangulation< 2  - 1,  2 > &,
+ parallel::distributed::Triangulation< 2  - 1,
+  2 > &,
  const dealii::Vector< double > &,
  const double,
  const double,
@@ -194,7 +197,8 @@ namespace parallel
  refine_and_coarsen_fixed_fraction< 2  - 1,
   double ,
   2 >(
- dealii::Triangulation< 2  - 1,  2 > &,
+ parallel::distributed::Triangulation< 2  - 1,
+  2 > &,
  const dealii::Vector< double > &,
  const double,
  const double,
@@ -217,7 +221,7 @@ namespace parallel
  refine_and_coarsen_fixed_number< 3 ,
   double ,
   3 >(
- dealii::Triangulation< 3 > &,
+ parallel::distributed::Triangulation< 3 > &,
  const dealii::Vector< double > &,
  const double,
  const double,
@@ -227,7 +231,7 @@ namespace parallel
  refine_and_coarsen_fixed_fraction< 3 ,
   double ,
   3 >(
- dealii::Triangulation< 3 > &,
+ parallel::distributed::Triangulation< 3 > &,
  const dealii::Vector< double > &,
  const double,
  const double,
@@ -249,7 +253,8 @@ namespace parallel
  refine_and_coarsen_fixed_number< 3  - 1,
   double ,
   3 >(
- dealii::Triangulation< 3  - 1,  3 > &,
+ parallel::distributed::Triangulation< 3  - 1,
+  3 > &,
  const dealii::Vector< double > &,
  const double,
  const double,
@@ -259,7 +264,8 @@ namespace parallel
  refine_and_coarsen_fixed_fraction< 3  - 1,
   double ,
   3 >(
- dealii::Triangulation< 3  - 1,  3 > &,
+ parallel::distributed::Triangulation< 3  - 1,
+  3 > &,
  const dealii::Vector< double > &,
  const double,
  const double,
@@ -282,7 +288,7 @@ namespace parallel
  refine_and_coarsen_fixed_number< 1 ,
   float ,
   1 >(
- dealii::Triangulation< 1 > &,
+ parallel::distributed::Triangulation< 1 > &,
  const dealii::Vector< float > &,
  const double,
  const double,
@@ -292,7 +298,7 @@ namespace parallel
  refine_and_coarsen_fixed_fraction< 1 ,
   float ,
   1 >(
- dealii::Triangulation< 1 > &,
+ parallel::distributed::Triangulation< 1 > &,
  const dealii::Vector< float > &,
  const double,
  const double,
@@ -314,7 +320,8 @@ namespace parallel
  refine_and_coarsen_fixed_number< 1  - 1,
   float ,
   1 >(
- dealii::Triangulation< 1  - 1,  1 > &,
+ parallel::distributed::Triangulation< 1  - 1,
+  1 > &,
  const dealii::Vector< float > &,
  const double,
  const double,
@@ -324,7 +331,8 @@ namespace parallel
  refine_and_coarsen_fixed_fraction< 1  - 1,
   float ,
   1 >(
- dealii::Triangulation< 1  - 1,  1 > &,
+ parallel::distributed::Triangulation< 1  - 1,
+  1 > &,
  const dealii::Vector< float > &,
  const double,
  const double,
@@ -347,7 +355,7 @@ namespace parallel
  refine_and_coarsen_fixed_number< 2 ,
   float ,
   2 >(
- dealii::Triangulation< 2 > &,
+ parallel::distributed::Triangulation< 2 > &,
  const dealii::Vector< float > &,
  const double,
  const double,
@@ -357,7 +365,7 @@ namespace parallel
  refine_and_coarsen_fixed_fraction< 2 ,
   float ,
   2 >(
- dealii::Triangulation< 2 > &,
+ parallel::distributed::Triangulation< 2 > &,
  const dealii::Vector< float > &,
  const double,
  const double,
@@ -379,7 +387,8 @@ namespace parallel
  refine_and_coarsen_fixed_number< 2  - 1,
   float ,
   2 >(
- dealii::Triangulation< 2  - 1,  2 > &,
+ parallel::distributed::Triangulation< 2  - 1,
+  2 > &,
  const dealii::Vector< float > &,
  const double,
  const double,
@@ -389,7 +398,8 @@ namespace parallel
  refine_and_coarsen_fixed_fraction< 2  - 1,
   float ,
   2 >(
- dealii::Triangulation< 2  - 1,  2 > &,
+ parallel::distributed::Triangulation< 2  - 1,
+  2 > &,
  const dealii::Vector< float > &,
  const double,
  const double,
@@ -412,7 +422,7 @@ namespace parallel
  refine_and_coarsen_fixed_number< 3 ,
   float ,
   3 >(
- dealii::Triangulation< 3 > &,
+ parallel::distributed::Triangulation< 3 > &,
  const dealii::Vector< float > &,
  const double,
  const double,
@@ -422,7 +432,7 @@ namespace parallel
  refine_and_coarsen_fixed_fraction< 3 ,
   float ,
   3 >(
- dealii::Triangulation< 3 > &,
+ parallel::distributed::Triangulation< 3 > &,
  const dealii::Vector< float > &,
  const double,
  const double,
@@ -444,7 +454,8 @@ namespace parallel
  refine_and_coarsen_fixed_number< 3  - 1,
   float ,
   3 >(
- dealii::Triangulation< 3  - 1,  3 > &,
+ parallel::distributed::Triangulation< 3  - 1,
+  3 > &,
  const dealii::Vector< float > &,
  const double,
  const double,
@@ -454,7 +465,8 @@ namespace parallel
  refine_and_coarsen_fixed_fraction< 3  - 1,
   float ,
   3 >(
- dealii::Triangulation< 3  - 1,  3 > &,
+ parallel::distributed::Triangulation< 3  - 1,
+  3 > &,
  const dealii::Vector< float > &,
  const double,
  const double,

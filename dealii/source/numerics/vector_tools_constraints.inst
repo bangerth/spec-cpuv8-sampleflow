@@ -23,19 +23,6 @@ namespace VectorTools
  const Mapping< 1 > &mapping);
 
  template void
- compute_nonzero_normal_flux_constraints_on_level(
- const DoFHandler< 1 > &dof_handler,
- const unsigned int first_vector_component,
- const std::set<types::boundary_id> & boundary_ids,
- const std::map<types::boundary_id, const Function< 1 > *>
- & function_map,
- AffineConstraints<double> & constraints,
- const Mapping< 1 > &mapping,
- const IndexSet & refinement_edge_indices,
- const unsigned int level);
-
-
- template void
  compute_nonzero_tangential_flux_constraints(
  const DoFHandler< 1 > &dof_handler,
  const unsigned int first_vector_component,
@@ -52,16 +39,6 @@ namespace VectorTools
  const std::set<types::boundary_id> & boundary_ids,
  AffineConstraints<double> & constraints,
  const Mapping< 1 > & mapping);
-
- template void
- compute_no_normal_flux_constraints_on_level(
- const DoFHandler< 1 > &dof_handler,
- const unsigned int first_vector_component,
- const std::set<types::boundary_id> & boundary_ids,
- AffineConstraints<double> & constraints,
- const Mapping< 1 > & mapping,
- const IndexSet & refinement_edge_indices,
- const unsigned int level);
 
  template void
  compute_normal_flux_constraints(
@@ -92,19 +69,6 @@ namespace VectorTools
  const Mapping< 1 > &mapping);
 
  template void
- compute_nonzero_normal_flux_constraints_on_level(
- const DoFHandler< 1 > &dof_handler,
- const unsigned int first_vector_component,
- const std::set<types::boundary_id> & boundary_ids,
- const std::map<types::boundary_id, const Function< 1 > *>
- & function_map,
- AffineConstraints<double> & constraints,
- const Mapping< 1 > &mapping,
- const IndexSet & refinement_edge_indices,
- const unsigned int level);
-
-
- template void
  compute_nonzero_tangential_flux_constraints(
  const DoFHandler< 1 > &dof_handler,
  const unsigned int first_vector_component,
@@ -121,16 +85,6 @@ namespace VectorTools
  const std::set<types::boundary_id> & boundary_ids,
  AffineConstraints<double> & constraints,
  const Mapping< 1 > & mapping);
-
- template void
- compute_no_normal_flux_constraints_on_level(
- const DoFHandler< 1 > &dof_handler,
- const unsigned int first_vector_component,
- const std::set<types::boundary_id> & boundary_ids,
- AffineConstraints<double> & constraints,
- const Mapping< 1 > & mapping,
- const IndexSet & refinement_edge_indices,
- const unsigned int level);
 
  template void
  compute_normal_flux_constraints(
@@ -161,19 +115,6 @@ namespace VectorTools
  const Mapping< 1 > &mapping);
 
  template void
- compute_nonzero_normal_flux_constraints_on_level(
- const DoFHandler< 1 > &dof_handler,
- const unsigned int first_vector_component,
- const std::set<types::boundary_id> & boundary_ids,
- const std::map<types::boundary_id, const Function< 1 > *>
- & function_map,
- AffineConstraints<double> & constraints,
- const Mapping< 1 > &mapping,
- const IndexSet & refinement_edge_indices,
- const unsigned int level);
-
-
- template void
  compute_nonzero_tangential_flux_constraints(
  const DoFHandler< 1 > &dof_handler,
  const unsigned int first_vector_component,
@@ -190,16 +131,6 @@ namespace VectorTools
  const std::set<types::boundary_id> & boundary_ids,
  AffineConstraints<double> & constraints,
  const Mapping< 1 > & mapping);
-
- template void
- compute_no_normal_flux_constraints_on_level(
- const DoFHandler< 1 > &dof_handler,
- const unsigned int first_vector_component,
- const std::set<types::boundary_id> & boundary_ids,
- AffineConstraints<double> & constraints,
- const Mapping< 1 > & mapping,
- const IndexSet & refinement_edge_indices,
- const unsigned int level);
 
  template void
  compute_normal_flux_constraints(
@@ -230,19 +161,6 @@ namespace VectorTools
  const Mapping< 2 > &mapping);
 
  template void
- compute_nonzero_normal_flux_constraints_on_level(
- const DoFHandler< 2 > &dof_handler,
- const unsigned int first_vector_component,
- const std::set<types::boundary_id> & boundary_ids,
- const std::map<types::boundary_id, const Function< 2 > *>
- & function_map,
- AffineConstraints<double> & constraints,
- const Mapping< 2 > &mapping,
- const IndexSet & refinement_edge_indices,
- const unsigned int level);
-
-
- template void
  compute_nonzero_tangential_flux_constraints(
  const DoFHandler< 2 > &dof_handler,
  const unsigned int first_vector_component,
@@ -259,16 +177,6 @@ namespace VectorTools
  const std::set<types::boundary_id> & boundary_ids,
  AffineConstraints<double> & constraints,
  const Mapping< 2 > & mapping);
-
- template void
- compute_no_normal_flux_constraints_on_level(
- const DoFHandler< 2 > &dof_handler,
- const unsigned int first_vector_component,
- const std::set<types::boundary_id> & boundary_ids,
- AffineConstraints<double> & constraints,
- const Mapping< 2 > & mapping,
- const IndexSet & refinement_edge_indices,
- const unsigned int level);
 
  template void
  compute_normal_flux_constraints(
@@ -299,19 +207,6 @@ namespace VectorTools
  const Mapping< 2 > &mapping);
 
  template void
- compute_nonzero_normal_flux_constraints_on_level(
- const DoFHandler< 2 > &dof_handler,
- const unsigned int first_vector_component,
- const std::set<types::boundary_id> & boundary_ids,
- const std::map<types::boundary_id, const Function< 2 > *>
- & function_map,
- AffineConstraints<double> & constraints,
- const Mapping< 2 > &mapping,
- const IndexSet & refinement_edge_indices,
- const unsigned int level);
-
-
- template void
  compute_nonzero_tangential_flux_constraints(
  const DoFHandler< 2 > &dof_handler,
  const unsigned int first_vector_component,
@@ -328,16 +223,6 @@ namespace VectorTools
  const std::set<types::boundary_id> & boundary_ids,
  AffineConstraints<double> & constraints,
  const Mapping< 2 > & mapping);
-
- template void
- compute_no_normal_flux_constraints_on_level(
- const DoFHandler< 2 > &dof_handler,
- const unsigned int first_vector_component,
- const std::set<types::boundary_id> & boundary_ids,
- AffineConstraints<double> & constraints,
- const Mapping< 2 > & mapping,
- const IndexSet & refinement_edge_indices,
- const unsigned int level);
 
  template void
  compute_normal_flux_constraints(
@@ -368,19 +253,6 @@ namespace VectorTools
  const Mapping< 2 > &mapping);
 
  template void
- compute_nonzero_normal_flux_constraints_on_level(
- const DoFHandler< 2 > &dof_handler,
- const unsigned int first_vector_component,
- const std::set<types::boundary_id> & boundary_ids,
- const std::map<types::boundary_id, const Function< 2 > *>
- & function_map,
- AffineConstraints<double> & constraints,
- const Mapping< 2 > &mapping,
- const IndexSet & refinement_edge_indices,
- const unsigned int level);
-
-
- template void
  compute_nonzero_tangential_flux_constraints(
  const DoFHandler< 2 > &dof_handler,
  const unsigned int first_vector_component,
@@ -397,16 +269,6 @@ namespace VectorTools
  const std::set<types::boundary_id> & boundary_ids,
  AffineConstraints<double> & constraints,
  const Mapping< 2 > & mapping);
-
- template void
- compute_no_normal_flux_constraints_on_level(
- const DoFHandler< 2 > &dof_handler,
- const unsigned int first_vector_component,
- const std::set<types::boundary_id> & boundary_ids,
- AffineConstraints<double> & constraints,
- const Mapping< 2 > & mapping,
- const IndexSet & refinement_edge_indices,
- const unsigned int level);
 
  template void
  compute_normal_flux_constraints(
@@ -437,19 +299,6 @@ namespace VectorTools
  const Mapping< 3 > &mapping);
 
  template void
- compute_nonzero_normal_flux_constraints_on_level(
- const DoFHandler< 3 > &dof_handler,
- const unsigned int first_vector_component,
- const std::set<types::boundary_id> & boundary_ids,
- const std::map<types::boundary_id, const Function< 3 > *>
- & function_map,
- AffineConstraints<double> & constraints,
- const Mapping< 3 > &mapping,
- const IndexSet & refinement_edge_indices,
- const unsigned int level);
-
-
- template void
  compute_nonzero_tangential_flux_constraints(
  const DoFHandler< 3 > &dof_handler,
  const unsigned int first_vector_component,
@@ -466,16 +315,6 @@ namespace VectorTools
  const std::set<types::boundary_id> & boundary_ids,
  AffineConstraints<double> & constraints,
  const Mapping< 3 > & mapping);
-
- template void
- compute_no_normal_flux_constraints_on_level(
- const DoFHandler< 3 > &dof_handler,
- const unsigned int first_vector_component,
- const std::set<types::boundary_id> & boundary_ids,
- AffineConstraints<double> & constraints,
- const Mapping< 3 > & mapping,
- const IndexSet & refinement_edge_indices,
- const unsigned int level);
 
  template void
  compute_normal_flux_constraints(
@@ -506,19 +345,6 @@ namespace VectorTools
  const Mapping< 3 > &mapping);
 
  template void
- compute_nonzero_normal_flux_constraints_on_level(
- const DoFHandler< 3 > &dof_handler,
- const unsigned int first_vector_component,
- const std::set<types::boundary_id> & boundary_ids,
- const std::map<types::boundary_id, const Function< 3 > *>
- & function_map,
- AffineConstraints<double> & constraints,
- const Mapping< 3 > &mapping,
- const IndexSet & refinement_edge_indices,
- const unsigned int level);
-
-
- template void
  compute_nonzero_tangential_flux_constraints(
  const DoFHandler< 3 > &dof_handler,
  const unsigned int first_vector_component,
@@ -535,16 +361,6 @@ namespace VectorTools
  const std::set<types::boundary_id> & boundary_ids,
  AffineConstraints<double> & constraints,
  const Mapping< 3 > & mapping);
-
- template void
- compute_no_normal_flux_constraints_on_level(
- const DoFHandler< 3 > &dof_handler,
- const unsigned int first_vector_component,
- const std::set<types::boundary_id> & boundary_ids,
- AffineConstraints<double> & constraints,
- const Mapping< 3 > & mapping,
- const IndexSet & refinement_edge_indices,
- const unsigned int level);
 
  template void
  compute_normal_flux_constraints(
@@ -575,19 +391,6 @@ namespace VectorTools
  const Mapping< 3 > &mapping);
 
  template void
- compute_nonzero_normal_flux_constraints_on_level(
- const DoFHandler< 3 > &dof_handler,
- const unsigned int first_vector_component,
- const std::set<types::boundary_id> & boundary_ids,
- const std::map<types::boundary_id, const Function< 3 > *>
- & function_map,
- AffineConstraints<double> & constraints,
- const Mapping< 3 > &mapping,
- const IndexSet & refinement_edge_indices,
- const unsigned int level);
-
-
- template void
  compute_nonzero_tangential_flux_constraints(
  const DoFHandler< 3 > &dof_handler,
  const unsigned int first_vector_component,
@@ -604,16 +407,6 @@ namespace VectorTools
  const std::set<types::boundary_id> & boundary_ids,
  AffineConstraints<double> & constraints,
  const Mapping< 3 > & mapping);
-
- template void
- compute_no_normal_flux_constraints_on_level(
- const DoFHandler< 3 > &dof_handler,
- const unsigned int first_vector_component,
- const std::set<types::boundary_id> & boundary_ids,
- AffineConstraints<double> & constraints,
- const Mapping< 3 > & mapping,
- const IndexSet & refinement_edge_indices,
- const unsigned int level);
 
  template void
  compute_normal_flux_constraints(

@@ -14,24 +14,29 @@
  {
  template void
  full_p_adaptivity< 1 ,  1 >(
- const DoFHandler< 1 ,  1 > &);
+ const dealii::DoFHandler< 1 ,  1 >
+ &);
 
  template void
  p_adaptivity_from_flags< 1 ,  1 >(
- const DoFHandler< 1 ,  1 > &,
+ const dealii::DoFHandler< 1 ,  1 >
+ &,
  const std::vector<bool> &);
 
  template void
  force_p_over_h< 1 ,  1 >(
- const DoFHandler< 1 ,  1 > &);
+ const dealii::DoFHandler< 1 ,  1 >
+ &);
 
  template void
  choose_p_over_h< 1 ,  1 >(
- const DoFHandler< 1 ,  1 > &);
+ const dealii::DoFHandler< 1 ,  1 >
+ &);
 
  template bool
  limit_p_level_difference< 1 ,  1 >(
- const DoFHandler< 1 ,  1 > &,
+ const dealii::DoFHandler< 1 ,  1 >
+ &,
  const unsigned int,
  const unsigned int);
  }
@@ -47,24 +52,29 @@
  {
  template void
  full_p_adaptivity< 1 ,  2 >(
- const DoFHandler< 1 ,  2 > &);
+ const dealii::DoFHandler< 1 ,  2 >
+ &);
 
  template void
  p_adaptivity_from_flags< 1 ,  2 >(
- const DoFHandler< 1 ,  2 > &,
+ const dealii::DoFHandler< 1 ,  2 >
+ &,
  const std::vector<bool> &);
 
  template void
  force_p_over_h< 1 ,  2 >(
- const DoFHandler< 1 ,  2 > &);
+ const dealii::DoFHandler< 1 ,  2 >
+ &);
 
  template void
  choose_p_over_h< 1 ,  2 >(
- const DoFHandler< 1 ,  2 > &);
+ const dealii::DoFHandler< 1 ,  2 >
+ &);
 
  template bool
  limit_p_level_difference< 1 ,  2 >(
- const DoFHandler< 1 ,  2 > &,
+ const dealii::DoFHandler< 1 ,  2 >
+ &,
  const unsigned int,
  const unsigned int);
  }
@@ -80,24 +90,29 @@
  {
  template void
  full_p_adaptivity< 1 ,  3 >(
- const DoFHandler< 1 ,  3 > &);
+ const dealii::DoFHandler< 1 ,  3 >
+ &);
 
  template void
  p_adaptivity_from_flags< 1 ,  3 >(
- const DoFHandler< 1 ,  3 > &,
+ const dealii::DoFHandler< 1 ,  3 >
+ &,
  const std::vector<bool> &);
 
  template void
  force_p_over_h< 1 ,  3 >(
- const DoFHandler< 1 ,  3 > &);
+ const dealii::DoFHandler< 1 ,  3 >
+ &);
 
  template void
  choose_p_over_h< 1 ,  3 >(
- const DoFHandler< 1 ,  3 > &);
+ const dealii::DoFHandler< 1 ,  3 >
+ &);
 
  template bool
  limit_p_level_difference< 1 ,  3 >(
- const DoFHandler< 1 ,  3 > &,
+ const dealii::DoFHandler< 1 ,  3 >
+ &,
  const unsigned int,
  const unsigned int);
  }
@@ -113,24 +128,29 @@
  {
  template void
  full_p_adaptivity< 2 ,  1 >(
- const DoFHandler< 2 ,  1 > &);
+ const dealii::DoFHandler< 2 ,  1 >
+ &);
 
  template void
  p_adaptivity_from_flags< 2 ,  1 >(
- const DoFHandler< 2 ,  1 > &,
+ const dealii::DoFHandler< 2 ,  1 >
+ &,
  const std::vector<bool> &);
 
  template void
  force_p_over_h< 2 ,  1 >(
- const DoFHandler< 2 ,  1 > &);
+ const dealii::DoFHandler< 2 ,  1 >
+ &);
 
  template void
  choose_p_over_h< 2 ,  1 >(
- const DoFHandler< 2 ,  1 > &);
+ const dealii::DoFHandler< 2 ,  1 >
+ &);
 
  template bool
  limit_p_level_difference< 2 ,  1 >(
- const DoFHandler< 2 ,  1 > &,
+ const dealii::DoFHandler< 2 ,  1 >
+ &,
  const unsigned int,
  const unsigned int);
  }
@@ -146,24 +166,29 @@
  {
  template void
  full_p_adaptivity< 2 ,  2 >(
- const DoFHandler< 2 ,  2 > &);
+ const dealii::DoFHandler< 2 ,  2 >
+ &);
 
  template void
  p_adaptivity_from_flags< 2 ,  2 >(
- const DoFHandler< 2 ,  2 > &,
+ const dealii::DoFHandler< 2 ,  2 >
+ &,
  const std::vector<bool> &);
 
  template void
  force_p_over_h< 2 ,  2 >(
- const DoFHandler< 2 ,  2 > &);
+ const dealii::DoFHandler< 2 ,  2 >
+ &);
 
  template void
  choose_p_over_h< 2 ,  2 >(
- const DoFHandler< 2 ,  2 > &);
+ const dealii::DoFHandler< 2 ,  2 >
+ &);
 
  template bool
  limit_p_level_difference< 2 ,  2 >(
- const DoFHandler< 2 ,  2 > &,
+ const dealii::DoFHandler< 2 ,  2 >
+ &,
  const unsigned int,
  const unsigned int);
  }
@@ -179,24 +204,29 @@
  {
  template void
  full_p_adaptivity< 2 ,  3 >(
- const DoFHandler< 2 ,  3 > &);
+ const dealii::DoFHandler< 2 ,  3 >
+ &);
 
  template void
  p_adaptivity_from_flags< 2 ,  3 >(
- const DoFHandler< 2 ,  3 > &,
+ const dealii::DoFHandler< 2 ,  3 >
+ &,
  const std::vector<bool> &);
 
  template void
  force_p_over_h< 2 ,  3 >(
- const DoFHandler< 2 ,  3 > &);
+ const dealii::DoFHandler< 2 ,  3 >
+ &);
 
  template void
  choose_p_over_h< 2 ,  3 >(
- const DoFHandler< 2 ,  3 > &);
+ const dealii::DoFHandler< 2 ,  3 >
+ &);
 
  template bool
  limit_p_level_difference< 2 ,  3 >(
- const DoFHandler< 2 ,  3 > &,
+ const dealii::DoFHandler< 2 ,  3 >
+ &,
  const unsigned int,
  const unsigned int);
  }
@@ -212,24 +242,29 @@
  {
  template void
  full_p_adaptivity< 3 ,  1 >(
- const DoFHandler< 3 ,  1 > &);
+ const dealii::DoFHandler< 3 ,  1 >
+ &);
 
  template void
  p_adaptivity_from_flags< 3 ,  1 >(
- const DoFHandler< 3 ,  1 > &,
+ const dealii::DoFHandler< 3 ,  1 >
+ &,
  const std::vector<bool> &);
 
  template void
  force_p_over_h< 3 ,  1 >(
- const DoFHandler< 3 ,  1 > &);
+ const dealii::DoFHandler< 3 ,  1 >
+ &);
 
  template void
  choose_p_over_h< 3 ,  1 >(
- const DoFHandler< 3 ,  1 > &);
+ const dealii::DoFHandler< 3 ,  1 >
+ &);
 
  template bool
  limit_p_level_difference< 3 ,  1 >(
- const DoFHandler< 3 ,  1 > &,
+ const dealii::DoFHandler< 3 ,  1 >
+ &,
  const unsigned int,
  const unsigned int);
  }
@@ -245,24 +280,29 @@
  {
  template void
  full_p_adaptivity< 3 ,  2 >(
- const DoFHandler< 3 ,  2 > &);
+ const dealii::DoFHandler< 3 ,  2 >
+ &);
 
  template void
  p_adaptivity_from_flags< 3 ,  2 >(
- const DoFHandler< 3 ,  2 > &,
+ const dealii::DoFHandler< 3 ,  2 >
+ &,
  const std::vector<bool> &);
 
  template void
  force_p_over_h< 3 ,  2 >(
- const DoFHandler< 3 ,  2 > &);
+ const dealii::DoFHandler< 3 ,  2 >
+ &);
 
  template void
  choose_p_over_h< 3 ,  2 >(
- const DoFHandler< 3 ,  2 > &);
+ const dealii::DoFHandler< 3 ,  2 >
+ &);
 
  template bool
  limit_p_level_difference< 3 ,  2 >(
- const DoFHandler< 3 ,  2 > &,
+ const dealii::DoFHandler< 3 ,  2 >
+ &,
  const unsigned int,
  const unsigned int);
  }
@@ -278,24 +318,29 @@
  {
  template void
  full_p_adaptivity< 3 ,  3 >(
- const DoFHandler< 3 ,  3 > &);
+ const dealii::DoFHandler< 3 ,  3 >
+ &);
 
  template void
  p_adaptivity_from_flags< 3 ,  3 >(
- const DoFHandler< 3 ,  3 > &,
+ const dealii::DoFHandler< 3 ,  3 >
+ &,
  const std::vector<bool> &);
 
  template void
  force_p_over_h< 3 ,  3 >(
- const DoFHandler< 3 ,  3 > &);
+ const dealii::DoFHandler< 3 ,  3 >
+ &);
 
  template void
  choose_p_over_h< 3 ,  3 >(
- const DoFHandler< 3 ,  3 > &);
+ const dealii::DoFHandler< 3 ,  3 >
+ &);
 
  template bool
  limit_p_level_difference< 3 ,  3 >(
- const DoFHandler< 3 ,  3 > &,
+ const dealii::DoFHandler< 3 ,  3 >
+ &,
  const unsigned int,
  const unsigned int);
  }
@@ -313,7 +358,8 @@
  p_adaptivity_from_absolute_threshold< 1 ,
   double ,
   1 >(
- const DoFHandler< 1 ,  1 > &,
+ const dealii::DoFHandler< 1 ,  1 >
+ &,
  const Vector< double > &,
  const  double ,
  const  double ,
@@ -324,7 +370,8 @@
  p_adaptivity_from_relative_threshold< 1 ,
   double ,
   1 >(
- const DoFHandler< 1 ,  1 > &,
+ const dealii::DoFHandler< 1 ,  1 >
+ &,
  const Vector< double > &,
  const double,
  const double,
@@ -335,7 +382,8 @@
  p_adaptivity_fixed_number< 1 ,
   double ,
   1 >(
- const DoFHandler< 1 ,  1 > &,
+ const dealii::DoFHandler< 1 ,  1 >
+ &,
  const Vector< double > &,
  const double,
  const double,
@@ -346,14 +394,16 @@
  p_adaptivity_from_regularity< 1 ,
   double ,
   1 >(
- const DoFHandler< 1 ,  1 > &,
+ const dealii::DoFHandler< 1 ,  1 >
+ &,
  const Vector< double > &);
 
  template void
  p_adaptivity_from_reference< 1 ,
   double ,
   1 >(
- const DoFHandler< 1 ,  1 > &,
+ const dealii::DoFHandler< 1 ,  1 >
+ &,
  const Vector< double > &,
  const Vector< double > &,
  const ComparisonFunction<typename identity< double >::type> &,
@@ -361,7 +411,8 @@
 
  template void
  predict_error< 1 ,  double ,  1 >(
- const DoFHandler< 1 ,  1 > &,
+ const dealii::DoFHandler< 1 ,  1 >
+ &,
  const Vector< double > &,
  Vector< double > &,
  const double,
@@ -382,7 +433,8 @@
  p_adaptivity_from_absolute_threshold< 1 ,
   double ,
   2 >(
- const DoFHandler< 1 ,  2 > &,
+ const dealii::DoFHandler< 1 ,  2 >
+ &,
  const Vector< double > &,
  const  double ,
  const  double ,
@@ -393,7 +445,8 @@
  p_adaptivity_from_relative_threshold< 1 ,
   double ,
   2 >(
- const DoFHandler< 1 ,  2 > &,
+ const dealii::DoFHandler< 1 ,  2 >
+ &,
  const Vector< double > &,
  const double,
  const double,
@@ -404,7 +457,8 @@
  p_adaptivity_fixed_number< 1 ,
   double ,
   2 >(
- const DoFHandler< 1 ,  2 > &,
+ const dealii::DoFHandler< 1 ,  2 >
+ &,
  const Vector< double > &,
  const double,
  const double,
@@ -415,14 +469,16 @@
  p_adaptivity_from_regularity< 1 ,
   double ,
   2 >(
- const DoFHandler< 1 ,  2 > &,
+ const dealii::DoFHandler< 1 ,  2 >
+ &,
  const Vector< double > &);
 
  template void
  p_adaptivity_from_reference< 1 ,
   double ,
   2 >(
- const DoFHandler< 1 ,  2 > &,
+ const dealii::DoFHandler< 1 ,  2 >
+ &,
  const Vector< double > &,
  const Vector< double > &,
  const ComparisonFunction<typename identity< double >::type> &,
@@ -430,7 +486,8 @@
 
  template void
  predict_error< 1 ,  double ,  2 >(
- const DoFHandler< 1 ,  2 > &,
+ const dealii::DoFHandler< 1 ,  2 >
+ &,
  const Vector< double > &,
  Vector< double > &,
  const double,
@@ -451,7 +508,8 @@
  p_adaptivity_from_absolute_threshold< 1 ,
   double ,
   3 >(
- const DoFHandler< 1 ,  3 > &,
+ const dealii::DoFHandler< 1 ,  3 >
+ &,
  const Vector< double > &,
  const  double ,
  const  double ,
@@ -462,7 +520,8 @@
  p_adaptivity_from_relative_threshold< 1 ,
   double ,
   3 >(
- const DoFHandler< 1 ,  3 > &,
+ const dealii::DoFHandler< 1 ,  3 >
+ &,
  const Vector< double > &,
  const double,
  const double,
@@ -473,7 +532,8 @@
  p_adaptivity_fixed_number< 1 ,
   double ,
   3 >(
- const DoFHandler< 1 ,  3 > &,
+ const dealii::DoFHandler< 1 ,  3 >
+ &,
  const Vector< double > &,
  const double,
  const double,
@@ -484,14 +544,16 @@
  p_adaptivity_from_regularity< 1 ,
   double ,
   3 >(
- const DoFHandler< 1 ,  3 > &,
+ const dealii::DoFHandler< 1 ,  3 >
+ &,
  const Vector< double > &);
 
  template void
  p_adaptivity_from_reference< 1 ,
   double ,
   3 >(
- const DoFHandler< 1 ,  3 > &,
+ const dealii::DoFHandler< 1 ,  3 >
+ &,
  const Vector< double > &,
  const Vector< double > &,
  const ComparisonFunction<typename identity< double >::type> &,
@@ -499,7 +561,8 @@
 
  template void
  predict_error< 1 ,  double ,  3 >(
- const DoFHandler< 1 ,  3 > &,
+ const dealii::DoFHandler< 1 ,  3 >
+ &,
  const Vector< double > &,
  Vector< double > &,
  const double,
@@ -520,7 +583,8 @@
  p_adaptivity_from_absolute_threshold< 1 ,
   float ,
   1 >(
- const DoFHandler< 1 ,  1 > &,
+ const dealii::DoFHandler< 1 ,  1 >
+ &,
  const Vector< float > &,
  const  float ,
  const  float ,
@@ -531,7 +595,8 @@
  p_adaptivity_from_relative_threshold< 1 ,
   float ,
   1 >(
- const DoFHandler< 1 ,  1 > &,
+ const dealii::DoFHandler< 1 ,  1 >
+ &,
  const Vector< float > &,
  const double,
  const double,
@@ -542,7 +607,8 @@
  p_adaptivity_fixed_number< 1 ,
   float ,
   1 >(
- const DoFHandler< 1 ,  1 > &,
+ const dealii::DoFHandler< 1 ,  1 >
+ &,
  const Vector< float > &,
  const double,
  const double,
@@ -553,14 +619,16 @@
  p_adaptivity_from_regularity< 1 ,
   float ,
   1 >(
- const DoFHandler< 1 ,  1 > &,
+ const dealii::DoFHandler< 1 ,  1 >
+ &,
  const Vector< float > &);
 
  template void
  p_adaptivity_from_reference< 1 ,
   float ,
   1 >(
- const DoFHandler< 1 ,  1 > &,
+ const dealii::DoFHandler< 1 ,  1 >
+ &,
  const Vector< float > &,
  const Vector< float > &,
  const ComparisonFunction<typename identity< float >::type> &,
@@ -568,7 +636,8 @@
 
  template void
  predict_error< 1 ,  float ,  1 >(
- const DoFHandler< 1 ,  1 > &,
+ const dealii::DoFHandler< 1 ,  1 >
+ &,
  const Vector< float > &,
  Vector< float > &,
  const double,
@@ -589,7 +658,8 @@
  p_adaptivity_from_absolute_threshold< 1 ,
   float ,
   2 >(
- const DoFHandler< 1 ,  2 > &,
+ const dealii::DoFHandler< 1 ,  2 >
+ &,
  const Vector< float > &,
  const  float ,
  const  float ,
@@ -600,7 +670,8 @@
  p_adaptivity_from_relative_threshold< 1 ,
   float ,
   2 >(
- const DoFHandler< 1 ,  2 > &,
+ const dealii::DoFHandler< 1 ,  2 >
+ &,
  const Vector< float > &,
  const double,
  const double,
@@ -611,7 +682,8 @@
  p_adaptivity_fixed_number< 1 ,
   float ,
   2 >(
- const DoFHandler< 1 ,  2 > &,
+ const dealii::DoFHandler< 1 ,  2 >
+ &,
  const Vector< float > &,
  const double,
  const double,
@@ -622,14 +694,16 @@
  p_adaptivity_from_regularity< 1 ,
   float ,
   2 >(
- const DoFHandler< 1 ,  2 > &,
+ const dealii::DoFHandler< 1 ,  2 >
+ &,
  const Vector< float > &);
 
  template void
  p_adaptivity_from_reference< 1 ,
   float ,
   2 >(
- const DoFHandler< 1 ,  2 > &,
+ const dealii::DoFHandler< 1 ,  2 >
+ &,
  const Vector< float > &,
  const Vector< float > &,
  const ComparisonFunction<typename identity< float >::type> &,
@@ -637,7 +711,8 @@
 
  template void
  predict_error< 1 ,  float ,  2 >(
- const DoFHandler< 1 ,  2 > &,
+ const dealii::DoFHandler< 1 ,  2 >
+ &,
  const Vector< float > &,
  Vector< float > &,
  const double,
@@ -658,7 +733,8 @@
  p_adaptivity_from_absolute_threshold< 1 ,
   float ,
   3 >(
- const DoFHandler< 1 ,  3 > &,
+ const dealii::DoFHandler< 1 ,  3 >
+ &,
  const Vector< float > &,
  const  float ,
  const  float ,
@@ -669,7 +745,8 @@
  p_adaptivity_from_relative_threshold< 1 ,
   float ,
   3 >(
- const DoFHandler< 1 ,  3 > &,
+ const dealii::DoFHandler< 1 ,  3 >
+ &,
  const Vector< float > &,
  const double,
  const double,
@@ -680,7 +757,8 @@
  p_adaptivity_fixed_number< 1 ,
   float ,
   3 >(
- const DoFHandler< 1 ,  3 > &,
+ const dealii::DoFHandler< 1 ,  3 >
+ &,
  const Vector< float > &,
  const double,
  const double,
@@ -691,14 +769,16 @@
  p_adaptivity_from_regularity< 1 ,
   float ,
   3 >(
- const DoFHandler< 1 ,  3 > &,
+ const dealii::DoFHandler< 1 ,  3 >
+ &,
  const Vector< float > &);
 
  template void
  p_adaptivity_from_reference< 1 ,
   float ,
   3 >(
- const DoFHandler< 1 ,  3 > &,
+ const dealii::DoFHandler< 1 ,  3 >
+ &,
  const Vector< float > &,
  const Vector< float > &,
  const ComparisonFunction<typename identity< float >::type> &,
@@ -706,7 +786,8 @@
 
  template void
  predict_error< 1 ,  float ,  3 >(
- const DoFHandler< 1 ,  3 > &,
+ const dealii::DoFHandler< 1 ,  3 >
+ &,
  const Vector< float > &,
  Vector< float > &,
  const double,
@@ -727,7 +808,8 @@
  p_adaptivity_from_absolute_threshold< 2 ,
   double ,
   1 >(
- const DoFHandler< 2 ,  1 > &,
+ const dealii::DoFHandler< 2 ,  1 >
+ &,
  const Vector< double > &,
  const  double ,
  const  double ,
@@ -738,7 +820,8 @@
  p_adaptivity_from_relative_threshold< 2 ,
   double ,
   1 >(
- const DoFHandler< 2 ,  1 > &,
+ const dealii::DoFHandler< 2 ,  1 >
+ &,
  const Vector< double > &,
  const double,
  const double,
@@ -749,7 +832,8 @@
  p_adaptivity_fixed_number< 2 ,
   double ,
   1 >(
- const DoFHandler< 2 ,  1 > &,
+ const dealii::DoFHandler< 2 ,  1 >
+ &,
  const Vector< double > &,
  const double,
  const double,
@@ -760,14 +844,16 @@
  p_adaptivity_from_regularity< 2 ,
   double ,
   1 >(
- const DoFHandler< 2 ,  1 > &,
+ const dealii::DoFHandler< 2 ,  1 >
+ &,
  const Vector< double > &);
 
  template void
  p_adaptivity_from_reference< 2 ,
   double ,
   1 >(
- const DoFHandler< 2 ,  1 > &,
+ const dealii::DoFHandler< 2 ,  1 >
+ &,
  const Vector< double > &,
  const Vector< double > &,
  const ComparisonFunction<typename identity< double >::type> &,
@@ -775,7 +861,8 @@
 
  template void
  predict_error< 2 ,  double ,  1 >(
- const DoFHandler< 2 ,  1 > &,
+ const dealii::DoFHandler< 2 ,  1 >
+ &,
  const Vector< double > &,
  Vector< double > &,
  const double,
@@ -796,7 +883,8 @@
  p_adaptivity_from_absolute_threshold< 2 ,
   double ,
   2 >(
- const DoFHandler< 2 ,  2 > &,
+ const dealii::DoFHandler< 2 ,  2 >
+ &,
  const Vector< double > &,
  const  double ,
  const  double ,
@@ -807,7 +895,8 @@
  p_adaptivity_from_relative_threshold< 2 ,
   double ,
   2 >(
- const DoFHandler< 2 ,  2 > &,
+ const dealii::DoFHandler< 2 ,  2 >
+ &,
  const Vector< double > &,
  const double,
  const double,
@@ -818,7 +907,8 @@
  p_adaptivity_fixed_number< 2 ,
   double ,
   2 >(
- const DoFHandler< 2 ,  2 > &,
+ const dealii::DoFHandler< 2 ,  2 >
+ &,
  const Vector< double > &,
  const double,
  const double,
@@ -829,14 +919,16 @@
  p_adaptivity_from_regularity< 2 ,
   double ,
   2 >(
- const DoFHandler< 2 ,  2 > &,
+ const dealii::DoFHandler< 2 ,  2 >
+ &,
  const Vector< double > &);
 
  template void
  p_adaptivity_from_reference< 2 ,
   double ,
   2 >(
- const DoFHandler< 2 ,  2 > &,
+ const dealii::DoFHandler< 2 ,  2 >
+ &,
  const Vector< double > &,
  const Vector< double > &,
  const ComparisonFunction<typename identity< double >::type> &,
@@ -844,7 +936,8 @@
 
  template void
  predict_error< 2 ,  double ,  2 >(
- const DoFHandler< 2 ,  2 > &,
+ const dealii::DoFHandler< 2 ,  2 >
+ &,
  const Vector< double > &,
  Vector< double > &,
  const double,
@@ -865,7 +958,8 @@
  p_adaptivity_from_absolute_threshold< 2 ,
   double ,
   3 >(
- const DoFHandler< 2 ,  3 > &,
+ const dealii::DoFHandler< 2 ,  3 >
+ &,
  const Vector< double > &,
  const  double ,
  const  double ,
@@ -876,7 +970,8 @@
  p_adaptivity_from_relative_threshold< 2 ,
   double ,
   3 >(
- const DoFHandler< 2 ,  3 > &,
+ const dealii::DoFHandler< 2 ,  3 >
+ &,
  const Vector< double > &,
  const double,
  const double,
@@ -887,7 +982,8 @@
  p_adaptivity_fixed_number< 2 ,
   double ,
   3 >(
- const DoFHandler< 2 ,  3 > &,
+ const dealii::DoFHandler< 2 ,  3 >
+ &,
  const Vector< double > &,
  const double,
  const double,
@@ -898,14 +994,16 @@
  p_adaptivity_from_regularity< 2 ,
   double ,
   3 >(
- const DoFHandler< 2 ,  3 > &,
+ const dealii::DoFHandler< 2 ,  3 >
+ &,
  const Vector< double > &);
 
  template void
  p_adaptivity_from_reference< 2 ,
   double ,
   3 >(
- const DoFHandler< 2 ,  3 > &,
+ const dealii::DoFHandler< 2 ,  3 >
+ &,
  const Vector< double > &,
  const Vector< double > &,
  const ComparisonFunction<typename identity< double >::type> &,
@@ -913,7 +1011,8 @@
 
  template void
  predict_error< 2 ,  double ,  3 >(
- const DoFHandler< 2 ,  3 > &,
+ const dealii::DoFHandler< 2 ,  3 >
+ &,
  const Vector< double > &,
  Vector< double > &,
  const double,
@@ -934,7 +1033,8 @@
  p_adaptivity_from_absolute_threshold< 2 ,
   float ,
   1 >(
- const DoFHandler< 2 ,  1 > &,
+ const dealii::DoFHandler< 2 ,  1 >
+ &,
  const Vector< float > &,
  const  float ,
  const  float ,
@@ -945,7 +1045,8 @@
  p_adaptivity_from_relative_threshold< 2 ,
   float ,
   1 >(
- const DoFHandler< 2 ,  1 > &,
+ const dealii::DoFHandler< 2 ,  1 >
+ &,
  const Vector< float > &,
  const double,
  const double,
@@ -956,7 +1057,8 @@
  p_adaptivity_fixed_number< 2 ,
   float ,
   1 >(
- const DoFHandler< 2 ,  1 > &,
+ const dealii::DoFHandler< 2 ,  1 >
+ &,
  const Vector< float > &,
  const double,
  const double,
@@ -967,14 +1069,16 @@
  p_adaptivity_from_regularity< 2 ,
   float ,
   1 >(
- const DoFHandler< 2 ,  1 > &,
+ const dealii::DoFHandler< 2 ,  1 >
+ &,
  const Vector< float > &);
 
  template void
  p_adaptivity_from_reference< 2 ,
   float ,
   1 >(
- const DoFHandler< 2 ,  1 > &,
+ const dealii::DoFHandler< 2 ,  1 >
+ &,
  const Vector< float > &,
  const Vector< float > &,
  const ComparisonFunction<typename identity< float >::type> &,
@@ -982,7 +1086,8 @@
 
  template void
  predict_error< 2 ,  float ,  1 >(
- const DoFHandler< 2 ,  1 > &,
+ const dealii::DoFHandler< 2 ,  1 >
+ &,
  const Vector< float > &,
  Vector< float > &,
  const double,
@@ -1003,7 +1108,8 @@
  p_adaptivity_from_absolute_threshold< 2 ,
   float ,
   2 >(
- const DoFHandler< 2 ,  2 > &,
+ const dealii::DoFHandler< 2 ,  2 >
+ &,
  const Vector< float > &,
  const  float ,
  const  float ,
@@ -1014,7 +1120,8 @@
  p_adaptivity_from_relative_threshold< 2 ,
   float ,
   2 >(
- const DoFHandler< 2 ,  2 > &,
+ const dealii::DoFHandler< 2 ,  2 >
+ &,
  const Vector< float > &,
  const double,
  const double,
@@ -1025,7 +1132,8 @@
  p_adaptivity_fixed_number< 2 ,
   float ,
   2 >(
- const DoFHandler< 2 ,  2 > &,
+ const dealii::DoFHandler< 2 ,  2 >
+ &,
  const Vector< float > &,
  const double,
  const double,
@@ -1036,14 +1144,16 @@
  p_adaptivity_from_regularity< 2 ,
   float ,
   2 >(
- const DoFHandler< 2 ,  2 > &,
+ const dealii::DoFHandler< 2 ,  2 >
+ &,
  const Vector< float > &);
 
  template void
  p_adaptivity_from_reference< 2 ,
   float ,
   2 >(
- const DoFHandler< 2 ,  2 > &,
+ const dealii::DoFHandler< 2 ,  2 >
+ &,
  const Vector< float > &,
  const Vector< float > &,
  const ComparisonFunction<typename identity< float >::type> &,
@@ -1051,7 +1161,8 @@
 
  template void
  predict_error< 2 ,  float ,  2 >(
- const DoFHandler< 2 ,  2 > &,
+ const dealii::DoFHandler< 2 ,  2 >
+ &,
  const Vector< float > &,
  Vector< float > &,
  const double,
@@ -1072,7 +1183,8 @@
  p_adaptivity_from_absolute_threshold< 2 ,
   float ,
   3 >(
- const DoFHandler< 2 ,  3 > &,
+ const dealii::DoFHandler< 2 ,  3 >
+ &,
  const Vector< float > &,
  const  float ,
  const  float ,
@@ -1083,7 +1195,8 @@
  p_adaptivity_from_relative_threshold< 2 ,
   float ,
   3 >(
- const DoFHandler< 2 ,  3 > &,
+ const dealii::DoFHandler< 2 ,  3 >
+ &,
  const Vector< float > &,
  const double,
  const double,
@@ -1094,7 +1207,8 @@
  p_adaptivity_fixed_number< 2 ,
   float ,
   3 >(
- const DoFHandler< 2 ,  3 > &,
+ const dealii::DoFHandler< 2 ,  3 >
+ &,
  const Vector< float > &,
  const double,
  const double,
@@ -1105,14 +1219,16 @@
  p_adaptivity_from_regularity< 2 ,
   float ,
   3 >(
- const DoFHandler< 2 ,  3 > &,
+ const dealii::DoFHandler< 2 ,  3 >
+ &,
  const Vector< float > &);
 
  template void
  p_adaptivity_from_reference< 2 ,
   float ,
   3 >(
- const DoFHandler< 2 ,  3 > &,
+ const dealii::DoFHandler< 2 ,  3 >
+ &,
  const Vector< float > &,
  const Vector< float > &,
  const ComparisonFunction<typename identity< float >::type> &,
@@ -1120,7 +1236,8 @@
 
  template void
  predict_error< 2 ,  float ,  3 >(
- const DoFHandler< 2 ,  3 > &,
+ const dealii::DoFHandler< 2 ,  3 >
+ &,
  const Vector< float > &,
  Vector< float > &,
  const double,
@@ -1141,7 +1258,8 @@
  p_adaptivity_from_absolute_threshold< 3 ,
   double ,
   1 >(
- const DoFHandler< 3 ,  1 > &,
+ const dealii::DoFHandler< 3 ,  1 >
+ &,
  const Vector< double > &,
  const  double ,
  const  double ,
@@ -1152,7 +1270,8 @@
  p_adaptivity_from_relative_threshold< 3 ,
   double ,
   1 >(
- const DoFHandler< 3 ,  1 > &,
+ const dealii::DoFHandler< 3 ,  1 >
+ &,
  const Vector< double > &,
  const double,
  const double,
@@ -1163,7 +1282,8 @@
  p_adaptivity_fixed_number< 3 ,
   double ,
   1 >(
- const DoFHandler< 3 ,  1 > &,
+ const dealii::DoFHandler< 3 ,  1 >
+ &,
  const Vector< double > &,
  const double,
  const double,
@@ -1174,14 +1294,16 @@
  p_adaptivity_from_regularity< 3 ,
   double ,
   1 >(
- const DoFHandler< 3 ,  1 > &,
+ const dealii::DoFHandler< 3 ,  1 >
+ &,
  const Vector< double > &);
 
  template void
  p_adaptivity_from_reference< 3 ,
   double ,
   1 >(
- const DoFHandler< 3 ,  1 > &,
+ const dealii::DoFHandler< 3 ,  1 >
+ &,
  const Vector< double > &,
  const Vector< double > &,
  const ComparisonFunction<typename identity< double >::type> &,
@@ -1189,7 +1311,8 @@
 
  template void
  predict_error< 3 ,  double ,  1 >(
- const DoFHandler< 3 ,  1 > &,
+ const dealii::DoFHandler< 3 ,  1 >
+ &,
  const Vector< double > &,
  Vector< double > &,
  const double,
@@ -1210,7 +1333,8 @@
  p_adaptivity_from_absolute_threshold< 3 ,
   double ,
   2 >(
- const DoFHandler< 3 ,  2 > &,
+ const dealii::DoFHandler< 3 ,  2 >
+ &,
  const Vector< double > &,
  const  double ,
  const  double ,
@@ -1221,7 +1345,8 @@
  p_adaptivity_from_relative_threshold< 3 ,
   double ,
   2 >(
- const DoFHandler< 3 ,  2 > &,
+ const dealii::DoFHandler< 3 ,  2 >
+ &,
  const Vector< double > &,
  const double,
  const double,
@@ -1232,7 +1357,8 @@
  p_adaptivity_fixed_number< 3 ,
   double ,
   2 >(
- const DoFHandler< 3 ,  2 > &,
+ const dealii::DoFHandler< 3 ,  2 >
+ &,
  const Vector< double > &,
  const double,
  const double,
@@ -1243,14 +1369,16 @@
  p_adaptivity_from_regularity< 3 ,
   double ,
   2 >(
- const DoFHandler< 3 ,  2 > &,
+ const dealii::DoFHandler< 3 ,  2 >
+ &,
  const Vector< double > &);
 
  template void
  p_adaptivity_from_reference< 3 ,
   double ,
   2 >(
- const DoFHandler< 3 ,  2 > &,
+ const dealii::DoFHandler< 3 ,  2 >
+ &,
  const Vector< double > &,
  const Vector< double > &,
  const ComparisonFunction<typename identity< double >::type> &,
@@ -1258,7 +1386,8 @@
 
  template void
  predict_error< 3 ,  double ,  2 >(
- const DoFHandler< 3 ,  2 > &,
+ const dealii::DoFHandler< 3 ,  2 >
+ &,
  const Vector< double > &,
  Vector< double > &,
  const double,
@@ -1279,7 +1408,8 @@
  p_adaptivity_from_absolute_threshold< 3 ,
   double ,
   3 >(
- const DoFHandler< 3 ,  3 > &,
+ const dealii::DoFHandler< 3 ,  3 >
+ &,
  const Vector< double > &,
  const  double ,
  const  double ,
@@ -1290,7 +1420,8 @@
  p_adaptivity_from_relative_threshold< 3 ,
   double ,
   3 >(
- const DoFHandler< 3 ,  3 > &,
+ const dealii::DoFHandler< 3 ,  3 >
+ &,
  const Vector< double > &,
  const double,
  const double,
@@ -1301,7 +1432,8 @@
  p_adaptivity_fixed_number< 3 ,
   double ,
   3 >(
- const DoFHandler< 3 ,  3 > &,
+ const dealii::DoFHandler< 3 ,  3 >
+ &,
  const Vector< double > &,
  const double,
  const double,
@@ -1312,14 +1444,16 @@
  p_adaptivity_from_regularity< 3 ,
   double ,
   3 >(
- const DoFHandler< 3 ,  3 > &,
+ const dealii::DoFHandler< 3 ,  3 >
+ &,
  const Vector< double > &);
 
  template void
  p_adaptivity_from_reference< 3 ,
   double ,
   3 >(
- const DoFHandler< 3 ,  3 > &,
+ const dealii::DoFHandler< 3 ,  3 >
+ &,
  const Vector< double > &,
  const Vector< double > &,
  const ComparisonFunction<typename identity< double >::type> &,
@@ -1327,7 +1461,8 @@
 
  template void
  predict_error< 3 ,  double ,  3 >(
- const DoFHandler< 3 ,  3 > &,
+ const dealii::DoFHandler< 3 ,  3 >
+ &,
  const Vector< double > &,
  Vector< double > &,
  const double,
@@ -1348,7 +1483,8 @@
  p_adaptivity_from_absolute_threshold< 3 ,
   float ,
   1 >(
- const DoFHandler< 3 ,  1 > &,
+ const dealii::DoFHandler< 3 ,  1 >
+ &,
  const Vector< float > &,
  const  float ,
  const  float ,
@@ -1359,7 +1495,8 @@
  p_adaptivity_from_relative_threshold< 3 ,
   float ,
   1 >(
- const DoFHandler< 3 ,  1 > &,
+ const dealii::DoFHandler< 3 ,  1 >
+ &,
  const Vector< float > &,
  const double,
  const double,
@@ -1370,7 +1507,8 @@
  p_adaptivity_fixed_number< 3 ,
   float ,
   1 >(
- const DoFHandler< 3 ,  1 > &,
+ const dealii::DoFHandler< 3 ,  1 >
+ &,
  const Vector< float > &,
  const double,
  const double,
@@ -1381,14 +1519,16 @@
  p_adaptivity_from_regularity< 3 ,
   float ,
   1 >(
- const DoFHandler< 3 ,  1 > &,
+ const dealii::DoFHandler< 3 ,  1 >
+ &,
  const Vector< float > &);
 
  template void
  p_adaptivity_from_reference< 3 ,
   float ,
   1 >(
- const DoFHandler< 3 ,  1 > &,
+ const dealii::DoFHandler< 3 ,  1 >
+ &,
  const Vector< float > &,
  const Vector< float > &,
  const ComparisonFunction<typename identity< float >::type> &,
@@ -1396,7 +1536,8 @@
 
  template void
  predict_error< 3 ,  float ,  1 >(
- const DoFHandler< 3 ,  1 > &,
+ const dealii::DoFHandler< 3 ,  1 >
+ &,
  const Vector< float > &,
  Vector< float > &,
  const double,
@@ -1417,7 +1558,8 @@
  p_adaptivity_from_absolute_threshold< 3 ,
   float ,
   2 >(
- const DoFHandler< 3 ,  2 > &,
+ const dealii::DoFHandler< 3 ,  2 >
+ &,
  const Vector< float > &,
  const  float ,
  const  float ,
@@ -1428,7 +1570,8 @@
  p_adaptivity_from_relative_threshold< 3 ,
   float ,
   2 >(
- const DoFHandler< 3 ,  2 > &,
+ const dealii::DoFHandler< 3 ,  2 >
+ &,
  const Vector< float > &,
  const double,
  const double,
@@ -1439,7 +1582,8 @@
  p_adaptivity_fixed_number< 3 ,
   float ,
   2 >(
- const DoFHandler< 3 ,  2 > &,
+ const dealii::DoFHandler< 3 ,  2 >
+ &,
  const Vector< float > &,
  const double,
  const double,
@@ -1450,14 +1594,16 @@
  p_adaptivity_from_regularity< 3 ,
   float ,
   2 >(
- const DoFHandler< 3 ,  2 > &,
+ const dealii::DoFHandler< 3 ,  2 >
+ &,
  const Vector< float > &);
 
  template void
  p_adaptivity_from_reference< 3 ,
   float ,
   2 >(
- const DoFHandler< 3 ,  2 > &,
+ const dealii::DoFHandler< 3 ,  2 >
+ &,
  const Vector< float > &,
  const Vector< float > &,
  const ComparisonFunction<typename identity< float >::type> &,
@@ -1465,7 +1611,8 @@
 
  template void
  predict_error< 3 ,  float ,  2 >(
- const DoFHandler< 3 ,  2 > &,
+ const dealii::DoFHandler< 3 ,  2 >
+ &,
  const Vector< float > &,
  Vector< float > &,
  const double,
@@ -1486,7 +1633,8 @@
  p_adaptivity_from_absolute_threshold< 3 ,
   float ,
   3 >(
- const DoFHandler< 3 ,  3 > &,
+ const dealii::DoFHandler< 3 ,  3 >
+ &,
  const Vector< float > &,
  const  float ,
  const  float ,
@@ -1497,7 +1645,8 @@
  p_adaptivity_from_relative_threshold< 3 ,
   float ,
   3 >(
- const DoFHandler< 3 ,  3 > &,
+ const dealii::DoFHandler< 3 ,  3 >
+ &,
  const Vector< float > &,
  const double,
  const double,
@@ -1508,7 +1657,8 @@
  p_adaptivity_fixed_number< 3 ,
   float ,
   3 >(
- const DoFHandler< 3 ,  3 > &,
+ const dealii::DoFHandler< 3 ,  3 >
+ &,
  const Vector< float > &,
  const double,
  const double,
@@ -1519,14 +1669,16 @@
  p_adaptivity_from_regularity< 3 ,
   float ,
   3 >(
- const DoFHandler< 3 ,  3 > &,
+ const dealii::DoFHandler< 3 ,  3 >
+ &,
  const Vector< float > &);
 
  template void
  p_adaptivity_from_reference< 3 ,
   float ,
   3 >(
- const DoFHandler< 3 ,  3 > &,
+ const dealii::DoFHandler< 3 ,  3 >
+ &,
  const Vector< float > &,
  const Vector< float > &,
  const ComparisonFunction<typename identity< float >::type> &,
@@ -1534,7 +1686,8 @@
 
  template void
  predict_error< 3 ,  float ,  3 >(
- const DoFHandler< 3 ,  3 > &,
+ const dealii::DoFHandler< 3 ,  3 >
+ &,
  const Vector< float > &,
  Vector< float > &,
  const double,
