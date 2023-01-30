@@ -22,7 +22,7 @@
 #include <mutex>
 #include <deque>
 
-#include <eigen3/Eigen/Dense>
+#include <boost/numeric/ublas/matrix.hpp>
 
 
 namespace SampleFlow
