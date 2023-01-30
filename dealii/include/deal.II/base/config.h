@@ -70,7 +70,7 @@
 /* #undef DEAL_II_WITH_TRILINOS */
 /* #define DEAL_II_WITH_UMFPACK */
 /* #define DEAL_II_FEATURE_UMFPACK_BUNDLED_CONFIGURED */
-#define DEAL_II_WITH_ZLIB
+/* #define DEAL_II_WITH_ZLIB */
 
 #ifdef DEAL_II_WITH_TBB
 /**
