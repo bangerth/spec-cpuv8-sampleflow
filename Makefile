@@ -4,9 +4,6 @@ OBJ = $(subst .cpp,.o,$(subst .cc,.o,$(SRC)))
 
 INCLUDEDIRS = -Idealii/include -Idealii/bundled/boost-1.70.0/include
 
-check:
-	echo $(SRC)
-
 %.o : %.cc
 	c++ -std=c++14 -Wno-deprecated-declarations -c $< -o $@ $(INCLUDEDIRS) -I..
 
