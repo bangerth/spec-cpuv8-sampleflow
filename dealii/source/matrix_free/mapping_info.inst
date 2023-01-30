@@ -6,7 +6,7 @@
   #define SPLIT_INSTANTIATIONS_CHECK(C) (1)
 #endif
 
-#if (SPLIT_INSTANTIATIONS_CHECK(0))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(0))
 template struct internal::MatrixFreeFunctions::MappingInfo<
   1 ,
   VectorizedArray<double,1> ::value_type,
@@ -38,7 +38,7 @@ template struct internal::MatrixFreeFunctions::MappingInfo<
  const TaskInfo &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(1))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(1))
 template struct internal::MatrixFreeFunctions::MappingInfo<
   1 ,
   VectorizedArray<float,1> ::value_type,
@@ -70,7 +70,7 @@ template struct internal::MatrixFreeFunctions::MappingInfo<
  const TaskInfo &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(2))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(2))
 template struct internal::MatrixFreeFunctions::MappingInfo<
   1 ,
   VectorizedArray<double,2> ::value_type,
@@ -102,7 +102,7 @@ template struct internal::MatrixFreeFunctions::MappingInfo<
  const TaskInfo &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(3))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(3))
 template struct internal::MatrixFreeFunctions::MappingInfo<
   1 ,
   VectorizedArray<float,4> ::value_type,
@@ -134,7 +134,7 @@ template struct internal::MatrixFreeFunctions::MappingInfo<
  const TaskInfo &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(4))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(4))
 template struct internal::MatrixFreeFunctions::MappingInfo<
   2 ,
   VectorizedArray<double,1> ::value_type,
@@ -166,7 +166,7 @@ template struct internal::MatrixFreeFunctions::MappingInfo<
  const TaskInfo &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(5))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(5))
 template struct internal::MatrixFreeFunctions::MappingInfo<
   2 ,
   VectorizedArray<float,1> ::value_type,
@@ -198,7 +198,7 @@ template struct internal::MatrixFreeFunctions::MappingInfo<
  const TaskInfo &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(6))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(6))
 template struct internal::MatrixFreeFunctions::MappingInfo<
   2 ,
   VectorizedArray<double,2> ::value_type,
@@ -230,7 +230,7 @@ template struct internal::MatrixFreeFunctions::MappingInfo<
  const TaskInfo &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(7))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(7))
 template struct internal::MatrixFreeFunctions::MappingInfo<
   2 ,
   VectorizedArray<float,4> ::value_type,
@@ -262,7 +262,7 @@ template struct internal::MatrixFreeFunctions::MappingInfo<
  const TaskInfo &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(8))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(8))
 template struct internal::MatrixFreeFunctions::MappingInfo<
   3 ,
   VectorizedArray<double,1> ::value_type,
@@ -294,7 +294,7 @@ template struct internal::MatrixFreeFunctions::MappingInfo<
  const TaskInfo &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(9))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(9))
 template struct internal::MatrixFreeFunctions::MappingInfo<
   3 ,
   VectorizedArray<float,1> ::value_type,
@@ -326,7 +326,7 @@ template struct internal::MatrixFreeFunctions::MappingInfo<
  const TaskInfo &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(10))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(10))
 template struct internal::MatrixFreeFunctions::MappingInfo<
   3 ,
   VectorizedArray<double,2> ::value_type,
@@ -358,7 +358,7 @@ template struct internal::MatrixFreeFunctions::MappingInfo<
  const TaskInfo &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(11))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(11))
 template struct internal::MatrixFreeFunctions::MappingInfo<
   3 ,
   VectorizedArray<float,4> ::value_type,

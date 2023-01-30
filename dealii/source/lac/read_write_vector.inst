@@ -6,21 +6,21 @@
   #define SPLIT_INSTANTIATIONS_CHECK(C) (1)
 #endif
 
-#if (SPLIT_INSTANTIATIONS_CHECK(0))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(0))
 namespace LinearAlgebra
  {
  template class ReadWriteVector< double >;
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(1))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(1))
 namespace LinearAlgebra
  {
  template class ReadWriteVector< float >;
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(2))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(2))
 namespace LinearAlgebra
  {
  template void
@@ -28,7 +28,7 @@ namespace LinearAlgebra
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(3))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(3))
 namespace LinearAlgebra
  {
  template void
@@ -36,7 +36,7 @@ namespace LinearAlgebra
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(4))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(4))
 namespace LinearAlgebra
  {
  template void
@@ -44,7 +44,7 @@ namespace LinearAlgebra
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(5))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(5))
 namespace LinearAlgebra
  {
  template void
@@ -52,21 +52,21 @@ namespace LinearAlgebra
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(6))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(6))
 namespace LinearAlgebra
  {
  template class ReadWriteVector< std::complex<double> >;
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(7))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(7))
 namespace LinearAlgebra
  {
  template class ReadWriteVector< std::complex<float> >;
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(8))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(8))
 namespace LinearAlgebra
  {
  template void
@@ -74,7 +74,7 @@ namespace LinearAlgebra
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(9))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(9))
 namespace LinearAlgebra
  {
  template void
@@ -82,7 +82,7 @@ namespace LinearAlgebra
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(10))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(10))
 namespace LinearAlgebra
  {
  template void
@@ -90,7 +90,7 @@ namespace LinearAlgebra
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(11))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(11))
 namespace LinearAlgebra
  {
  template void

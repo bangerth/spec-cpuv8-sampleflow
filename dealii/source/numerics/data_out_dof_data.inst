@@ -6,7 +6,7 @@
   #define SPLIT_INSTANTIATIONS_CHECK(C) (1)
 #endif
 
-#if (SPLIT_INSTANTIATIONS_CHECK(0))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(0))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< Vector<double> >(
  const DoFHandler< 1 > *,
@@ -89,7 +89,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(1))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(1))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< Vector<double> >(
  const DoFHandler< 2 > *,
@@ -172,7 +172,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(2))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(2))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< Vector<double> >(
  const DoFHandler< 3 > *,
@@ -255,7 +255,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(3))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(3))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< Vector<float> >(
  const DoFHandler< 1 > *,
@@ -338,7 +338,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(4))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(4))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< Vector<float> >(
  const DoFHandler< 2 > *,
@@ -421,7 +421,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(5))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(5))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< Vector<float> >(
  const DoFHandler< 3 > *,
@@ -504,7 +504,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(6))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(6))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< BlockVector<double> >(
  const DoFHandler< 1 > *,
@@ -587,7 +587,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(7))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(7))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< BlockVector<double> >(
  const DoFHandler< 2 > *,
@@ -670,7 +670,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(8))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(8))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< BlockVector<double> >(
  const DoFHandler< 3 > *,
@@ -753,7 +753,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(9))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(9))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< BlockVector<float> >(
  const DoFHandler< 1 > *,
@@ -836,7 +836,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(10))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(10))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< BlockVector<float> >(
  const DoFHandler< 2 > *,
@@ -919,7 +919,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(11))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(11))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< BlockVector<float> >(
  const DoFHandler< 3 > *,
@@ -1002,7 +1002,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(12))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(12))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< LinearAlgebra::Vector<double> >(
  const DoFHandler< 1 > *,
@@ -1085,7 +1085,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(13))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(13))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< LinearAlgebra::Vector<double> >(
  const DoFHandler< 2 > *,
@@ -1168,7 +1168,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(14))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(14))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< LinearAlgebra::Vector<double> >(
  const DoFHandler< 3 > *,
@@ -1251,7 +1251,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(15))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(15))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< LinearAlgebra::Vector<float> >(
  const DoFHandler< 1 > *,
@@ -1334,7 +1334,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(16))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(16))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< LinearAlgebra::Vector<float> >(
  const DoFHandler< 2 > *,
@@ -1417,7 +1417,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(17))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(17))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< LinearAlgebra::Vector<float> >(
  const DoFHandler< 3 > *,
@@ -1500,7 +1500,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(18))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(18))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< LinearAlgebra::distributed::Vector<double> >(
  const DoFHandler< 1 > *,
@@ -1583,7 +1583,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(19))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(19))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< LinearAlgebra::distributed::Vector<double> >(
  const DoFHandler< 2 > *,
@@ -1666,7 +1666,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(20))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(20))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< LinearAlgebra::distributed::Vector<double> >(
  const DoFHandler< 3 > *,
@@ -1749,7 +1749,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(21))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(21))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< LinearAlgebra::distributed::Vector<float> >(
  const DoFHandler< 1 > *,
@@ -1832,7 +1832,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(22))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(22))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< LinearAlgebra::distributed::Vector<float> >(
  const DoFHandler< 2 > *,
@@ -1915,7 +1915,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(23))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(23))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< LinearAlgebra::distributed::Vector<float> >(
  const DoFHandler< 3 > *,
@@ -1998,7 +1998,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(24))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(24))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< LinearAlgebra::distributed::BlockVector<double> >(
  const DoFHandler< 1 > *,
@@ -2081,7 +2081,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(25))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(25))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< LinearAlgebra::distributed::BlockVector<double> >(
  const DoFHandler< 2 > *,
@@ -2164,7 +2164,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(26))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(26))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< LinearAlgebra::distributed::BlockVector<double> >(
  const DoFHandler< 3 > *,
@@ -2247,7 +2247,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(27))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(27))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< LinearAlgebra::distributed::BlockVector<float> >(
  const DoFHandler< 1 > *,
@@ -2330,7 +2330,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(28))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(28))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< LinearAlgebra::distributed::BlockVector<float> >(
  const DoFHandler< 2 > *,
@@ -2413,7 +2413,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(29))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(29))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< LinearAlgebra::distributed::BlockVector<float> >(
  const DoFHandler< 3 > *,
@@ -2496,7 +2496,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(30))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(30))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< Vector<std::complex<double> > >(
  const DoFHandler< 1 > *,
@@ -2579,7 +2579,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(31))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(31))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< Vector<std::complex<double> > >(
  const DoFHandler< 2 > *,
@@ -2662,7 +2662,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(32))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(32))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< Vector<std::complex<double> > >(
  const DoFHandler< 3 > *,
@@ -2745,7 +2745,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(33))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(33))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< Vector<std::complex<float> > >(
  const DoFHandler< 1 > *,
@@ -2828,7 +2828,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(34))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(34))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< Vector<std::complex<float> > >(
  const DoFHandler< 2 > *,
@@ -2911,7 +2911,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(35))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(35))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< Vector<std::complex<float> > >(
  const DoFHandler< 3 > *,
@@ -2994,7 +2994,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(36))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(36))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< BlockVector<std::complex<double> > >(
  const DoFHandler< 1 > *,
@@ -3077,7 +3077,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(37))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(37))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< BlockVector<std::complex<double> > >(
  const DoFHandler< 2 > *,
@@ -3160,7 +3160,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(38))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(38))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< BlockVector<std::complex<double> > >(
  const DoFHandler< 3 > *,
@@ -3243,7 +3243,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(39))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(39))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< BlockVector<std::complex<float> > >(
  const DoFHandler< 1 > *,
@@ -3326,7 +3326,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(40))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(40))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< BlockVector<std::complex<float> > >(
  const DoFHandler< 2 > *,
@@ -3409,7 +3409,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(41))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(41))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< BlockVector<std::complex<float> > >(
  const DoFHandler< 3 > *,
@@ -3492,7 +3492,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(42))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(42))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< LinearAlgebra::Vector<std::complex<double> > >(
  const DoFHandler< 1 > *,
@@ -3575,7 +3575,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(43))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(43))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< LinearAlgebra::Vector<std::complex<double> > >(
  const DoFHandler< 2 > *,
@@ -3658,7 +3658,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(44))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(44))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< LinearAlgebra::Vector<std::complex<double> > >(
  const DoFHandler< 3 > *,
@@ -3741,7 +3741,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(45))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(45))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< LinearAlgebra::Vector<std::complex<float> > >(
  const DoFHandler< 1 > *,
@@ -3824,7 +3824,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(46))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(46))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< LinearAlgebra::Vector<std::complex<float> > >(
  const DoFHandler< 2 > *,
@@ -3907,7 +3907,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(47))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(47))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< LinearAlgebra::Vector<std::complex<float> > >(
  const DoFHandler< 3 > *,
@@ -3990,7 +3990,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(48))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(48))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< LinearAlgebra::distributed::Vector<std::complex<double> > >(
  const DoFHandler< 1 > *,
@@ -4073,7 +4073,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(49))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(49))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< LinearAlgebra::distributed::Vector<std::complex<double> > >(
  const DoFHandler< 2 > *,
@@ -4156,7 +4156,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(50))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(50))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< LinearAlgebra::distributed::Vector<std::complex<double> > >(
  const DoFHandler< 3 > *,
@@ -4239,7 +4239,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(51))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(51))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< LinearAlgebra::distributed::Vector<std::complex<float> > >(
  const DoFHandler< 1 > *,
@@ -4322,7 +4322,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(52))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(52))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< LinearAlgebra::distributed::Vector<std::complex<float> > >(
  const DoFHandler< 2 > *,
@@ -4405,7 +4405,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(53))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(53))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< LinearAlgebra::distributed::Vector<std::complex<float> > >(
  const DoFHandler< 3 > *,
@@ -4488,7 +4488,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(54))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(54))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< LinearAlgebra::distributed::BlockVector<std::complex<double> > >(
  const DoFHandler< 1 > *,
@@ -4571,7 +4571,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(55))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(55))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< LinearAlgebra::distributed::BlockVector<std::complex<double> > >(
  const DoFHandler< 2 > *,
@@ -4654,7 +4654,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(56))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(56))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< LinearAlgebra::distributed::BlockVector<std::complex<double> > >(
  const DoFHandler< 3 > *,
@@ -4737,7 +4737,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(57))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(57))
 template void DataOut_DoFData< 1 ,  1 >::
  add_data_vector_internal< LinearAlgebra::distributed::BlockVector<std::complex<float> > >(
  const DoFHandler< 1 > *,
@@ -4820,7 +4820,7 @@ template void DataOut_DoFData< 1 ,  1 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(58))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(58))
 template void DataOut_DoFData< 2 ,  2 >::
  add_data_vector_internal< LinearAlgebra::distributed::BlockVector<std::complex<float> > >(
  const DoFHandler< 2 > *,
@@ -4903,7 +4903,7 @@ template void DataOut_DoFData< 2 ,  2 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(59))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(59))
 template void DataOut_DoFData< 3 ,  3 >::
  add_data_vector_internal< LinearAlgebra::distributed::BlockVector<std::complex<float> > >(
  const DoFHandler< 3 > *,
@@ -4986,7 +4986,7 @@ template void DataOut_DoFData< 3 ,  3 >::
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(60))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(60))
 template class DataOut_DoFData< 1 ,  1 >;
 
 #if  1  < 3
@@ -5017,7 +5017,7 @@ template class DataOut_DoFData< 1 ,  1 >;
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(61))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(61))
 template class DataOut_DoFData< 2 ,  2 >;
 
 #if  2  < 3
@@ -5048,7 +5048,7 @@ template class DataOut_DoFData< 2 ,  2 >;
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(62))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(62))
 template class DataOut_DoFData< 3 ,  3 >;
 
 #if  3  < 3

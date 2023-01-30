@@ -6,23 +6,23 @@
   #define SPLIT_INSTANTIATIONS_CHECK(C) (1)
 #endif
 
-#if (SPLIT_INSTANTIATIONS_CHECK(0))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(0))
 template class AffineConstraints< double >;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(1))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(1))
 template class AffineConstraints< float >;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(2))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(2))
 template class AffineConstraints< std::complex<double> >;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(3))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(3))
 template class AffineConstraints< std::complex<float> >;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(4))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(4))
 template void AffineConstraints< double >::condense<Vector< double >>(SparseMatrix< double > &,
  Vector< double > &) const;
 
@@ -30,7 +30,7 @@ template void AffineConstraints< double >::condense<Vector< double >>(SparseMatr
  BlockSparseMatrix< double > &, BlockVector< double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(5))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(5))
 template void AffineConstraints< float >::condense<Vector< float >>(SparseMatrix< float > &,
  Vector< float > &) const;
 
@@ -38,7 +38,7 @@ template void AffineConstraints< float >::condense<Vector< float >>(SparseMatrix
  BlockSparseMatrix< float > &, BlockVector< float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(6))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(6))
 template void AffineConstraints< std::complex<double> >::condense<Vector< std::complex<double> >>(SparseMatrix< std::complex<double> > &,
  Vector< std::complex<double> > &) const;
 
@@ -46,7 +46,7 @@ template void AffineConstraints< std::complex<double> >::condense<Vector< std::c
  BlockSparseMatrix< std::complex<double> > &, BlockVector< std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(7))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(7))
 template void AffineConstraints< std::complex<float> >::condense<Vector< std::complex<float> >>(SparseMatrix< std::complex<float> > &,
  Vector< std::complex<float> > &) const;
 
@@ -54,7 +54,7 @@ template void AffineConstraints< std::complex<float> >::condense<Vector< std::co
  BlockSparseMatrix< std::complex<float> > &, BlockVector< std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(8))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(8))
 template void AffineConstraints< double >::condense< Vector < double >>(const  Vector < double > &,  Vector < double > &)
  const;
 
@@ -70,7 +70,7 @@ template void AffineConstraints< double >::condense< Vector < double >>(const  V
  LinearAlgebra::distributed:: Vector < double > & vec) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(9))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(9))
 template void AffineConstraints< double >::condense< BlockVector < double >>(const  BlockVector < double > &,  BlockVector < double > &)
  const;
 
@@ -86,7 +86,7 @@ template void AffineConstraints< double >::condense< BlockVector < double >>(con
  LinearAlgebra::distributed:: BlockVector < double > & vec) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(10))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(10))
 template void AffineConstraints< float >::condense< Vector < float >>(const  Vector < float > &,  Vector < float > &)
  const;
 
@@ -102,7 +102,7 @@ template void AffineConstraints< float >::condense< Vector < float >>(const  Vec
  LinearAlgebra::distributed:: Vector < float > & vec) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(11))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(11))
 template void AffineConstraints< float >::condense< BlockVector < float >>(const  BlockVector < float > &,  BlockVector < float > &)
  const;
 
@@ -118,7 +118,7 @@ template void AffineConstraints< float >::condense< BlockVector < float >>(const
  LinearAlgebra::distributed:: BlockVector < float > & vec) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(12))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(12))
 template void AffineConstraints< std::complex<double> >::condense< Vector < std::complex<double> >>(const  Vector < std::complex<double> > &,  Vector < std::complex<double> > &)
  const;
 
@@ -134,7 +134,7 @@ template void AffineConstraints< std::complex<double> >::condense< Vector < std:
  LinearAlgebra::distributed:: Vector < std::complex<double> > & vec) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(13))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(13))
 template void AffineConstraints< std::complex<double> >::condense< BlockVector < std::complex<double> >>(const  BlockVector < std::complex<double> > &,  BlockVector < std::complex<double> > &)
  const;
 
@@ -150,7 +150,7 @@ template void AffineConstraints< std::complex<double> >::condense< BlockVector <
  LinearAlgebra::distributed:: BlockVector < std::complex<double> > & vec) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(14))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(14))
 template void AffineConstraints< std::complex<float> >::condense< Vector < std::complex<float> >>(const  Vector < std::complex<float> > &,  Vector < std::complex<float> > &)
  const;
 
@@ -166,7 +166,7 @@ template void AffineConstraints< std::complex<float> >::condense< Vector < std::
  LinearAlgebra::distributed:: Vector < std::complex<float> > & vec) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(15))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(15))
 template void AffineConstraints< std::complex<float> >::condense< BlockVector < std::complex<float> >>(const  BlockVector < std::complex<float> > &,  BlockVector < std::complex<float> > &)
  const;
 
@@ -182,7 +182,7 @@ template void AffineConstraints< std::complex<float> >::condense< BlockVector < 
  LinearAlgebra::distributed:: BlockVector < std::complex<float> > & vec) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(16))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(16))
 template void AffineConstraints< double >::distribute_local_to_global< Vector < double >>(
  const Vector< double > &,
  const std::vector<types::global_dof_index> &,
@@ -214,7 +214,7 @@ template void AffineConstraints< double >::distribute_local_to_global< Vector < 
  bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(17))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(17))
 template void AffineConstraints< double >::distribute_local_to_global< BlockVector < double >>(
  const Vector< double > &,
  const std::vector<types::global_dof_index> &,
@@ -246,7 +246,7 @@ template void AffineConstraints< double >::distribute_local_to_global< BlockVect
  bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(18))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(18))
 template void AffineConstraints< float >::distribute_local_to_global< Vector < float >>(
  const Vector< float > &,
  const std::vector<types::global_dof_index> &,
@@ -278,7 +278,7 @@ template void AffineConstraints< float >::distribute_local_to_global< Vector < f
  bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(19))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(19))
 template void AffineConstraints< float >::distribute_local_to_global< BlockVector < float >>(
  const Vector< float > &,
  const std::vector<types::global_dof_index> &,
@@ -310,7 +310,7 @@ template void AffineConstraints< float >::distribute_local_to_global< BlockVecto
  bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(20))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(20))
 template void AffineConstraints< std::complex<double> >::distribute_local_to_global< Vector < std::complex<double> >>(
  const Vector< std::complex<double> > &,
  const std::vector<types::global_dof_index> &,
@@ -342,7 +342,7 @@ template void AffineConstraints< std::complex<double> >::distribute_local_to_glo
  bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(21))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(21))
 template void AffineConstraints< std::complex<double> >::distribute_local_to_global< BlockVector < std::complex<double> >>(
  const Vector< std::complex<double> > &,
  const std::vector<types::global_dof_index> &,
@@ -374,7 +374,7 @@ template void AffineConstraints< std::complex<double> >::distribute_local_to_glo
  bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(22))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(22))
 template void AffineConstraints< std::complex<float> >::distribute_local_to_global< Vector < std::complex<float> >>(
  const Vector< std::complex<float> > &,
  const std::vector<types::global_dof_index> &,
@@ -406,7 +406,7 @@ template void AffineConstraints< std::complex<float> >::distribute_local_to_glob
  bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(23))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(23))
 template void AffineConstraints< std::complex<float> >::distribute_local_to_global< BlockVector < std::complex<float> >>(
  const Vector< std::complex<float> > &,
  const std::vector<types::global_dof_index> &,
@@ -438,7 +438,7 @@ template void AffineConstraints< std::complex<float> >::distribute_local_to_glob
  bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(24))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(24))
 template void
  AffineConstraints< double >::distribute_local_to_global< FullMatrix < double >, Vector< double >>(
  const FullMatrix< double > &,
@@ -463,7 +463,7 @@ template void
   FullMatrix < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(25))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(25))
 template void
  AffineConstraints< double >::distribute_local_to_global< SparseMatrix < double >, Vector< double >>(
  const FullMatrix< double > &,
@@ -488,7 +488,7 @@ template void
   SparseMatrix < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(26))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(26))
 template void
  AffineConstraints< double >::distribute_local_to_global< SparseMatrixEZ < double >, Vector< double >>(
  const FullMatrix< double > &,
@@ -513,7 +513,7 @@ template void
   SparseMatrixEZ < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(27))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(27))
 template void
  AffineConstraints< double >::distribute_local_to_global< ChunkSparseMatrix < double >, Vector< double >>(
  const FullMatrix< double > &,
@@ -538,7 +538,7 @@ template void
   ChunkSparseMatrix < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(28))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(28))
 template void
  AffineConstraints< float >::distribute_local_to_global< FullMatrix < float >, Vector< float >>(
  const FullMatrix< float > &,
@@ -563,7 +563,7 @@ template void
   FullMatrix < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(29))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(29))
 template void
  AffineConstraints< float >::distribute_local_to_global< SparseMatrix < float >, Vector< float >>(
  const FullMatrix< float > &,
@@ -588,7 +588,7 @@ template void
   SparseMatrix < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(30))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(30))
 template void
  AffineConstraints< float >::distribute_local_to_global< SparseMatrixEZ < float >, Vector< float >>(
  const FullMatrix< float > &,
@@ -613,7 +613,7 @@ template void
   SparseMatrixEZ < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(31))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(31))
 template void
  AffineConstraints< float >::distribute_local_to_global< ChunkSparseMatrix < float >, Vector< float >>(
  const FullMatrix< float > &,
@@ -638,7 +638,7 @@ template void
   ChunkSparseMatrix < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(32))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(32))
 template void
  AffineConstraints< std::complex<double> >::distribute_local_to_global< FullMatrix < std::complex<double> >, Vector< std::complex<double> >>(
  const FullMatrix< std::complex<double> > &,
@@ -663,7 +663,7 @@ template void
   FullMatrix < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(33))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(33))
 template void
  AffineConstraints< std::complex<double> >::distribute_local_to_global< SparseMatrix < std::complex<double> >, Vector< std::complex<double> >>(
  const FullMatrix< std::complex<double> > &,
@@ -688,7 +688,7 @@ template void
   SparseMatrix < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(34))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(34))
 template void
  AffineConstraints< std::complex<double> >::distribute_local_to_global< SparseMatrixEZ < std::complex<double> >, Vector< std::complex<double> >>(
  const FullMatrix< std::complex<double> > &,
@@ -713,7 +713,7 @@ template void
   SparseMatrixEZ < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(35))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(35))
 template void
  AffineConstraints< std::complex<double> >::distribute_local_to_global< ChunkSparseMatrix < std::complex<double> >, Vector< std::complex<double> >>(
  const FullMatrix< std::complex<double> > &,
@@ -738,7 +738,7 @@ template void
   ChunkSparseMatrix < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(36))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(36))
 template void
  AffineConstraints< std::complex<float> >::distribute_local_to_global< FullMatrix < std::complex<float> >, Vector< std::complex<float> >>(
  const FullMatrix< std::complex<float> > &,
@@ -763,7 +763,7 @@ template void
   FullMatrix < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(37))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(37))
 template void
  AffineConstraints< std::complex<float> >::distribute_local_to_global< SparseMatrix < std::complex<float> >, Vector< std::complex<float> >>(
  const FullMatrix< std::complex<float> > &,
@@ -788,7 +788,7 @@ template void
   SparseMatrix < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(38))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(38))
 template void
  AffineConstraints< std::complex<float> >::distribute_local_to_global< SparseMatrixEZ < std::complex<float> >, Vector< std::complex<float> >>(
  const FullMatrix< std::complex<float> > &,
@@ -813,7 +813,7 @@ template void
   SparseMatrixEZ < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(39))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(39))
 template void
  AffineConstraints< std::complex<float> >::distribute_local_to_global< ChunkSparseMatrix < std::complex<float> >, Vector< std::complex<float> >>(
  const FullMatrix< std::complex<float> > &,
@@ -838,7 +838,7 @@ template void
   ChunkSparseMatrix < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(40))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(40))
 template void AffineConstraints< double >::distribute_local_to_global<
  DiagonalMatrix< Vector < double >>>(const FullMatrix< double > &,
  const std::vector<size_type> &,
@@ -882,7 +882,7 @@ template void AffineConstraints< double >::distribute_local_to_global<
  std::integral_constant<bool, false>) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(41))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(41))
 template void AffineConstraints< double >::distribute_local_to_global<
  DiagonalMatrix< BlockVector < double >>>(const FullMatrix< double > &,
  const std::vector<size_type> &,
@@ -926,7 +926,7 @@ template void AffineConstraints< double >::distribute_local_to_global<
  std::integral_constant<bool, false>) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(42))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(42))
 template void AffineConstraints< float >::distribute_local_to_global<
  DiagonalMatrix< Vector < float >>>(const FullMatrix< float > &,
  const std::vector<size_type> &,
@@ -970,7 +970,7 @@ template void AffineConstraints< float >::distribute_local_to_global<
  std::integral_constant<bool, false>) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(43))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(43))
 template void AffineConstraints< float >::distribute_local_to_global<
  DiagonalMatrix< BlockVector < float >>>(const FullMatrix< float > &,
  const std::vector<size_type> &,
@@ -1014,7 +1014,7 @@ template void AffineConstraints< float >::distribute_local_to_global<
  std::integral_constant<bool, false>) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(44))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(44))
 template void AffineConstraints< std::complex<double> >::distribute_local_to_global<
  DiagonalMatrix< Vector < std::complex<double> >>>(const FullMatrix< std::complex<double> > &,
  const std::vector<size_type> &,
@@ -1058,7 +1058,7 @@ template void AffineConstraints< std::complex<double> >::distribute_local_to_glo
  std::integral_constant<bool, false>) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(45))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(45))
 template void AffineConstraints< std::complex<double> >::distribute_local_to_global<
  DiagonalMatrix< BlockVector < std::complex<double> >>>(const FullMatrix< std::complex<double> > &,
  const std::vector<size_type> &,
@@ -1102,7 +1102,7 @@ template void AffineConstraints< std::complex<double> >::distribute_local_to_glo
  std::integral_constant<bool, false>) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(46))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(46))
 template void AffineConstraints< std::complex<float> >::distribute_local_to_global<
  DiagonalMatrix< Vector < std::complex<float> >>>(const FullMatrix< std::complex<float> > &,
  const std::vector<size_type> &,
@@ -1146,7 +1146,7 @@ template void AffineConstraints< std::complex<float> >::distribute_local_to_glob
  std::integral_constant<bool, false>) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(47))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(47))
 template void AffineConstraints< std::complex<float> >::distribute_local_to_global<
  DiagonalMatrix< BlockVector < std::complex<float> >>>(const FullMatrix< std::complex<float> > &,
  const std::vector<size_type> &,
@@ -1190,7 +1190,7 @@ template void AffineConstraints< std::complex<float> >::distribute_local_to_glob
  std::integral_constant<bool, false>) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(48))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(48))
 #ifdef DEAL_II_WITH_TRILINOS
  template void AffineConstraints<double>::distribute_local_to_global<
  TrilinosWrappers::SparseMatrix,
@@ -1205,7 +1205,7 @@ template void AffineConstraints< std::complex<float> >::distribute_local_to_glob
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(49))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(49))
 #ifdef DEAL_II_WITH_TRILINOS
  template void AffineConstraints<double>::distribute_local_to_global<
  TrilinosWrappers::SparseMatrix,
@@ -1220,7 +1220,7 @@ template void AffineConstraints< std::complex<float> >::distribute_local_to_glob
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(50))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(50))
 template void AffineConstraints< double >::distribute_local_to_global<
  BlockSparseMatrix< double >,
  Vector< double >>(const FullMatrix< double > &,
@@ -1257,7 +1257,7 @@ template void AffineConstraints< double >::distribute_local_to_global<
  BlockSparseMatrix< double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(51))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(51))
 template void AffineConstraints< float >::distribute_local_to_global<
  BlockSparseMatrix< float >,
  Vector< float >>(const FullMatrix< float > &,
@@ -1294,7 +1294,7 @@ template void AffineConstraints< float >::distribute_local_to_global<
  BlockSparseMatrix< float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(52))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(52))
 template void AffineConstraints< std::complex<double> >::distribute_local_to_global<
  BlockSparseMatrix< std::complex<double> >,
  Vector< std::complex<double> >>(const FullMatrix< std::complex<double> > &,
@@ -1331,7 +1331,7 @@ template void AffineConstraints< std::complex<double> >::distribute_local_to_glo
  BlockSparseMatrix< std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(53))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(53))
 template void AffineConstraints< std::complex<float> >::distribute_local_to_global<
  BlockSparseMatrix< std::complex<float> >,
  Vector< std::complex<float> >>(const FullMatrix< std::complex<float> > &,
@@ -1368,7 +1368,7 @@ template void AffineConstraints< std::complex<float> >::distribute_local_to_glob
  BlockSparseMatrix< std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(54))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(54))
 template void AffineConstraints< double >::distribute_local_to_global<
  MatrixBlock<SparseMatrix< double >>>(
  const FullMatrix< double > &,
@@ -1385,7 +1385,7 @@ template void AffineConstraints< double >::distribute_local_to_global<
  MatrixBlock<SparseMatrix< double >> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(55))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(55))
 template void AffineConstraints< float >::distribute_local_to_global<
  MatrixBlock<SparseMatrix< float >>>(
  const FullMatrix< float > &,
@@ -1402,7 +1402,7 @@ template void AffineConstraints< float >::distribute_local_to_global<
  MatrixBlock<SparseMatrix< float >> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(56))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(56))
 template void AffineConstraints< std::complex<double> >::distribute_local_to_global<
  MatrixBlock<SparseMatrix< std::complex<double> >>>(
  const FullMatrix< std::complex<double> > &,
@@ -1419,7 +1419,7 @@ template void AffineConstraints< std::complex<double> >::distribute_local_to_glo
  MatrixBlock<SparseMatrix< std::complex<double> >> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(57))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(57))
 template void AffineConstraints< std::complex<float> >::distribute_local_to_global<
  MatrixBlock<SparseMatrix< std::complex<float> >>>(
  const FullMatrix< std::complex<float> > &,
@@ -1436,7 +1436,7 @@ template void AffineConstraints< std::complex<float> >::distribute_local_to_glob
  MatrixBlock<SparseMatrix< std::complex<float> >> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(58))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(58))
 template void AffineConstraints< double >::add_entries_local_to_global< SparsityPattern >(
  const std::vector<AffineConstraints< double >::size_type> &,
   SparsityPattern  &,
@@ -1460,7 +1460,7 @@ template void AffineConstraints< double >::add_entries_local_to_global< Sparsity
  const Table<2, bool> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(59))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(59))
 template void AffineConstraints< double >::add_entries_local_to_global< DynamicSparsityPattern >(
  const std::vector<AffineConstraints< double >::size_type> &,
   DynamicSparsityPattern  &,
@@ -1484,7 +1484,7 @@ template void AffineConstraints< double >::add_entries_local_to_global< DynamicS
  const Table<2, bool> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(60))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(60))
 template void AffineConstraints< float >::add_entries_local_to_global< SparsityPattern >(
  const std::vector<AffineConstraints< float >::size_type> &,
   SparsityPattern  &,
@@ -1508,7 +1508,7 @@ template void AffineConstraints< float >::add_entries_local_to_global< SparsityP
  const Table<2, bool> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(61))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(61))
 template void AffineConstraints< float >::add_entries_local_to_global< DynamicSparsityPattern >(
  const std::vector<AffineConstraints< float >::size_type> &,
   DynamicSparsityPattern  &,
@@ -1532,7 +1532,7 @@ template void AffineConstraints< float >::add_entries_local_to_global< DynamicSp
  const Table<2, bool> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(62))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(62))
 template void AffineConstraints< std::complex<double> >::add_entries_local_to_global< SparsityPattern >(
  const std::vector<AffineConstraints< std::complex<double> >::size_type> &,
   SparsityPattern  &,
@@ -1556,7 +1556,7 @@ template void AffineConstraints< std::complex<double> >::add_entries_local_to_gl
  const Table<2, bool> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(63))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(63))
 template void AffineConstraints< std::complex<double> >::add_entries_local_to_global< DynamicSparsityPattern >(
  const std::vector<AffineConstraints< std::complex<double> >::size_type> &,
   DynamicSparsityPattern  &,
@@ -1580,7 +1580,7 @@ template void AffineConstraints< std::complex<double> >::add_entries_local_to_gl
  const Table<2, bool> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(64))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(64))
 template void AffineConstraints< std::complex<float> >::add_entries_local_to_global< SparsityPattern >(
  const std::vector<AffineConstraints< std::complex<float> >::size_type> &,
   SparsityPattern  &,
@@ -1604,7 +1604,7 @@ template void AffineConstraints< std::complex<float> >::add_entries_local_to_glo
  const Table<2, bool> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(65))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(65))
 template void AffineConstraints< std::complex<float> >::add_entries_local_to_global< DynamicSparsityPattern >(
  const std::vector<AffineConstraints< std::complex<float> >::size_type> &,
   DynamicSparsityPattern  &,
@@ -1628,7 +1628,7 @@ template void AffineConstraints< std::complex<float> >::add_entries_local_to_glo
  const Table<2, bool> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(66))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(66))
 template void AffineConstraints< double >::add_entries_local_to_global< BlockSparsityPattern >(
  const std::vector<AffineConstraints< double >::size_type> &,
   BlockSparsityPattern  &,
@@ -1652,7 +1652,7 @@ template void AffineConstraints< double >::add_entries_local_to_global< BlockSpa
  const Table<2, bool> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(67))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(67))
 template void AffineConstraints< double >::add_entries_local_to_global< BlockDynamicSparsityPattern >(
  const std::vector<AffineConstraints< double >::size_type> &,
   BlockDynamicSparsityPattern  &,
@@ -1676,7 +1676,7 @@ template void AffineConstraints< double >::add_entries_local_to_global< BlockDyn
  const Table<2, bool> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(68))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(68))
 template void AffineConstraints< float >::add_entries_local_to_global< BlockSparsityPattern >(
  const std::vector<AffineConstraints< float >::size_type> &,
   BlockSparsityPattern  &,
@@ -1700,7 +1700,7 @@ template void AffineConstraints< float >::add_entries_local_to_global< BlockSpar
  const Table<2, bool> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(69))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(69))
 template void AffineConstraints< float >::add_entries_local_to_global< BlockDynamicSparsityPattern >(
  const std::vector<AffineConstraints< float >::size_type> &,
   BlockDynamicSparsityPattern  &,
@@ -1724,7 +1724,7 @@ template void AffineConstraints< float >::add_entries_local_to_global< BlockDyna
  const Table<2, bool> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(70))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(70))
 template void AffineConstraints< std::complex<double> >::add_entries_local_to_global< BlockSparsityPattern >(
  const std::vector<AffineConstraints< std::complex<double> >::size_type> &,
   BlockSparsityPattern  &,
@@ -1748,7 +1748,7 @@ template void AffineConstraints< std::complex<double> >::add_entries_local_to_gl
  const Table<2, bool> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(71))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(71))
 template void AffineConstraints< std::complex<double> >::add_entries_local_to_global< BlockDynamicSparsityPattern >(
  const std::vector<AffineConstraints< std::complex<double> >::size_type> &,
   BlockDynamicSparsityPattern  &,
@@ -1772,7 +1772,7 @@ template void AffineConstraints< std::complex<double> >::add_entries_local_to_gl
  const Table<2, bool> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(72))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(72))
 template void AffineConstraints< std::complex<float> >::add_entries_local_to_global< BlockSparsityPattern >(
  const std::vector<AffineConstraints< std::complex<float> >::size_type> &,
   BlockSparsityPattern  &,
@@ -1796,7 +1796,7 @@ template void AffineConstraints< std::complex<float> >::add_entries_local_to_glo
  const Table<2, bool> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(73))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(73))
 template void AffineConstraints< std::complex<float> >::add_entries_local_to_global< BlockDynamicSparsityPattern >(
  const std::vector<AffineConstraints< std::complex<float> >::size_type> &,
   BlockDynamicSparsityPattern  &,
@@ -1820,7 +1820,7 @@ template void AffineConstraints< std::complex<float> >::add_entries_local_to_glo
  const Table<2, bool> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(74))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(74))
 template void AffineConstraints< double >::distribute< Vector < double >>( Vector < double > &) const;
 
  template void
@@ -1828,7 +1828,7 @@ template void AffineConstraints< double >::distribute< Vector < double >>( Vecto
  LinearAlgebra::distributed:: Vector < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(75))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(75))
 template void AffineConstraints< double >::distribute< BlockVector < double >>( BlockVector < double > &) const;
 
  template void
@@ -1836,7 +1836,7 @@ template void AffineConstraints< double >::distribute< BlockVector < double >>( 
  LinearAlgebra::distributed:: BlockVector < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(76))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(76))
 template void AffineConstraints< float >::distribute< Vector < float >>( Vector < float > &) const;
 
  template void
@@ -1844,7 +1844,7 @@ template void AffineConstraints< float >::distribute< Vector < float >>( Vector 
  LinearAlgebra::distributed:: Vector < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(77))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(77))
 template void AffineConstraints< float >::distribute< BlockVector < float >>( BlockVector < float > &) const;
 
  template void
@@ -1852,7 +1852,7 @@ template void AffineConstraints< float >::distribute< BlockVector < float >>( Bl
  LinearAlgebra::distributed:: BlockVector < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(78))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(78))
 template void AffineConstraints< std::complex<double> >::distribute< Vector < std::complex<double> >>( Vector < std::complex<double> > &) const;
 
  template void
@@ -1860,7 +1860,7 @@ template void AffineConstraints< std::complex<double> >::distribute< Vector < st
  LinearAlgebra::distributed:: Vector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(79))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(79))
 template void AffineConstraints< std::complex<double> >::distribute< BlockVector < std::complex<double> >>( BlockVector < std::complex<double> > &) const;
 
  template void
@@ -1868,7 +1868,7 @@ template void AffineConstraints< std::complex<double> >::distribute< BlockVector
  LinearAlgebra::distributed:: BlockVector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(80))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(80))
 template void AffineConstraints< std::complex<float> >::distribute< Vector < std::complex<float> >>( Vector < std::complex<float> > &) const;
 
  template void
@@ -1876,7 +1876,7 @@ template void AffineConstraints< std::complex<float> >::distribute< Vector < std
  LinearAlgebra::distributed:: Vector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(81))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(81))
 template void AffineConstraints< std::complex<float> >::distribute< BlockVector < std::complex<float> >>( BlockVector < std::complex<float> > &) const;
 
  template void
@@ -1884,7 +1884,7 @@ template void AffineConstraints< std::complex<float> >::distribute< BlockVector 
  LinearAlgebra::distributed:: BlockVector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(82))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(82))
 template void AffineConstraints< std::complex<double> ::value_type>::distribute< Vector < std::complex<double> >>( Vector < std::complex<double> > &)
  const;
 
@@ -1893,7 +1893,7 @@ template void AffineConstraints< std::complex<double> ::value_type>::distribute<
  const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(83))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(83))
 template void AffineConstraints< std::complex<double> ::value_type>::distribute< BlockVector < std::complex<double> >>( BlockVector < std::complex<double> > &)
  const;
 
@@ -1902,7 +1902,7 @@ template void AffineConstraints< std::complex<double> ::value_type>::distribute<
  const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(84))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(84))
 template void AffineConstraints< std::complex<float> ::value_type>::distribute< Vector < std::complex<float> >>( Vector < std::complex<float> > &)
  const;
 
@@ -1911,7 +1911,7 @@ template void AffineConstraints< std::complex<float> ::value_type>::distribute< 
  const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(85))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(85))
 template void AffineConstraints< std::complex<float> ::value_type>::distribute< BlockVector < std::complex<float> >>( BlockVector < std::complex<float> > &)
  const;
 
@@ -1920,39 +1920,39 @@ template void AffineConstraints< std::complex<float> ::value_type>::distribute< 
  const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(86))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(86))
 template void AffineConstraints< double >::distribute<LinearAlgebra::Vector< double >>(
  LinearAlgebra::Vector< double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(87))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(87))
 template void AffineConstraints< float >::distribute<LinearAlgebra::Vector< float >>(
  LinearAlgebra::Vector< float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(88))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(88))
 template void AffineConstraints< std::complex<double> >::distribute<LinearAlgebra::Vector< std::complex<double> >>(
  LinearAlgebra::Vector< std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(89))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(89))
 template void AffineConstraints< std::complex<float> >::distribute<LinearAlgebra::Vector< std::complex<float> >>(
  LinearAlgebra::Vector< std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(90))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(90))
 template void
  AffineConstraints< std::complex<double> ::value_type>::distribute<LinearAlgebra::Vector< std::complex<double> >>(
  LinearAlgebra::Vector< std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(91))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(91))
 template void
  AffineConstraints< std::complex<float> ::value_type>::distribute<LinearAlgebra::Vector< std::complex<float> >>(
  LinearAlgebra::Vector< std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(92))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(92))
 template void dealii::AffineConstraints<double>::condense< Vector <float>>(
   Vector <float> &) const;
  template void dealii::AffineConstraints<double>::distribute< Vector <float>>(
@@ -1963,7 +1963,7 @@ template void dealii::AffineConstraints<double>::condense< Vector <float>>(
  LinearAlgebra::distributed:: Vector <float> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(93))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(93))
 template void dealii::AffineConstraints<double>::condense< BlockVector <float>>(
   BlockVector <float> &) const;
  template void dealii::AffineConstraints<double>::distribute< BlockVector <float>>(
@@ -1974,7 +1974,7 @@ template void dealii::AffineConstraints<double>::condense< BlockVector <float>>(
  LinearAlgebra::distributed:: BlockVector <float> &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(94))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(94))
 namespace internal
  {
  namespace AffineConstraintsImplementation
@@ -1985,7 +1985,7 @@ namespace internal
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(95))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(95))
 namespace internal
  {
  namespace AffineConstraintsImplementation
@@ -1996,7 +1996,7 @@ namespace internal
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(96))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(96))
 namespace internal
  {
  namespace AffineConstraintsImplementation
@@ -2007,7 +2007,7 @@ namespace internal
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(97))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(97))
 namespace internal
  {
  namespace AffineConstraintsImplementation
@@ -2018,7 +2018,7 @@ namespace internal
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(98))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(98))
 namespace internal
  {
  namespace AffineConstraintsImplementation
@@ -2029,7 +2029,7 @@ namespace internal
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(99))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(99))
 namespace internal
  {
  namespace AffineConstraintsImplementation
@@ -2040,7 +2040,7 @@ namespace internal
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(100))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(100))
 namespace internal
  {
  namespace AffineConstraintsImplementation
@@ -2051,7 +2051,7 @@ namespace internal
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(101))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(101))
 namespace internal
  {
  namespace AffineConstraintsImplementation
@@ -2062,7 +2062,7 @@ namespace internal
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(102))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(102))
 namespace internal
  {
  namespace AffineConstraintsImplementation
@@ -2073,7 +2073,7 @@ namespace internal
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(103))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(103))
 namespace internal
  {
  namespace AffineConstraintsImplementation
@@ -2084,7 +2084,7 @@ namespace internal
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(104))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(104))
 namespace internal
  {
  namespace AffineConstraintsImplementation
@@ -2095,7 +2095,7 @@ namespace internal
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(105))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(105))
 namespace internal
  {
  namespace AffineConstraintsImplementation
@@ -2106,7 +2106,7 @@ namespace internal
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(106))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(106))
 namespace internal
  {
  namespace AffineConstraintsImplementation
@@ -2117,7 +2117,7 @@ namespace internal
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(107))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(107))
 namespace internal
  {
  namespace AffineConstraintsImplementation
@@ -2128,7 +2128,7 @@ namespace internal
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(108))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(108))
 namespace internal
  {
  namespace AffineConstraintsImplementation
@@ -2139,7 +2139,7 @@ namespace internal
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(109))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(109))
 namespace internal
  {
  namespace AffineConstraintsImplementation
@@ -2150,7 +2150,7 @@ namespace internal
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(110))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(110))
 namespace internal
  {
  namespace AffineConstraintsImplementation
@@ -2161,7 +2161,7 @@ namespace internal
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(111))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(111))
 namespace internal
  {
  namespace AffineConstraintsImplementation
@@ -2172,7 +2172,7 @@ namespace internal
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(112))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(112))
 namespace internal
  {
  namespace AffineConstraintsImplementation
@@ -2183,7 +2183,7 @@ namespace internal
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(113))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(113))
 namespace internal
  {
  namespace AffineConstraintsImplementation

@@ -6,15 +6,15 @@
   #define SPLIT_INSTANTIATIONS_CHECK(C) (1)
 #endif
 
-#if (SPLIT_INSTANTIATIONS_CHECK(0))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(0))
 template class SparseMatrix< double >;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(1))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(1))
 template class SparseMatrix< float >;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(2))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(2))
 template SparseMatrix< double > &SparseMatrix< double >::copy_from< double >(
  const SparseMatrix< double > &);
 
@@ -36,7 +36,7 @@ template SparseMatrix< double > &SparseMatrix< double >::copy_from< double >(
  const bool);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(3))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(3))
 template SparseMatrix< double > &SparseMatrix< double >::copy_from< float >(
  const SparseMatrix< float > &);
 
@@ -58,7 +58,7 @@ template SparseMatrix< double > &SparseMatrix< double >::copy_from< float >(
  const bool);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(4))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(4))
 template SparseMatrix< float > &SparseMatrix< float >::copy_from< double >(
  const SparseMatrix< double > &);
 
@@ -80,7 +80,7 @@ template SparseMatrix< float > &SparseMatrix< float >::copy_from< double >(
  const bool);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(5))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(5))
 template SparseMatrix< float > &SparseMatrix< float >::copy_from< float >(
  const SparseMatrix< float > &);
 
@@ -102,7 +102,7 @@ template SparseMatrix< float > &SparseMatrix< float >::copy_from< float >(
  const bool);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(6))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(6))
 template  double  SparseMatrix< double >::matrix_norm_square< double >(const Vector< double > &)
  const;
 
@@ -157,7 +157,7 @@ template  double  SparseMatrix< double >::matrix_norm_square< double >(const Vec
  const  double ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(7))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(7))
 template  float  SparseMatrix< double >::matrix_norm_square< float >(const Vector< float > &)
  const;
 
@@ -212,7 +212,7 @@ template  float  SparseMatrix< double >::matrix_norm_square< float >(const Vecto
  const  double ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(8))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(8))
 template  double  SparseMatrix< float >::matrix_norm_square< double >(const Vector< double > &)
  const;
 
@@ -267,7 +267,7 @@ template  double  SparseMatrix< float >::matrix_norm_square< double >(const Vect
  const  float ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(9))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(9))
 template  float  SparseMatrix< float >::matrix_norm_square< float >(const Vector< float > &)
  const;
 
@@ -322,455 +322,455 @@ template  float  SparseMatrix< float >::matrix_norm_square< float >(const Vector
  const  float ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(10))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(10))
 template void SparseMatrix< double >::vmult( Vector < double > &, const  Vector < double > &) const;
  template void SparseMatrix< double >::Tvmult( Vector < double > &, const  Vector < double > &) const;
  template void SparseMatrix< double >::vmult_add( Vector < double > &, const  Vector < double > &) const;
  template void SparseMatrix< double >::Tvmult_add( Vector < double > &, const  Vector < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(11))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(11))
 template void SparseMatrix< double >::vmult( Vector < double > &, const  BlockVector < double > &) const;
  template void SparseMatrix< double >::Tvmult( Vector < double > &, const  BlockVector < double > &) const;
  template void SparseMatrix< double >::vmult_add( Vector < double > &, const  BlockVector < double > &) const;
  template void SparseMatrix< double >::Tvmult_add( Vector < double > &, const  BlockVector < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(12))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(12))
 template void SparseMatrix< double >::vmult( BlockVector < double > &, const  Vector < double > &) const;
  template void SparseMatrix< double >::Tvmult( BlockVector < double > &, const  Vector < double > &) const;
  template void SparseMatrix< double >::vmult_add( BlockVector < double > &, const  Vector < double > &) const;
  template void SparseMatrix< double >::Tvmult_add( BlockVector < double > &, const  Vector < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(13))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(13))
 template void SparseMatrix< double >::vmult( BlockVector < double > &, const  BlockVector < double > &) const;
  template void SparseMatrix< double >::Tvmult( BlockVector < double > &, const  BlockVector < double > &) const;
  template void SparseMatrix< double >::vmult_add( BlockVector < double > &, const  BlockVector < double > &) const;
  template void SparseMatrix< double >::Tvmult_add( BlockVector < double > &, const  BlockVector < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(14))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(14))
 template void SparseMatrix< double >::vmult( Vector < double > &, const  Vector < float > &) const;
  template void SparseMatrix< double >::Tvmult( Vector < double > &, const  Vector < float > &) const;
  template void SparseMatrix< double >::vmult_add( Vector < double > &, const  Vector < float > &) const;
  template void SparseMatrix< double >::Tvmult_add( Vector < double > &, const  Vector < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(15))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(15))
 template void SparseMatrix< double >::vmult( Vector < double > &, const  BlockVector < float > &) const;
  template void SparseMatrix< double >::Tvmult( Vector < double > &, const  BlockVector < float > &) const;
  template void SparseMatrix< double >::vmult_add( Vector < double > &, const  BlockVector < float > &) const;
  template void SparseMatrix< double >::Tvmult_add( Vector < double > &, const  BlockVector < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(16))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(16))
 template void SparseMatrix< double >::vmult( BlockVector < double > &, const  Vector < float > &) const;
  template void SparseMatrix< double >::Tvmult( BlockVector < double > &, const  Vector < float > &) const;
  template void SparseMatrix< double >::vmult_add( BlockVector < double > &, const  Vector < float > &) const;
  template void SparseMatrix< double >::Tvmult_add( BlockVector < double > &, const  Vector < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(17))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(17))
 template void SparseMatrix< double >::vmult( BlockVector < double > &, const  BlockVector < float > &) const;
  template void SparseMatrix< double >::Tvmult( BlockVector < double > &, const  BlockVector < float > &) const;
  template void SparseMatrix< double >::vmult_add( BlockVector < double > &, const  BlockVector < float > &) const;
  template void SparseMatrix< double >::Tvmult_add( BlockVector < double > &, const  BlockVector < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(18))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(18))
 template void SparseMatrix< double >::vmult( Vector < float > &, const  Vector < double > &) const;
  template void SparseMatrix< double >::Tvmult( Vector < float > &, const  Vector < double > &) const;
  template void SparseMatrix< double >::vmult_add( Vector < float > &, const  Vector < double > &) const;
  template void SparseMatrix< double >::Tvmult_add( Vector < float > &, const  Vector < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(19))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(19))
 template void SparseMatrix< double >::vmult( Vector < float > &, const  BlockVector < double > &) const;
  template void SparseMatrix< double >::Tvmult( Vector < float > &, const  BlockVector < double > &) const;
  template void SparseMatrix< double >::vmult_add( Vector < float > &, const  BlockVector < double > &) const;
  template void SparseMatrix< double >::Tvmult_add( Vector < float > &, const  BlockVector < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(20))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(20))
 template void SparseMatrix< double >::vmult( BlockVector < float > &, const  Vector < double > &) const;
  template void SparseMatrix< double >::Tvmult( BlockVector < float > &, const  Vector < double > &) const;
  template void SparseMatrix< double >::vmult_add( BlockVector < float > &, const  Vector < double > &) const;
  template void SparseMatrix< double >::Tvmult_add( BlockVector < float > &, const  Vector < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(21))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(21))
 template void SparseMatrix< double >::vmult( BlockVector < float > &, const  BlockVector < double > &) const;
  template void SparseMatrix< double >::Tvmult( BlockVector < float > &, const  BlockVector < double > &) const;
  template void SparseMatrix< double >::vmult_add( BlockVector < float > &, const  BlockVector < double > &) const;
  template void SparseMatrix< double >::Tvmult_add( BlockVector < float > &, const  BlockVector < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(22))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(22))
 template void SparseMatrix< double >::vmult( Vector < float > &, const  Vector < float > &) const;
  template void SparseMatrix< double >::Tvmult( Vector < float > &, const  Vector < float > &) const;
  template void SparseMatrix< double >::vmult_add( Vector < float > &, const  Vector < float > &) const;
  template void SparseMatrix< double >::Tvmult_add( Vector < float > &, const  Vector < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(23))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(23))
 template void SparseMatrix< double >::vmult( Vector < float > &, const  BlockVector < float > &) const;
  template void SparseMatrix< double >::Tvmult( Vector < float > &, const  BlockVector < float > &) const;
  template void SparseMatrix< double >::vmult_add( Vector < float > &, const  BlockVector < float > &) const;
  template void SparseMatrix< double >::Tvmult_add( Vector < float > &, const  BlockVector < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(24))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(24))
 template void SparseMatrix< double >::vmult( BlockVector < float > &, const  Vector < float > &) const;
  template void SparseMatrix< double >::Tvmult( BlockVector < float > &, const  Vector < float > &) const;
  template void SparseMatrix< double >::vmult_add( BlockVector < float > &, const  Vector < float > &) const;
  template void SparseMatrix< double >::Tvmult_add( BlockVector < float > &, const  Vector < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(25))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(25))
 template void SparseMatrix< double >::vmult( BlockVector < float > &, const  BlockVector < float > &) const;
  template void SparseMatrix< double >::Tvmult( BlockVector < float > &, const  BlockVector < float > &) const;
  template void SparseMatrix< double >::vmult_add( BlockVector < float > &, const  BlockVector < float > &) const;
  template void SparseMatrix< double >::Tvmult_add( BlockVector < float > &, const  BlockVector < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(26))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(26))
 template void SparseMatrix< float >::vmult( Vector < double > &, const  Vector < double > &) const;
  template void SparseMatrix< float >::Tvmult( Vector < double > &, const  Vector < double > &) const;
  template void SparseMatrix< float >::vmult_add( Vector < double > &, const  Vector < double > &) const;
  template void SparseMatrix< float >::Tvmult_add( Vector < double > &, const  Vector < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(27))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(27))
 template void SparseMatrix< float >::vmult( Vector < double > &, const  BlockVector < double > &) const;
  template void SparseMatrix< float >::Tvmult( Vector < double > &, const  BlockVector < double > &) const;
  template void SparseMatrix< float >::vmult_add( Vector < double > &, const  BlockVector < double > &) const;
  template void SparseMatrix< float >::Tvmult_add( Vector < double > &, const  BlockVector < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(28))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(28))
 template void SparseMatrix< float >::vmult( BlockVector < double > &, const  Vector < double > &) const;
  template void SparseMatrix< float >::Tvmult( BlockVector < double > &, const  Vector < double > &) const;
  template void SparseMatrix< float >::vmult_add( BlockVector < double > &, const  Vector < double > &) const;
  template void SparseMatrix< float >::Tvmult_add( BlockVector < double > &, const  Vector < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(29))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(29))
 template void SparseMatrix< float >::vmult( BlockVector < double > &, const  BlockVector < double > &) const;
  template void SparseMatrix< float >::Tvmult( BlockVector < double > &, const  BlockVector < double > &) const;
  template void SparseMatrix< float >::vmult_add( BlockVector < double > &, const  BlockVector < double > &) const;
  template void SparseMatrix< float >::Tvmult_add( BlockVector < double > &, const  BlockVector < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(30))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(30))
 template void SparseMatrix< float >::vmult( Vector < double > &, const  Vector < float > &) const;
  template void SparseMatrix< float >::Tvmult( Vector < double > &, const  Vector < float > &) const;
  template void SparseMatrix< float >::vmult_add( Vector < double > &, const  Vector < float > &) const;
  template void SparseMatrix< float >::Tvmult_add( Vector < double > &, const  Vector < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(31))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(31))
 template void SparseMatrix< float >::vmult( Vector < double > &, const  BlockVector < float > &) const;
  template void SparseMatrix< float >::Tvmult( Vector < double > &, const  BlockVector < float > &) const;
  template void SparseMatrix< float >::vmult_add( Vector < double > &, const  BlockVector < float > &) const;
  template void SparseMatrix< float >::Tvmult_add( Vector < double > &, const  BlockVector < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(32))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(32))
 template void SparseMatrix< float >::vmult( BlockVector < double > &, const  Vector < float > &) const;
  template void SparseMatrix< float >::Tvmult( BlockVector < double > &, const  Vector < float > &) const;
  template void SparseMatrix< float >::vmult_add( BlockVector < double > &, const  Vector < float > &) const;
  template void SparseMatrix< float >::Tvmult_add( BlockVector < double > &, const  Vector < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(33))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(33))
 template void SparseMatrix< float >::vmult( BlockVector < double > &, const  BlockVector < float > &) const;
  template void SparseMatrix< float >::Tvmult( BlockVector < double > &, const  BlockVector < float > &) const;
  template void SparseMatrix< float >::vmult_add( BlockVector < double > &, const  BlockVector < float > &) const;
  template void SparseMatrix< float >::Tvmult_add( BlockVector < double > &, const  BlockVector < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(34))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(34))
 template void SparseMatrix< float >::vmult( Vector < float > &, const  Vector < double > &) const;
  template void SparseMatrix< float >::Tvmult( Vector < float > &, const  Vector < double > &) const;
  template void SparseMatrix< float >::vmult_add( Vector < float > &, const  Vector < double > &) const;
  template void SparseMatrix< float >::Tvmult_add( Vector < float > &, const  Vector < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(35))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(35))
 template void SparseMatrix< float >::vmult( Vector < float > &, const  BlockVector < double > &) const;
  template void SparseMatrix< float >::Tvmult( Vector < float > &, const  BlockVector < double > &) const;
  template void SparseMatrix< float >::vmult_add( Vector < float > &, const  BlockVector < double > &) const;
  template void SparseMatrix< float >::Tvmult_add( Vector < float > &, const  BlockVector < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(36))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(36))
 template void SparseMatrix< float >::vmult( BlockVector < float > &, const  Vector < double > &) const;
  template void SparseMatrix< float >::Tvmult( BlockVector < float > &, const  Vector < double > &) const;
  template void SparseMatrix< float >::vmult_add( BlockVector < float > &, const  Vector < double > &) const;
  template void SparseMatrix< float >::Tvmult_add( BlockVector < float > &, const  Vector < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(37))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(37))
 template void SparseMatrix< float >::vmult( BlockVector < float > &, const  BlockVector < double > &) const;
  template void SparseMatrix< float >::Tvmult( BlockVector < float > &, const  BlockVector < double > &) const;
  template void SparseMatrix< float >::vmult_add( BlockVector < float > &, const  BlockVector < double > &) const;
  template void SparseMatrix< float >::Tvmult_add( BlockVector < float > &, const  BlockVector < double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(38))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(38))
 template void SparseMatrix< float >::vmult( Vector < float > &, const  Vector < float > &) const;
  template void SparseMatrix< float >::Tvmult( Vector < float > &, const  Vector < float > &) const;
  template void SparseMatrix< float >::vmult_add( Vector < float > &, const  Vector < float > &) const;
  template void SparseMatrix< float >::Tvmult_add( Vector < float > &, const  Vector < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(39))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(39))
 template void SparseMatrix< float >::vmult( Vector < float > &, const  BlockVector < float > &) const;
  template void SparseMatrix< float >::Tvmult( Vector < float > &, const  BlockVector < float > &) const;
  template void SparseMatrix< float >::vmult_add( Vector < float > &, const  BlockVector < float > &) const;
  template void SparseMatrix< float >::Tvmult_add( Vector < float > &, const  BlockVector < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(40))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(40))
 template void SparseMatrix< float >::vmult( BlockVector < float > &, const  Vector < float > &) const;
  template void SparseMatrix< float >::Tvmult( BlockVector < float > &, const  Vector < float > &) const;
  template void SparseMatrix< float >::vmult_add( BlockVector < float > &, const  Vector < float > &) const;
  template void SparseMatrix< float >::Tvmult_add( BlockVector < float > &, const  Vector < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(41))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(41))
 template void SparseMatrix< float >::vmult( BlockVector < float > &, const  BlockVector < float > &) const;
  template void SparseMatrix< float >::Tvmult( BlockVector < float > &, const  BlockVector < float > &) const;
  template void SparseMatrix< float >::vmult_add( BlockVector < float > &, const  BlockVector < float > &) const;
  template void SparseMatrix< float >::Tvmult_add( BlockVector < float > &, const  BlockVector < float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(42))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(42))
 template void SparseMatrix< double >::vmult( Vector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< double >::Tvmult( Vector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< double >::vmult_add( Vector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< double >::Tvmult_add( Vector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(43))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(43))
 template void SparseMatrix< double >::vmult( Vector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< double >::Tvmult( Vector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< double >::vmult_add( Vector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< double >::Tvmult_add( Vector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(44))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(44))
 template void SparseMatrix< double >::vmult( BlockVector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< double >::Tvmult( BlockVector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< double >::vmult_add( BlockVector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< double >::Tvmult_add( BlockVector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(45))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(45))
 template void SparseMatrix< double >::vmult( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< double >::Tvmult( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< double >::vmult_add( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< double >::Tvmult_add( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(46))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(46))
 template void SparseMatrix< double >::vmult( Vector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< double >::Tvmult( Vector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< double >::vmult_add( Vector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< double >::Tvmult_add( Vector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(47))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(47))
 template void SparseMatrix< double >::vmult( Vector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< double >::Tvmult( Vector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< double >::vmult_add( Vector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< double >::Tvmult_add( Vector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(48))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(48))
 template void SparseMatrix< double >::vmult( BlockVector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< double >::Tvmult( BlockVector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< double >::vmult_add( BlockVector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< double >::Tvmult_add( BlockVector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(49))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(49))
 template void SparseMatrix< double >::vmult( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< double >::Tvmult( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< double >::vmult_add( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< double >::Tvmult_add( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(50))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(50))
 template void SparseMatrix< double >::vmult( Vector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< double >::Tvmult( Vector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< double >::vmult_add( Vector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< double >::Tvmult_add( Vector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(51))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(51))
 template void SparseMatrix< double >::vmult( Vector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< double >::Tvmult( Vector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< double >::vmult_add( Vector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< double >::Tvmult_add( Vector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(52))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(52))
 template void SparseMatrix< double >::vmult( BlockVector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< double >::Tvmult( BlockVector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< double >::vmult_add( BlockVector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< double >::Tvmult_add( BlockVector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(53))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(53))
 template void SparseMatrix< double >::vmult( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< double >::Tvmult( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< double >::vmult_add( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< double >::Tvmult_add( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(54))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(54))
 template void SparseMatrix< double >::vmult( Vector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< double >::Tvmult( Vector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< double >::vmult_add( Vector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< double >::Tvmult_add( Vector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(55))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(55))
 template void SparseMatrix< double >::vmult( Vector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< double >::Tvmult( Vector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< double >::vmult_add( Vector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< double >::Tvmult_add( Vector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(56))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(56))
 template void SparseMatrix< double >::vmult( BlockVector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< double >::Tvmult( BlockVector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< double >::vmult_add( BlockVector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< double >::Tvmult_add( BlockVector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(57))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(57))
 template void SparseMatrix< double >::vmult( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< double >::Tvmult( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< double >::vmult_add( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< double >::Tvmult_add( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(58))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(58))
 template void SparseMatrix< float >::vmult( Vector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< float >::Tvmult( Vector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< float >::vmult_add( Vector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< float >::Tvmult_add( Vector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(59))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(59))
 template void SparseMatrix< float >::vmult( Vector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< float >::Tvmult( Vector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< float >::vmult_add( Vector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< float >::Tvmult_add( Vector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(60))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(60))
 template void SparseMatrix< float >::vmult( BlockVector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< float >::Tvmult( BlockVector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< float >::vmult_add( BlockVector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< float >::Tvmult_add( BlockVector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(61))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(61))
 template void SparseMatrix< float >::vmult( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< float >::Tvmult( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< float >::vmult_add( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< float >::Tvmult_add( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(62))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(62))
 template void SparseMatrix< float >::vmult( Vector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< float >::Tvmult( Vector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< float >::vmult_add( Vector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< float >::Tvmult_add( Vector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(63))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(63))
 template void SparseMatrix< float >::vmult( Vector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< float >::Tvmult( Vector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< float >::vmult_add( Vector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< float >::Tvmult_add( Vector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(64))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(64))
 template void SparseMatrix< float >::vmult( BlockVector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< float >::Tvmult( BlockVector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< float >::vmult_add( BlockVector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< float >::Tvmult_add( BlockVector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(65))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(65))
 template void SparseMatrix< float >::vmult( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< float >::Tvmult( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< float >::vmult_add( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< float >::Tvmult_add( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(66))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(66))
 template void SparseMatrix< float >::vmult( Vector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< float >::Tvmult( Vector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< float >::vmult_add( Vector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< float >::Tvmult_add( Vector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(67))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(67))
 template void SparseMatrix< float >::vmult( Vector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< float >::Tvmult( Vector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< float >::vmult_add( Vector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< float >::Tvmult_add( Vector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(68))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(68))
 template void SparseMatrix< float >::vmult( BlockVector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< float >::Tvmult( BlockVector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< float >::vmult_add( BlockVector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< float >::Tvmult_add( BlockVector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(69))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(69))
 template void SparseMatrix< float >::vmult( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< float >::Tvmult( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< float >::vmult_add( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< float >::Tvmult_add( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(70))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(70))
 template void SparseMatrix< float >::vmult( Vector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< float >::Tvmult( Vector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< float >::vmult_add( Vector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< float >::Tvmult_add( Vector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(71))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(71))
 template void SparseMatrix< float >::vmult( Vector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< float >::Tvmult( Vector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< float >::vmult_add( Vector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< float >::Tvmult_add( Vector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(72))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(72))
 template void SparseMatrix< float >::vmult( BlockVector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< float >::Tvmult( BlockVector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< float >::vmult_add( BlockVector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< float >::Tvmult_add( BlockVector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(73))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(73))
 template void SparseMatrix< float >::vmult( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< float >::Tvmult( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< float >::vmult_add( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< float >::Tvmult_add( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(74))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(74))
 template void SparseMatrix< double >::vmult(
  LinearAlgebra::distributed::Vector< double > &,
  const LinearAlgebra::distributed::Vector< double > &) const;
@@ -785,7 +785,7 @@ template void SparseMatrix< double >::vmult(
  const LinearAlgebra::distributed::Vector< double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(75))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(75))
 template void SparseMatrix< float >::vmult(
  LinearAlgebra::distributed::Vector< float > &,
  const LinearAlgebra::distributed::Vector< float > &) const;
@@ -800,7 +800,7 @@ template void SparseMatrix< float >::vmult(
  const LinearAlgebra::distributed::Vector< float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(76))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(76))
 template void SparseMatrix< double >::mmult(SparseMatrix< double > &,
  const SparseMatrix< double > &,
  const Vector< double > &,
@@ -811,7 +811,7 @@ template void SparseMatrix< double >::mmult(SparseMatrix< double > &,
  const bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(77))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(77))
 template void SparseMatrix< double >::mmult(SparseMatrix< double > &,
  const SparseMatrix< float > &,
  const Vector< double > &,
@@ -822,7 +822,7 @@ template void SparseMatrix< double >::mmult(SparseMatrix< double > &,
  const bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(78))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(78))
 template void SparseMatrix< double >::mmult(SparseMatrix< float > &,
  const SparseMatrix< double > &,
  const Vector< double > &,
@@ -833,7 +833,7 @@ template void SparseMatrix< double >::mmult(SparseMatrix< float > &,
  const bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(79))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(79))
 template void SparseMatrix< double >::mmult(SparseMatrix< float > &,
  const SparseMatrix< float > &,
  const Vector< double > &,
@@ -844,7 +844,7 @@ template void SparseMatrix< double >::mmult(SparseMatrix< float > &,
  const bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(80))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(80))
 template void SparseMatrix< float >::mmult(SparseMatrix< double > &,
  const SparseMatrix< double > &,
  const Vector< float > &,
@@ -855,7 +855,7 @@ template void SparseMatrix< float >::mmult(SparseMatrix< double > &,
  const bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(81))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(81))
 template void SparseMatrix< float >::mmult(SparseMatrix< double > &,
  const SparseMatrix< float > &,
  const Vector< float > &,
@@ -866,7 +866,7 @@ template void SparseMatrix< float >::mmult(SparseMatrix< double > &,
  const bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(82))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(82))
 template void SparseMatrix< float >::mmult(SparseMatrix< float > &,
  const SparseMatrix< double > &,
  const Vector< float > &,
@@ -877,7 +877,7 @@ template void SparseMatrix< float >::mmult(SparseMatrix< float > &,
  const bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(83))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(83))
 template void SparseMatrix< float >::mmult(SparseMatrix< float > &,
  const SparseMatrix< float > &,
  const Vector< float > &,
@@ -888,15 +888,15 @@ template void SparseMatrix< float >::mmult(SparseMatrix< float > &,
  const bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(84))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(84))
 template class SparseMatrix< std::complex<double> >;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(85))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(85))
 template class SparseMatrix< std::complex<float> >;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(86))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(86))
 template SparseMatrix< std::complex<double> > &SparseMatrix< std::complex<double> >::copy_from< std::complex<double> >(
  const SparseMatrix< std::complex<double> > &);
 
@@ -918,7 +918,7 @@ template SparseMatrix< std::complex<double> > &SparseMatrix< std::complex<double
  const bool);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(87))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(87))
 template SparseMatrix< std::complex<double> > &SparseMatrix< std::complex<double> >::copy_from< std::complex<float> >(
  const SparseMatrix< std::complex<float> > &);
 
@@ -940,7 +940,7 @@ template SparseMatrix< std::complex<double> > &SparseMatrix< std::complex<double
  const bool);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(88))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(88))
 template SparseMatrix< std::complex<float> > &SparseMatrix< std::complex<float> >::copy_from< std::complex<double> >(
  const SparseMatrix< std::complex<double> > &);
 
@@ -962,7 +962,7 @@ template SparseMatrix< std::complex<float> > &SparseMatrix< std::complex<float> 
  const bool);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(89))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(89))
 template SparseMatrix< std::complex<float> > &SparseMatrix< std::complex<float> >::copy_from< std::complex<float> >(
  const SparseMatrix< std::complex<float> > &);
 
@@ -984,7 +984,7 @@ template SparseMatrix< std::complex<float> > &SparseMatrix< std::complex<float> 
  const bool);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(90))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(90))
 template  std::complex<double>  SparseMatrix< std::complex<double> >::matrix_norm_square< std::complex<double> >(const Vector< std::complex<double> > &)
  const;
 
@@ -1039,7 +1039,7 @@ template  std::complex<double>  SparseMatrix< std::complex<double> >::matrix_nor
  const  std::complex<double> ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(91))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(91))
 template  std::complex<float>  SparseMatrix< std::complex<double> >::matrix_norm_square< std::complex<float> >(const Vector< std::complex<float> > &)
  const;
 
@@ -1094,7 +1094,7 @@ template  std::complex<float>  SparseMatrix< std::complex<double> >::matrix_norm
  const  std::complex<double> ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(92))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(92))
 template  std::complex<double>  SparseMatrix< std::complex<float> >::matrix_norm_square< std::complex<double> >(const Vector< std::complex<double> > &)
  const;
 
@@ -1149,7 +1149,7 @@ template  std::complex<double>  SparseMatrix< std::complex<float> >::matrix_norm
  const  std::complex<float> ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(93))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(93))
 template  std::complex<float>  SparseMatrix< std::complex<float> >::matrix_norm_square< std::complex<float> >(const Vector< std::complex<float> > &)
  const;
 
@@ -1204,231 +1204,231 @@ template  std::complex<float>  SparseMatrix< std::complex<float> >::matrix_norm_
  const  std::complex<float> ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(94))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(94))
 template void SparseMatrix< std::complex<double> >::vmult( Vector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult( Vector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::vmult_add( Vector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult_add( Vector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(95))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(95))
 template void SparseMatrix< std::complex<double> >::vmult( Vector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult( Vector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::vmult_add( Vector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult_add( Vector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(96))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(96))
 template void SparseMatrix< std::complex<double> >::vmult( BlockVector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult( BlockVector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::vmult_add( BlockVector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult_add( BlockVector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(97))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(97))
 template void SparseMatrix< std::complex<double> >::vmult( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::vmult_add( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult_add( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(98))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(98))
 template void SparseMatrix< std::complex<double> >::vmult( Vector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult( Vector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::vmult_add( Vector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult_add( Vector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(99))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(99))
 template void SparseMatrix< std::complex<double> >::vmult( Vector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult( Vector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::vmult_add( Vector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult_add( Vector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(100))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(100))
 template void SparseMatrix< std::complex<double> >::vmult( BlockVector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult( BlockVector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::vmult_add( BlockVector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult_add( BlockVector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(101))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(101))
 template void SparseMatrix< std::complex<double> >::vmult( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::vmult_add( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult_add( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(102))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(102))
 template void SparseMatrix< std::complex<double> >::vmult( Vector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult( Vector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::vmult_add( Vector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult_add( Vector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(103))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(103))
 template void SparseMatrix< std::complex<double> >::vmult( Vector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult( Vector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::vmult_add( Vector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult_add( Vector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(104))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(104))
 template void SparseMatrix< std::complex<double> >::vmult( BlockVector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult( BlockVector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::vmult_add( BlockVector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult_add( BlockVector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(105))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(105))
 template void SparseMatrix< std::complex<double> >::vmult( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::vmult_add( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult_add( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(106))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(106))
 template void SparseMatrix< std::complex<double> >::vmult( Vector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult( Vector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::vmult_add( Vector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult_add( Vector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(107))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(107))
 template void SparseMatrix< std::complex<double> >::vmult( Vector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult( Vector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::vmult_add( Vector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult_add( Vector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(108))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(108))
 template void SparseMatrix< std::complex<double> >::vmult( BlockVector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult( BlockVector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::vmult_add( BlockVector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult_add( BlockVector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(109))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(109))
 template void SparseMatrix< std::complex<double> >::vmult( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::vmult_add( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<double> >::Tvmult_add( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(110))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(110))
 template void SparseMatrix< std::complex<float> >::vmult( Vector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult( Vector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::vmult_add( Vector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult_add( Vector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(111))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(111))
 template void SparseMatrix< std::complex<float> >::vmult( Vector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult( Vector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::vmult_add( Vector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult_add( Vector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(112))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(112))
 template void SparseMatrix< std::complex<float> >::vmult( BlockVector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult( BlockVector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::vmult_add( BlockVector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult_add( BlockVector < std::complex<double> > &, const  Vector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(113))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(113))
 template void SparseMatrix< std::complex<float> >::vmult( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::vmult_add( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult_add( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(114))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(114))
 template void SparseMatrix< std::complex<float> >::vmult( Vector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult( Vector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::vmult_add( Vector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult_add( Vector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(115))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(115))
 template void SparseMatrix< std::complex<float> >::vmult( Vector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult( Vector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::vmult_add( Vector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult_add( Vector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(116))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(116))
 template void SparseMatrix< std::complex<float> >::vmult( BlockVector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult( BlockVector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::vmult_add( BlockVector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult_add( BlockVector < std::complex<double> > &, const  Vector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(117))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(117))
 template void SparseMatrix< std::complex<float> >::vmult( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::vmult_add( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult_add( BlockVector < std::complex<double> > &, const  BlockVector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(118))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(118))
 template void SparseMatrix< std::complex<float> >::vmult( Vector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult( Vector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::vmult_add( Vector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult_add( Vector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(119))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(119))
 template void SparseMatrix< std::complex<float> >::vmult( Vector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult( Vector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::vmult_add( Vector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult_add( Vector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(120))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(120))
 template void SparseMatrix< std::complex<float> >::vmult( BlockVector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult( BlockVector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::vmult_add( BlockVector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult_add( BlockVector < std::complex<float> > &, const  Vector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(121))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(121))
 template void SparseMatrix< std::complex<float> >::vmult( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::vmult_add( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult_add( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(122))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(122))
 template void SparseMatrix< std::complex<float> >::vmult( Vector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult( Vector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::vmult_add( Vector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult_add( Vector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(123))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(123))
 template void SparseMatrix< std::complex<float> >::vmult( Vector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult( Vector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::vmult_add( Vector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult_add( Vector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(124))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(124))
 template void SparseMatrix< std::complex<float> >::vmult( BlockVector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult( BlockVector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::vmult_add( BlockVector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult_add( BlockVector < std::complex<float> > &, const  Vector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(125))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(125))
 template void SparseMatrix< std::complex<float> >::vmult( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::vmult_add( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  template void SparseMatrix< std::complex<float> >::Tvmult_add( BlockVector < std::complex<float> > &, const  BlockVector < std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(126))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(126))
 template void SparseMatrix< std::complex<double> >::mmult(SparseMatrix< std::complex<double> > &,
  const SparseMatrix< std::complex<double> > &,
  const Vector< std::complex<double> > &,
@@ -1439,7 +1439,7 @@ template void SparseMatrix< std::complex<double> >::mmult(SparseMatrix< std::com
  const bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(127))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(127))
 template void SparseMatrix< std::complex<double> >::mmult(SparseMatrix< std::complex<double> > &,
  const SparseMatrix< std::complex<float> > &,
  const Vector< std::complex<double> > &,
@@ -1450,7 +1450,7 @@ template void SparseMatrix< std::complex<double> >::mmult(SparseMatrix< std::com
  const bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(128))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(128))
 template void SparseMatrix< std::complex<double> >::mmult(SparseMatrix< std::complex<float> > &,
  const SparseMatrix< std::complex<double> > &,
  const Vector< std::complex<double> > &,
@@ -1461,7 +1461,7 @@ template void SparseMatrix< std::complex<double> >::mmult(SparseMatrix< std::com
  const bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(129))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(129))
 template void SparseMatrix< std::complex<double> >::mmult(SparseMatrix< std::complex<float> > &,
  const SparseMatrix< std::complex<float> > &,
  const Vector< std::complex<double> > &,
@@ -1472,7 +1472,7 @@ template void SparseMatrix< std::complex<double> >::mmult(SparseMatrix< std::com
  const bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(130))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(130))
 template void SparseMatrix< std::complex<float> >::mmult(SparseMatrix< std::complex<double> > &,
  const SparseMatrix< std::complex<double> > &,
  const Vector< std::complex<float> > &,
@@ -1483,7 +1483,7 @@ template void SparseMatrix< std::complex<float> >::mmult(SparseMatrix< std::comp
  const bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(131))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(131))
 template void SparseMatrix< std::complex<float> >::mmult(SparseMatrix< std::complex<double> > &,
  const SparseMatrix< std::complex<float> > &,
  const Vector< std::complex<float> > &,
@@ -1494,7 +1494,7 @@ template void SparseMatrix< std::complex<float> >::mmult(SparseMatrix< std::comp
  const bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(132))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(132))
 template void SparseMatrix< std::complex<float> >::mmult(SparseMatrix< std::complex<float> > &,
  const SparseMatrix< std::complex<double> > &,
  const Vector< std::complex<float> > &,
@@ -1505,7 +1505,7 @@ template void SparseMatrix< std::complex<float> >::mmult(SparseMatrix< std::comp
  const bool) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(133))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(133))
 template void SparseMatrix< std::complex<float> >::mmult(SparseMatrix< std::complex<float> > &,
  const SparseMatrix< std::complex<float> > &,
  const Vector< std::complex<float> > &,

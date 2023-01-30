@@ -6,7 +6,7 @@
   #define SPLIT_INSTANTIATIONS_CHECK(C) (1)
 #endif
 
-#if (SPLIT_INSTANTIATIONS_CHECK(0))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(0))
 #ifdef DEAL_II_WITH_MPI
  template void Utilities::MPI::Partitioner::export_to_ghosted_array_start<
   int ,
@@ -36,7 +36,7 @@
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(1))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(1))
 #ifdef DEAL_II_WITH_MPI
  template void Utilities::MPI::Partitioner::export_to_ghosted_array_start<
   long int ,
@@ -66,7 +66,7 @@
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(2))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(2))
 #ifdef DEAL_II_WITH_MPI
  template void Utilities::MPI::Partitioner::export_to_ghosted_array_start<
   unsigned int ,
@@ -96,7 +96,7 @@
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(3))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(3))
 #ifdef DEAL_II_WITH_MPI
  template void Utilities::MPI::Partitioner::export_to_ghosted_array_start<
   unsigned long int ,
@@ -126,7 +126,7 @@
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(4))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(4))
 #ifdef DEAL_II_WITH_MPI
  template void Utilities::MPI::Partitioner::export_to_ghosted_array_start<
   unsigned long long int ,
@@ -156,7 +156,7 @@
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(5))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(5))
 #ifdef DEAL_II_WITH_MPI
  template void Utilities::MPI::Partitioner::export_to_ghosted_array_start<
   float ,
@@ -186,7 +186,7 @@
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(6))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(6))
 #ifdef DEAL_II_WITH_MPI
  template void Utilities::MPI::Partitioner::export_to_ghosted_array_start<
   double ,
@@ -216,7 +216,7 @@
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(7))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(7))
 #ifdef DEAL_II_WITH_MPI
  template void Utilities::MPI::Partitioner::export_to_ghosted_array_start<
   long double ,
@@ -246,7 +246,7 @@
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(8))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(8))
 #ifdef DEAL_II_WITH_MPI
  template void Utilities::MPI::Partitioner::export_to_ghosted_array_start<
   std::complex<double> ,
@@ -276,7 +276,7 @@
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(9))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(9))
 #ifdef DEAL_II_WITH_MPI
  template void Utilities::MPI::Partitioner::export_to_ghosted_array_start<
   std::complex<float> ,

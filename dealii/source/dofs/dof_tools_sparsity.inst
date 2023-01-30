@@ -6,7 +6,7 @@
   #define SPLIT_INSTANTIATIONS_CHECK(C) (1)
 #endif
 
-#if (SPLIT_INSTANTIATIONS_CHECK(0))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(0))
 template void DoFTools::make_boundary_sparsity_pattern< 1 ,
   1 ,
   SparsityPattern ,
@@ -48,7 +48,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 1 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(1))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(1))
 template void DoFTools::make_boundary_sparsity_pattern< 2 ,
   2 ,
   SparsityPattern ,
@@ -90,7 +90,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 2 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(2))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(2))
 template void DoFTools::make_boundary_sparsity_pattern< 3 ,
   3 ,
   SparsityPattern ,
@@ -132,7 +132,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 3 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(3))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(3))
 template void DoFTools::make_boundary_sparsity_pattern< 1 ,
   1 ,
   DynamicSparsityPattern ,
@@ -174,7 +174,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 1 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(4))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(4))
 template void DoFTools::make_boundary_sparsity_pattern< 2 ,
   2 ,
   DynamicSparsityPattern ,
@@ -216,7 +216,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 2 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(5))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(5))
 template void DoFTools::make_boundary_sparsity_pattern< 3 ,
   3 ,
   DynamicSparsityPattern ,
@@ -258,7 +258,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 3 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(6))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(6))
 template void DoFTools::make_boundary_sparsity_pattern< 1 ,
   1 ,
   BlockSparsityPattern ,
@@ -300,7 +300,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 1 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(7))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(7))
 template void DoFTools::make_boundary_sparsity_pattern< 2 ,
   2 ,
   BlockSparsityPattern ,
@@ -342,7 +342,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 2 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(8))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(8))
 template void DoFTools::make_boundary_sparsity_pattern< 3 ,
   3 ,
   BlockSparsityPattern ,
@@ -384,7 +384,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 3 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(9))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(9))
 template void DoFTools::make_boundary_sparsity_pattern< 1 ,
   1 ,
   BlockDynamicSparsityPattern ,
@@ -426,7 +426,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 1 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(10))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(10))
 template void DoFTools::make_boundary_sparsity_pattern< 2 ,
   2 ,
   BlockDynamicSparsityPattern ,
@@ -468,7 +468,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 2 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(11))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(11))
 template void DoFTools::make_boundary_sparsity_pattern< 3 ,
   3 ,
   BlockDynamicSparsityPattern ,
@@ -510,7 +510,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 3 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(12))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(12))
 template void DoFTools::make_boundary_sparsity_pattern< 1 ,
   1 ,
   SparsityPattern ,
@@ -552,7 +552,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 1 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(13))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(13))
 template void DoFTools::make_boundary_sparsity_pattern< 2 ,
   2 ,
   SparsityPattern ,
@@ -594,7 +594,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 2 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(14))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(14))
 template void DoFTools::make_boundary_sparsity_pattern< 3 ,
   3 ,
   SparsityPattern ,
@@ -636,7 +636,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 3 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(15))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(15))
 template void DoFTools::make_boundary_sparsity_pattern< 1 ,
   1 ,
   DynamicSparsityPattern ,
@@ -678,7 +678,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 1 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(16))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(16))
 template void DoFTools::make_boundary_sparsity_pattern< 2 ,
   2 ,
   DynamicSparsityPattern ,
@@ -720,7 +720,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 2 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(17))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(17))
 template void DoFTools::make_boundary_sparsity_pattern< 3 ,
   3 ,
   DynamicSparsityPattern ,
@@ -762,7 +762,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 3 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(18))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(18))
 template void DoFTools::make_boundary_sparsity_pattern< 1 ,
   1 ,
   BlockSparsityPattern ,
@@ -804,7 +804,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 1 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(19))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(19))
 template void DoFTools::make_boundary_sparsity_pattern< 2 ,
   2 ,
   BlockSparsityPattern ,
@@ -846,7 +846,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 2 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(20))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(20))
 template void DoFTools::make_boundary_sparsity_pattern< 3 ,
   3 ,
   BlockSparsityPattern ,
@@ -888,7 +888,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 3 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(21))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(21))
 template void DoFTools::make_boundary_sparsity_pattern< 1 ,
   1 ,
   BlockDynamicSparsityPattern ,
@@ -930,7 +930,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 1 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(22))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(22))
 template void DoFTools::make_boundary_sparsity_pattern< 2 ,
   2 ,
   BlockDynamicSparsityPattern ,
@@ -972,7 +972,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 2 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(23))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(23))
 template void DoFTools::make_boundary_sparsity_pattern< 3 ,
   3 ,
   BlockDynamicSparsityPattern ,
@@ -1014,7 +1014,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 3 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(24))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(24))
 template void DoFTools::make_boundary_sparsity_pattern< 1 ,
   1 ,
   SparsityPattern ,
@@ -1056,7 +1056,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 1 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(25))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(25))
 template void DoFTools::make_boundary_sparsity_pattern< 2 ,
   2 ,
   SparsityPattern ,
@@ -1098,7 +1098,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 2 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(26))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(26))
 template void DoFTools::make_boundary_sparsity_pattern< 3 ,
   3 ,
   SparsityPattern ,
@@ -1140,7 +1140,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 3 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(27))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(27))
 template void DoFTools::make_boundary_sparsity_pattern< 1 ,
   1 ,
   DynamicSparsityPattern ,
@@ -1182,7 +1182,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 1 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(28))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(28))
 template void DoFTools::make_boundary_sparsity_pattern< 2 ,
   2 ,
   DynamicSparsityPattern ,
@@ -1224,7 +1224,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 2 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(29))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(29))
 template void DoFTools::make_boundary_sparsity_pattern< 3 ,
   3 ,
   DynamicSparsityPattern ,
@@ -1266,7 +1266,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 3 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(30))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(30))
 template void DoFTools::make_boundary_sparsity_pattern< 1 ,
   1 ,
   BlockSparsityPattern ,
@@ -1308,7 +1308,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 1 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(31))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(31))
 template void DoFTools::make_boundary_sparsity_pattern< 2 ,
   2 ,
   BlockSparsityPattern ,
@@ -1350,7 +1350,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 2 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(32))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(32))
 template void DoFTools::make_boundary_sparsity_pattern< 3 ,
   3 ,
   BlockSparsityPattern ,
@@ -1392,7 +1392,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 3 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(33))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(33))
 template void DoFTools::make_boundary_sparsity_pattern< 1 ,
   1 ,
   BlockDynamicSparsityPattern ,
@@ -1434,7 +1434,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 1 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(34))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(34))
 template void DoFTools::make_boundary_sparsity_pattern< 2 ,
   2 ,
   BlockDynamicSparsityPattern ,
@@ -1476,7 +1476,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 2 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(35))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(35))
 template void DoFTools::make_boundary_sparsity_pattern< 3 ,
   3 ,
   BlockDynamicSparsityPattern ,
@@ -1518,7 +1518,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 3 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(36))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(36))
 template void DoFTools::make_boundary_sparsity_pattern< 1 ,
   1 ,
   SparsityPattern ,
@@ -1560,7 +1560,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 1 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(37))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(37))
 template void DoFTools::make_boundary_sparsity_pattern< 2 ,
   2 ,
   SparsityPattern ,
@@ -1602,7 +1602,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 2 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(38))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(38))
 template void DoFTools::make_boundary_sparsity_pattern< 3 ,
   3 ,
   SparsityPattern ,
@@ -1644,7 +1644,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 3 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(39))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(39))
 template void DoFTools::make_boundary_sparsity_pattern< 1 ,
   1 ,
   DynamicSparsityPattern ,
@@ -1686,7 +1686,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 1 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(40))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(40))
 template void DoFTools::make_boundary_sparsity_pattern< 2 ,
   2 ,
   DynamicSparsityPattern ,
@@ -1728,7 +1728,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 2 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(41))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(41))
 template void DoFTools::make_boundary_sparsity_pattern< 3 ,
   3 ,
   DynamicSparsityPattern ,
@@ -1770,7 +1770,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 3 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(42))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(42))
 template void DoFTools::make_boundary_sparsity_pattern< 1 ,
   1 ,
   BlockSparsityPattern ,
@@ -1812,7 +1812,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 1 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(43))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(43))
 template void DoFTools::make_boundary_sparsity_pattern< 2 ,
   2 ,
   BlockSparsityPattern ,
@@ -1854,7 +1854,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 2 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(44))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(44))
 template void DoFTools::make_boundary_sparsity_pattern< 3 ,
   3 ,
   BlockSparsityPattern ,
@@ -1896,7 +1896,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 3 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(45))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(45))
 template void DoFTools::make_boundary_sparsity_pattern< 1 ,
   1 ,
   BlockDynamicSparsityPattern ,
@@ -1938,7 +1938,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 1 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(46))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(46))
 template void DoFTools::make_boundary_sparsity_pattern< 2 ,
   2 ,
   BlockDynamicSparsityPattern ,
@@ -1980,7 +1980,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 2 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(47))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(47))
 template void DoFTools::make_boundary_sparsity_pattern< 3 ,
   3 ,
   BlockDynamicSparsityPattern ,
@@ -2022,7 +2022,7 @@ template void DoFTools::make_boundary_sparsity_pattern< 3 ,
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(48))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(48))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  SparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof,
@@ -2143,7 +2143,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(49))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(49))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  SparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof,
@@ -2264,7 +2264,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(50))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(50))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  SparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof,
@@ -2385,7 +2385,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(51))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(51))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  SparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof,
@@ -2506,7 +2506,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(52))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(52))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  SparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof,
@@ -2627,7 +2627,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(53))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(53))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  SparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof,
@@ -2748,7 +2748,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(54))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(54))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  SparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof,
@@ -2869,7 +2869,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(55))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(55))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  SparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof,
@@ -2990,7 +2990,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(56))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(56))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  SparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof,
@@ -3111,7 +3111,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(57))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(57))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  SparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof,
@@ -3232,7 +3232,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(58))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(58))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  SparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof,
@@ -3353,7 +3353,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(59))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(59))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  SparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof,
@@ -3474,7 +3474,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(60))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(60))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  DynamicSparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof,
@@ -3595,7 +3595,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(61))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(61))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  DynamicSparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof,
@@ -3716,7 +3716,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(62))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(62))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  DynamicSparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof,
@@ -3837,7 +3837,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(63))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(63))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  DynamicSparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof,
@@ -3958,7 +3958,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(64))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(64))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  DynamicSparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof,
@@ -4079,7 +4079,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(65))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(65))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  DynamicSparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof,
@@ -4200,7 +4200,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(66))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(66))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  DynamicSparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof,
@@ -4321,7 +4321,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(67))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(67))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  DynamicSparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof,
@@ -4442,7 +4442,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(68))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(68))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  DynamicSparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof,
@@ -4563,7 +4563,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(69))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(69))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  DynamicSparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof,
@@ -4684,7 +4684,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(70))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(70))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  DynamicSparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof,
@@ -4805,7 +4805,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(71))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(71))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  DynamicSparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof,
@@ -4926,7 +4926,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(72))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(72))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  BlockSparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof,
@@ -5047,7 +5047,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(73))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(73))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  BlockSparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof,
@@ -5168,7 +5168,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(74))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(74))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  BlockSparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof,
@@ -5289,7 +5289,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(75))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(75))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  BlockSparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof,
@@ -5410,7 +5410,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(76))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(76))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  BlockSparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof,
@@ -5531,7 +5531,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(77))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(77))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  BlockSparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof,
@@ -5652,7 +5652,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(78))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(78))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  BlockSparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof,
@@ -5773,7 +5773,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(79))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(79))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  BlockSparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof,
@@ -5894,7 +5894,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(80))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(80))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  BlockSparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof,
@@ -6015,7 +6015,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(81))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(81))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  BlockSparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof,
@@ -6136,7 +6136,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(82))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(82))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  BlockSparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof,
@@ -6257,7 +6257,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(83))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(83))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  BlockSparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof,
@@ -6378,7 +6378,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(84))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(84))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  BlockDynamicSparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof,
@@ -6499,7 +6499,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(85))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(85))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  BlockDynamicSparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof,
@@ -6620,7 +6620,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(86))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(86))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  BlockDynamicSparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof,
@@ -6741,7 +6741,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(87))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(87))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  BlockDynamicSparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof,
@@ -6862,7 +6862,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(88))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(88))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  BlockDynamicSparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof,
@@ -6983,7 +6983,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(89))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(89))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  BlockDynamicSparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof,
@@ -7104,7 +7104,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(90))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(90))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  BlockDynamicSparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof,
@@ -7225,7 +7225,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(91))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(91))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  BlockDynamicSparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof,
@@ -7346,7 +7346,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(92))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(92))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  BlockDynamicSparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof,
@@ -7467,7 +7467,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(93))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(93))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  BlockDynamicSparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof,
@@ -7588,7 +7588,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(94))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(94))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  BlockDynamicSparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof,
@@ -7709,7 +7709,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(95))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(95))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  BlockDynamicSparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof,
@@ -7830,7 +7830,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(96))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(96))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  SparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof_row,
@@ -7910,7 +7910,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(97))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(97))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  SparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof_row,
@@ -7990,7 +7990,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(98))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(98))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  SparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof_row,
@@ -8070,7 +8070,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(99))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(99))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  DynamicSparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof_row,
@@ -8150,7 +8150,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(100))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(100))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  DynamicSparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof_row,
@@ -8230,7 +8230,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(101))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(101))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  DynamicSparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof_row,
@@ -8310,7 +8310,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(102))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(102))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  BlockSparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof_row,
@@ -8390,7 +8390,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(103))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(103))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  BlockSparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof_row,
@@ -8470,7 +8470,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(104))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(104))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  BlockSparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof_row,
@@ -8550,7 +8550,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(105))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(105))
 template void
  DoFTools::make_sparsity_pattern< 1 ,  1 ,  BlockDynamicSparsityPattern >(
  const DoFHandler< 1 ,  1 > &dof_row,
@@ -8630,7 +8630,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(106))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(106))
 template void
  DoFTools::make_sparsity_pattern< 2 ,  2 ,  BlockDynamicSparsityPattern >(
  const DoFHandler< 2 ,  2 > &dof_row,
@@ -8710,7 +8710,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(107))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(107))
 template void
  DoFTools::make_sparsity_pattern< 3 ,  3 ,  BlockDynamicSparsityPattern >(
  const DoFHandler< 3 ,  3 > &dof_row,
@@ -8790,7 +8790,7 @@ template void
 #endif
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(108))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(108))
 template Table<2, DoFTools::Coupling>
  DoFTools::dof_couplings_from_component_couplings(
  const FiniteElement< 1 > &fe,
@@ -8802,7 +8802,7 @@ template Table<2, DoFTools::Coupling>
  const Table<2, DoFTools::Coupling> & component_couplings);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(109))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(109))
 template Table<2, DoFTools::Coupling>
  DoFTools::dof_couplings_from_component_couplings(
  const FiniteElement< 2 > &fe,
@@ -8814,7 +8814,7 @@ template Table<2, DoFTools::Coupling>
  const Table<2, DoFTools::Coupling> & component_couplings);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(110))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(110))
 template Table<2, DoFTools::Coupling>
  DoFTools::dof_couplings_from_component_couplings(
  const FiniteElement< 3 > &fe,

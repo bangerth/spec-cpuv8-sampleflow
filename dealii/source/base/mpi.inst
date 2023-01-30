@@ -7,19 +7,19 @@
 #endif
 
 #ifndef DOXYGEN
-#if (SPLIT_INSTANTIATIONS_CHECK(0))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(0))
 template void sum< double >(const SparseMatrix< double > &,
  const MPI_Comm &,
  SparseMatrix< double > &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(1))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(1))
 template void sum< float >(const SparseMatrix< float > &,
  const MPI_Comm &,
  SparseMatrix< float > &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(2))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(2))
 template void sum<LAPACKFullMatrix< int >>(const LAPACKFullMatrix< int > &,
  const MPI_Comm &,
  LAPACKFullMatrix< int > &);
@@ -106,7 +106,7 @@ template void sum<LAPACKFullMatrix< int >>(const LAPACKFullMatrix< int > &,
  const ArrayView< int > &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(3))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(3))
 template void sum<LAPACKFullMatrix< long int >>(const LAPACKFullMatrix< long int > &,
  const MPI_Comm &,
  LAPACKFullMatrix< long int > &);
@@ -193,7 +193,7 @@ template void sum<LAPACKFullMatrix< long int >>(const LAPACKFullMatrix< long int
  const ArrayView< long int > &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(4))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(4))
 template void sum<LAPACKFullMatrix< unsigned int >>(const LAPACKFullMatrix< unsigned int > &,
  const MPI_Comm &,
  LAPACKFullMatrix< unsigned int > &);
@@ -280,7 +280,7 @@ template void sum<LAPACKFullMatrix< unsigned int >>(const LAPACKFullMatrix< unsi
  const ArrayView< unsigned int > &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(5))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(5))
 template void sum<LAPACKFullMatrix< unsigned long int >>(const LAPACKFullMatrix< unsigned long int > &,
  const MPI_Comm &,
  LAPACKFullMatrix< unsigned long int > &);
@@ -367,7 +367,7 @@ template void sum<LAPACKFullMatrix< unsigned long int >>(const LAPACKFullMatrix<
  const ArrayView< unsigned long int > &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(6))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(6))
 template void sum<LAPACKFullMatrix< unsigned long long int >>(const LAPACKFullMatrix< unsigned long long int > &,
  const MPI_Comm &,
  LAPACKFullMatrix< unsigned long long int > &);
@@ -454,7 +454,7 @@ template void sum<LAPACKFullMatrix< unsigned long long int >>(const LAPACKFullMa
  const ArrayView< unsigned long long int > &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(7))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(7))
 template void sum<LAPACKFullMatrix< float >>(const LAPACKFullMatrix< float > &,
  const MPI_Comm &,
  LAPACKFullMatrix< float > &);
@@ -541,7 +541,7 @@ template void sum<LAPACKFullMatrix< float >>(const LAPACKFullMatrix< float > &,
  const ArrayView< float > &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(8))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(8))
 template void sum<LAPACKFullMatrix< double >>(const LAPACKFullMatrix< double > &,
  const MPI_Comm &,
  LAPACKFullMatrix< double > &);
@@ -628,7 +628,7 @@ template void sum<LAPACKFullMatrix< double >>(const LAPACKFullMatrix< double > &
  const ArrayView< double > &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(9))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(9))
 template void sum<LAPACKFullMatrix< long double >>(const LAPACKFullMatrix< long double > &,
  const MPI_Comm &,
  LAPACKFullMatrix< long double > &);
@@ -715,7 +715,7 @@ template void sum<LAPACKFullMatrix< long double >>(const LAPACKFullMatrix< long 
  const ArrayView< long double > &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(10))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(10))
 template void sum<LAPACKFullMatrix< std::complex<double> >>(const LAPACKFullMatrix< std::complex<double> > &,
  const MPI_Comm &,
  LAPACKFullMatrix< std::complex<double> > &);
@@ -802,7 +802,7 @@ template void sum<LAPACKFullMatrix< std::complex<double> >>(const LAPACKFullMatr
  const ArrayView< std::complex<double> > &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(11))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(11))
 template void sum<LAPACKFullMatrix< std::complex<float> >>(const LAPACKFullMatrix< std::complex<float> > &,
  const MPI_Comm &,
  LAPACKFullMatrix< std::complex<float> > &);
@@ -889,127 +889,127 @@ template void sum<LAPACKFullMatrix< std::complex<float> >>(const LAPACKFullMatri
  const ArrayView< std::complex<float> > &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(12))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(12))
 template Tensor< 1 ,  1 ,  double > sum< 1 ,  1 ,  double >(
  const Tensor< 1 ,  1 ,  double > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(13))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(13))
 template Tensor< 1 ,  2 ,  double > sum< 1 ,  2 ,  double >(
  const Tensor< 1 ,  2 ,  double > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(14))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(14))
 template Tensor< 1 ,  3 ,  double > sum< 1 ,  3 ,  double >(
  const Tensor< 1 ,  3 ,  double > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(15))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(15))
 template Tensor< 2 ,  1 ,  double > sum< 2 ,  1 ,  double >(
  const Tensor< 2 ,  1 ,  double > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(16))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(16))
 template Tensor< 2 ,  2 ,  double > sum< 2 ,  2 ,  double >(
  const Tensor< 2 ,  2 ,  double > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(17))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(17))
 template Tensor< 2 ,  3 ,  double > sum< 2 ,  3 ,  double >(
  const Tensor< 2 ,  3 ,  double > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(18))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(18))
 template Tensor< 3 ,  1 ,  double > sum< 3 ,  1 ,  double >(
  const Tensor< 3 ,  1 ,  double > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(19))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(19))
 template Tensor< 3 ,  2 ,  double > sum< 3 ,  2 ,  double >(
  const Tensor< 3 ,  2 ,  double > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(20))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(20))
 template Tensor< 3 ,  3 ,  double > sum< 3 ,  3 ,  double >(
  const Tensor< 3 ,  3 ,  double > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(21))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(21))
 template Tensor< 4 ,  1 ,  double > sum< 4 ,  1 ,  double >(
  const Tensor< 4 ,  1 ,  double > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(22))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(22))
 template Tensor< 4 ,  2 ,  double > sum< 4 ,  2 ,  double >(
  const Tensor< 4 ,  2 ,  double > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(23))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(23))
 template Tensor< 4 ,  3 ,  double > sum< 4 ,  3 ,  double >(
  const Tensor< 4 ,  3 ,  double > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(24))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(24))
 template Tensor< 1 ,  1 ,  float > sum< 1 ,  1 ,  float >(
  const Tensor< 1 ,  1 ,  float > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(25))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(25))
 template Tensor< 1 ,  2 ,  float > sum< 1 ,  2 ,  float >(
  const Tensor< 1 ,  2 ,  float > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(26))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(26))
 template Tensor< 1 ,  3 ,  float > sum< 1 ,  3 ,  float >(
  const Tensor< 1 ,  3 ,  float > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(27))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(27))
 template Tensor< 2 ,  1 ,  float > sum< 2 ,  1 ,  float >(
  const Tensor< 2 ,  1 ,  float > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(28))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(28))
 template Tensor< 2 ,  2 ,  float > sum< 2 ,  2 ,  float >(
  const Tensor< 2 ,  2 ,  float > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(29))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(29))
 template Tensor< 2 ,  3 ,  float > sum< 2 ,  3 ,  float >(
  const Tensor< 2 ,  3 ,  float > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(30))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(30))
 template Tensor< 3 ,  1 ,  float > sum< 3 ,  1 ,  float >(
  const Tensor< 3 ,  1 ,  float > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(31))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(31))
 template Tensor< 3 ,  2 ,  float > sum< 3 ,  2 ,  float >(
  const Tensor< 3 ,  2 ,  float > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(32))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(32))
 template Tensor< 3 ,  3 ,  float > sum< 3 ,  3 ,  float >(
  const Tensor< 3 ,  3 ,  float > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(33))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(33))
 template Tensor< 4 ,  1 ,  float > sum< 4 ,  1 ,  float >(
  const Tensor< 4 ,  1 ,  float > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(34))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(34))
 template Tensor< 4 ,  2 ,  float > sum< 4 ,  2 ,  float >(
  const Tensor< 4 ,  2 ,  float > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(35))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(35))
 template Tensor< 4 ,  3 ,  float > sum< 4 ,  3 ,  float >(
  const Tensor< 4 ,  3 ,  float > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(36))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(36))
 template SymmetricTensor<2,  1 ,  double > sum<2,  1 ,  double >(
  const SymmetricTensor<2,  1 ,  double > &, const MPI_Comm &);
 
@@ -1017,7 +1017,7 @@ template SymmetricTensor<2,  1 ,  double > sum<2,  1 ,  double >(
  const SymmetricTensor<4,  1 ,  double > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(37))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(37))
 template SymmetricTensor<2,  2 ,  double > sum<2,  2 ,  double >(
  const SymmetricTensor<2,  2 ,  double > &, const MPI_Comm &);
 
@@ -1025,7 +1025,7 @@ template SymmetricTensor<2,  2 ,  double > sum<2,  2 ,  double >(
  const SymmetricTensor<4,  2 ,  double > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(38))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(38))
 template SymmetricTensor<2,  3 ,  double > sum<2,  3 ,  double >(
  const SymmetricTensor<2,  3 ,  double > &, const MPI_Comm &);
 
@@ -1033,7 +1033,7 @@ template SymmetricTensor<2,  3 ,  double > sum<2,  3 ,  double >(
  const SymmetricTensor<4,  3 ,  double > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(39))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(39))
 template SymmetricTensor<2,  1 ,  float > sum<2,  1 ,  float >(
  const SymmetricTensor<2,  1 ,  float > &, const MPI_Comm &);
 
@@ -1041,7 +1041,7 @@ template SymmetricTensor<2,  1 ,  float > sum<2,  1 ,  float >(
  const SymmetricTensor<4,  1 ,  float > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(40))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(40))
 template SymmetricTensor<2,  2 ,  float > sum<2,  2 ,  float >(
  const SymmetricTensor<2,  2 ,  float > &, const MPI_Comm &);
 
@@ -1049,7 +1049,7 @@ template SymmetricTensor<2,  2 ,  float > sum<2,  2 ,  float >(
  const SymmetricTensor<4,  2 ,  float > &, const MPI_Comm &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(41))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(41))
 template SymmetricTensor<2,  3 ,  float > sum<2,  3 ,  float >(
  const SymmetricTensor<2,  3 ,  float > &, const MPI_Comm &);
 

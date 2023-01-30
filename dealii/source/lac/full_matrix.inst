@@ -6,7 +6,7 @@
   #define SPLIT_INSTANTIATIONS_CHECK(C) (1)
 #endif
 
-#if (SPLIT_INSTANTIATIONS_CHECK(0))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(0))
 template class FullMatrix< double >;
 
  template void FullMatrix< double >::print(LogStream &,
@@ -41,7 +41,7 @@ template class FullMatrix< double >;
  const size_type);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(1))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(1))
 template class FullMatrix< float >;
 
  template void FullMatrix< float >::print(LogStream &,
@@ -76,7 +76,7 @@ template class FullMatrix< float >;
  const size_type);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(2))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(2))
 template class FullMatrix< std::complex<double> >;
 
  template void FullMatrix< std::complex<double> >::print(LogStream &,
@@ -111,7 +111,7 @@ template class FullMatrix< std::complex<double> >;
  const size_type);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(3))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(3))
 template class FullMatrix< std::complex<float> >;
 
  template void FullMatrix< std::complex<float> >::print(LogStream &,
@@ -146,7 +146,7 @@ template class FullMatrix< std::complex<float> >;
  const size_type);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(4))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(4))
 template void FullMatrix< double >::copy_to<1>(Tensor<2, 1> &,
  const size_type,
  const size_type,
@@ -172,7 +172,7 @@ template void FullMatrix< double >::copy_to<1>(Tensor<2, 1> &,
  const unsigned int) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(5))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(5))
 template void FullMatrix< float >::copy_to<1>(Tensor<2, 1> &,
  const size_type,
  const size_type,
@@ -198,7 +198,7 @@ template void FullMatrix< float >::copy_to<1>(Tensor<2, 1> &,
  const unsigned int) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(6))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(6))
 template FullMatrix< double > &FullMatrix< double >::operator=(
  const LAPACKFullMatrix< double > &);
 
@@ -259,7 +259,7 @@ template FullMatrix< double > &FullMatrix< double >::operator=(
  const Vector< double > &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(7))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(7))
 template FullMatrix< double > &FullMatrix< double >::operator=(
  const LAPACKFullMatrix< float > &);
 
@@ -320,7 +320,7 @@ template FullMatrix< double > &FullMatrix< double >::operator=(
  const Vector< float > &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(8))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(8))
 template FullMatrix< float > &FullMatrix< float >::operator=(
  const LAPACKFullMatrix< double > &);
 
@@ -381,7 +381,7 @@ template FullMatrix< float > &FullMatrix< float >::operator=(
  const Vector< double > &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(9))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(9))
 template FullMatrix< float > &FullMatrix< float >::operator=(
  const LAPACKFullMatrix< float > &);
 
@@ -442,7 +442,7 @@ template FullMatrix< float > &FullMatrix< float >::operator=(
  const Vector< float > &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(10))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(10))
 template void FullMatrix< double >::vmult< double >(Vector< double > &,
  const Vector< double > &,
  bool) const;
@@ -464,7 +464,7 @@ template void FullMatrix< double >::vmult< double >(Vector< double > &,
  const  double ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(11))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(11))
 template void FullMatrix< double >::vmult< float >(Vector< float > &,
  const Vector< float > &,
  bool) const;
@@ -486,7 +486,7 @@ template void FullMatrix< double >::vmult< float >(Vector< float > &,
  const  double ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(12))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(12))
 template void FullMatrix< double >::vmult< std::complex<double> >(Vector< std::complex<double> > &,
  const Vector< std::complex<double> > &,
  bool) const;
@@ -508,7 +508,7 @@ template void FullMatrix< double >::vmult< std::complex<double> >(Vector< std::c
  const  double ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(13))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(13))
 template void FullMatrix< double >::vmult< std::complex<float> >(Vector< std::complex<float> > &,
  const Vector< std::complex<float> > &,
  bool) const;
@@ -530,7 +530,7 @@ template void FullMatrix< double >::vmult< std::complex<float> >(Vector< std::co
  const  double ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(14))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(14))
 template void FullMatrix< float >::vmult< double >(Vector< double > &,
  const Vector< double > &,
  bool) const;
@@ -552,7 +552,7 @@ template void FullMatrix< float >::vmult< double >(Vector< double > &,
  const  float ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(15))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(15))
 template void FullMatrix< float >::vmult< float >(Vector< float > &,
  const Vector< float > &,
  bool) const;
@@ -574,7 +574,7 @@ template void FullMatrix< float >::vmult< float >(Vector< float > &,
  const  float ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(16))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(16))
 template void FullMatrix< float >::vmult< std::complex<double> >(Vector< std::complex<double> > &,
  const Vector< std::complex<double> > &,
  bool) const;
@@ -596,7 +596,7 @@ template void FullMatrix< float >::vmult< std::complex<double> >(Vector< std::co
  const  float ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(17))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(17))
 template void FullMatrix< float >::vmult< std::complex<float> >(Vector< std::complex<float> > &,
  const Vector< std::complex<float> > &,
  bool) const;
@@ -618,7 +618,7 @@ template void FullMatrix< float >::vmult< std::complex<float> >(Vector< std::com
  const  float ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(18))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(18))
 template void FullMatrix< std::complex<double> >::vmult< std::complex<double> >(Vector< std::complex<double> > &,
  const Vector< std::complex<double> > &,
  bool) const;
@@ -640,7 +640,7 @@ template void FullMatrix< std::complex<double> >::vmult< std::complex<double> >(
  const  std::complex<double> ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(19))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(19))
 template void FullMatrix< std::complex<double> >::vmult< std::complex<float> >(Vector< std::complex<float> > &,
  const Vector< std::complex<float> > &,
  bool) const;
@@ -662,7 +662,7 @@ template void FullMatrix< std::complex<double> >::vmult< std::complex<float> >(V
  const  std::complex<double> ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(20))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(20))
 template void FullMatrix< std::complex<float> >::vmult< std::complex<double> >(Vector< std::complex<double> > &,
  const Vector< std::complex<double> > &,
  bool) const;
@@ -684,7 +684,7 @@ template void FullMatrix< std::complex<float> >::vmult< std::complex<double> >(V
  const  std::complex<float> ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(21))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(21))
 template void FullMatrix< std::complex<float> >::vmult< std::complex<float> >(Vector< std::complex<float> > &,
  const Vector< std::complex<float> > &,
  bool) const;
@@ -706,55 +706,55 @@ template void FullMatrix< std::complex<float> >::vmult< std::complex<float> >(Ve
  const  std::complex<float> ) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(22))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(22))
 template  double  FullMatrix< double >::residual< double ,  double >(Vector< double > &,
  const Vector< double > &,
  const Vector< double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(23))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(23))
 template  double  FullMatrix< double >::residual< double ,  float >(Vector< double > &,
  const Vector< double > &,
  const Vector< float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(24))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(24))
 template  double  FullMatrix< double >::residual< float ,  double >(Vector< float > &,
  const Vector< float > &,
  const Vector< double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(25))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(25))
 template  double  FullMatrix< double >::residual< float ,  float >(Vector< float > &,
  const Vector< float > &,
  const Vector< float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(26))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(26))
 template  float  FullMatrix< float >::residual< double ,  double >(Vector< double > &,
  const Vector< double > &,
  const Vector< double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(27))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(27))
 template  float  FullMatrix< float >::residual< double ,  float >(Vector< double > &,
  const Vector< double > &,
  const Vector< float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(28))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(28))
 template  float  FullMatrix< float >::residual< float ,  double >(Vector< float > &,
  const Vector< float > &,
  const Vector< double > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(29))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(29))
 template  float  FullMatrix< float >::residual< float ,  float >(Vector< float > &,
  const Vector< float > &,
  const Vector< float > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(30))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(30))
 template void FullMatrix< std::complex<double> >::fill< std::complex<double> >(
  const FullMatrix< std::complex<double> > &, size_type, size_type, size_type, size_type);
  template void FullMatrix< std::complex<double> >::add< std::complex<double> >(const  std::complex<double> , const FullMatrix< std::complex<double> > &);
@@ -801,7 +801,7 @@ template void FullMatrix< std::complex<double> >::fill< std::complex<double> >(
  const std::vector<size_type> &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(31))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(31))
 template void FullMatrix< std::complex<double> >::fill< std::complex<float> >(
  const FullMatrix< std::complex<float> > &, size_type, size_type, size_type, size_type);
  template void FullMatrix< std::complex<double> >::add< std::complex<float> >(const  std::complex<double> , const FullMatrix< std::complex<float> > &);
@@ -848,7 +848,7 @@ template void FullMatrix< std::complex<double> >::fill< std::complex<float> >(
  const std::vector<size_type> &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(32))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(32))
 template void FullMatrix< std::complex<float> >::fill< std::complex<double> >(
  const FullMatrix< std::complex<double> > &, size_type, size_type, size_type, size_type);
  template void FullMatrix< std::complex<float> >::add< std::complex<double> >(const  std::complex<float> , const FullMatrix< std::complex<double> > &);
@@ -895,7 +895,7 @@ template void FullMatrix< std::complex<float> >::fill< std::complex<double> >(
  const std::vector<size_type> &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(33))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(33))
 template void FullMatrix< std::complex<float> >::fill< std::complex<float> >(
  const FullMatrix< std::complex<float> > &, size_type, size_type, size_type, size_type);
  template void FullMatrix< std::complex<float> >::add< std::complex<float> >(const  std::complex<float> , const FullMatrix< std::complex<float> > &);
@@ -942,49 +942,49 @@ template void FullMatrix< std::complex<float> >::fill< std::complex<float> >(
  const std::vector<size_type> &);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(34))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(34))
 template  std::complex<double>  FullMatrix< std::complex<double> >::residual< std::complex<double> ,  std::complex<double> >(Vector< std::complex<double> > &,
  const Vector< std::complex<double> > &,
  const Vector< std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(35))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(35))
 template  std::complex<double>  FullMatrix< std::complex<double> >::residual< std::complex<double> ,  std::complex<float> >(Vector< std::complex<double> > &,
  const Vector< std::complex<double> > &,
  const Vector< std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(36))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(36))
 template  std::complex<double>  FullMatrix< std::complex<double> >::residual< std::complex<float> ,  std::complex<double> >(Vector< std::complex<float> > &,
  const Vector< std::complex<float> > &,
  const Vector< std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(37))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(37))
 template  std::complex<double>  FullMatrix< std::complex<double> >::residual< std::complex<float> ,  std::complex<float> >(Vector< std::complex<float> > &,
  const Vector< std::complex<float> > &,
  const Vector< std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(38))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(38))
 template  std::complex<float>  FullMatrix< std::complex<float> >::residual< std::complex<double> ,  std::complex<double> >(Vector< std::complex<double> > &,
  const Vector< std::complex<double> > &,
  const Vector< std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(39))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(39))
 template  std::complex<float>  FullMatrix< std::complex<float> >::residual< std::complex<double> ,  std::complex<float> >(Vector< std::complex<double> > &,
  const Vector< std::complex<double> > &,
  const Vector< std::complex<float> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(40))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(40))
 template  std::complex<float>  FullMatrix< std::complex<float> >::residual< std::complex<float> ,  std::complex<double> >(Vector< std::complex<float> > &,
  const Vector< std::complex<float> > &,
  const Vector< std::complex<double> > &) const;
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(41))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(41))
 template  std::complex<float>  FullMatrix< std::complex<float> >::residual< std::complex<float> ,  std::complex<float> >(Vector< std::complex<float> > &,
  const Vector< std::complex<float> > &,
  const Vector< std::complex<float> > &) const;

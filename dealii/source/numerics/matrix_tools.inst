@@ -6,7 +6,7 @@
   #define SPLIT_INSTANTIATIONS_CHECK(C) (1)
 #endif
 
-#if (SPLIT_INSTANTIATIONS_CHECK(0))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(0))
 template void MatrixTools::local_apply_boundary_values(
  const std::map<types::global_dof_index,  double > &boundary_values,
  const std::vector<types::global_dof_index> & local_dof_indices,
@@ -29,7 +29,7 @@ template void MatrixTools::local_apply_boundary_values(
  const bool eliminate_columns);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(1))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(1))
 template void MatrixTools::local_apply_boundary_values(
  const std::map<types::global_dof_index,  float > &boundary_values,
  const std::vector<types::global_dof_index> & local_dof_indices,
@@ -52,7 +52,7 @@ template void MatrixTools::local_apply_boundary_values(
  const bool eliminate_columns);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(2))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(2))
 template void MatrixTools::local_apply_boundary_values(
  const std::map<types::global_dof_index,  std::complex<double> > &boundary_values,
  const std::vector<types::global_dof_index> & local_dof_indices,
@@ -75,7 +75,7 @@ template void MatrixTools::local_apply_boundary_values(
  const bool eliminate_columns);
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(3))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(3))
 template void MatrixTools::local_apply_boundary_values(
  const std::map<types::global_dof_index,  std::complex<float> > &boundary_values,
  const std::vector<types::global_dof_index> & local_dof_indices,

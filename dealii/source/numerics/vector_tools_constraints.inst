@@ -6,7 +6,7 @@
   #define SPLIT_INSTANTIATIONS_CHECK(C) (1)
 #endif
 
-#if (SPLIT_INSTANTIATIONS_CHECK(0))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(0))
 namespace VectorTools
  {
 
@@ -52,7 +52,7 @@ namespace VectorTools
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(1))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(1))
 namespace VectorTools
  {
 
@@ -98,7 +98,7 @@ namespace VectorTools
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(2))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(2))
 namespace VectorTools
  {
 
@@ -144,7 +144,7 @@ namespace VectorTools
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(3))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(3))
 namespace VectorTools
  {
 
@@ -190,7 +190,7 @@ namespace VectorTools
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(4))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(4))
 namespace VectorTools
  {
 
@@ -236,7 +236,7 @@ namespace VectorTools
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(5))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(5))
 namespace VectorTools
  {
 
@@ -282,7 +282,7 @@ namespace VectorTools
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(6))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(6))
 namespace VectorTools
  {
 
@@ -328,7 +328,7 @@ namespace VectorTools
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(7))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(7))
 namespace VectorTools
  {
 
@@ -374,7 +374,7 @@ namespace VectorTools
  }
  
 #endif
-#if (SPLIT_INSTANTIATIONS_CHECK(8))
+#if 1 && (SPLIT_INSTANTIATIONS_CHECK(8))
 namespace VectorTools
  {
 
