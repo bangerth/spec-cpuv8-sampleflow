@@ -159,7 +159,7 @@
  * Macro indicating that the current feature will be removed in a future
  * release.
  */
-#define DEAL_II_DEPRECATED [[deprecated]]
+#define DEAL_II_DEPRECATED
 
 /**
  * Same as above, but for things that have been deprecated during the current
