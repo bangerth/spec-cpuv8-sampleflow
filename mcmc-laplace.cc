@@ -988,6 +988,9 @@ int main()
   sampler.sample(std::vector<SampleType>(n_samplers, starting_coefficients),
                  /* log_likelihood = */
                  [&](const SampleType &x) {
+                   for (const auto &v : x)
+                     if (v<=0)
+                       return -std::numeric_limits<double>::infinity();
                    const double posterior
                      = (log_likelihood.log_likelihood(laplace_problem.evaluate(x)) +
                         log_prior.log_prior(x));
@@ -1001,20 +1004,18 @@ int main()
                  [](const SampleType &current_sample,
                     const SampleType &sample_a,
                     const SampleType &sample_b)
+                 -> std::pair<SampleType,double>
                  {
                    const double gamma = 2.38 / std::sqrt(2*current_sample.size());
 
                    // Compute 'current_sample + gamma * (sample_a - sample_b)'
-                   // but in log-space:
-                   SampleType result(current_sample.size());
-                   for (unsigned int i=0; i<result.size(); ++i)
-                     result[i] = std::exp(std::log(current_sample[i])
-                                          + gamma * (std::log(sample_a[i])
-                                                     -
-                                                     std::log(sample_b[i])));
-                   return result;
+                   SampleType result(sample_a);
+                   result -= sample_b;
+                   result *= gamma;
+                   result += current_sample;
+                   return {result,1.};
                  },
-                 /* crossover_gap = */ 0,
+                 /* crossover_gap = */ n_samples_per_chain,
                  /* n_samples = */ n_samples_per_chain * n_samplers,
                  /* asynchronous_likelihood_execution = */ true,
                  random_seed);
