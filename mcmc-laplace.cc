@@ -706,10 +706,11 @@ int main()
                                             :
                                             100000000);
 
-  // Run with one thread, so as to not step on other processes
-  // doing the same at the same time. It turns out that the problem
-  // is also so small that running with more than one thread
-  // *increases* the runtime.
+  // This benchmark does not use deal.II's TBB-based threading
+  // capabilities to parallelize deal.II-internal functionality. (It
+  // does, however, use threads at a higher level.) So it probably
+  // doesn't matter whether or not we set a thread limit for these
+  // internal operations, but it also doesn't do any harm.
   MultithreadInfo::set_thread_limit(1);
 
   const unsigned int random_seed  = (testing ? 1U : std::random_device()());
