@@ -224,7 +224,7 @@ namespace SampleFlow
                   (generation > 0))
                 {
                   // Pick one of the other chains from which we want to draw from:
-                  std::uniform_int_distribution<typename std::vector<OutputType>::size_type>
+                  SampleFlow::random::uniform_int_distribution<typename std::vector<OutputType>::size_type>
                   a_dist(0, n_chains - 2);
 
                   typename std::vector<OutputType>::size_type a = a_dist(rng);
@@ -233,7 +233,7 @@ namespace SampleFlow
                   const OutputType trial_a = current_samples[a];
 
                   // Then the other chain to draw from:
-                  std::uniform_int_distribution<typename std::vector<OutputType>::size_type>
+                  SampleFlow::random::uniform_int_distribution<typename std::vector<OutputType>::size_type>
                   b_dist(0, n_chains - 3);
 
                   typename std::vector<OutputType>::size_type b = b_dist(rng);
