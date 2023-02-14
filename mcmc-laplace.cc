@@ -658,7 +658,7 @@ namespace ProposalGenerator
     double         product_of_ratios = 1;
     for (auto &x : new_sample)
       {
-        const double rnd = std::normal_distribution<>(0, log_sigma)(random_number_generator);
+        const double rnd = SampleFlow::random::uniform_real_distribution<>(-log_sigma, log_sigma)(random_number_generator);
         const double exp_rnd = std::exp(rnd);
         x *= exp_rnd;
         product_of_ratios /= exp_rnd;
