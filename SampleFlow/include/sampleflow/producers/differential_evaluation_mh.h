@@ -181,7 +181,7 @@ namespace SampleFlow
         rng.seed (random_seed);
 
       // Initialize distribution for comparing to acceptance ratio
-      std::uniform_real_distribution<> uniform_distribution(0,1);
+      SampleFlow::random::uniform_real_distribution<> uniform_distribution(0,1);
 
       std::vector<OutputType> current_samples = starting_points;
       std::vector<double> current_log_likelihoods(n_chains);
