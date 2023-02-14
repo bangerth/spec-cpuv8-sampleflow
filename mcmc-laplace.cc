@@ -699,12 +699,8 @@ namespace ProposalGenerator
 // @endcode
 int main()
 {
-  const bool testing = true;
   const unsigned int n_samplers = 2;
-  const unsigned int n_samples_per_chain = (testing ?
-                                            100000
-                                            :
-                                            100000000);
+  const unsigned int n_samples_per_chain = 100000;
 
   // This benchmark does not use deal.II's TBB-based threading
   // capabilities to parallelize deal.II-internal functionality. (It
@@ -713,7 +709,7 @@ int main()
   // internal operations, but it also doesn't do any harm.
   MultithreadInfo::set_thread_limit(1);
 
-  const unsigned int random_seed  = (testing ? 1U : std::random_device()());
+  const unsigned int random_seed  = 1U;
 
   const Vector<double> exact_solution(
     {   0.06076511762259369, 0.09601910120848481,
