@@ -30,6 +30,7 @@
 #include <deal.II/fe/fe_values.h>
 #include <deal.II/base/quadrature_lib.h>
 #include <deal.II/base/function.h>
+#include <deal.II/base/parameter_handler.h>
 #include <deal.II/numerics/vector_tools.h>
 #include <deal.II/numerics/matrix_tools.h>
 #include <deal.II/lac/vector.h>
@@ -697,10 +698,30 @@ namespace ProposalGenerator
 //                                       /* prefix = */ "exact")
 //      .evaluate(exact_coefficients);
 // @endcode
-int main()
+int main(int argc, char **argv)
 {
-  const unsigned int n_samplers = 2;
-  const unsigned int n_samples_per_chain = 100000;
+  if ((argc < 2) || (argc > 2))
+    {
+      std::cout << "Call this program via the following command line:\n"
+                << "     ./sample-flow <input.prm>\n"
+                << "where <input.prm> is the name of an input file."
+                << std::endl;
+      std::exit(1);
+    }
+
+  unsigned int n_chains = 3;
+  unsigned int n_samples_per_chain = 10000;
+  
+  ParameterHandler prm;
+  prm.add_parameter ("Number of samples per chain", n_samples_per_chain, "",
+                     Patterns::Integer ());
+  prm.add_parameter ("Number of chains", n_chains, "",
+                     Patterns::Integer (3,100));
+  prm.parse_input (argv[1]);
+  
+  
+  
+  
 
   // This benchmark does not use deal.II's TBB-based threading
   // capabilities to parallelize deal.II-internal functionality. (It
@@ -982,7 +1003,7 @@ int main()
   
   // Finally, create the samples:
   std::mt19937 random_number_generator(random_seed);
-  sampler.sample(std::vector<SampleType>(n_samplers, starting_coefficients),
+  sampler.sample(std::vector<SampleType>(n_chains, starting_coefficients),
                  /* log_likelihood = */
                  [&](const SampleType &x) {
                    for (const auto &v : x)
@@ -1013,7 +1034,7 @@ int main()
                    return {result,1.};
                  },
                  /* crossover_gap = */ n_samples_per_chain,
-                 /* n_samples = */ n_samples_per_chain * n_samplers,
+                 /* n_samples = */ n_samples_per_chain * n_chains,
                  /* asynchronous_likelihood_execution = */ true,
                  random_seed);
 
