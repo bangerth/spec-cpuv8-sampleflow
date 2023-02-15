@@ -282,9 +282,6 @@ namespace ForwardSimulator
                       "in the definition of the coefficient."));
     GridGenerator::hyper_cube(triangulation, 0, 1);
     triangulation.refine_global(global_refinements);
-
-    std::cout << "   Number of active cells: " << triangulation.n_active_cells()
-              << std::endl;
   }
 
 
@@ -294,9 +291,6 @@ namespace ForwardSimulator
   {
     // First define the finite element space:
     dof_handler.distribute_dofs(fe);
-
-    std::cout << "   Number of degrees of freedom: " << dof_handler.n_dofs()
-              << std::endl;
 
     // Then set up the main data structures that will hold the discrete problem:
     {
@@ -719,7 +713,9 @@ int main(int argc, char **argv)
                      Patterns::Integer (3,100));
   prm.parse_input (argv[1]);
   
-  
+  std::cout << "Running with " << n_chains << " chains, computing "
+            << n_samples_per_chain << " samples per chain."
+            << std::endl;
   
   
 
@@ -1001,6 +997,16 @@ int main(int argc, char **argv)
   running_mean_error.connect_to_producer (every_1000th);
 
   
+  auto print_periodic_output
+    = [&](SampleType, SampleFlow::AuxiliaryData)
+    {
+          static unsigned int nth_sample = 1000;
+          std::cout << "Sample number " << nth_sample << std::endl;
+          nth_sample += 1000;
+    };
+  SampleFlow::Consumers::Action<SampleType> periodic_output (print_periodic_output);
+  periodic_output.connect_to_producer (every_1000th);
+
   // Finally, create the samples:
   std::mt19937 random_number_generator(random_seed);
   sampler.sample(std::vector<SampleType>(n_chains, starting_coefficients),
