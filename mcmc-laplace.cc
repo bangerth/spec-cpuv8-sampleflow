@@ -948,7 +948,7 @@ int main(int argc, char **argv)
                                                                                    0, 100, 300);
   pair_histogram_53_54.connect_to_producer (pair_splitter_53_54);
 
-  std::ofstream running_mean_error_output ("running_mean_error.txt");
+  std::ostringstream running_mean_error_output;
   auto compute_running_mean_error
     = [&](SampleType, SampleFlow::AuxiliaryData)
     {
