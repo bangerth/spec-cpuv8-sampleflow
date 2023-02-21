@@ -299,7 +299,11 @@ namespace SampleFlow
     // sample looks like depends on the parallel mode of the current
     // object.
     std::function<void(InputType sample, AuxiliaryData aux_data)> sample_consumer;
-    switch (static_cast<ParallelMode>(parallel_mode.load()))
+
+    // For the purposes of this benchmark, only support sequential
+    // mode. This is to avoid the use of std::async, for the
+    // same reason as we describe in the thread_pool.h file.
+    switch (ParallelMode::synchronous) // static_cast<ParallelMode>(parallel_mode.load())
       {
         // If we want to process samples synchronously, then
         // then the lambda function simply calls the 'consume()'
