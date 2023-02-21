@@ -66,6 +66,9 @@ namespace SampleFlow
     std::mutex queue_mutex;
     std::deque<std::pair<unsigned int,std::shared_ptr<std::function<void ()>>>> task_queue;
 
+    std::mutex wake_up_mutex;
+    std::condition_variable wake_up_signal;
+    
     void worker_thread(const unsigned int thread_number);
   };
 
@@ -91,12 +94,16 @@ namespace SampleFlow
   {
     join_all();
     
-    // Get the queue_mutex, set the stop signal, and then wait for all of
-    // the threads to realize what's going on:
+    // Get the queue_mutex, set the stop signal, and then wait for all
+    // of the threads to realize what's going on. For them to get to
+    // the state where they actually pay attention, we have to notify
+    // them via the condition variable:
     {
       std::lock_guard<std::mutex> lock(queue_mutex);
       stop_signal = true;
     }
+    wake_up_signal.notify_all();
+    
     for (auto &t : worker_threads)
       t.join();
   }    
@@ -109,10 +116,16 @@ namespace SampleFlow
     static int n_tasks = 0;
     
     // Get the lock and put the task into the queue:
-    std::lock_guard<std::mutex> lock(queue_mutex);
+    {
+      std::lock_guard<std::mutex> lock(queue_mutex);
 
-    task_queue.emplace_back (n_tasks,
-                             std::make_shared<std::function<void ()>>(std::move(task)));
+      task_queue.emplace_back (n_tasks,
+                               std::make_shared<std::function<void ()>>(std::move(task)));
+    }
+
+    // Now make sure that at least one of the threads actually wakes
+    // up:
+    wake_up_signal.notify_one();
   }
 
 
@@ -173,8 +186,10 @@ namespace SampleFlow
         else
           {
             // There was no work for us to do. Let the OS do something
-            // else instead:
-            std::this_thread::yield();
+            // else instead and wait until we get asked to wake up via
+            // a condition variable:
+            std::unique_lock<std::mutex> lock(wake_up_mutex);
+            wake_up_signal.wait(lock);
           }
         
       }
