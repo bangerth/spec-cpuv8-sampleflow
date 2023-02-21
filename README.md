@@ -36,9 +36,12 @@ exchanging information. In the version used for this benchmark, _N_ is
 a parameter that is set in the input file. The resulting algorithm is
 then of the fork-join type: At the beginning of each iteration, _N_
 work items are created to generate a new sample on each of these
-chains, and these items can be worked on independently; once done, a
-sequential phase follows in which the resulting samples are
-post-processed.
+chains, and these items can be worked on independently; once done, we
+start another parallel phase where the samples are post-processed. The
+fork-join approach of this benchmark is implemented using a simple
+thread pool that maps tasks on available worker threads. It creates as
+many worker threads as std::thread::hardward_concurrency() states the
+machine can provide.
 
 
 # Author
@@ -74,7 +77,7 @@ The benchmark comes with the requisite three workloads. To execute
 these, run the benchmark executable with the name of the respective
 input file as the sole command line argument. The input files are as follows:
 
-- `test.prm`: This workload utilizes 4-way parallelism for the main loop. On an ~2018 system using two AMD Epyc 7552 processors with 48 cores each, the run time for the test load is approximately as follows:
+- `test.prm`: This workload utilizes 4-way parallelism for the main loop. On an ~2018 system using two AMD Epyc 7552 processors with 48 cores each, the run time for the test load is approximately as follows when using `-O3` optimization:
 ```
 real    0m13.015s
 user    0m25.348s
