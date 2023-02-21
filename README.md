@@ -79,9 +79,9 @@ input file as the sole command line argument. The input files are as follows:
 
 - `test.prm`: This workload utilizes 4-way parallelism for the main loop. On an ~2018 system using two AMD Epyc 7552 processors with 48 cores each, the run time for the test load is approximately as follows when using `-O3` optimization:
 ```
-real    0m13.015s
-user    0m25.348s
-sys     0m1.093s
+real    0m5.806s
+user    0m27.300s
+sys     0m0.850s
 ```
 The last few lines of output should look like this:
 ```
@@ -95,9 +95,9 @@ Number of samples = 16000
 
 - `train.prm`: This workload utilizes 8-way parallelism for the main loop. On the same system as mentioned above, its run time is approximately as follows:
 ```
-real    0m58.535s
-user    2m6.218s
-sys     0m4.873s
+real    0m32.918s
+user    2m8.473s
+sys     0m9.816s
 ```
 The last few lines of output should look like this:
 ```
@@ -111,9 +111,9 @@ Number of samples = 60000
 
 - `reference.prm`: This workload utilizes 32-way parallelism for the main loop. On the same system as mentioned above, its run time is approximately as follows:
 ```
-real    5m10.347s
-user    18m34.011s
-sys     0m30.149s
+real    3m19.379s
+user    11m17.839s
+sys     2m28.875s
 ```
 The last few lines of output should look like this:
 ```
