@@ -59,6 +59,8 @@ namespace SampleFlow
     void join_all ();
     
   private:
+    unsigned int concurrency;
+    
     bool stop_signal;
     
     std::vector<std::thread> worker_threads;
@@ -78,15 +80,34 @@ namespace SampleFlow
   :
   stop_signal (false)
   {
-    // Start all of the worker threads. Start as many threads as there
-    // are cores on the machine, but at least one
-    // (hardward_concurrency() is documented as possibly returning
-    // zero if the system does not have the capability to say how many
-    // cores it actually might have.
-    worker_threads.reserve (std::thread::hardware_concurrency());
-    for (unsigned int t=0; t<std::max(std::thread::hardware_concurrency(),1U); ++t)
-      worker_threads.emplace_back ([this,t]() { worker_thread(t); } );
+    if(const char* env_p = std::getenv("OMP_NUM_THREADS"))
+      concurrency = std::min<unsigned int> (std::atoi(env_p),
+                                            std::thread::hardware_concurrency());
+    else
+      concurrency = std::thread::hardware_concurrency();
+
+    // Start all of the worker threads. If we are allowed concurrency
+    // (i.e., if concurrency>=2), then start as many threads as there
+    // are cores on the machine. Note that hardward_concurrency() is
+    // documented as possibly returning zero if the system does not
+    // have the capability to say how many cores it actually might
+    // have. In that case, we just bail and not start any threads at
+    // all.
+    if (concurrency >= 2)
+      {
+        std::cout << "Starting thread pool with "
+                  << concurrency << " threads." << std::endl;
+    
+        worker_threads.reserve (concurrency);
+        for (unsigned int t=0; t<concurrency; ++t)
+          worker_threads.emplace_back ([this,t]() { worker_thread(t); } );
+      }
+    else
+      {
+        std::cout << "Running sequentially without a thread pool." << std::endl;
+      }  
   }
+  
 
 
   inline
@@ -113,38 +134,49 @@ namespace SampleFlow
   inline
   void ThreadPool::enqueue_task (TaskType &&task)
   {
-    static int n_tasks = 0;
+    if (concurrency >= 2)
+      {
+        static int n_tasks = 0;
     
-    // Get the lock and put the task into the queue:
-    {
-      std::lock_guard<std::mutex> lock(queue_mutex);
+        // Get the lock and put the task into the queue:
+        {
+          std::lock_guard<std::mutex> lock(queue_mutex);
 
-      task_queue.emplace_back (n_tasks,
-                               std::make_shared<std::function<void ()>>(std::move(task)));
-    }
+          task_queue.emplace_back (n_tasks,
+                                   std::make_shared<std::function<void ()>>(std::move(task)));
+        }
 
-    // Now make sure that at least one of the threads actually wakes
-    // up:
-    wake_up_signal.notify_one();
+        // Now make sure that at least one of the threads actually wakes
+        // up:
+        wake_up_signal.notify_one();
+      }
+    else
+      {
+        // No concurrency. Just execute the task outright:
+        task();
+      }
   }
 
 
   inline
   void ThreadPool::join_all()
   {
-    // Wait for all currently enqueued tasks to finish. Do this by
-    // repeatedly getting the lock and checking the size of the
-    // queue. If it is zero, return. If it is nonzero, tell the OS to
-    // do something else instead.
-    while (true)
+    if (concurrency >= 2)
       {
-        {
-          std::lock_guard<std::mutex> lock(queue_mutex);
-          if (task_queue.empty())
-            return;
-        }
+        // Wait for all currently enqueued tasks to finish. Do this by
+        // repeatedly getting the lock and checking the size of the
+        // queue. If it is zero, return. If it is nonzero, tell the OS to
+        // do something else instead.
+        while (true)
+          {
+            {
+              std::lock_guard<std::mutex> lock(queue_mutex);
+              if (task_queue.empty())
+                return;
+            }
 
-        std::this_thread::yield();
+            std::this_thread::yield();
+          }
       }
   }
   

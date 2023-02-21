@@ -124,3 +124,22 @@ Comparison mean value of the downscaled 64-parameter mean:
     3.33384 6.76076 3.81944 16.9824 
 Number of samples = 320000
 ```
+
+
+# Limiting parallel execution
+
+By default, the fork-join model mentioned at the top of this page is
+implemented using a thread pool that upon start-up creates as many
+threads as the system reports is useful via the function
+`std::hardware_concurrency()`. The program then executes available
+work tasks on these threads whenever a thread becomes idle.
+
+However, the number of threads can be limited by setting the
+environment variable `OMP_NUM_THREADS` and in that case the program
+uses the minimum of the two.
+
+In order to support SPECrate benchmarks, if `OMP_NUM_THREADS` is set
+to either zero or one, the program does not start any worker threads
+at all, and instead of enqueuing tasks and executing them on an
+available thread, each task is immediately executed on the calling
+thread. In other words, the program executed everything sequentially.
