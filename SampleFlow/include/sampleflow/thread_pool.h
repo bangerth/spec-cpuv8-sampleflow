@@ -95,17 +95,10 @@ namespace SampleFlow
     // all.
     if (concurrency >= 2)
       {
-        std::cout << "Starting thread pool with "
-                  << concurrency << " threads." << std::endl;
-    
         worker_threads.reserve (concurrency);
         for (unsigned int t=0; t<concurrency; ++t)
           worker_threads.emplace_back ([this,t]() { worker_thread(t); } );
       }
-    else
-      {
-        std::cout << "Running sequentially without a thread pool." << std::endl;
-      }  
   }
   
 
