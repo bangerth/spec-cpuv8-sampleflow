@@ -1,6 +1,6 @@
-SRC = $(shell find dealii/source -name '*.cc' ; \
-              find dealii/bundled/boost-1.70.0/libs -name '*.cpp' ; \
-              echo mcmc-laplace.cc)
+SRC = $(shell echo mcmc-laplace.cc ; \
+              find dealii/source -name '*.cc' ; \
+              find dealii/bundled/boost-1.70.0/libs -name '*.cpp')
 OBJ = $(subst .cpp,.o,$(subst .cc,.o,$(SRC)))
 
 INCLUDEDIRS = -Idealii/include \
