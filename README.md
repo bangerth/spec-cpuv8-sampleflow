@@ -40,7 +40,7 @@ chains, and these items can be worked on independently; once done, we
 start another parallel phase where the samples are post-processed. The
 fork-join approach of this benchmark is implemented using a simple
 thread pool that maps tasks on available worker threads. It creates as
-many worker threads as std::thread::hardward_concurrency() states the
+many worker threads as std::thread::hardware_concurrency() states the
 machine can provide.
 
 
