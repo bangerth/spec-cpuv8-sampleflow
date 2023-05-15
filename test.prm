@@ -1,2 +1,5 @@
-set Number of samples per chain = 300
+# Run 400*3 samples. The sampler internally does something different
+# every 1000'th sample (or so), so the test input is chosen to ensure
+# it also runs this separate code path.
+set Number of samples per chain = 400
 set Number of chains            = 3
