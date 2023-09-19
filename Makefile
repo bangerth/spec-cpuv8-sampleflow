@@ -8,13 +8,13 @@ INCLUDEDIRS = -Idealii/include \
               -ISampleFlow/include
 
 %.o : %.cc
-	c++ -std=c++14 -c $< -o $@ $(INCLUDEDIRS)
+	c++ -std=c++17 -c $< -o $@ $(INCLUDEDIRS) -O3
 
 %.o : %.cpp
-	c++ -std=c++14 -c $< -o $@ $(INCLUDEDIRS)
+	c++ -std=c++17 -c $< -o $@ $(INCLUDEDIRS) -O3
 
 sample-flow: $(OBJ)
-	c++ -o $@ $(OBJ) -lpthread
+	c++ -o $@ $(OBJ) -lpthread -fuse-ld=lld
 
 clean:
 	-rm -f $(OBJ) sample-flow
