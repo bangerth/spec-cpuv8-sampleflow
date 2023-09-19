@@ -14,7 +14,12 @@
 ##
 ## ---------------------------------------------------------------------
 
-set(src_boost_serialization
+INCLUDE_DIRECTORIES(
+  ${BOOST_BUNDLED_INCLUDE_DIRS}
+  ${DEAL_II_INCLUDE_DIRS}
+  )
+
+SET(src_boost_serialization
   archive_exception.cpp
   basic_archive.cpp
   basic_iarchive.cpp
@@ -54,8 +59,7 @@ set(src_boost_serialization
   xml_wiarchive.cpp
   xml_woarchive.cpp
   )
-enable_if_supported(DEAL_II_CXX_FLAGS -Wno-c11-extensions)
-enable_if_supported(DEAL_II_CXX_FLAGS -Wno-deprecated-copy)
-enable_if_supported(DEAL_II_CXX_FLAGS -Wno-uninitialized)
+ENABLE_IF_SUPPORTED(DEAL_II_CXX_FLAGS -Wno-deprecated-copy)
+ENABLE_IF_SUPPORTED(DEAL_II_CXX_FLAGS -Wno-c11-extensions)
 
-deal_ii_add_library(obj_boost_serialization OBJECT ${src_boost_serialization})
+DEAL_II_ADD_LIBRARY(obj_boost_serialization OBJECT ${src_boost_serialization})
